@@ -1,3 +1,17 @@
+ESE Project
+----------------------------------
+Prerequisites: Java JDK8, MySQL and Maven installed
+
+**Windows Instructions:**
+Environment Variables to set: JAVA_HOME and C:\..\maven\bin to PATH
+Make sure both 'java -version' and 'mvn -version' work from the commandline.
+Set an empty password for the MySQL root user in your MySQL Workbench on the left-handed Navigator: Management > Users and Privileges
+Make sure that you have a MySQL Connection up and running: Navigator > Instance > Startup/Shutdown (if you run into any sql errors later on just stop and restart the server in here)
+Within Powershell or CMD cd to the project root of the cloned repository \..\ese2016-team6\
+\..\ese2016-team6> mvn jetty:stop
+\..\ese2016-team6> mvn jetty:run
+
+
 ESE Base Project
 ----------------------------------
 To build this project, please follow these steps:
