@@ -1,9 +1,9 @@
-<%@page import="ch.unibe.ese.team1.model.Picture"%>
-<%@page import="ch.unibe.ese.team1.model.User"%>
+<%@page import="ch.unibe.ese.team6.model.Picture"%>
+<%@page import="ch.unibe.ese.team6.model.User"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="ch.unibe.ese.team1.model.Location"%>
+<%@page import="ch.unibe.ese.team6.model.Location"%>
 <%@page import="java.util.List"%>
-<%@page import="ch.unibe.ese.team1.controller.service.UserService"%>
+<%@page import="ch.unibe.ese.team6.controller.service.UserService"%>
 
 <%@page
 	import="org.springframework.security.core.context.SecurityContextHolder"%>
