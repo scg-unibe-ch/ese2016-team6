@@ -47,6 +47,9 @@ public class User {
 	@Column(nullable = false)
 	private boolean enabled;
 
+	@Column(nullable = false)
+	private KindOfMembership kind;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles;
@@ -182,4 +185,7 @@ public class User {
 		return true;
 	}
 	
+	public void setKindOfMembership(KindOfMembership kind) {
+		this.kind = kind;
+	}
 }

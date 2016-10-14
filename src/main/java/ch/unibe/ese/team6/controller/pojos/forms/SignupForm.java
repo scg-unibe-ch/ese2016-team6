@@ -27,6 +27,9 @@ public class SignupForm {
 	
 	@NotNull
 	private Gender gender;
+	
+	@NotNull
+	private KindOfMembership kind;
 
 	public String getEmail() {
 		return email;
