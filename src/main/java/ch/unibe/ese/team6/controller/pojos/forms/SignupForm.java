@@ -5,6 +5,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import ch.unibe.ese.team6.model.Gender;
+import ch.unibe.ese.team6.model.KindOfMembership;
 
 /** This form is used when a user want to sign up for an account. */
 public class SignupForm {
@@ -69,6 +70,14 @@ public class SignupForm {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+	
+	public void setKindOfMembership(KindOfMembership kind) {
+		this.kind = kind;
+	}
+	
+	public KindOfMembership getKindOfMembership() {
+		return kind;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package ch.unibe.ese.team6.model;
 
+import ch.unibe.ese.team6.model.KindOfMembership;
 import java.util.List;
 import java.util.Set;
 
@@ -187,5 +188,9 @@ public class User {
 	
 	public void setKindOfMembership(KindOfMembership kind) {
 		this.kind = kind;
+	}
+	
+	public KindOfMembership getKindOfMembership() {
+		return kind;
 	}
 }

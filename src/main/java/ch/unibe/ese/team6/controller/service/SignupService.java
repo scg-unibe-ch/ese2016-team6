@@ -11,6 +11,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.SignupForm;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.UserRole;
 import ch.unibe.ese.team6.model.dao.UserDao;
+import ch.unibe.ese.team6.model.KindOfMembership;
 
 /** Handles the persisting of new users */
 @Service
@@ -32,6 +33,7 @@ public class SignupService {
 		user.setPassword(signupForm.getPassword());
 		user.setEnabled(true);
 		user.setGender(signupForm.getGender());
+		user.setKindOfMembership(signupForm.getKindOfMembership());
 		
 		Set<UserRole> userRoles = new HashSet<>();
 		UserRole role = new UserRole();

@@ -80,7 +80,7 @@ public class UserTestDataSaver {
 	}
 
 	public User createUser(String email, String password, String firstName,
-			String lastName, Gender gender, KindOfMembership kind) {
+			String lastName, Gender gender, KindOfMembership normal) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -89,7 +89,7 @@ public class UserTestDataSaver {
 		user.setLastName(lastName);
 		user.setEnabled(true);
 		user.setGender(gender);
-		user.setKindOfMembership(kind);
+		user.setKindOfMembership(normal);
 		Set<UserRole> userRoles = new HashSet<>();
 		UserRole role = new UserRole();
 		role.setRole("ROLE_USER");

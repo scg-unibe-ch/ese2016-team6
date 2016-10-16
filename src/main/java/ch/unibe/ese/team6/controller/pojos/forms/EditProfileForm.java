@@ -2,6 +2,8 @@ package ch.unibe.ese.team6.controller.pojos.forms;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import ch.unibe.ese.team6.model.KindOfMembership;
+
 /** This form is used when a user wants to edit their profile. */
 public class EditProfileForm {
 
@@ -18,6 +20,8 @@ public class EditProfileForm {
 	private String lastName;
 	
 	private String aboutMe;
+
+	private KindOfMembership kind;
 
 	public String getPassword() {
 		return password;
@@ -57,5 +61,13 @@ public class EditProfileForm {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public void setKindOfMembership(KindOfMembership  kind) {
+		this.kind = kind;
+	}
+	
+	public KindOfMembership getKindOfMembership() {
+		return kind;
 	}
 }
