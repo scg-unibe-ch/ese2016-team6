@@ -55,11 +55,19 @@
 		<td class="spacingTable"><label for="password">Password:</label><a>&emsp;&thinsp;</a>
 		<form:input type="password" id="password" path="password" value="${currentUser.password}" /></td>
 	</tr>
+	<tr>
+		<td class="spacingTable"><label for="kindOfMembership">Kind of Membership:</label><a>&emsp;&thinsp;</a>
+		<form:select path="kindOfMembership">
+						<form:option value="NORMAL" label="Normal" />
+						<form:option value="PREMIUM" label="Premium" />
+					</form:select>
+	</tr>
 
 	<tr>
 		<td class="spacingTable"><label for="about-me">About me:</label><a>&emsp;&thinsp;</a><br>
 		<form:textarea id="about-me" path="aboutMe" rows="10" cols="100" /></td>
 	</tr>
+	
 </table>
 
 <div>

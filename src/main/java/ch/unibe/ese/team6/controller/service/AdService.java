@@ -1,5 +1,6 @@
 package ch.unibe.ese.team6.controller.service;
 
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,8 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.jdbc.Statement;
+
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
+import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.Location;
@@ -28,6 +32,7 @@ import ch.unibe.ese.team6.model.dao.AdDao;
 import ch.unibe.ese.team6.model.dao.AlertDao;
 import ch.unibe.ese.team6.model.dao.MessageDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
+import ch.unibe.ese.team6.model.dao.VisitDao;
 
 /** Handles all persistence operations concerning ad placement and retrieval. */
 @Service
@@ -184,9 +189,27 @@ public class AdService {
 		ad.setUser(user);
 		
 		adDao.save(ad);
+		
+		sendInfoEmail(ad);
 
 		return ad;
 	}
+	
+	@Autowired
+	private UserDao userDa;
+	
+	// sends email to the premium users immediately when a ad has been done
+	@Transactional
+	private void sendInfoEmail(Ad ad) {
+		MessageService messageService = new MessageService();
+		
+		for(User temp: userDa.findAll()) {
+			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
+				messageService.sendMessage(temp, temp, ad.toString(), "Check it out, there is a new Ad online!");
+			}
+		}	
+	}
+
 
 	/**
 	 * Gets the ad that has the given id.

@@ -19,6 +19,7 @@ import ch.unibe.ese.team6.controller.service.EnquiryService;
 import ch.unibe.ese.team6.controller.service.VisitService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Gender;
+import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.UserRole;
 import ch.unibe.ese.team6.model.Visit;
@@ -65,7 +66,7 @@ public class EnquiryServiceTest {
 	public void createVisits() throws Exception {		
 		//create user
 		User thomyF = createUser("thomy@f.ch", "password", "Thomy", "F",
-				Gender.MALE);
+				Gender.MALE, KindOfMembership.NORMAL);
 		thomyF.setAboutMe("Supreme hustler");
 		userDao.save(thomyF);
 		
@@ -123,11 +124,11 @@ public class EnquiryServiceTest {
 	public void enquireAndAccept() throws Exception {		
 		//create two users
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
-				Gender.MALE);
+				Gender.MALE, KindOfMembership.NORMAL);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
 		
-		User blocher = createUser("christoph@blocher.eu", "svp", "Christoph", "Blocher", Gender.MALE);
+		User blocher = createUser("christoph@blocher.eu", "svp", "Christoph", "Blocher", Gender.MALE, KindOfMembership.NORMAL);
 		blocher.setAboutMe("I own you");
 		userDao.save(blocher);
 		
@@ -194,7 +195,7 @@ public class EnquiryServiceTest {
 	
 	//Lean user creating method
 	User createUser(String email, String password, String firstName,
-			String lastName, Gender gender) {
+			String lastName, Gender gender, KindOfMembership kind) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -203,6 +204,7 @@ public class EnquiryServiceTest {
 		user.setLastName(lastName);
 		user.setEnabled(true);
 		user.setGender(gender);
+		user.setKindOfMembership(kind);
 		Set<UserRole> userRoles = new HashSet<>();
 		UserRole role = new UserRole();
 		role.setRole("ROLE_USER");

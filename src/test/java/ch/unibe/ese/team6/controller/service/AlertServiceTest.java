@@ -20,6 +20,7 @@ import ch.unibe.ese.team6.controller.service.AlertService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Alert;
 import ch.unibe.ese.team6.model.Gender;
+import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.UserRole;
 import ch.unibe.ese.team6.model.dao.AdDao;
@@ -52,7 +53,7 @@ public class AlertServiceTest {
 		
 		// Create user Adolf Ogi
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
-				Gender.MALE);
+				Gender.MALE, KindOfMembership.NORMAL);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
 		
@@ -96,7 +97,7 @@ public class AlertServiceTest {
 		ArrayList<Alert> alertList = new ArrayList<Alert>();
 		
 		User thomyF = createUser("thomy@f.ch", "password", "Thomy", "F",
-				Gender.MALE);
+				Gender.MALE, KindOfMembership.NORMAL);
 		thomyF.setAboutMe("Supreme hustler");
 		userDao.save(thomyF);
 		
@@ -162,7 +163,7 @@ public class AlertServiceTest {
 	
 	//Lean user creating method
 	User createUser(String email, String password, String firstName,
-			String lastName, Gender gender) {
+			String lastName, Gender gender, KindOfMembership kind) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -171,6 +172,7 @@ public class AlertServiceTest {
 		user.setLastName(lastName);
 		user.setEnabled(true);
 		user.setGender(gender);
+		user.setKindOfMembership(kind);
 		Set<UserRole> userRoles = new HashSet<>();
 		UserRole role = new UserRole();
 		role.setRole("ROLE_USER");

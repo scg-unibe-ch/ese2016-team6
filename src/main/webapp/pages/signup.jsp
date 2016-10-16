@@ -64,6 +64,13 @@
 						<form:option value="MALE" label="Male" />
 					</form:select></td>
 			</tr>
+			<tr>
+				<td class="signupDescription"><label for="field-kind">Kind of Membership:</label></td>
+				<td><form:select path="KindOfMembership">
+						<form:option value="NORMAL" label="Normal" />
+						<form:option value="PREMIUM" label="Premium" />
+					</form:select></td>
+			</tr>
 		</table>
 		<br />
 		<button type="submit">Sign up</button>

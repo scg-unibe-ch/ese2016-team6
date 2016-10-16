@@ -27,26 +27,26 @@ public class UserTestDataSaver {
 	public void saveTestData() throws Exception {
 		// system account
 		User system = createUser("System", "1234", "FlatFindr", "Admin",
-				"/img/test/system.jpg", Gender.ADMIN, KindOfMembership.Premium);
+				"/img/test/system.jpg", Gender.ADMIN, KindOfMembership.PREMIUM);
 		system.setAboutMe("We keep you off the streets.");
 		
 		userDao.save(system);
 
 		// Main test-user for the assistants (advertiser)
 		User ese = createUser("ese@unibe.ch", "ese", "John", "Wayne",
-				"/img/test/portrait.jpg", Gender.MALE, KindOfMembership.Normal);
+				"/img/test/portrait.jpg", Gender.MALE, KindOfMembership.NORMAL);
 		ese.setAboutMe(getDummyText());
 		userDao.save(ese);
 		
 		// Searcher
 		User janeDoe = createUser("jane@doe.com", "password", "Jane", "Doe",
-				Gender.FEMALE, KindOfMembership.Normal);
+				Gender.FEMALE, KindOfMembership.NORMAL);
 		janeDoe.setAboutMe(getDummyText());
 		userDao.save(janeDoe);
 
 		// Another advertiser & searcher
 		User bernerBaer = createUser("user@bern.com", "password",
-				"Berner", "Bär", Gender.MALE, KindOfMembership.Normal);
+				"Berner", "Bär", Gender.MALE, KindOfMembership.NORMAL);
 		UserPicture picture = new UserPicture();
 		picture.setFilePath("/img/test/berner_baer.png");
 		picture.setUser(bernerBaer);
@@ -61,19 +61,19 @@ public class UserTestDataSaver {
 		
 		// Another advertiser & searcher
 		User oprah = createUser("oprah@winfrey.com", "password", "Oprah", "Winfrey",
-				"/img/test/oprah.jpg", Gender.FEMALE, KindOfMembership.Normal);
+				"/img/test/oprah.jpg", Gender.FEMALE, KindOfMembership.NORMAL);
 		oprah.setAboutMe(getDummyText());
 		userDao.save(oprah);
 		
 		// Dummy users to be added for Roommates
 		User hans = createUser("hans@unibe.ch", "password", "Hans", "DummyOne",
-				Gender.MALE, KindOfMembership.Normal);
+				Gender.MALE, KindOfMembership.NORMAL);
 		hans.setAboutMe("Hello, I am the dummy user Hans for the AdBern. I am living" +
 				"at Kramgasse 22 and I am very very happy there.");
 		userDao.save(hans);
 		
 		User mathilda = createUser("mathilda@unibe.ch", "password", "Mathilda",
-				"DummyTwo", Gender.FEMALE, KindOfMembership.Normal);
+				"DummyTwo", Gender.FEMALE, KindOfMembership.NORMAL);
 		mathilda.setAboutMe("Hello, I am the dummy user Mathilda for the AdBern. I am living" +
 				"at Kramgasse 22 and I am very very happy there.");
 		userDao.save(mathilda);
