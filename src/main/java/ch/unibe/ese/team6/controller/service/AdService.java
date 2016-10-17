@@ -26,6 +26,8 @@ import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.Location;
+import ch.unibe.ese.team6.model.Message;
+import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.Visit;
 import ch.unibe.ese.team6.model.dao.AdDao;
@@ -201,13 +203,29 @@ public class AdService {
 	// sends email to the premium users immediately when a ad has been done
 	@Transactional
 	private void sendInfoEmail(Ad ad) {
-		MessageService messageService = new MessageService();
-		
 		for(User temp: userDa.findAll()) {
 			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
-				messageService.sendMessage(temp, temp, ad.toString(), "Check it out, there is a new Ad online!");
+				sendMessageForNewAd(temp, ad);
 			}
-		}	
+		}
+	}
+	
+	public void sendMessageForNewAd(User temp, Ad ad) {
+		Message message = new Message();
+		message.setDateSent(new Date());
+		message.setSender(userDao.findByUsername("System"));
+		message.setRecipient(temp);
+		message.setSubject("New Add!");
+		message.setText("There is a new Ad!"
+				+ "/n"
+				+ "<a class=\"link\" href=/ad?id="
+				+ ad.getId()
+				+ ">"
+				+ ad.getTitle()
+				+ "</a><br><br>");
+		message.setState(MessageState.UNREAD);
+		
+		messageDao.save(message);
 	}
 
 
