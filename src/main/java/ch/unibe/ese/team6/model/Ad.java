@@ -99,7 +99,15 @@ public class Ad {
 	@Column(nullable = false)
 	private boolean internet;
 
+	
+	@Column(nullable = false)
+	private KindOfProperty propertyType;
+	
+	
+	
+	
 	// true if studio, false if room
+	// this is deprecated
 	@Column(nullable = false)
 	private boolean studio;
 
@@ -122,11 +130,21 @@ public class Ad {
 	}
 
 	public boolean getStudio() {
-		return studio;
+		return (propertyType==KindOfProperty.Studio);
+		
+		
+		//following line is deprecated
+		//return studio;
+		
 	}
 
 	public void setStudio(boolean studio) {
-		this.studio = studio;
+		this.propertyType=KindOfProperty.Studio;
+		
+		
+		//following line is deprecated
+		//this.studio = studio;
+		
 	}
 
 	public boolean getSmokers() {
