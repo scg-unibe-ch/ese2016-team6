@@ -134,6 +134,12 @@ public class AdService {
 		ad.setGarage(placeAdForm.getGarage());
 		ad.setInternet(placeAdForm.getInternet());
 		
+		//set add numerOfRooms
+		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
+		
+		//set property Type
+		ad.setPropertyType(placeAdForm.getPropertyType());
+		
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
 		 * uploaded at this point!

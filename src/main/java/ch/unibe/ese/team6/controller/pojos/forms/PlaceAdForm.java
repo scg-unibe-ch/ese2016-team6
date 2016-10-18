@@ -7,6 +7,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import ch.unibe.ese.team6.model.KindOfProperty;
+
 /** This form is used when a user wants to place a new ad. */
 public class PlaceAdForm {
 	
@@ -33,6 +35,15 @@ public class PlaceAdForm {
 	@NotBlank(message = "Required")
 	private String roomDescription;
 
+	//specifies how many rooms this property has
+	@NotBlank(message = "Required")
+	private int numberOfRooms;
+	
+	//what type of property this property is
+	@NotBlank(message = "Required")
+	private KindOfProperty propertyType;
+	
+	
 	private String preferences;
 
 	// optional free text description
@@ -60,6 +71,26 @@ public class PlaceAdForm {
 	
 	private List<String> visits;
 
+	//Gets and sets the number of rooms this property has and that the add will show
+	public int getNumberOfRooms(){
+		return numberOfRooms;
+	}
+	
+	public void setNumberOfRooms(int newNumber){
+		numberOfRooms = newNumber;
+	}
+	
+	//gets and sets the property Type
+	public KindOfProperty getPropertyType(){
+		return propertyType;
+	}
+	
+	public void setPropertyType(KindOfProperty newType){
+		propertyType = newType;
+	}
+	
+	
+	
 	public String getCity() {
 		return city;
 	}

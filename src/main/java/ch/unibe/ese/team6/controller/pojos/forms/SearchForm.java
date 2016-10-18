@@ -26,6 +26,13 @@ public class SearchForm {
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "In your dreams.")
 	private Integer prize;
+	
+	
+	//specifies how many rooms a Flat must have
+	@NotNull(message = "Requires a number")
+	@Min(value = 0, message = "Cannot search for studios or flats with no rooms")
+	private Integer numberOfRooms;
+	
 
 	@AssertFalse(message = "Please select either or both types")
 	private boolean noRoomNoStudio;

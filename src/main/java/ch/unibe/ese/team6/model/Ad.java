@@ -99,12 +99,13 @@ public class Ad {
 	@Column(nullable = false)
 	private boolean internet;
 
-	
+	//Specifies what kind of property this property is (Studio, Room, Flat)
 	@Column(nullable = false)
 	private KindOfProperty propertyType;
 	
-	
-	
+	//specifies how many rooms the property in the add has
+	@Column(nullable = false)
+	private int numberOfRooms;
 	
 	// true if studio, false if room
 	// this is deprecated
@@ -129,6 +130,31 @@ public class Ad {
 		this.creationDate = creationDate;
 	}
 
+	//Gets the number of rooms this Property has
+	public int getNumberOfRooms(){
+		//creates a failsave for rooms whos number of rooms have not been updated properly
+		if(numberOfRooms<1) return 1;
+		else
+		
+		return numberOfRooms;
+	}
+	
+	
+	public void setNumberOfRooms(int newNumber){
+		
+		numberOfRooms = newNumber;
+	}
+	
+	public void setPropertyType(KindOfProperty newType){
+		propertyType = newType;
+	}
+	
+	
+	public KindOfProperty getPropertyType(){
+		return propertyType;
+	}
+	
+	
 	public boolean getStudio() {
 		return (propertyType==KindOfProperty.Studio);
 		
@@ -141,6 +167,8 @@ public class Ad {
 	public void setStudio(boolean studio) {
 		this.propertyType=KindOfProperty.Studio;
 		
+		//A failsave to make sure no single room has more or less than one room
+		if(this.propertyType==KindOfProperty.Room) this.setNumberOfRooms(1);
 		
 		//following line is deprecated
 		//this.studio = studio;

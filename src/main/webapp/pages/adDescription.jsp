@@ -194,6 +194,12 @@
 			<td><h2>Square Meters</h2></td>
 			<td>${shownAd.squareFootage}&#32;m²</td>
 		</tr>
+		
+		<tr>
+			<td><h2>Number of Rooms</h2></td>
+			<td>${shownAd.numberOfRooms}</td>
+		</tr>
+		
 		<tr>
 			<td><h2>Ad created on</h2></td>
 			<td>${formattedCreationDate}</td>
