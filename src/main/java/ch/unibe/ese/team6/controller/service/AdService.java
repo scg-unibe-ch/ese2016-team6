@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -203,9 +204,15 @@ public class AdService {
 	// sends email to the premium users immediately when a ad has been done
 	@Transactional
 	private void sendInfoEmail(Ad ad) {
+		Iterable<Ad> ads = getAdsOfLastWeek(ad);
 		for(User temp: userDa.findAll()) {
 			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
 				sendMessageForNewAd(temp, ad);
+			}
+			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.NORMAL)) {
+				if (ads != null) {
+					sendSummaryMessage(temp, ads);
+				}
 			}
 		}
 	}
@@ -215,7 +222,7 @@ public class AdService {
 		message.setDateSent(new Date());
 		message.setSender(userDao.findByUsername("System"));
 		message.setRecipient(temp);
-		message.setSubject("New Add!");
+		message.setSubject("New Ad!");
 		message.setText("There is a new Ad!"
 				+ "/n"
 				+ "<a class=\"link\" href=/ad?id="
@@ -225,6 +232,58 @@ public class AdService {
 				+ "</a><br><br>");
 		message.setState(MessageState.UNREAD);
 		
+		messageDao.save(message);
+	}
+	
+	
+	@Transactional
+	public Iterable<Ad> getAdsOfLastWeek(Ad ad) {
+		// set c to the start of this week
+		GregorianCalendar c = new GregorianCalendar();
+		c.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.MONDAY);
+		c.set(GregorianCalendar.HOUR, 0);
+		c.set(GregorianCalendar.MINUTE, 0);
+		c.set(GregorianCalendar.SECOND, 0);
+		
+		Iterable<Ad> list = adDao.findByCreationDateGreaterThan(c);
+		if (numberOfNewAds(list, c.getTimeInMillis()) > 1) {
+            // indicate that no message will be sent
+			return null;
+		}
+		
+		c.add(GregorianCalendar.DAY_OF_MONTH, -7);
+		list = adDao.findByCreationDateGreaterThan(c);
+		return list;
+	}
+	
+	private int numberOfNewAds(Iterable<Ad> ad, long time) {
+		int n = 0;
+		for (Ad temp : ad) {
+			if (temp.getCreationDate().getTime() > time) {
+				n++;
+			}
+		}
+		return n;
+	}
+	
+	public void sendSummaryMessage(User temp, Iterable<Ad> ads) {
+		Message message = new Message();
+		message.setDateSent(new Date());
+		message.setSender(userDao.findByUsername("System"));
+		message.setRecipient(temp);
+		message.setSubject("New Ads");
+		String text = "There are new Ads!";
+		for (Ad ad : ads) {
+			text = text
+					+ "/n"
+					+ "<a class=\"link\" href=/ad?id="
+					+ ad.getId()
+					+ ">"
+					+ ad.getTitle()
+					+ "</a><br><br>";
+		}
+		message.setText(text);
+		message.setState(MessageState.UNREAD);
 		messageDao.save(message);
 	}
 

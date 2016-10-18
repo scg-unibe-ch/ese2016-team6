@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.User;
 
+import java.util.Calendar;
+
 public interface AdDao extends CrudRepository<Ad, Long> {
 	
 	/** this will be used if both rooms AND studios are searched */
@@ -15,4 +17,6 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 			int i);
 
 	public Iterable<Ad> findByUser(User user);
+	
+	public Iterable<Ad> findByCreationDateGreaterThan(Calendar c);
 }
