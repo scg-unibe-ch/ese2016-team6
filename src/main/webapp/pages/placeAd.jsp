@@ -167,6 +167,26 @@
 						path="squareFootage" placeholder="Prize per month" step="5" /> <form:errors
 						path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
+			
+			<tr>
+				<td><label for="field-NumberRooms">Number of Rooms</label></td>
+			</tr>
+			
+			<tr>
+				<td>
+				<form:input id="field-NumberRooms" type="number" path="numberOfRooms"
+					placeholder="Number of Rooms" step="1" /> <form:errors path="numberOfRooms" cssClass="validationErrorText" />
+				
+				
+				</td>
+			
+			
+			</tr>
+			
+			
+			
+			
+			
 		</table>
 	</fieldset>
 

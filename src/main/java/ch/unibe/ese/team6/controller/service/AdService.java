@@ -138,7 +138,11 @@ public class AdService {
 		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
 		
 		//set property Type
+		//taken out for now
+		/*
 		ad.setPropertyType(placeAdForm.getPropertyType());
+		*/
+		
 		
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be

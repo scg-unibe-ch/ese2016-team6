@@ -36,13 +36,15 @@ public class PlaceAdForm {
 	private String roomDescription;
 
 	//specifies how many rooms this property has
-	@NotBlank(message = "Required")
+	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int numberOfRooms;
 	
 	//what type of property this property is
+	//taken out for now
+	/*
 	@NotBlank(message = "Required")
 	private KindOfProperty propertyType;
-	
+	*/
 	
 	private String preferences;
 
@@ -81,6 +83,8 @@ public class PlaceAdForm {
 	}
 	
 	//gets and sets the property Type
+	//taken out for now
+	/*
 	public KindOfProperty getPropertyType(){
 		return propertyType;
 	}
@@ -88,7 +92,7 @@ public class PlaceAdForm {
 	public void setPropertyType(KindOfProperty newType){
 		propertyType = newType;
 	}
-	
+	*/
 	
 	
 	public String getCity() {
@@ -256,7 +260,9 @@ public class PlaceAdForm {
 	}
 	
 	public void setStudio(boolean studio) {
+		
 		this.studio = studio;
+		
 	}
 
 	public List<String> getRegisteredRoommateEmails() {

@@ -100,8 +100,11 @@ public class Ad {
 	private boolean internet;
 
 	//Specifies what kind of property this property is (Studio, Room, Flat)
+	//taken out because it caused an error
+	/*
 	@Column(nullable = false)
 	private KindOfProperty propertyType;
+	*/
 	
 	//specifies how many rooms the property in the add has
 	@Column(nullable = false)
@@ -145,6 +148,8 @@ public class Ad {
 		numberOfRooms = newNumber;
 	}
 	
+	
+	/*
 	public void setPropertyType(KindOfProperty newType){
 		propertyType = newType;
 	}
@@ -174,7 +179,17 @@ public class Ad {
 		//this.studio = studio;
 		
 	}
-
+	*/
+	
+	public boolean getStudio() {
+		return studio;
+	}
+		
+	public void setStudio(boolean studio) {
+		this.studio = studio;
+	}
+	
+	
 	public boolean getSmokers() {
 		return smokers;
 	}
