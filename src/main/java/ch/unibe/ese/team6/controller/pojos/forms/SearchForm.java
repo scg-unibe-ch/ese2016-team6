@@ -39,6 +39,15 @@ public class SearchForm {
 
 	private boolean bothRoomAndStudio;
 
+	
+	public int getNumberOfRooms(){
+		return numberOfRooms;
+	}
+	
+	public void setNumberOfRooms(int newNumber){
+		numberOfRooms = newNumber;
+	}
+	
 	public String getCity() {
 		return city;
 	}

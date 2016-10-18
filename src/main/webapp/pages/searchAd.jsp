@@ -24,10 +24,18 @@
 		var price = document.getElementById('prizeInput');
 		var radius = document.getElementById('radiusInput');
 		
+		var roomNumbers = document.getElementById('numberRoomsInput');
+		
+		
 		if(price.value == null || price.value == "" || price.value == "0")
 			price.value = "500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
 			radius.value = "5";
+		
+		
+		if(roomNumbers.value == null || roomNumbers.value == "" || roomNumbers.value == "0")
+			roomNumbers.value = "4";
+		
 	});
 </script>
 
@@ -88,13 +96,24 @@ function validateType(form)
 			placeholder="e.g. 5" step="5" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
+		
+		
 		<br /> <label for="prize">Price (max.):</label>
 		<form:input id="prizeInput" type="number" path="prize"
 			placeholder="e.g. 5" step="50" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" />
 		<br />
-
+		
+		
+		<br /> <label for="numberOfRooms">Rooms (min.):</label>
+		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
+			placeholder="e.g. 5" step="1" />
+		Rooms
+		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
+		<br />
+		
+		
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
 		<button type="reset" tabindex="8">Cancel</button>
 	</fieldset>

@@ -301,6 +301,15 @@ public class AdService {
 					searchForm.getStudio(), searchForm.getPrize() + 1);
 		}
 
+		
+		//attempt to filter by rooms
+		/*
+		while (results.iterator().hasNext()) {
+			Ad ad = results.iterator().next();
+			if (ad.getNumberOfRooms()<searchForm.getNumberOfRooms())
+				results.iterator().remove();
+		}
+			*/	
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);
 
