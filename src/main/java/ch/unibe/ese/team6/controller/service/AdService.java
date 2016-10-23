@@ -121,8 +121,13 @@ public class AdService {
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
+		
+		
+		/* Removed due to customer wishes
 		ad.setRoommates(placeAdForm.getRoommates());
-
+		*/
+		
+		
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
 		ad.setAnimals(placeAdForm.isAnimals());
@@ -161,6 +166,8 @@ public class AdService {
 		 * into Users and saved as a List which will be accessible through the
 		 * ad object itself.
 		 */
+		
+		/* Removed due to customer wishes
 		List<User> registeredUserRommates = new LinkedList<>();
 		if (placeAdForm.getRegisteredRoommateEmails() != null) {
 			for (String userEmail : placeAdForm.getRegisteredRoommateEmails()) {
@@ -169,7 +176,9 @@ public class AdService {
 			}
 		}
 		ad.setRegisteredRoommates(registeredUserRommates);
-
+		*/
+		
+		
 		// visits
 		List<Visit> visits = new LinkedList<>();
 		List<String> visitStrings = placeAdForm.getVisits();

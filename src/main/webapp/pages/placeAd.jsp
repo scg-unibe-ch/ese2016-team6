@@ -44,6 +44,9 @@
 		
 
 		$("#addbutton").click(function() {
+			
+			
+			
 			var text = $("#roomFriends").val();
 			var alreadyAdded = $("#addedRoommates").html();
 			if(validateForm(text)) {
@@ -59,6 +62,11 @@
 			else {
 				alert("Please enter an e-mail adress");
 			}
+			 
+			 
+			 
+			 
+			 
 			 
 			// Validates the input for Email Syntax
 			function validateForm(text) {
@@ -232,6 +240,12 @@
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
 	</fieldset>
 
+	<%--
+	
+	removed because of customer wishes
+	
+	
+	
 	<br />
 	<fieldset>
 		<legend>Roommates (optional)</legend>
@@ -264,6 +278,11 @@
 		<form:errors path="roommates" cssClass="validationErrorText" />
 	</fieldset>
 
+	--%>
+	
+	
+	
+	
 	<br />
 	<fieldset>
 		<legend>Preferences (optional)</legend>

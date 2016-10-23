@@ -231,6 +231,8 @@
 		</div>
 		<br />
 
+		<%-- Removed because of customer wished
+		
 		<div class="adDescDiv">
 			<h2>Roommates</h2>
 			<p>${shownAd.roommates}</p>
@@ -268,6 +270,9 @@
 		</div>
 		<br />
 
+		--%>
+		
+		
 		<div class="adDescDiv">
 			<h2>Preferences</h2>
 			<p>${shownAd.preferences}</p>
