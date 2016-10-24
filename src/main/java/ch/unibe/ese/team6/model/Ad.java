@@ -65,7 +65,7 @@ public class Ad {
 	@Lob
 	private String preferences;
 
-	@Column(nullable = false)
+	
 	private String roommates;
 
 	@Fetch(FetchMode.SELECT)
@@ -143,9 +143,9 @@ public class Ad {
 	}
 	
 	
-	public void setNumberOfRooms(int newNumber){
+	public void setNumberOfRooms(int numberOfRooms){
 		
-		numberOfRooms = newNumber;
+		this.numberOfRooms = numberOfRooms;
 	}
 	
 	

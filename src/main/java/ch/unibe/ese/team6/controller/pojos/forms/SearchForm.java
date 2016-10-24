@@ -29,7 +29,7 @@ public class SearchForm {
 	
 	
 	//specifies how many rooms a Flat must have
-	@NotNull(message = "Requires a number")
+	//@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "Cannot search for studios or flats with no rooms")
 	private Integer numberOfRooms;
 	
@@ -39,6 +39,15 @@ public class SearchForm {
 
 	private boolean bothRoomAndStudio;
 
+	
+	public int getNumberOfRooms(){
+		return numberOfRooms;
+	}
+	
+	public void setNumberOfRooms(int numberOfRooms){
+		this.numberOfRooms = numberOfRooms;
+	}
+	
 	public String getCity() {
 		return city;
 	}

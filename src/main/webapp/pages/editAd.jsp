@@ -39,6 +39,7 @@
 			dateFormat : 'dd-mm-yy'
 		});
 		
+		
 		$("#addbutton").click(function() {
 			var text = $("#roomFriends").val();
 			var alreadyAdded = $("#addedRoommates").html();
@@ -68,6 +69,9 @@
 			    }
 			}
 		});
+		
+		
+		
 		
 		$("#addVisitButton").click(function() {
 			var date = $("#field-visitDay").val();
@@ -202,6 +206,18 @@
 						path="squareFootage" cssClass="validationErrorText" />
 				</td>
 			</tr>
+			
+			<tr>
+				<td><label for="field-numberOfRooms">Rooms</label></td>
+			</tr>
+			<tr>
+				<td>
+					<form:input id="field-numberOfRooms" type="number" path="numberOfRooms"
+						placeholder="number of rooms" step="1" value="${ad.numberOfRooms }"/> <form:errors
+						path="numberOfRooms" cssClass="validationErrorText" />
+				</td>
+			</tr>
+			
 		</table>
 	</fieldset>
 
@@ -335,7 +351,9 @@
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
 	</fieldset>
 
-
+	
+	<%-- removed due to customer wishes
+	
 	<br />
 	<fieldset>
 		<legend>Change roommates</legend>
@@ -385,7 +403,9 @@
 					</c:forEach>
 		</table>
 	</fieldset>
-
+	--%>
+	
+	
 	<br />
 	<fieldset>
 		<legend>Change preferences</legend>
