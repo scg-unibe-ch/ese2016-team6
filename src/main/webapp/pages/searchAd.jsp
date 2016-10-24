@@ -109,7 +109,7 @@ function validateType(form)
 		<label for="numberRoomsInput">Rooms (min.):</label>
 		
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 5" step="10" />
+			placeholder="e.g. 5" step="1" />
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		

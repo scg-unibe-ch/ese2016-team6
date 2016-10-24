@@ -301,24 +301,40 @@ public class AdService {
 
 		// we use this method if we are looking for rooms AND studios
 		if (searchForm.getBothRoomAndStudio()) {
+			/*
 			results = adDao
 					.findByPrizePerMonthLessThan(searchForm.getPrize() + 1);
+			
+			*/
+			
+			//Now searches for rooms with minimum number of rooms
+			results = adDao
+					.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1,searchForm.getNumberOfRooms());
+			
 		}
 		// we use this method if we are looking EITHER for rooms OR for studios
 		else {
+			/*
 			results = adDao.findByStudioAndPrizePerMonthLessThan(
 					searchForm.getStudio(), searchForm.getPrize() + 1);
+			*/
+			
+			//Now searches for rooms with minimum number of rooms
+			results = adDao.findByStudioAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
+					searchForm.getStudio(), searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
 		}
 
 		
 		//attempt to filter by rooms
+		
 		/*
 		while (results.iterator().hasNext()) {
 			Ad ad = results.iterator().next();
 			if (ad.getNumberOfRooms()<searchForm.getNumberOfRooms())
 				results.iterator().remove();
 		}
-			*/	
+		*/		
+		
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);
 

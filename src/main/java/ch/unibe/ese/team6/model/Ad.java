@@ -135,9 +135,6 @@ public class Ad {
 
 	//Gets the number of rooms this Property has
 	public int getNumberOfRooms(){
-		//creates a failsave for rooms whos number of rooms have not been updated properly
-		if(numberOfRooms<1) return 1;
-		else
 		
 		return numberOfRooms;
 	}
