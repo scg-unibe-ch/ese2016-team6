@@ -26,7 +26,6 @@ import com.mysql.jdbc.Statement;
 
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
-import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.Location;
