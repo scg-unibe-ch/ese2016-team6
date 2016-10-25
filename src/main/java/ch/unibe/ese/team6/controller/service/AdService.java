@@ -228,12 +228,12 @@ public class AdService {
 		for(User temp: userDa.findAll()) {
 			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
 				sendMessageForNewAd(temp, ad);
-				sendEmail(temp, ad);
+				//sendEmail(temp, ad);
 			}
 		}
 	}
 	
-	private void sendEmail(User temp, Ad ad) {
+	/*private void sendEmail(User temp, Ad ad) {
 
 		String to = temp.getEmail();
 		String from = userDao.findByUsername("System").getEmail();
@@ -256,7 +256,7 @@ public class AdService {
 			}catch (MessagingException mex) {
 				mex.printStackTrace();
 			}		
-	}
+	}*/
 	
 	public void sendMessageForNewAd(User temp, Ad ad) {
 		Message message = new Message();
