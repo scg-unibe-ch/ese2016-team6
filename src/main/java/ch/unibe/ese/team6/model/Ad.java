@@ -114,6 +114,10 @@ public class Ad {
 	// this is deprecated
 	@Column(nullable = false)
 	private boolean studio;
+	
+	//true if for rent, false if for sale
+	@Column(nullable=false)
+	private boolean rent;
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -186,6 +190,13 @@ public class Ad {
 		this.studio = studio;
 	}
 	
+	public boolean getRent() {
+		return rent;
+	}
+	
+	public void setRent(boolean rent){
+		this.rent = rent;
+	}
 	
 	public boolean getSmokers() {
 		return smokers;

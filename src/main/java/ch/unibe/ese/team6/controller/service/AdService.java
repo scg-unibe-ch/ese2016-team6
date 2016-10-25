@@ -85,6 +85,9 @@ public class AdService {
 		ad.setStreet(placeAdForm.getStreet());
 
 		ad.setStudio(placeAdForm.getStudio());
+		
+		ad.setRent(placeAdForm.getRent());
+
 
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);

@@ -129,20 +129,26 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-title">Ad Title</label></td>
-				<td><label for="type-room">Type:</label></td>
 			</tr>
 
 			<tr>
 				<td><form:input id="field-title" path="title"
 						placeholder="Ad Title" /></td>
-				<td><form:radiobutton id="type-room" path="studio" value="0"
-						checked="checked" />Room <form:radiobutton id="type-studio"
-						path="studio" value="1" />Studio</td>
 			</tr>
 
 			<tr>
-				<td><label for="field-street">Street</label></td>
-				<td><label for="field-city">City / Zip code</label></td>
+				<td><label for="type-room">Type:</label></td>
+				<td><label for="forRent">Status:</label></td>
+			</tr>
+			
+			<tr>
+				<td><form:radiobutton id="type-room" path="studio" value="0"
+						checked="checked" />Room <form:radiobutton id="type-studio"
+						path="studio" value="1" />Studio</td>
+
+				<td><form:radiobutton id="for-sale" path="rent" value="0" 
+						checked="checked"/> For Rent <form:radiobutton id="for-rent"
+						path="rent" value="1"/> For Sale </td>
 			</tr>
 
 			<tr>
@@ -164,7 +170,7 @@
 			</tr>
 
 			<tr>
-				<td><label for="field-Prize">Prize per month</label></td>
+				<td><label for="field-Prize">Price (per month if for rent, global if for sale)</label></td>
 				<td><label for="field-SquareFootage">Square Meters</label></td>
 			</tr>
 			<tr>

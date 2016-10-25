@@ -140,11 +140,18 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-title">Ad Title</label></td>
+			</tr>
+			
+			<tr>
+				<td><form:input id="field-title" path="title" value="${ad.title}" /></td>
+			</tr>
+			
+			<tr>
 				<td><label for="type-room">Type:</label></td>
+				<td><label for="forRent">Status:</label></td>
 			</tr>
 
 			<tr>
-				<td><form:input id="field-title" path="title" value="${ad.title}" /></td>
 				<td>
 					<c:choose>
 						<c:when test="${ad.studio == 'true'}">
@@ -158,6 +165,22 @@
 								path="studio" value="1" />Studio
 						</c:otherwise>
 					</c:choose>
+				</td>
+			
+				<td>
+					<c:choose>
+						<c:when test="${ad.rent == 'true'}">
+							<form:radiobutton id="for-sale" path="rent" value="1" 
+							checked="checked" />For Sale <form:radiobutton id="for-rent"
+							path="rent" value="0" />For Rent
+						</c:when>
+						<c:otherwise>
+							<form:radiobutton id="for-sale" path="rent" value="0"
+							checked="checked"/>For Sale <form:radiobutton id="for-rent"
+							path="rent" value="1" />For Rent
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 
 			<tr>
@@ -190,7 +213,7 @@
 			</tr>
 
 			<tr>
-				<td><label for="field-Prize">Prize per month</label></td>
+				<td><label for="field-Prize">Price (per month if for rent, global if for sale)</label></td>
 				<td><label for="field-SquareFootage">Square Meters</label></td>
 			</tr>
 			<tr>
