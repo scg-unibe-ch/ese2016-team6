@@ -18,8 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.unibe.ese.team6.controller.pojos.forms.SignupForm;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.UserRole;
+import ch.unibe.ese.team6.model.dao.AdDao;
 import ch.unibe.ese.team6.model.dao.MessageDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
+import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.MessageState;
@@ -35,6 +37,9 @@ public class SignupService {
 	
 	@Autowired
 	private MessageDao messageDao;
+	
+	@Autowired
+	private AdDao adDao;
 
 	/** Handles persisting a new user to the database. */
 	@Transactional
@@ -60,9 +65,42 @@ public class SignupService {
 		userDao.save(user);
 		
 		if(user.getKindOfMembership().equals(KindOfMembership.PREMIUM)) {
-			Timer timer = new Timer();
-			timer.schedule(sendPayMessage(user), 1000);
 			sendPayMessage(user);
+			Timer timer = new Timer();
+			timer.schedule(new PayMessager(user), user.getPeriodOfPreiumMembership());
+		}
+		if(user.getKindOfMembership().equals(KindOfMembership.NORMAL)) {
+			sendsMessageAndEmailForNormalUserWeekly(user);
+			Timer timer2 = new Timer();
+			timer2.schedule(new WeeklyEmail(user), 60000); //would be for a week: 60000*60*24*7 but to test its: 60000 = 1 Minute
+		}
+	}
+	
+	// Timer for the Pay Reminder for the Premium Members
+	class PayMessager extends TimerTask {
+		User user;
+		
+		public PayMessager(User user) {
+			this.user = user;
+		}
+
+		@Override
+		public void run() {
+			sendPayMessage(user);	
+		}
+	}
+	
+	// Timer for the Weekly Summary of the Ads of last week
+	class WeeklyEmail extends TimerTask {
+		User user;
+		
+		public WeeklyEmail(User user) {
+			this.user = user;
+		}
+		
+		@Override
+		public void run() {
+			sendsMessageAndEmailForNormalUserWeekly(user);
 		}
 	}
 	
@@ -72,32 +110,67 @@ public class SignupService {
 	 * @param: user
 	 */
 	public void sendPayMessage(User user) {
-		User sender = userDao.findByUsername("System");
-		String sub = "Welcome to Flatfindr!";
+		String sub = "Welcome to Flatfinder!";
 		String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
-		+ " CHF on our bank account!";
+		+ " CHF into our bank account for the Premium Membership!";
 		
-		//sends message
+		sendMessage(user, sub, txt);
+		sendEmail(user, sub, txt);
+	}
+	
+	/*
+	 * sends Weekly a summary of all Ads from the last week
+	 */
+	public void sendsMessageAndEmailForNormalUserWeekly(User user) {
+		String sub = "These are the Ads from last week!";
+		String txt = "Adds: ";
+		
+		Date dateNow = new Date();
+		Date date7DaysAgo = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(dateNow);
+		c.add(Calendar.DATE, -7);
+		date7DaysAgo.setTime(c.getTime().getTime());
+
+		for(Ad ad: adDao.findAll()) {
+			if(ad.getCreationDate().after(date7DaysAgo)) {
+				txt += "</a><br><br> <a class=\"link\" href=/ad?id="
+			 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>";
+			}
+		}
+		
+		if(txt.equals("Adds: ")) {
+			txt = "There are no new Ads, but check out our Page!";
+		}
+		
+		sendMessage(user, sub, txt);
+		sendEmail(user, sub, txt);
+	}
+	
+	//sends message
+	public void sendMessage(User recipient, String sub, String tex) {
 		Message message = new Message();
 		message.setDateSent(new Date());
-		message.setSender(sender);
-		message.setRecipient(user);
+		message.setSender(userDao.findByUsername("System"));
+		message.setRecipient(recipient);
 		message.setSubject(sub);
-		message.setText(txt);
+		message.setText(tex);
 		message.setState(MessageState.UNREAD);
 		
 		messageDao.save(message);
-		
-		//sends email
+	}
+	
+	//sends email
+	public void sendEmail(User recipient, String sub, String tex) {
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", "localhost");
 		javax.mail.Session session = javax.mail.Session.getInstance(properties);
 		try {
 			MimeMessage mess = new MimeMessage(session);
-			mess.setFrom(new InternetAddress(sender.getEmail()));
-			mess.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(user.getEmail(), false));
+			mess.setFrom(new InternetAddress(userDao.findByUsername("System").getEmail()));
+			mess.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(recipient.getEmail(), false));
 			mess.setSubject(sub);
-			mess.setText(txt);
+			mess.setText(tex);
 
 			Transport.send(mess);
 			System.out.println("Sent message successfully....");
@@ -114,11 +187,5 @@ public class SignupService {
 	@Transactional
 	public boolean doesUserWithUsernameExist(String username){
 		return userDao.findByUsername(username) != null;
-	}
-}
-
-private class Timer extends TimerTask {
-	public void run(User user){
-		sendPayMessage(user);
 	}
 }
