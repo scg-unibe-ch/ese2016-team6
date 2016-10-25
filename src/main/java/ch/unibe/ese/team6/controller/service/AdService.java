@@ -26,6 +26,7 @@ import com.mysql.jdbc.Statement;
 
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
+import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.Location;
@@ -222,21 +223,33 @@ public class AdService {
 	@Autowired
 	private UserDao userDa;
 	
-	// sends email to the premium users immediately when a ad has been done
+	/*
+	 * sends email to the premium users immediately when a ad has been done with the link for the ad
+	 */
 	@Transactional
 	private void sendInfoEmail(Ad ad) {
+		String txt = "There ist a new Ad: </a><br><br> <a class=\"link\" href=/ad?id="
+	 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>";
+		String subject = "New Add!";
+		User sender = userDao.findByUsername("System");
 		for(User temp: userDa.findAll()) {
 			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
-				sendMessageForNewAd(temp, ad);
-				//sendEmail(temp, ad);
+				if(!temp.equals(ad.getUser())) {
+					sendMessageForNewAd(temp, sender, subject, txt);
+					sendEmail(temp, sender, subject, txt);
+				}
 			}
 		}
 	}
 	
-	/*private void sendEmail(User temp, Ad ad) {
-
+	/*
+	 * sends an Email to the user
+	 * 
+	 * @param: recipient, sender, subject, text of the message
+	 */
+	private void sendEmail(User temp, User sender, String subject, String txt) {
 		String to = temp.getEmail();
-		String from = userDao.findByUsername("System").getEmail();
+		String from = sender.getEmail();
 		String host = "localhost";
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", host);
@@ -246,9 +259,7 @@ public class AdService {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
 			message.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(to, false));
-			message.setSubject("There is a new Ad!");
-			String txt = "Check this out: <a class=\"link\" href=/ad?id="
-			 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>";
+			message.setSubject(subject);
 			message.setText(txt);
 
 			Transport.send(message);
@@ -256,21 +267,20 @@ public class AdService {
 			}catch (MessagingException mex) {
 				mex.printStackTrace();
 			}		
-	}*/
+	}
 	
-	public void sendMessageForNewAd(User temp, Ad ad) {
+	/*
+	 * sends a Message to the user
+	 * 
+	 * @param: recipient, sender, subject, text of the message
+	 */
+	public void sendMessageForNewAd(User temp, User sender, String subject, String txt) {
 		Message message = new Message();
 		message.setDateSent(new Date());
-		message.setSender(userDao.findByUsername("System"));
+		message.setSender(sender);
 		message.setRecipient(temp);
-		message.setSubject("New Add!");
-		message.setText("There is a new Ad!"
-				+ "/n"
-				+ "<a class=\"link\" href=/ad?id="
-				+ ad.getId()
-				+ ">"
-				+ ad.getTitle()
-				+ "</a><br><br>");
+		message.setSubject(subject);
+		message.setText(txt);
 		message.setState(MessageState.UNREAD);
 		
 		messageDao.save(message);
