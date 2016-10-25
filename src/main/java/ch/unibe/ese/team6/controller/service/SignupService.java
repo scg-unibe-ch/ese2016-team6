@@ -73,7 +73,7 @@ public class SignupService {
 	 */
 	public void sendPayMessage(User user) {
 		User sender = userDao.findByUsername("System");
-		String sub = "Welcome to Flatfinder!";
+		String sub = "Welcome to Flatfindr!";
 		String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
 		+ " CHF on our bank account!";
 		

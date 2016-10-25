@@ -166,6 +166,16 @@
 				</c:choose>
 			</td>
 		</tr>
+		
+		<tr>
+			<td><h2>Status</h2></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.rent}">For Sale</c:when>
+					<c:otherwise>For Rent</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
 
 		<tr>
 			<td><h2>Address</h2></td>
@@ -186,7 +196,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Monthly Rent</h2></td>
+			<td><h2>Price</h2></td>
 			<td>${shownAd.prizePerMonth}&#32;CHF</td>
 		</tr>
 

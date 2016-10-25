@@ -85,6 +85,11 @@ function validateType(form)
 		
 		<br />
 		
+		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
+		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label>
+		
+		<br />
+		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />

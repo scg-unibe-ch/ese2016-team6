@@ -186,6 +186,9 @@ function sort_div_attribute() {
 		<form:checkbox style="display:none" name="type" id="type" path="studio" />
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
 		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />
+		
+		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
+		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label> <br/>
 	
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"

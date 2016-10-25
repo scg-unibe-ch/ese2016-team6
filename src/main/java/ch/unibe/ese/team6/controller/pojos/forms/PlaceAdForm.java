@@ -61,6 +61,9 @@ public class PlaceAdForm {
 	//true if studio, false if room
 	private boolean studio;
 	
+	//true if rent, false if sale
+	private boolean rent;
+	
 	private boolean smokers;
 	private boolean animals;
 	private boolean garden;
@@ -265,6 +268,14 @@ public class PlaceAdForm {
 		
 	}
 
+	public boolean getRent() {
+		return rent;
+	}
+	
+	public void setRent(boolean rent) {
+		this.rent = rent;
+	}
+	
 	public List<String> getRegisteredRoommateEmails() {
 		return registeredRoommateEmails;
 	}
