@@ -193,4 +193,8 @@ public class User {
 	public KindOfMembership getKindOfMembership() {
 		return kind;
 	}
+	
+	public int getPriceForPremiumMembereship() {
+		return 20;
+	}
 }

@@ -72,6 +72,8 @@
 					</form:select></td>
 			</tr>
 		</table>
+		<b>For a premium Membership you have to pay!</b>
+		<br />
 		<br />
 		<button type="submit">Sign up</button>
 	</fieldset>

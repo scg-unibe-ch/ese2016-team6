@@ -247,17 +247,14 @@ public class AdService {
 	 * @param: recipient, sender, subject, text of the message
 	 */
 	private void sendEmail(User temp, User sender, String subject, String txt) {
-		String to = temp.getEmail();
-		String from = sender.getEmail();
-		String host = "localhost";
 		Properties properties = System.getProperties();
-		properties.setProperty("mail.smtp.host", host);
+		properties.setProperty("mail.smtp.host", "localhost");
 		javax.mail.Session session = javax.mail.Session.getInstance(properties);
 
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from));
-			message.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(to, false));
+			message.setFrom(new InternetAddress(sender.getEmail()));
+			message.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(temp.getEmail(), false));
 			message.setSubject(subject);
 			message.setText(txt);
 
