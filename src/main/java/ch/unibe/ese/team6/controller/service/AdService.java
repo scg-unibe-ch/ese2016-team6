@@ -12,7 +12,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
+
+import javax.mail.*;
+import javax.mail.internet.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +26,6 @@ import com.mysql.jdbc.Statement;
 
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
-import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.Location;
@@ -225,8 +228,34 @@ public class AdService {
 		for(User temp: userDa.findAll()) {
 			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
 				sendMessageForNewAd(temp, ad);
+				sendEmail(temp, ad);
 			}
 		}
+	}
+	
+	private void sendEmail(User temp, Ad ad) {
+
+		String to = temp.getEmail();
+		String from = userDao.findByUsername("System").getEmail();
+		String host = "localhost";
+		Properties properties = System.getProperties();
+		properties.setProperty("mail.smtp.host", host);
+		javax.mail.Session session = javax.mail.Session.getInstance(properties);
+
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(to, false));
+			message.setSubject("There is a new Ad!");
+			String txt = "Check this out: <a class=\"link\" href=/ad?id="
+			 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>";
+			message.setText(txt);
+
+			Transport.send(message);
+			System.out.println("Sent message successfully....");
+			}catch (MessagingException mex) {
+				mex.printStackTrace();
+			}		
 	}
 	
 	public void sendMessageForNewAd(User temp, Ad ad) {
