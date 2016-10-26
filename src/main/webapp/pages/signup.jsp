@@ -72,6 +72,7 @@
 					</form:select></td>
 			</tr>
 		</table>
+		<br />
 		<b>For a premium Membership you have to pay!</b>
 		<br />
 		<br />

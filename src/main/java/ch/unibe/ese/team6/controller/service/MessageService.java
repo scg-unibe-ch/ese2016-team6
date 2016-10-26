@@ -137,6 +137,4 @@ public class MessageService {
 		}
 		return i;
 	}
-	
-	//methods for weekly emails
 }

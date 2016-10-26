@@ -197,4 +197,8 @@ public class User {
 	public int getPriceForPremiumMembereship() {
 		return 20;
 	}
+	
+	public long getPeriodOfPreiumMembership() {
+		return 100000;
+	}
 }
