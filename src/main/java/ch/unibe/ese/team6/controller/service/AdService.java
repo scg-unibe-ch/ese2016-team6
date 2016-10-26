@@ -251,12 +251,12 @@ public class AdService {
 	 */
 	private void sendEmail(User temp, User sender, String subject, String txt) {
 		Properties properties = System.getProperties();
-		properties.setProperty("mail.smtp.host", "localhost");
+		properties.setProperty("mail.smtp.host", "smtp.unibe.ch");
 		javax.mail.Session session = javax.mail.Session.getInstance(properties);
 
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(sender.getEmail()));
+			message.setFrom(new InternetAddress("valerie.haftka@students.unibe.ch")); //sender.getEmail()
 			message.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(temp.getEmail(), false));
 			message.setSubject(subject);
 			message.setText(txt);
