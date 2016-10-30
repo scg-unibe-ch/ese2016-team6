@@ -7,6 +7,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import ch.unibe.ese.team6.model.KindOfMembership;
+
 /** This form is used for searching for an ad. */
 public class SearchForm {
 

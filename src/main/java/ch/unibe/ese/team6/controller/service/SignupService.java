@@ -4,9 +4,13 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
+import javax.mail.Authenticator;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -32,6 +36,9 @@ public class SignupService {
 	
 	private static final String DEFAULT_ROLE = "ROLE_USER";
 	
+	public Timer timer2 = new Timer();
+	public Timer timer = new Timer();
+	
 	@Autowired
 	private UserDao userDao;
 	
@@ -40,6 +47,9 @@ public class SignupService {
 	
 	@Autowired
 	private AdDao adDao;
+	
+	@Autowired
+	private MessageService messageService;
 
 	/** Handles persisting a new user to the database. */
 	@Transactional
@@ -66,13 +76,9 @@ public class SignupService {
 		
 		if(user.getKindOfMembership().equals(KindOfMembership.PREMIUM)) {
 			sendPayMessage(user);
-			Timer timer = new Timer();
-			timer.schedule(new PayMessager(user), user.getPeriodOfPreiumMembership());
 		}
 		if(user.getKindOfMembership().equals(KindOfMembership.NORMAL)) {
 			sendsMessageAndEmailForNormalUserWeekly(user);
-			Timer timer2 = new Timer();
-			timer2.schedule(new WeeklyEmail(user), 60000); //would be for a week: 60000*60*24*7 but to test its: 60000 = 1 Minute
 		}
 	}
 	
@@ -110,75 +116,54 @@ public class SignupService {
 	 * @param: user
 	 */
 	public void sendPayMessage(User user) {
-		String sub = "Welcome to Flatfinder!";
-		String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
-		+ " CHF into our bank account for the Premium Membership!";
+			timer.schedule(new PayMessager(user), user.getPeriodOfPreiumMembership());
 		
-		sendMessage(user, sub, txt);
-		sendEmail(user, sub, txt);
+			String sub = "Welcome to Flatfinder!";
+			String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
+			+ " CHF into our bank account for the Premium Membership!";
+			
+			messageService.sendMessage(userDao.findByUsername("System"),user, sub, txt);
+			messageService.sendEmail(user, sub, txt);
 	}
 	
 	/*
 	 * sends Weekly a summary of all Ads from the last week
 	 */
 	public void sendsMessageAndEmailForNormalUserWeekly(User user) {
-		String sub = "These are the Ads from last week!";
-		String txt = "Adds: ";
+			timer2.schedule(new WeeklyEmail(user), 60000); //would be for a week: 60000*60*24*7 but to test its: 60000 = 1 Minute
 		
-		Date dateNow = new Date();
-		Date date7DaysAgo = new Date();
-		Calendar c = Calendar.getInstance();
-		c.setTime(dateNow);
-		c.add(Calendar.DATE, -7);
-		date7DaysAgo.setTime(c.getTime().getTime());
+			String sub = "These are the Ads from last week!";
+			String txt = "Ads: \n";
+			String txt2 = "Ads: \n\n";
+			
+			Date dateNow = new Date();
+			Date date7DaysAgo = new Date();
+			Calendar c = Calendar.getInstance();
+			c.setTime(dateNow);
+			c.add(Calendar.DATE, -7);
+			date7DaysAgo.setTime(c.getTime().getTime());
 
-		for(Ad ad: adDao.findAll()) {
-			if(ad.getCreationDate().after(date7DaysAgo)) {
-				txt += "</a><br><br> <a class=\"link\" href=/ad?id="
-			 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>";
+			for(Ad ad: adDao.findAll()) {
+				if(ad.getCreationDate().after(date7DaysAgo)) {
+					txt += "</a><br><br> <a class=\"link\" href=/ad?id="
+				 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>"
+				 			+ ad.getRoomDescription() + "\n";
+					String tmp = ad.getTitle();
+					String id = "http://localhost:8080/" + "ad?id=" + ad.getId();
+					txt2 += tmp + "\nLink: " + id + "\n" + ad.getRoomDescription();
+				}
 			}
-		}
-		
-		if(txt.equals("Adds: ")) {
-			txt = "There are no new Ads, but check out our Page!";
-		}
-		
-		sendMessage(user, sub, txt);
-		sendEmail(user, sub, txt);
+			
+			if(txt.equals("Ads: \n")) {
+				txt = "There are no new Ads, but check out our Page!";
+				txt2 = "There are no new Ads, but check out our Page!";
+			}
+			
+			messageService.sendMessage(userDao.findByUsername("System"),user, sub, txt);
+			messageService.sendEmail(user, sub, txt2);
 	}
 	
-	//sends message
-	public void sendMessage(User recipient, String sub, String tex) {
-		Message message = new Message();
-		message.setDateSent(new Date());
-		message.setSender(userDao.findByUsername("System"));
-		message.setRecipient(recipient);
-		message.setSubject(sub);
-		message.setText(tex);
-		message.setState(MessageState.UNREAD);
-		
-		messageDao.save(message);
-	}
 	
-	//sends email
-	public void sendEmail(User recipient, String sub, String tex) {
-		Properties properties = System.getProperties();
-		properties.setProperty("mail.smtp.host", "smtp.unibe.ch");
-		javax.mail.Session session = javax.mail.Session.getInstance(properties);
-		try {
-			MimeMessage mess = new MimeMessage(session);
-			mess.setFrom(new InternetAddress("valerie.haftka@students.unibe.ch")); // userDao.findByUsername("System").getEmail())
-			mess.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(recipient.getEmail(), false));
-			mess.setSubject(sub);
-			mess.setText(tex);
-
-			Transport.send(mess);
-			System.out.println("Sent message successfully....");
-			}catch (MessagingException mex) {
-				mex.printStackTrace();
-			}
-	}
-
 	/**
 	 * Returns whether a user with the given username already exists.
 	 * @param username the username to check for
