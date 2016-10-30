@@ -145,6 +145,8 @@ public class SearchForm {
 	
 	private boolean forRent;
 	private boolean forSale;
+	
+	private boolean kindOfMembershipUser; //true if KindOfMembership of the User is Premium
 
 	public boolean getSmokers() {
 		return smokers;
@@ -280,5 +282,13 @@ public class SearchForm {
 	
 	public void setForSale(boolean helper){
 		this.forSale=helper;
+	}
+
+	public boolean getKindOfMembershipUser() {
+		return kindOfMembershipUser;
+	}
+
+	public void setKindOfMembershipUser(boolean kindOfMembershipUser) {
+		this.kindOfMembershipUser = kindOfMembershipUser;
 	}
 }

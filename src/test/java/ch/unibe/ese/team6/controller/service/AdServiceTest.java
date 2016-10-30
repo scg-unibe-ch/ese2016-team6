@@ -76,6 +76,7 @@ public class AdServiceTest {
 		placeAdForm.setCable(false);
 		placeAdForm.setGarage(true);
 		placeAdForm.setInternet(false);
+		placeAdForm.setMembershipUser(KindOfMembership.PREMIUM);
 		
 		ArrayList<String> filePaths = new ArrayList<>();
 		filePaths.add("/img/test/ad1_1.jpg");

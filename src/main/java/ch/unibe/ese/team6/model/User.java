@@ -194,6 +194,13 @@ public class User {
 		return kind;
 	}
 	
+	public boolean getKindOfMembershipBo() {
+		if(kind.equals(KindOfMembership.PREMIUM)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public int getPriceForPremiumMembereship() {
 		return 20;
 	}

@@ -217,6 +217,7 @@ public class AdService {
 		}
 
 		ad.setUser(user);
+		ad.setKindOfMembership(ad.getUser().getKindOfMembership());
 		
 		adDao.save(ad);
 		
@@ -299,6 +300,10 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
+		
+		if(searchForm.getKindOfMembershipUser()) {
+			//adDao.findAllWhereKindOfMembershipOfTheUserIsPremium();
+		}
 
 		// we use this method if we are looking for rooms AND studios
 		if (searchForm.getBothRoomAndStudio()) {
