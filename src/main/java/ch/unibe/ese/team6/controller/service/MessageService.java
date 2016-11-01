@@ -6,7 +6,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Store;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +120,40 @@ public class MessageService {
 		message.setState(MessageState.UNREAD);
 		
 		messageDao.save(message);
+	}
+	
+	//sends email
+	public void sendEmail(User recipient, String sub, String tex) {
+		Properties properties = System.getProperties();
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtp.user", "eseserver@gmail.com");
+		properties.setProperty("mail.smtp.auth", "true"); 
+		properties.setProperty("mail.smtp.debug", "true");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.port", "465");
+		properties.setProperty("mail.smtp.socketFactory.port", "465");
+		properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+
+		javax.mail.Session session = javax.mail.Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("eseserver@gmail.com", "flatfinder");
+            }
+        });
+
+		try {
+			MimeMessage mess = new MimeMessage(session);
+			mess.setFrom(new InternetAddress("eseserver@gmail.com"));
+			mess.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(recipient.getEmail(), false));
+			mess.setSubject(sub);
+			mess.setText(tex);
+	
+
+			Transport.send(mess);
+			System.out.println("Sent message successfully....");
+			}catch (MessagingException mex) {
+				mex.printStackTrace();
+			}
 	}
 
 	/**

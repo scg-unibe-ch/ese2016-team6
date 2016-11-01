@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
+import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.dao.AdDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
@@ -100,6 +101,7 @@ public class AdTestDataSaver {
 		adBern.setCable(true);
 		adBern.setGarage(true);
 		adBern.setInternet(true);
+		adBern.setKindOfMembership(KindOfMembership.NORMAL);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
 		pictures.add(createPicture(adBern, "/img/test/ad1_2.jpg"));
@@ -145,6 +147,7 @@ public class AdTestDataSaver {
 		adBern2.setCable(false);
 		adBern2.setGarage(false);
 		adBern2.setInternet(true);
+		adBern2.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern2, "/img/test/ad2_1.jpg"));
 		pictures.add(createPicture(adBern2, "/img/test/ad2_2.jpg"));
@@ -188,6 +191,7 @@ public class AdTestDataSaver {
 		adBasel.setCable(false);
 		adBasel.setGarage(false);
 		adBasel.setInternet(false);
+		adBasel.setKindOfMembership(KindOfMembership.PREMIUM);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBasel, "/img/test/ad3_1.jpg"));
 		pictures.add(createPicture(adBasel, "/img/test/ad3_2.jpg"));
@@ -227,6 +231,7 @@ public class AdTestDataSaver {
 		adOlten.setCable(true);
 		adOlten.setGarage(false);
 		adOlten.setInternet(false);
+		adOlten.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adOlten, "/img/test/ad4_1.png"));
 		pictures.add(createPicture(adOlten, "/img/test/ad4_2.png"));
@@ -265,6 +270,7 @@ public class AdTestDataSaver {
 		adNeuchâtel.setCable(false);
 		adNeuchâtel.setGarage(false);
 		adNeuchâtel.setInternet(true);
+		adNeuchâtel.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_1.jpg"));
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_2.jpg"));
@@ -301,6 +307,7 @@ public class AdTestDataSaver {
 		adBiel.setCable(false);
 		adBiel.setGarage(false);
 		adBiel.setInternet(false);
+		adBiel.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBiel, "/img/test/ad6_1.png"));
 		pictures.add(createPicture(adBiel, "/img/test/ad6_2.png"));
@@ -344,6 +351,7 @@ public class AdTestDataSaver {
 		adZurich.setCable(true);
 		adZurich.setGarage(true);
 		adZurich.setInternet(true);
+		adZurich.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adZurich, "/img/test/ad1_3.jpg"));
 		pictures.add(createPicture(adZurich, "/img/test/ad1_2.jpg"));
@@ -389,6 +397,7 @@ public class AdTestDataSaver {
 		adLuzern.setCable(false);
 		adLuzern.setGarage(false);
 		adLuzern.setInternet(true);
+		adLuzern.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_3.jpg"));
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_2.jpg"));
@@ -432,6 +441,7 @@ public class AdTestDataSaver {
 		adAarau.setCable(false);
 		adAarau.setGarage(false);
 		adAarau.setInternet(false);
+		adAarau.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adAarau, "/img/test/ad3_3.jpg"));
 		pictures.add(createPicture(adAarau, "/img/test/ad3_2.jpg"));
@@ -474,6 +484,7 @@ public class AdTestDataSaver {
 		adDavos.setCable(true);
 		adDavos.setGarage(false);
 		adDavos.setInternet(false);
+		adDavos.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adDavos, "/img/test/ad4_3.png"));
 		pictures.add(createPicture(adDavos, "/img/test/ad4_2.png"));
@@ -512,6 +523,7 @@ public class AdTestDataSaver {
 		adLausanne.setCable(false);
 		adLausanne.setGarage(false);
 		adLausanne.setInternet(false);
+		adLausanne.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_3.jpg"));
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_2.jpg"));
@@ -548,6 +560,7 @@ public class AdTestDataSaver {
 		adLocarno.setCable(false);
 		adLocarno.setGarage(false);
 		adLocarno.setInternet(false);
+		adLocarno.setKindOfMembership(KindOfMembership.NORMAL);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_3.png"));
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_2.png"));

@@ -7,6 +7,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import ch.unibe.ese.team6.model.KindOfMembership;
+
 /** This form is used for searching for an ad. */
 public class SearchForm {
 
@@ -143,6 +145,8 @@ public class SearchForm {
 	
 	private boolean forRent;
 	private boolean forSale;
+	
+	private boolean kindOfMembershipUser; //true if KindOfMembership of the User is Premium
 
 	public boolean getSmokers() {
 		return smokers;
@@ -278,5 +282,13 @@ public class SearchForm {
 	
 	public void setForSale(boolean helper){
 		this.forSale=helper;
+	}
+
+	public boolean getKindOfMembershipUser() {
+		return kindOfMembershipUser;
+	}
+
+	public void setKindOfMembershipUser(boolean kindOfMembershipUser) {
+		this.kindOfMembershipUser = kindOfMembershipUser;
 	}
 }

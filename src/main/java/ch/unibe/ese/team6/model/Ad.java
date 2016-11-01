@@ -126,6 +126,8 @@ public class Ad {
 	@ManyToOne(optional = false)
 	private User user;
 	
+	private boolean kindOfMembershipOfUser;
+	
 	@OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Visit> visits;
 
@@ -135,6 +137,18 @@ public class Ad {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	public boolean getKindOFMembershipOfUser() {
+		return kindOfMembershipOfUser;
+	}
+	
+	public void setKindOfMembership(KindOfMembership kind) {
+		if(kind.equals(KindOfMembership.PREMIUM)) {
+			kindOfMembershipOfUser = true;
+		} else {
+			kindOfMembershipOfUser = false;
+		}
 	}
 
 	//Gets the number of rooms this Property has

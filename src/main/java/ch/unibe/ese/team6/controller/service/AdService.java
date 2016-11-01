@@ -60,6 +60,9 @@ public class AdService {
 
 	@Autowired
 	private GeoDataService geoDataService;
+	
+	@Autowired
+	private MessageService messageService;
 
 	/**
 	 * Handles persisting a new ad to the database.
@@ -214,6 +217,7 @@ public class AdService {
 		}
 
 		ad.setUser(user);
+		ad.setKindOfMembership(ad.getUser().getKindOfMembership());
 		
 		adDao.save(ad);
 		
@@ -230,61 +234,21 @@ public class AdService {
 	 */
 	@Transactional
 	private void sendInfoEmail(Ad ad) {
-		String txt = "There ist a new Ad: </a><br><br> <a class=\"link\" href=/ad?id="
-	 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>";
-		String subject = "New Add!";
+		String txt = "There is a new Ad: </a><br><br> <a class=\"link\" href=/ad?id="
+	 			+ ad.getId() + ">" + ad.getTitle() + "</a><br><br>" + ad.getRoomDescription();
+		String txt2 = "There is a new Ad: " + ad.getTitle() + "\nLink: http://localhost:8080/ad?id=" 
+	 			+ ad.getId() + "\n" + ad.getRoomDescription();
+		String subject = "New Ad!";
 		User sender = userDao.findByUsername("System");
 		for(User temp: userDa.findAll()) {
 			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
 				if(!temp.equals(ad.getUser())) {
-					sendMessageForNewAd(temp, sender, subject, txt);
-					sendEmail(temp, sender, subject, txt);
+					messageService.sendMessage(sender, temp, subject, txt);
+					messageService.sendEmail(temp, subject, txt2);
 				}
 			}
 		}
 	}
-	
-	/*
-	 * sends an Email to the user
-	 * 
-	 * @param: recipient, sender, subject, text of the message
-	 */
-	private void sendEmail(User temp, User sender, String subject, String txt) {
-		Properties properties = System.getProperties();
-		properties.setProperty("mail.smtp.host", "smtp.unibe.ch");
-		javax.mail.Session session = javax.mail.Session.getInstance(properties);
-
-		try {
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("valerie.haftka@students.unibe.ch")); //sender.getEmail()
-			message.addRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(temp.getEmail(), false));
-			message.setSubject(subject);
-			message.setText(txt);
-
-			Transport.send(message);
-			System.out.println("Sent message successfully....");
-			}catch (MessagingException mex) {
-				mex.printStackTrace();
-			}		
-	}
-	
-	/*
-	 * sends a Message to the user
-	 * 
-	 * @param: recipient, sender, subject, text of the message
-	 */
-	public void sendMessageForNewAd(User temp, User sender, String subject, String txt) {
-		Message message = new Message();
-		message.setDateSent(new Date());
-		message.setSender(sender);
-		message.setRecipient(temp);
-		message.setSubject(subject);
-		message.setText(txt);
-		message.setState(MessageState.UNREAD);
-		
-		messageDao.save(message);
-	}
-
 
 	/**
 	 * Gets the ad that has the given id.
@@ -336,6 +300,10 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
+		
+		if(searchForm.getKindOfMembershipUser()) {
+			//adDao.findAllWhereKindOfMembershipOfTheUserIsPremium();
+		}
 
 		// we use this method if we are looking for rooms AND studios
 		if (searchForm.getBothRoomAndStudio()) {

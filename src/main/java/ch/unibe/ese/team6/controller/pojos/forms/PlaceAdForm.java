@@ -7,6 +7,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.KindOfProperty;
 
 /** This form is used when a user wants to place a new ad. */
@@ -75,6 +76,8 @@ public class PlaceAdForm {
 	private boolean internet;
 	
 	private List<String> visits;
+
+	private KindOfMembership kind;
 
 	//Gets and sets the number of rooms this property has and that the add will show
 	public int getNumberOfRooms(){
@@ -290,5 +293,13 @@ public class PlaceAdForm {
 
 	public void setVisits(List<String> visits) {
 		this.visits = visits;
+	}
+	
+	public KindOfMembership getMembereshipUser() {
+		return kind;
+	}
+	
+	public void setMembershipUser(KindOfMembership kind) {
+		this.kind = kind;
 	}
 }
