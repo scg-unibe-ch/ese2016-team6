@@ -27,24 +27,25 @@
 		var roomNumbers = document.getElementById('numberRoomsInput');
 		
 		
-		if(price.value == null || price.value == "" || price.value == "0")
+		<!-- if(price.value == null || price.value == "" || price.value == "0")
 			price.value = "500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
 			radius.value = "5";
 		
 		
 		if(roomNumbers.value == null || roomNumbers.value == "" || roomNumbers.value == "0")
-			roomNumbers.value = "4";
+			roomNumbers.value = "1"; -->
 		
 	});
 </script>
 
 
-<script>
+<!-- <script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
 	var studio = document.getElementById('studio');
+	
 	var neither = document.getElementById('neither');
 	var both = document.getElementById('both');
 	var type = document.getElementById('type');
@@ -65,7 +66,7 @@ function validateType(form)
 	}
 	filtered.checked = false;
 }
-</script>
+</script> -->
 
 <h1>Search for an ad</h1>
 <hr />
@@ -74,16 +75,14 @@ function validateType(form)
 	id="searchForm" autocomplete="off">
 
 	<fieldset>
-		<form:checkbox name="room" id="room" path="roomHelper" /><label for="room">Room</label>
+		<!-- <form:checkbox name="room" id="room" path="roomHelper" /><label for="room">Room</label>
 		<form:checkbox name="studio" id="studio" path="studioHelper" /><label for="studio">Studio</label>
 		
 		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
 		<form:checkbox style="display:none" name="type" id="type" path="studio" />
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />
-		
-		<br />
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> -->
 		
 		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
 		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label>
@@ -96,33 +95,25 @@ function validateType(form)
 		<form:errors path="city" cssClass="validationErrorText" />
 		
 
-		<label for="radiusInput">Within radius of (max.):</label>
+		<label for="radiusInput">Maximum radius of search :</label>
 		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="5" />
+			placeholder="e.g. 5" step="1" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
 		
+		</br>
 		
-		<br /> <label for="prizeInput">Price (max.):</label>
+		<label for="prizeInput">Maximum price :</label></td>
 		<form:input id="prizeInput" type="number" path="prize"
-			placeholder="e.g. 5" step="50" />
-		CHF
+			placeholder="e.g. 5" step="50" />CHF
 		<form:errors path="prize" cssClass="validationErrorText" />
-		<br />
-		
-		
-		<label for="numberRoomsInput">Rooms (min.):</label>
-		
+
+		<label for="numberRoomsInput">Minimum number of rooms :</label>
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
 			placeholder="e.g. 5" step="1" />
-		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		
-	
-		
-		
-		<br />
-		
+		</br>
 		
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
 		<button type="reset" tabindex="8">Cancel</button>
