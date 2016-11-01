@@ -41,6 +41,18 @@ public class Alert {
 
 	@Column
 	private boolean bothRoomAndStudio;
+	
+	@Column
+	private boolean forRent;
+	
+	@Column
+	private boolean forSale;
+	
+	@Column
+	private boolean bothRentAndSale;
+	
+	@Column(nullable = false)
+	private int numberOfRooms;
 
 	public long getId() {
 		return id;
@@ -112,5 +124,37 @@ public class Alert {
 
 	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
 		this.bothRoomAndStudio = bothRoomAndStudio;
+	}
+	
+	public boolean getForRent() {
+		return forRent;
+	}
+
+	public void setForRent(boolean rent) {
+		this.forRent = rent;
+	}
+	
+	public boolean getForSale() {
+		return forSale;
+	}
+
+	public void setForSale(boolean sale) {
+		this.forSale = sale;
+	}
+	
+	public boolean getBothRentAndSale() {
+		return bothRentAndSale;
+	}
+
+	public void setBothRentAndSale(boolean bothRentAndSale) {
+		this.bothRentAndSale = bothRentAndSale;
+	}
+	
+	public int getNumberOfRooms() {
+		return numberOfRooms;
+	}
+
+	public void setNumberOfRooms(int rooms) {
+		this.numberOfRooms = rooms;
 	}
 }
