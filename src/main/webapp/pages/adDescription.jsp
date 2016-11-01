@@ -205,10 +205,19 @@
 			<td>${shownAd.squareFootage}&#32;m²</td>
 		</tr>
 		
+		<c:if test="${shownAd.studio}">
 		<tr>
 			<td><h2>Number of Rooms</h2></td>
-			<td>${shownAd.numberOfRooms}</td>
+			<c:if test="${shownAd.numberOfRooms>0}">
+				<td>${shownAd.numberOfRooms}</td>
+			</c:if>
+			
+			<c:if test="${shownAd.numberOfRooms==0}">
+				<td>unspecified</td>
+			</c:if>
+			
 		</tr>
+		</c:if>
 		
 		<tr>
 			<td><h2>Ad created on</h2></td>

@@ -34,7 +34,7 @@
 		
 		
 		if(roomNumbers.value == null || roomNumbers.value == "" || roomNumbers.value == "0")
-			roomNumbers.value = "4";
+			roomNumbers.value = "0";
 		
 	});
 </script>

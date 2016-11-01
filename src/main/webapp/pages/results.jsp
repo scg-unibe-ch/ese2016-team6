@@ -153,9 +153,15 @@ function sort_div_attribute() {
 						<br />
 						<p>
 							<i><c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
+									<c:when test="${ad.studio}">Studio</c:when>		
+										
 									<c:otherwise>Room</c:otherwise>
-								</c:choose></i>
+								</c:choose>
+								
+								<c:if test="${ad.numberOfRooms==0&&ad.studio}"> with unspecified amount of rooms </c:if>
+								<c:if test="${ad.numberOfRooms>0&&ad.studio}"> with ${ad.numberOfRooms} rooms  </c:if>
+								
+								</i>
 						</p>
 					</div>
 					<div class="resultRight">
