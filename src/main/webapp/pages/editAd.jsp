@@ -147,12 +147,12 @@
 			</tr>
 			
 			<tr>
-				<td><label for="type-room">Type:</label></td>
+				<!-- <td><label for="type-room">Type:</label></td> -->
 				<td><label for="forRent">Status:</label></td>
 			</tr>
 
 			<tr>
-				<td>
+				<!-- <td>
 					<c:choose>
 						<c:when test="${ad.studio == 'true'}">
 							<form:radiobutton id="type-room" path="studio" value="1"
@@ -165,7 +165,7 @@
 								path="studio" value="1" />Studio
 						</c:otherwise>
 					</c:choose>
-				</td>
+				</td> -->
 			
 				<td>
 					<c:choose>
@@ -233,6 +233,7 @@
 			<tr>
 				<td><label for="field-numberOfRooms">Rooms</label></td>
 			</tr>
+			
 			<tr>
 				<td>
 					<form:input id="field-numberOfRooms" type="number" path="numberOfRooms"

@@ -17,7 +17,7 @@ function deleteAlert(button) {
 }
 </script>
 
-<script>
+<!-- <script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
@@ -38,9 +38,9 @@ function validateType(form)
 		neither.checked = false;
 	}
 }
-</script>
+</script> -->
 
-<script>
+<!-- <script>
 function typeOfAlert(alert) {
 	if(alert.getBothRoomAndStudio())
 		return "Both"
@@ -49,7 +49,7 @@ function typeOfAlert(alert) {
 	else
 		return "Room"
 }	
-</script>
+</script> -->
 	
 <script>
 	$(document).ready(function() {
@@ -70,7 +70,7 @@ function typeOfAlert(alert) {
 		if(price.value == null || price.value == "" || price.value == "0")
 			price.value = "500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
-			radius.value = "5";
+			radius.value = "1";
 	});
 </script>
 
@@ -82,24 +82,24 @@ function typeOfAlert(alert) {
 	id="alertForm" autocomplete="off">
 
 	<fieldset>
-		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
+		<!-- <form:checkbox name="room" id="room" path="room" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
 		
 		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br />
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br /> -->
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />
 		<form:errors path="city" cssClass="validationErrorText" />
 		
-		<label for="radius">Within radius of (max.):</label>
+		<label for="radius">Maximum radius of search :</label>
 		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="5" />
+			placeholder="e.g. 5" step="1" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
-		<br /> <label for="price">Price (max.):</label>
+		<br /> <label for="price">Maximum price :</label>
 		<form:input id="priceInput" type="number" path="price"
 			placeholder="e.g. 5" step="50" />
 		CHF
@@ -131,7 +131,7 @@ function typeOfAlert(alert) {
 			</thead>
 		<c:forEach var="alert" items="${alerts}">
 			<tr>
-				<td>
+				<!-- <td>
 				<c:choose>
 					<c:when test="${alert.bothRoomAndStudio}">
 						Both
@@ -143,7 +143,7 @@ function typeOfAlert(alert) {
 						Room
 					</c:otherwise>
 				</c:choose>
-				</td>
+				</td> -->
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>
