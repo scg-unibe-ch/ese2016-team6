@@ -68,9 +68,7 @@ function typeOfAlert(alert) {
 	else
 		return "Room"
 }	
-<<<<<<< HEAD
-</script> -->
-=======
+
 </script>
 
 <script>
@@ -83,7 +81,6 @@ function rentSaleOfAlert(alert) {
 		return "For Rent"
 }	
 </script>
->>>>>>> alertcriterias
 	
 <script>
 	$(document).ready(function() {
@@ -116,12 +113,12 @@ function rentSaleOfAlert(alert) {
 	id="alertForm" autocomplete="off">
 
 	<fieldset>
-		<!-- <form:checkbox name="room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
 		
 		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br /> -->
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br />
 		
 		<form:checkbox name="rent" id="rent" path="forRent" /><label>For Rent</label>
 		<form:checkbox name="sale" id="sale" path="forSale" /><label>For Sale</label>
@@ -192,9 +189,7 @@ function rentSaleOfAlert(alert) {
 						Room
 					</c:otherwise>
 				</c:choose>
-<<<<<<< HEAD
 				</td> -->
-=======
 				</td>
 				<td>
 				<c:choose>
@@ -209,7 +204,6 @@ function rentSaleOfAlert(alert) {
 					</c:otherwise>
 				</c:choose>
 				</td>
->>>>>>> alertcriterias
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>
