@@ -37,6 +37,8 @@ public class AlertTestDataSaver {
 		alert.setZipcode(3000);
 		alert.setPrice(1500);
 		alert.setRadius(30);
+		alert.setForRent(true);
+		alert.setNumberOfRooms(3);
 		alertDao.save(alert);
 		
 		alert = new Alert();
@@ -48,6 +50,8 @@ public class AlertTestDataSaver {
 		alert.setZipcode(8000);
 		alert.setPrice(1000);
 		alert.setRadius(25);
+		alert.setForRent(true);
+		alert.setNumberOfRooms(2);
 		alertDao.save(alert);
 		
 		
@@ -61,6 +65,8 @@ public class AlertTestDataSaver {
 		alert.setZipcode(6003);
 		alert.setPrice(900);
 		alert.setRadius(22);
+		alert.setForRent(true);
+		alert.setNumberOfRooms(2);
 		alertDao.save(alert);
 	}
 
