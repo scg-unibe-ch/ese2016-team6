@@ -300,9 +300,10 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
-		Iterable<Ad> AdsOfPremium = null;
 		
-		AdsOfPremium = adDao.findByKindOfMembershipOfUserEquals(true);
+		if(searchForm.getKindOfMembershipUser()) {
+			//adDao.findAllWhereKindOfMembershipOfTheUserIsPremium();
+		}
 
 		// we use this method if we are looking for rooms AND studios
 		if (searchForm.getBothRoomAndStudio()) {
@@ -348,12 +349,6 @@ public class AdService {
 		Location searchedLocation = geoDataService.getLocationsByCity(city)
 				.get(0);
 
-		//adds first the results of the Premium Users
-		List<Ad> allTogether = new ArrayList<>();
-		for(Ad ads : AdsOfPremium) {
-			allTogether.add(ads);
-		}
-		
 		// create a list of the results and of their locations
 		List<Ad> locatedResults = new ArrayList<>();
 		for (Ad ad : results) {
@@ -520,9 +515,7 @@ public class AdService {
 				}
 			}
 		}
-		allTogether.addAll(locatedResults);
-		
-		return allTogether;
+		return locatedResults;
 	}
 
 	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut,

@@ -116,12 +116,12 @@ public class SignupService {
 	 * @param: user
 	 */
 	public void sendPayMessage(User user) {
-		
-		User sender = userDao.findByUsername("System");
-		String sub = "Welcome to FlatFindr!";
-		String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
-		+ " CHF into our bank account for the Premium Membership!";
 			timer.schedule(new PayMessager(user), user.getPeriodOfPreiumMembership());
+		
+			String sub = "Welcome to Flatfinder!";
+			String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
+			+ " CHF into our bank account for the Premium Membership!";
+			
 			messageService.sendMessage(userDao.findByUsername("System"),user, sub, txt);
 			messageService.sendEmail(user, sub, txt);
 	}

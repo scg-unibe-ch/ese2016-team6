@@ -17,7 +17,7 @@ function deleteAlert(button) {
 }
 </script>
 
-<!-- <script>
+<script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
@@ -57,9 +57,9 @@ function validateType(form)
 		neitherRentSale.checked = false;
 	}
 }
-</script> -->
+</script>
 
-<!-- <script>
+<script>
 function typeOfAlert(alert) {
 	if(alert.getBothRoomAndStudio())
 		return "Both"
@@ -68,7 +68,6 @@ function typeOfAlert(alert) {
 	else
 		return "Room"
 }	
-
 </script>
 
 <script>
@@ -101,7 +100,7 @@ function rentSaleOfAlert(alert) {
 		if(price.value == null || price.value == "" || price.value == "0")
 			price.value = "500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
-			radius.value = "1";
+			radius.value = "5";
 	});
 </script>
 
@@ -132,12 +131,12 @@ function rentSaleOfAlert(alert) {
 			placeholder="e.g. Bern" tabindex="3" />
 		<form:errors path="city" cssClass="validationErrorText" />
 		
-		<label for="radius">Maximum radius of search :</label>
+		<label for="radius">Within radius of (max.):</label>
 		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="1" />
+			placeholder="e.g. 5" step="5" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
-		<br /> <label for="price">Maximum price :</label>
+		<br /> <label for="price">Price (max.):</label>
 		<form:input id="priceInput" type="number" path="price"
 			placeholder="e.g. 5" step="50" />
 		CHF
@@ -177,7 +176,7 @@ function rentSaleOfAlert(alert) {
 			</thead>
 		<c:forEach var="alert" items="${alerts}">
 			<tr>
-				<!-- <td>
+				<td>
 				<c:choose>
 					<c:when test="${alert.bothRoomAndStudio}">
 						Both
@@ -189,7 +188,6 @@ function rentSaleOfAlert(alert) {
 						Room
 					</c:otherwise>
 				</c:choose>
-				</td> -->
 				</td>
 				<td>
 				<c:choose>

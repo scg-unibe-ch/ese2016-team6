@@ -65,7 +65,7 @@
 						</a>
 							<ul>
 								<li><a href="/profile/placeAd">Place an ad</a></li>
-								<li><a href="/profile/myRooms">My properties</a></li>
+								<li><a href="/profile/myRooms">My rooms</a></li>
 								<li><a id="messageLink" href="/profile/messages"></a></li>
 								<li><a href="/profile/enquiries">Enquiries</a></li>
 								<li><a href="/profile/schedule">Schedule</a></li>
