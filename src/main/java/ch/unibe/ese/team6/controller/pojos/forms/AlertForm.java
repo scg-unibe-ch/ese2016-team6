@@ -35,6 +35,16 @@ public class AlertForm {
 	private boolean noRoomNoStudio;
 
 	private boolean bothRoomAndStudio;
+	
+	private boolean forRent;
+	private boolean forSale;
+	private boolean bothRentAndSale;
+	
+	@AssertFalse(message = "Please select either or both types")
+	private boolean noRentNoSale;
+	
+	@NotNull(message = "Requires a number")
+	private int numberOfRooms;
 
 	public String getCity() {
 		return city;
@@ -47,6 +57,7 @@ public class AlertForm {
 	public int getZipCode() {
 		return zipCode;
 	}
+	
 	public void setZipCode(int zip) {
 		this.zipCode = zip;
 	}
@@ -105,5 +116,45 @@ public class AlertForm {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public boolean getForRent() {
+		return forRent;
+	}
+
+	public void setForRent(boolean forRent) {
+		this.forRent = forRent;
+	}
+
+	public boolean getForSale() {
+		return forSale;
+	}
+
+	public void setForSale(boolean forSale) {
+		this.forSale = forSale;
+	}
+
+	public boolean getNoRentNoSale() {
+		return noRentNoSale;
+	}
+
+	public void setNoRentNoSale(boolean noRentNoSale) {
+		this.noRentNoSale = noRentNoSale;
+	}
+
+	public boolean getBothRentAndSale() {
+		return bothRentAndSale;
+	}
+
+	public void setBothRentAndSale(boolean bothRentAndSale) {
+		this.bothRentAndSale = bothRentAndSale;
+	}
+	
+	public int getNumberOfRooms() {
+		return numberOfRooms;
+	}
+	
+	public void setNumberOfRooms(int rooms) {
+		this.numberOfRooms = rooms;
 	}
 }

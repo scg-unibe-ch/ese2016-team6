@@ -157,7 +157,7 @@
 	<br>
 
 	<table id="adDescTable" class="adDescDiv">
-		<!--<tr>
+		<tr>
 			<td><h2>Type</h2></td>
 			<td>
 				<c:choose>
@@ -165,7 +165,7 @@
 					<c:otherwise>Room</c:otherwise>
 				</c:choose>
 			</td>
-		</tr>-->
+		</tr>
 		
 		<tr>
 			<td><h2>Status</h2></td>
@@ -207,23 +207,8 @@
 		
 		<tr>
 			<td><h2>Number of Rooms</h2></td>
-			<td>${shownAd.numberOfRooms}</td>	
+			<td>${shownAd.numberOfRooms}</td>
 		</tr>
-
-		
-		<!--<c:if test="${shownAd.studio}">
-		<tr>
-			<td><h2>Number of Rooms</h2></td>
-			<c:if test="${shownAd.numberOfRooms>0}">
-				<td>${shownAd.numberOfRooms}</td>
-			</c:if>
-			
-			<c:if test="${shownAd.numberOfRooms==0}">
-				<td>unspecified</td>
-			</c:if>
-			
-		</tr>
-		</c:if> -->
 		
 		<tr>
 			<td><h2>Ad created on</h2></td>

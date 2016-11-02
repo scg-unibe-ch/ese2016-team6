@@ -62,6 +62,10 @@ public class AlertService {
 		alert.setStudio(alertForm.getStudio());
 		alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
 		alert.setUser(user);
+		alert.setForRent(alertForm.getForRent());
+		alert.setForSale(alertForm.getForSale());
+		alert.setBothRentAndSale(alertForm.getBothRentAndSale());
+		alert.setNumberOfRooms(alertForm.getNumberOfRooms());
 		alertDao.save(alert);
 	}
 
@@ -94,7 +98,7 @@ public class AlertService {
 		while (alertIterator.hasNext()) {
 			Alert alert = alertIterator.next();
 			if (typeMismatchWith(ad, alert) || radiusMismatchWith(ad, alert)
-					|| ad.getUser().equals(alert.getUser()))
+					|| ad.getUser().equals(alert.getUser()) || rentSaleMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
 				alertIterator.remove();
 		}
 
@@ -143,6 +147,15 @@ public class AlertService {
 		boolean mismatch = false;
 		if (!alert.getBothRoomAndStudio()
 				&& ad.getStudio() != alert.getStudio())
+			mismatch = true;
+		return mismatch;
+	}
+	
+	/** Checks if an ad is conforming to the criteria in an alert. */
+	private boolean rentSaleMismatchWith(Ad ad, Alert alert) {
+		boolean mismatch = false;
+		if (!alert.getBothRentAndSale()
+				&& ad.getRent() == alert.getForRent())
 			mismatch = true;
 		return mismatch;
 	}

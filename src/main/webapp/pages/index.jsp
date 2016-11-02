@@ -18,11 +18,9 @@
 <h1>Welcome to FlatFindr!</h1>
 
 <c:choose>
-
 	<c:when test="${empty newest}">
 		<h2>No ads placed yet</h2>
 	</c:when>
-	
 	<c:otherwise>
 		<div id="resultsDiv" class="resultsDiv">	
 			<h2>Our newest ads:</h2>		
@@ -36,20 +34,12 @@
 						</h2>
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						<br />
-						
-						<!-- <p>
-							<i>
-								<c:choose>
+						<p>
+							<i><c:choose>
 									<c:when test="${ad.studio}">Studio</c:when>
 									<c:otherwise>Room</c:otherwise>
-								</c:choose>
-								<c:if test="${ad.numberOfRooms==0&&ad.studio}"> with unspecified amount of rooms </c:if>
-								<c:if test="${ad.numberOfRooms>0&&ad.studio}"> with ${ad.numberOfRooms} rooms  </c:if>
-							</i>
-						</p> -->
-						
-						<!-- displaying if it is for rent or for sale -->
-
+								</c:choose></i>
+						</p>
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>
