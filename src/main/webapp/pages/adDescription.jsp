@@ -157,7 +157,7 @@
 	<br>
 
 	<table id="adDescTable" class="adDescDiv">
-		<tr>
+		<!-- <tr>
 			<td><h2>Type</h2></td>
 			<td>
 				<c:choose>
@@ -165,7 +165,7 @@
 					<c:otherwise>Room</c:otherwise>
 				</c:choose>
 			</td>
-		</tr>
+		</tr> -->
 		
 		<tr>
 			<td><h2>Status</h2></td>

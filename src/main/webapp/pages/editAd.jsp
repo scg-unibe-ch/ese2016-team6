@@ -140,33 +140,11 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-title">Ad Title</label></td>
+				<td><label for="type-room">Type:</label></td>
 			</tr>
 			
 			<tr>
 				<td><form:input id="field-title" path="title" value="${ad.title}" /></td>
-			</tr>
-			
-			<tr>
-				<td><label for="type-room">Type:</label></td>
-				<td><label for="forRent">Status:</label></td>
-			</tr>
-
-			<tr>
-				<td>
-					<c:choose>
-						<c:when test="${ad.studio == 'true'}">
-							<form:radiobutton id="type-room" path="studio" value="1"
-								checked="checked" />Room <form:radiobutton id="type-studio"
-								path="studio" value="0" />Studio
-						</c:when>
-						<c:otherwise>
-							<form:radiobutton id="type-room" path="studio" value="0"
-								checked="checked" />Room <form:radiobutton id="type-studio"
-								path="studio" value="1" />Studio
-						</c:otherwise>
-					</c:choose>
-				</td>
-			
 				<td>
 					<c:choose>
 						<c:when test="${ad.rent == 'true'}">
@@ -181,6 +159,27 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
+			</tr>
+			
+			<tr>
+				<!--<td><label for="forRent">Status:</label></td>-->
+			</tr>
+
+			<tr>
+				<!--<td>
+					<c:choose>
+						<c:when test="${ad.studio == 'true'}">
+							<form:radiobutton id="type-room" path="studio" value="1"
+								checked="checked" />Room <form:radiobutton id="type-studio"
+								path="studio" value="0" />Studio
+						</c:when>
+						<c:otherwise>
+							<form:radiobutton id="type-room" path="studio" value="0"
+								checked="checked" />Room <form:radiobutton id="type-studio"
+								path="studio" value="1" />Studio
+						</c:otherwise>
+					</c:choose>
+				</td> -->
 			</tr>
 
 			<tr>

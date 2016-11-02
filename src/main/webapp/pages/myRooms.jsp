@@ -14,7 +14,7 @@
 </script>
 
 
-<pre><a href="/">Home</a>   &gt;   My Rooms</pre>
+<pre><a href="/">Home</a>   &gt;   My properties</pre>
 
 <c:choose>
 	<c:when test="${empty ownAdvertisements}">
@@ -39,12 +39,12 @@
 						</h2>
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						<br />
-						<p>
+						<!--<p>
 							<i><c:choose>
 									<c:when test="${ad.studio}">Studio</c:when>
 									<c:otherwise>Room</c:otherwise>
 								</c:choose></i>
-						</p>
+						</p>-->
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>
@@ -81,12 +81,12 @@
 						</h2>
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						<br />
-						<p>
+						<!--<p>
 							<i><c:choose>
 									<c:when test="${ad.studio}">Studio</c:when>
 									<c:otherwise>Room</c:otherwise>
 								</c:choose></i>
-						</p>
+						</p>-->
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>

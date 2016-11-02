@@ -9,7 +9,7 @@
 <c:import url="template/header.jsp" />
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
 
-<script>
+<!--<script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
@@ -34,7 +34,7 @@ function validateType(form)
 	}
 	filtered.checked = true;
 }
-</script>
+</script>-->
 
 <script>
 /*
@@ -151,12 +151,12 @@ function sort_div_attribute() {
 						</h2>
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						<br />
-						<p>
+						<!--<p>
 							<i><c:choose>
 									<c:when test="${ad.studio}">Studio</c:when>
 									<c:otherwise>Room</c:otherwise>
 								</c:choose></i>
-						</p>
+						</p>-->
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>
@@ -178,14 +178,14 @@ function sort_div_attribute() {
 
 	<div id="filterDiv">
 		<h2>Filter results:</h2>
-		<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
+		<!--<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studioHelper" /><label>Studio</label>
 	
 		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
 		<form:checkbox style="display:none" name="type" id="type" path="studio" />
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />-->
 		
 		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
 		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label> <br/>
