@@ -35,21 +35,25 @@
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						<br />
 						<p>
-							<i>
 							
-								<%-- replaced with flat
+							<%-- replaced with flat
 								<c:choose>
 									<c:when test="${ad.studio}">Studio</c:when>
 									<c:otherwise>Room</c:otherwise>
 								</c:choose>
 								--%>
+							
+							
+							<i>
+							
+								
 								
 								flat
  								
  								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
  								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
  								
- 								</i>
+ 							</i>
 						</p>
 					</div>
 					<div class="resultRight">
