@@ -40,10 +40,16 @@
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						<br />
 						<p>
-							<i><c:choose>
+							<i>
+								<%-- replaced with flat
+								--%>
+								<c:choose>
 									<c:when test="${ad.studio}">Studio</c:when>
 									<c:otherwise>Room</c:otherwise>
-								</c:choose></i>
+								</c:choose>
+								
+								
+								</i>
 						</p>
 					</div>
 					<div class="resultRight">

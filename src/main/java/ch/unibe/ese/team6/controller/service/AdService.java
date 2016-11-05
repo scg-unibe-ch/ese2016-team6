@@ -28,7 +28,6 @@ import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
-import ch.unibe.ese.team6.model.Location;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.User;
@@ -38,6 +37,7 @@ import ch.unibe.ese.team6.model.dao.AlertDao;
 import ch.unibe.ese.team6.model.dao.MessageDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
 import ch.unibe.ese.team6.model.dao.VisitDao;
+import ch.unibe.ese.team6.model.util.Location;
 
 /** Handles all persistence operations concerning ad placement and retrieval. */
 @Service

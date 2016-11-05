@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.jolbox.bonecp.BoneCPDataSource;
 
-import ch.unibe.ese.team6.model.Location;
+import ch.unibe.ese.team6.model.util.Location;
 
 /**
  * Provides read access to the geo db. Performs the reading operations manually,

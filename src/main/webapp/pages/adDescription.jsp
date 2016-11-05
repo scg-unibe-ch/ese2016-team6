@@ -157,6 +157,9 @@
 	<br>
 
 	<table id="adDescTable" class="adDescDiv">
+		
+		
+		<%--removed because room/studio difference no longer important
 		<tr>
 			<td><h2>Type</h2></td>
 			<td>
@@ -166,6 +169,7 @@
 				</c:choose>
 			</td>
 		</tr>
+		--%>
 		
 		<tr>
 			<td><h2>Status</h2></td>
@@ -205,20 +209,30 @@
 			<td>${shownAd.squareFootage}&#32;m²</td>
 		</tr>
 		
+		<%--removed because room/studio difference no longer important
 		<c:if test="${shownAd.studio}">
   		<tr>
   			<td><h2>Number of Rooms</h2></td>
- -			<td>${shownAd.numberOfRooms}</td>
- +			<c:if test="${shownAd.numberOfRooms>0}">
- +				<td>${shownAd.numberOfRooms}</td>
- +			</c:if>
- +			
- +			<c:if test="${shownAd.numberOfRooms==0}">
- +				<td>unspecified</td>
- +			</c:if>
- +			
+ 			<td>${shownAd.numberOfRooms}</td>
+ 			<c:if test="${shownAd.numberOfRooms>0}">
+ 				<td>${shownAd.numberOfRooms}</td>
+ 			</c:if>
+ 			
+ 			<c:if test="${shownAd.numberOfRooms==0}">
+ 				<td>unspecified</td>
+ 			</c:if>
+ 			
   		</tr>
- +		</c:if>
+ 		</c:if>
+		--%>
+		
+		
+		<tr>
+		<td><h2>Number of Rooms</h2></td>
+		<td>${shownAd.numberOfRooms}</td>
+		
+		</tr>
+		
 		
 		<tr>
 			<td><h2>Ad created on</h2></td>
