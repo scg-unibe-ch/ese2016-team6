@@ -38,23 +38,15 @@ function validateType(form)
 		neither.checked = false;
 	}
 	
+	var minsize = document.getElementById('minSize');
+	var maxsize = document.getElementById('maxSize');
 	
-	var rent = document.getElementById('rent');
-	var sale = document.getElementById('sale');
-	var neitherRentSale = document.getElementById('neitherRentSale');
-	var bothRentAndSale = document.getElementById('bothRentAndSale');
+	if(minSize == null) {
+		minSize = 0;
+	}
 	
-	if(rent.checked && sale.checked) {
-		bothRentAndSale.checked = true;
-		neitherRentSale.checked = false;
-	}
-	else if(!rent.checked && !sale.checked) {
-		bothRentAndSale.checked = false;
-		neitherRentSale.checked = true;
-	}
-	else {
-		bothRentAndSale.checked = false;
-		neitherRentSale.checked = false;
+	if(maxSize == null) {
+		maxSize = 1000000;
 	}
 }
 </script> -->
@@ -72,12 +64,10 @@ function typeOfAlert(alert) {
 
 <script>
 function rentSaleOfAlert(alert) {
-	if(alert.getBothRentAndSale())
-		return "Both"
-	else if(alert.getForSale())
-		return "For Sale"
-	else
+	if(alert.forRent())
 		return "For Rent"
+	else
+		return "For Sale"
 }	
 </script>
 	
@@ -101,6 +91,8 @@ function rentSaleOfAlert(alert) {
 			price.value = "500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
 			radius.value = "5";
+		if(maxSize.value == null || maxSize.value == "" || maxSize.value == "0")
+			maxSize.value = "1000000";
 	});
 </script>
 
@@ -119,12 +111,8 @@ function rentSaleOfAlert(alert) {
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
 		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br /> -->
 		
-		<form:checkbox name="rent" id="rent" path="forRent" /><label>For Rent</label>
-		<form:checkbox name="sale" id="sale" path="forSale" /><label>For Sale</label>
-		
-		<form:checkbox style="display:none" name="neitherRentSale" id="neitherRentSale" path="noRentNoSale" />
-		<form:checkbox style="display:none" name="bothRentAndSale" id="bothRentAndSale" path="bothRentAndSale" />
-		<form:errors path="noRentNoSale" cssClass="validationErrorText" /><br />
+		<form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
+		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br />
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -147,6 +135,16 @@ function rentSaleOfAlert(alert) {
 		<form:input id="roomsInput" type="number" path="numberOfRooms"
 			placeholder="e.g. 3" step="1" />
 		
+		<br />
+		
+		<label for="minSize">Size (min.):</label>
+		<form:input id="minSize" type="number" path="minSize" step="5"/>
+		Square Meters
+			
+		<label for="maxSize">Size (max.):</label>
+		<form:input id="maxSize" type="number" path="maxSize" step="5"/>
+		Square Meters
+			
 		<br />
 
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
@@ -171,6 +169,7 @@ function rentSaleOfAlert(alert) {
 				<th>Radius</th>
 				<th>max. Price</th>
 				<th>min. Number of Rooms</th>
+				<th>Size</th>
 				<th>Action</th>
 			</tr>
 			</thead>
@@ -192,14 +191,11 @@ function rentSaleOfAlert(alert) {
 				
 				<td>
 				<c:choose>
-					<c:when test="${alert.bothRentAndSale}">
-						Both
-					</c:when>
-					<c:when test="${alert.forSale}">
-						For Sale
+					<c:when test="${alert.forRent}">
+						For Rent
 					</c:when>
 					<c:otherwise>
-						For Rent
+						For Sale
 					</c:otherwise>
 				</c:choose>
 				</td>
@@ -207,6 +203,22 @@ function rentSaleOfAlert(alert) {
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>
 				<td>${alert.numberOfRooms}</td>
+				<td>
+				<c:choose>
+					<c:when test="${alert.minSize != 0 && alert.maxSize == 1000000}">
+						greater than ${alert.minSize} Square Meters
+					</c:when>
+					<c:when test="${alert.minSize == 0 && alert.maxSize == 1000000}">
+						all
+					</c:when>
+					<c:when test="${alert.minSize == alert.maxSize}">
+						${alert.maxSize} Square Meters
+					</c:when>						
+					<c:otherwise>
+						${alert.minSize} - ${alert.maxSize} Square Meters
+					</c:otherwise>
+				</c:choose>
+				</td>
 				<td><button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button></td>
 			</tr>
 		</c:forEach>

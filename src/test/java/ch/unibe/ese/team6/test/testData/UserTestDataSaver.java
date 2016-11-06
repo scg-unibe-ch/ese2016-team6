@@ -26,7 +26,7 @@ public class UserTestDataSaver {
 	@Transactional
 	public void saveTestData() throws Exception {
 		// system account
-		User system = createUser("System", "1234", "FlatFindr", "Admin",
+		User system = createUser("System", "1234", "EstateArranger", "Admin",
 				"/img/test/system.jpg", Gender.ADMIN, KindOfMembership.PREMIUM);
 		system.setAboutMe("We keep you off the streets.");
 		
