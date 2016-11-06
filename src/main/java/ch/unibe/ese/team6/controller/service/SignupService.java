@@ -118,7 +118,7 @@ public class SignupService {
 	public void sendPayMessage(User user) {
 			timer.schedule(new PayMessager(user), user.getPeriodOfPreiumMembership());
 		
-			String sub = "Welcome to Flatfinder!";
+			String sub = "Welcome to EstateArranger!";
 			String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
 			+ " CHF into our bank account for the Premium Membership!";
 			
@@ -130,7 +130,7 @@ public class SignupService {
 	 * sends Weekly a summary of all Ads from the last week
 	 */
 	public void sendsMessageAndEmailForNormalUserWeekly(User user) {
-			timer2.schedule(new WeeklyEmail(user), 60000); //would be for a week: 60000*60*24*7 but to test its: 60000 = 1 Minute
+			timer2.schedule(new WeeklyEmail(user), 60000*60*24*7); //to test its: 60000 = 1 Minute
 		
 			String sub = "These are the Ads from last week!";
 			String txt = "Ads: \n";

@@ -1,4 +1,4 @@
-package ch.unibe.ese.team6.model;
+package ch.unibe.ese.team6.model.util;
 
 /**
  * Describes a picture with properties such as filename, file size etc. Objects

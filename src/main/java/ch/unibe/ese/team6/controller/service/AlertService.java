@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.unibe.ese.team6.controller.pojos.forms.AlertForm;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Alert;
-import ch.unibe.ese.team6.model.Location;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.dao.AlertDao;
 import ch.unibe.ese.team6.model.dao.MessageDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
+import ch.unibe.ese.team6.model.util.Location;
 
 /**
  * Provides and handles persistence operations for adding, editing and deleting

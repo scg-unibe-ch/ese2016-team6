@@ -151,19 +151,23 @@ function sort_div_attribute() {
 						</h2>
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						<br />
-						<!--<p>
-							<i><c:choose>
+
+						<p>
+							<i>
+								<%-- replaced with flat
+								<c:choose>
 									<c:when test="${ad.studio}">Studio</c:when>
 									<c:otherwise>Room</c:otherwise>
-									
-								</c:choose></i>
+								</c:choose>
+								--%>
 								
-							<i><c:choose>
-								<c:if test="${ad.numberOfRooms==0&&ad.studio}"> with unspecified amount of rooms </c:if>
-								<c:if test="${ad.numberOfRooms>0&&ad.studio}"> with ${ad.numberOfRooms} rooms  </c:if>
+								flat
 								
-								</c:choose></i>
-						</p>-->
+								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
+								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
+								
+							</i>
+						</p>
 						
 					</div>
 					<div class="resultRight">
