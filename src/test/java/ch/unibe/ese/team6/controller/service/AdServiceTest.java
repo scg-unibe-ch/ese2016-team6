@@ -58,7 +58,7 @@ public class AdServiceTest {
 		placeAdForm.setCity("3018 - Bern");
 		placeAdForm.setPreferences("Test preferences");
 		placeAdForm.setRoomDescription("Test Room description");
-		placeAdForm.setRoommates("Test Roommate description");
+		//placeAdForm.setRoommates("Test Roommate description");
 		placeAdForm.setPrize(600);
 		placeAdForm.setSquareFootage(50);
 		placeAdForm.setTitle("title");

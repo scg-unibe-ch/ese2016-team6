@@ -121,6 +121,7 @@
 	type="date" pattern="dd.MM.yyyy" />
 <fmt:formatDate value="${shownAd.creationDate}" var="formattedCreationDate"
 	type="date" pattern="dd.MM.yyyy" />
+	
 <c:choose>
 	<c:when test="${empty shownAd.moveOutDate }">
 		<c:set var="formattedMoveOutDate" value="unlimited" />
@@ -203,7 +204,8 @@
 		</tr>
 		
 		<tr>
-			<td><h2>Available from</h2>${formattedMoveInDate}<h2>to</h2>${formattedMoveOutDate}</td>
+			<td><h2>Available from</h2>${formattedMoveInDate}</td>
+			<td><h2>to</h2>${formattedMoveOutDate}</td>
 		</tr>
 
 		

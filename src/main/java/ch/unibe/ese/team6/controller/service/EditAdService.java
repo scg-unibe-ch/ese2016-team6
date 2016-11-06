@@ -218,7 +218,7 @@ public class EditAdService {
 
 		adForm.setRoomDescription(ad.getRoomDescription());
 		adForm.setPreferences(ad.getPreferences());
-		adForm.setRoommates(ad.getRoommates());
+		//adForm.setRoommates(ad.getRoommates());
 
 		return adForm;
 	}
