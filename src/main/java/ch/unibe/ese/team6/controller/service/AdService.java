@@ -364,7 +364,7 @@ public class AdService {
 				.collect(Collectors.toList());
 		
 		// same for a distance bigger than the users wants
-		int maxi = 300;
+		int maxi = 30;
 		List<Integer> zipcodeP = distanceCalculator(searchedLocation, searchForm, maxi);
 		premiumsFiltered = premiumsFiltered.stream()
 				.filter(ad -> zipcodeP.contains(ad.getZipcode()))
@@ -605,7 +605,18 @@ public class AdService {
 					}		
 				}
 			}
-			
+			// locatedResults and premiumsFiltered should be disjunct
+			Iterator<Ad> prem = premiumsFiltered.iterator();
+			while(prem.hasNext()) {
+				Ad ad = prem.next();
+				Iterator<Ad> local = locatedResults.iterator();
+				while(local.hasNext()) {
+					Ad ad2 = local.next();
+					if(ad.equals(ad2)) {
+						locatedResults.remove(ad2);
+					}
+				}
+			}
 			locatedResults.addAll(premiumsFiltered);
 
 		}
