@@ -39,6 +39,8 @@ public class AlertTestDataSaver {
 		alert.setRadius(30);
 		alert.setForRent(true);
 		alert.setNumberOfRooms(3);
+		alert.setMinSize(0);
+		alert.setMaxSize(1000000);
 		alertDao.save(alert);
 		
 		alert = new Alert();
@@ -52,6 +54,8 @@ public class AlertTestDataSaver {
 		alert.setRadius(25);
 		alert.setForRent(true);
 		alert.setNumberOfRooms(2);
+		alert.setMinSize(0);
+		alert.setMaxSize(1000000);
 		alertDao.save(alert);
 		
 		
@@ -67,6 +71,8 @@ public class AlertTestDataSaver {
 		alert.setRadius(22);
 		alert.setForRent(true);
 		alert.setNumberOfRooms(2);
+		alert.setMinSize(0);
+		alert.setMaxSize(1000000);
 		alertDao.save(alert);
 	}
 
