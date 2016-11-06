@@ -300,7 +300,6 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
-		Iterable<Ad> premium = null;
 
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 		
@@ -329,9 +328,8 @@ public class AdService {
 		}
 
 		//for the premium user ads list
-		premium = adDao.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1, 0);
 		List<Ad> premiumsFiltered = new ArrayList<>();
-		for(Ad ad : premium) {
+		for(Ad ad : adsFromPremium) {
 			premiumsFiltered.add(ad);
 		}
 		
@@ -366,7 +364,7 @@ public class AdService {
 				.collect(Collectors.toList());
 		
 		// same for a distance bigger than the users wants
-		int maxi = 30;
+		int maxi = 300;
 		List<Integer> zipcodeP = distanceCalculator(searchedLocation, searchForm, maxi);
 		premiumsFiltered = premiumsFiltered.stream()
 				.filter(ad -> zipcodeP.contains(ad.getZipcode()))

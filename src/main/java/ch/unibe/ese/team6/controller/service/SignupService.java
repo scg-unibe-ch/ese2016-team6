@@ -118,7 +118,7 @@ public class SignupService {
 	public void sendPayMessage(User user) {
 			timer.schedule(new PayMessager(user), user.getPeriodOfPreiumMembership());
 		
-			String sub = "Welcome to Flatfinder!";
+			String sub = "Welcome to EstateArranger!";
 			String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
 			+ " CHF into our bank account for the Premium Membership!";
 			
