@@ -26,7 +26,7 @@ h2 {
 
 hr {
 	color: #33ccff;
-	background-color: blue;
+	background-color: MediumBlue;
 	height: 4px;
 	margin-bottom: 40px;
 }
@@ -233,7 +233,7 @@ fieldset {
 legend {
 	font-size: 1.1em;
 	font-weight: bold;
-	padding: 0 10px;
+	padding: 5px 10px;
 }
 
 button {
@@ -284,7 +284,7 @@ button {
 /* Header & Footer */
 header {
 	color: white;
-	background: blue;
+	background: MediumBlue;
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -372,7 +372,7 @@ header ul li a {
 	display: block;
 	padding: 5px 10px;
 	color: #fff;
-	background: purple;
+	background: DodgerBlue;
 	text-decoration: none;
 }
 
@@ -400,7 +400,7 @@ header nav {
 
 footer {
 	color: white;
-	background: blue;
+	background: MediumBlue;
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
@@ -451,7 +451,7 @@ footer nav ul li {
 /* -------------------------------------------------------------------- */
 /* placeAd.jsp */
 #placeAdForm {
-	width: 900px;
+	width: 1000px;
 	margin: auto;
 }
 
@@ -477,7 +477,7 @@ footer nav ul li {
 }
 
 .placeAdTable {
-	width: 80%;
+	width: 100%;
 }
 
 /* -------------------------------------------------------------------- */

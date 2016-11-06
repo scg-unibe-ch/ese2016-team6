@@ -87,7 +87,7 @@ public class AdService {
 
 		ad.setStreet(placeAdForm.getStreet());
 
-		ad.setStudio(placeAdForm.getStudio());
+		//ad.setStudio(placeAdForm.getStudio());
 		
 		ad.setRent(placeAdForm.getRent());
 

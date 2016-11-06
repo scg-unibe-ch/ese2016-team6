@@ -188,16 +188,6 @@
 		</tr>
 
 		<tr>
-			<td><h2>Available from</h2></td>
-			<td>${formattedMoveInDate}</td>
-		</tr>
-
-		<tr>
-			<td><h2>Move-out Date</h2></td>
-			<td>${formattedMoveOutDate}</td>
-		</tr>
-
-		<tr>
 			<td><h2>Price</h2></td>
 			<td>${shownAd.prizePerMonth}&#32;CHF</td>
 		</tr>
@@ -206,6 +196,16 @@
 			<td><h2>Square Meters</h2></td>
 			<td>${shownAd.squareFootage}&#32;m²</td>
 		</tr>
+		
+		<tr>
+			<td><h2>Number of Rooms</h2></td>
+			<td>${shownAd.numberOfRooms}</td>
+		</tr>
+		
+		<tr>
+			<td><h2>Available from</h2>${formattedMoveInDate}<h2>to</h2>${formattedMoveOutDate}</td>
+		</tr>
+
 		
 		<%--removed because room/studio difference no longer important
 		<c:if test="${shownAd.studio}">
@@ -224,18 +224,11 @@
  		</c:if>
 		--%>
 		
-		
-		<tr>
-		<td><h2>Number of Rooms</h2></td>
-		<td>${shownAd.numberOfRooms}</td>
-		
-		</tr>
-		
-		
 		<tr>
 			<td><h2>Ad created on</h2></td>
 			<td>${formattedCreationDate}</td>
 		</tr>
+		
 	</table>
 </section>
 
@@ -254,6 +247,16 @@
 </div>
 
 <hr class="clearBoth" />
+
+<!--must depend on the kind of deal-->
+<section>
+	<div id="descriptionTexts">
+		<div class="adDescDiv">
+		<h2>Price corner</h2>
+		<p>${shownAd.roomDescription}</p>
+	</div>
+	<br/>
+</section>
 
 <section>
 	<div id="descriptionTexts">
