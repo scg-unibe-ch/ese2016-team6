@@ -300,11 +300,10 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
-		
-		if(searchForm.getKindOfMembershipUser()) {
-			//adDao.findAllWhereKindOfMembershipOfTheUserIsPremium();
-		}
+		Iterable<Ad> premium = null;
 
+		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
+		
 		// we use this method if we are looking for rooms AND studios
 		if (searchForm.getBothRoomAndStudio()) {
 			/*
@@ -316,7 +315,6 @@ public class AdService {
 			//Now searches for rooms with minimum number of rooms
 			results = adDao
 					.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1,searchForm.getNumberOfRooms());
-			
 		}
 		// we use this method if we are looking EITHER for rooms OR for studios
 		else {
@@ -330,6 +328,12 @@ public class AdService {
 					searchForm.getStudio(), searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
 		}
 
+		//for the premium user ads list
+		premium = adDao.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1, 0);
+		List<Ad> premiumsFiltered = new ArrayList<>();
+		for(Ad ad : premium) {
+			premiumsFiltered.add(ad);
+		}
 		
 		//attempt to filter by rooms
 		
@@ -355,37 +359,19 @@ public class AdService {
 			locatedResults.add(ad);
 		}
 
-		final int earthRadiusKm = 6380;
-		List<Location> locations = geoDataService.getAllLocations();
-		double radSinLat = Math.sin(Math.toRadians(searchedLocation
-				.getLatitude()));
-		double radCosLat = Math.cos(Math.toRadians(searchedLocation
-				.getLatitude()));
-		double radLong = Math.toRadians(searchedLocation.getLongitude());
-
-		/*
-		 * calculate the distances (Java 8) and collect all matching zipcodes.
-		 * The distance is calculated using the law of cosines.
-		 * http://www.movable-type.co.uk/scripts/latlong.html
-		 */
-		List<Integer> zipcodes = locations
-				.parallelStream()
-				.filter(location -> {
-					double radLongitude = Math.toRadians(location
-							.getLongitude());
-					double radLatitude = Math.toRadians(location.getLatitude());
-					double distance = Math.acos(radSinLat
-							* Math.sin(radLatitude) + radCosLat
-							* Math.cos(radLatitude)
-							* Math.cos(radLong - radLongitude))
-							* earthRadiusKm;
-					return distance < searchForm.getRadius();
-				}).map(location -> location.getZip())
-				.collect(Collectors.toList());
-
+		int max = 0;
+		List<Integer> zipcodes = distanceCalculator(searchedLocation, searchForm, max);
 		locatedResults = locatedResults.stream()
 				.filter(ad -> zipcodes.contains(ad.getZipcode()))
 				.collect(Collectors.toList());
+		
+		// same for a distance bigger than the users wants
+		int maxi = 30;
+		List<Integer> zipcodeP = distanceCalculator(searchedLocation, searchForm, maxi);
+		premiumsFiltered = premiumsFiltered.stream()
+				.filter(ad -> zipcodeP.contains(ad.getZipcode()))
+				.collect(Collectors.toList());
+
 
 		// filter for additional criteria
 		if (searchForm.getFiltered()) {
@@ -423,6 +409,13 @@ public class AdService {
 					latestInDate);
 			locatedResults = validateDate(locatedResults, false,
 					earliestOutDate, latestOutDate);
+			
+			premiumsFiltered = validateDate(premiumsFiltered, true, earliestInDate,
+					latestInDate);
+			premiumsFiltered = validateDate(premiumsFiltered, false,
+					earliestOutDate, latestOutDate);
+			
+			int counterForP = 0;
 
 			// filtering for the rest
 			// smokers
@@ -432,6 +425,17 @@ public class AdService {
 					Ad ad = iterator.next();
 					if (!ad.getSmokers())
 						iterator.remove();
+				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getSmokers()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}	
 				}
 			}
 
@@ -443,6 +447,17 @@ public class AdService {
 					if (!ad.getAnimals())
 						iterator.remove();
 				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getAnimals()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
+				}
 			}
 
 			// garden
@@ -453,7 +468,19 @@ public class AdService {
 					if (!ad.getGarden())
 						iterator.remove();
 				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getGarden()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
+				}
 			}
+			
 
 			// balcony
 			if (searchForm.getBalcony()) {
@@ -462,6 +489,17 @@ public class AdService {
 					Ad ad = iterator.next();
 					if (!ad.getBalcony())
 						iterator.remove();
+				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getBalcony()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
 				}
 			}
 
@@ -473,6 +511,17 @@ public class AdService {
 					if (!ad.getCellar())
 						iterator.remove();
 				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getCellar()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
+				}
 			}
 
 			// furnished
@@ -482,6 +531,17 @@ public class AdService {
 					Ad ad = iterator.next();
 					if (!ad.getFurnished())
 						iterator.remove();
+				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getFurnished()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
 				}
 			}
 
@@ -493,6 +553,17 @@ public class AdService {
 					if (!ad.getCable())
 						iterator.remove();
 				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getCable()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
+				}
 			}
 
 			// garage
@@ -502,6 +573,17 @@ public class AdService {
 					Ad ad = iterator.next();
 					if (!ad.getGarage())
 						iterator.remove();
+				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getGarage()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
 				}
 			}
 
@@ -513,9 +595,60 @@ public class AdService {
 					if (!ad.getInternet())
 						iterator.remove();
 				}
+				Iterator<Ad> iteratorP = premiumsFiltered.iterator();
+				while(iteratorP.hasNext()) {
+					Ad ad = iteratorP.next();
+					if(!ad.getInternet()) {
+						if(counterForP>5) {
+							iteratorP.remove();
+						} else {
+							counterForP++;
+						}
+					}		
+				}
 			}
+			
+			locatedResults.addAll(premiumsFiltered);
+
 		}
 		return locatedResults;
+	}
+	
+	/*
+	 * calculate the distances (Java 8) and collect all matching zipcodes.
+	 * The distance is calculated using the law of cosines.
+	 * http://www.movable-type.co.uk/scripts/latlong.html
+	 */
+	private List<Integer> distanceCalculator(Location searchedLocation, SearchForm searchForm, int max) {
+		final int earthRadiusKm = 6380;
+		List<Location> locations = geoDataService.getAllLocations();
+		double radSinLat = Math.sin(Math.toRadians(searchedLocation
+				.getLatitude()));
+		double radCosLat = Math.cos(Math.toRadians(searchedLocation
+				.getLatitude()));
+		double radLong = Math.toRadians(searchedLocation.getLongitude());
+
+		return locations
+				.parallelStream()
+				.filter(location -> {
+					double radLongitude = Math.toRadians(location
+							.getLongitude());
+					double radLatitude = Math.toRadians(location.getLatitude());
+					double distance = Math.acos(radSinLat
+							* Math.sin(radLatitude) + radCosLat
+							* Math.cos(radLatitude)
+							* Math.cos(radLong - radLongitude))
+							* earthRadiusKm;
+					return distance < getMaximum(searchForm.getRadius(), max);
+				}).map(location -> location.getZip())
+				.collect(Collectors.toList());
+	}
+
+	private double getMaximum(Integer radius, int max) {
+		if(radius<max) {
+			return max;
+		}
+		return radius;
 	}
 
 	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut,

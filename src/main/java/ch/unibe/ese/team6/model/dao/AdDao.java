@@ -20,5 +20,5 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 	
 	public Iterable<Ad> findByUser(User user);
 
-//	public Iterable<Ad> findAllWhereKindOfMembershipOfTheUserIsPremium();
+	public Iterable<Ad> findByKindOfMembershipOfUserEquals(boolean i);
 }
