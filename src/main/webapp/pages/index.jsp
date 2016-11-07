@@ -11,9 +11,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome to EstateArranger</title>
 </head>
+
 <body>
 
-<pre>Home</pre>
+<!--<pre>Home</pre>-->
 
 <h1>Welcome to EstateArranger!</h1>
 
@@ -21,6 +22,7 @@
 	<c:when test="${empty newest}">
 		<h2>No ads placed yet</h2>
 	</c:when>
+	
 	<c:otherwise>
 		<div id="resultsDiv" class="resultsDiv">	
 			<h2>Our newest ads:</h2>		
@@ -103,7 +105,9 @@
 							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
 						</h2>
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+						
 						<br />
+<<<<<<< HEAD
 						<p>
 							
 							
@@ -119,8 +123,24 @@
  								<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
  								
 								 rooms
+=======
+
+							<%-- replaced with flat
+								<c:choose>
+									<c:when test="${ad.studio}">Studio</c:when>
+									<c:otherwise>Room</c:otherwise>
+								</c:choose>
+								--%>
+
+						<p>
+							<i>
+								flat
+ 								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
+ 								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
+>>>>>>> origin/master
  							</i>
 						</p>
+
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>

@@ -88,10 +88,10 @@ public class AdTestDataSaver {
 		adBern.setAnimals(true);
 		adBern.setRoomDescription(roomDescription1);
 		adBern.setPreferences(preferences1);
-		adBern.setRoommates("One roommate");
+		adBern.setRoommates(null);
 		adBern.setUser(bernerBaer);
 		adBern.setRegisteredRoommates(regRoommatesAdBern);
-		adBern.setTitle("Roommate wanted in Bern");
+		adBern.setTitle("Nice Flat in Bern");
 		adBern.setStreet("Kramgasse 22");
 		adBern.setCity("Bern");
 		adBern.setGarden(true);
@@ -101,7 +101,7 @@ public class AdTestDataSaver {
 		adBern.setCable(true);
 		adBern.setGarage(true);
 		adBern.setInternet(true);
-		adBern.setKindOfMembership(KindOfMembership.NORMAL);
+		adBern.setKindOfMembership(KindOfMembership.PREMIUM);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
 		pictures.add(createPicture(adBern, "/img/test/ad1_2.jpg"));

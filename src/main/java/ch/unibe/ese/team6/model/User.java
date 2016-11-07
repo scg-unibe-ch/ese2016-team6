@@ -206,6 +206,6 @@ public class User {
 	}
 	
 	public long getPeriodOfPreiumMembership() {
-		return 100000;
+		return 60000*24*7;
 	}
 }

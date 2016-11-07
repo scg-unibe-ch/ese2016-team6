@@ -141,13 +141,13 @@ public class PlaceAdForm {
 		this.squareFootage = squareFootage;
 	}
 
-	public String getRoommates() {
-		return roommates;
-	}
+	//public String getRoommates() {
+	//	return roommates;
+	//}
 
-	public void setRoommates(String roommates) {
-		this.roommates = roommates;
-	}
+	//public void setRoommates(String roommates) {
+	//	this.roommates = roommates;
+	//}
 
 	public boolean isSmokers() {
 		return smokers;

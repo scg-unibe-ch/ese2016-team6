@@ -87,7 +87,7 @@ public class AdService {
 
 		ad.setStreet(placeAdForm.getStreet());
 
-		ad.setStudio(placeAdForm.getStudio());
+		//ad.setStudio(placeAdForm.getStudio());
 		
 		ad.setRent(placeAdForm.getRent());
 
@@ -300,7 +300,6 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
-		Iterable<Ad> premium = null;
 
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 		
@@ -329,9 +328,8 @@ public class AdService {
 		}
 
 		//for the premium user ads list
-		premium = adDao.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1, 0);
 		List<Ad> premiumsFiltered = new ArrayList<>();
-		for(Ad ad : premium) {
+		for(Ad ad : adsFromPremium) {
 			premiumsFiltered.add(ad);
 		}
 		
@@ -607,7 +605,18 @@ public class AdService {
 					}		
 				}
 			}
-			
+			// locatedResults and premiumsFiltered should be disjunct
+			Iterator<Ad> prem = premiumsFiltered.iterator();
+			while(prem.hasNext()) {
+				Ad ad = prem.next();
+				Iterator<Ad> local = locatedResults.iterator();
+				while(local.hasNext()) {
+					Ad ad2 = local.next();
+					if(ad.equals(ad2)) {
+						locatedResults.remove(ad2);
+					}
+				}
+			}
 			locatedResults.addAll(premiumsFiltered);
 
 		}

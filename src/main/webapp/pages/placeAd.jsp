@@ -9,9 +9,7 @@
 <script src="/js/jquery.ui.widget.js"></script>
 <script src="/js/jquery.iframe-transport.js"></script>
 <script src="/js/jquery.fileupload.js"></script>
-
 <script src="/js/pictureUpload.js"></script>
-
 
 <script>
 	$(document).ready(function() {
@@ -24,16 +22,20 @@
 		$("#field-city").autocomplete({
 			minLength : 2
 		});
+		
 		$("#field-city").autocomplete({
 			source : <c:import url="getzipcodes.jsp" />
 		});
+		
 		$("#field-city").autocomplete("option", {
 			enabled : true,
 			autoFocus : true
 		});
+		
 		$("#field-moveInDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
+		
 		$("#field-moveOutDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
@@ -42,13 +44,15 @@
 			dateFormat : 'dd-mm-yy'
 		});
 		
-
+		$("#field-deadlineDay").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+		
 		$("#addbutton").click(function() {
-			
-			
 			
 			var text = $("#roomFriends").val();
 			var alreadyAdded = $("#addedRoommates").html();
+			
 			if(validateForm(text)) {
 				$.post("/profile/placeAd/validateEmail",{email: text, alreadyIn: alreadyAdded}, function(data) {
 					if(validateForm(data)) {
@@ -59,14 +63,11 @@
 						alert(data);
 					}});
 			}
+			
 			else {
 				alert("Please enter an e-mail adress");
 			}
-			 
-			 
-			 
-			 
-			 
+			  
 			 
 			// Validates the input for Email Syntax
 			function validateForm(text) {
@@ -114,10 +115,10 @@
 	});
 </script>
 
-<pre>
-	<a href="/">Home</a>   &gt;   Place ad</pre>
+<pre><a href="/">Home</a>   &gt;   Place ad</pre>
 
 <h1>Place an ad</h1>
+
 <hr />
 
 <form:form method="post" modelAttribute="placeAdForm"
@@ -125,134 +126,152 @@
 	enctype="multipart/form-data">
 
 	<fieldset>
-		<legend>General info</legend>
+		<legend>General description</legend>
 		<table class="placeAdTable">
+			
 			<tr>
-				<td><label for="field-title">Ad Title</label></td>
-			</tr>
-
-			<tr>
-				<td><form:input id="field-title" path="title"
-						placeholder="Ad Title" /></td>
-			</tr>
-
-			<tr>
-				<td><label for="type-room">Type:</label></td>
-				<td><label for="forRent">Status:</label></td>
+			<td><label for="field-title">Title of your ad :</label> 
+				<form:input id="field-title" path="title" placeholder="ad title" /></td>
 			</tr>
 			
 			<tr>
-				<td><form:radiobutton id="type-room" path="studio" value="0"
-						checked="checked" />Room <form:radiobutton id="type-studio"
-						path="studio" value="1" />Studio</td>
-
-				<td><form:radiobutton id="for-sale" path="rent" value="0" 
-						checked="checked"/> For Rent <form:radiobutton id="for-rent"
-						path="rent" value="1"/> For Sale </td>
-			</tr>
-
-			<tr>
-				<td><form:input id="field-street" path="street"
-						placeholder="Street" /></td>
-				<td><form:input id="field-city" path="city" placeholder="City" />
-					<form:errors path="city" cssClass="validationErrorText" /></td>
-			</tr>
-
-			<tr>
-				<td><label for="moveInDate">Move-in date</label></td>
-				<td><label for="moveOutDate">Move-out date (optional)</label></td>
-			</tr>
-			<tr>
-				<td><form:input type="text" id="field-moveInDate"
-						path="moveInDate" /></td>
-				<td><form:input type="text" id="field-moveOutDate"
-						path="moveOutDate" /></td>
-			</tr>
-
-			<tr>
-				<td><label for="field-Prize">Price (per month if for rent, global if for sale)</label></td>
-				<td><label for="field-SquareFootage">Square Meters</label></td>
-			</tr>
-			<tr>
-				<td><form:input id="field-Prize" type="number" path="prize"
-						placeholder="Prize per month" step="50" /> <form:errors
-						path="prize" cssClass="validationErrorText" /></td>
-				<td><form:input id="field-SquareFootage" type="number"
-						path="squareFootage" placeholder="Prize per month" step="5" /> <form:errors
-						path="squareFootage" cssClass="validationErrorText" /></td>
+			<td><label for="forRent">Status :</label>
+				<form:radiobutton id="for-sale" path="rent" value="0" checked="checked"/> For Rent 
+				<form:radiobutton id="for-rent" path="rent" value="1"/> For Sale </td>
 			</tr>
 			
 			<tr>
-				<td><label for="field-NumberRooms">Number of Rooms</label></td>
-			</tr>
-			
-			<tr>
-				<td>
-				<form:input id="field-NumberRooms" type="number" path="numberOfRooms"
-					placeholder="Number of Rooms" step="1" /> <form:errors path="numberOfRooms" cssClass="validationErrorText" />
+			<td><label for="field-street">Address :</label>
+				<form:input id="field-street" path="street" placeholder="street" /></td>
 				
+			<td><label for="field-city">City :</label>
+				<form:input id="field-city" path="city" placeholder="city" />
+				<form:errors path="city" cssClass="validationErrorText" /></td>
+			</tr>
+
+			<tr>
+				<td><label for="field-SquareFootage">Square Meters :</label>
+					<form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" />
+					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
+					
+				<td><label for="field-NumberRooms">Number of Rooms :</label>
+					<form:input id="field-NumberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" />
+					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
+			</tr>
+			
+			<tr>
+				<td><label for="moveInDate">Move-in date :</label>
+				<form:input type="text" id="field-moveInDate" path="moveInDate" /></td>
 				
+				<td><label for="moveOutDate">Move-out date (optional) :</label>
+				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
+			</tr>
+
+		</table>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Type of deal</legend>
+		<table class="placeAnAd">
+			
+			<!--the error message should work only if no field is filled out-->
+			
+			<tr>
+				<td>If for Rent :<td>
+			</tr>
+			
+			<tr>
+				<td><label for="field-Prize">Monthly rental charges :</label>
+				<form:input id="for-rent" type="number" path="rent" step="50"/></br></br></td>
+			</tr>
+			
+			<tr>
+				<td>If for Sale :</td>
+			</tr>
+			
+			<tr>
+				<td><i>You can choose either "Direct sale", or "Sale through auction" or both</i><td>
+			</tr>
+			
+			<tr>
+				<td><label for="field-Prize">Price for a direct sale</label>
+				<form:input id="for-sale" type="number" path="rent" step="50" /></td>
+			</tr>
+			
+			<tr>
+				<td><label for="field-Prize">Initial bid for a sale through auction</label>
+				<form:input id="for-sale" type="number" path="rent" step="50"/></td>
+				
+				<td><label for="field-Prize">Automatic increment for each new bid</label>
+				<form:input id="for-sale" type="number" path="rent" step="2" /></td>			
+			</tr>
+			
+			<tr>
+				<td><label for="field-Prize">Deadline</label>
+					<input type="text" id="field-deadlineDay" />
+					<select id="startHour">
+						<%
+							for (int i = 0; i < 24; i++) {
+									String hour = String.format("%02d", i);
+									out.print("<option value=\"" + hour + "\">" + hour + "</option>");
+								}
+						%>
+					</select> 
+						
+					<select id="startMinutes">
+						<%
+							for (int i = 0; i < 60; i++) {
+									String minute = String.format("%02d", i);
+									out.print("<option value=\"" + minute + "\">" + minute + "</option>");
+								}
+						%>
+					</select>
 				</td>
-			
-			
 			</tr>
-			
-			
-			
-			
-			
+
 		</table>
 	</fieldset>
 
-
-	<br />
 	<fieldset>
-		<legend>Room Description</legend>
-
+		<legend>Room content</legend>
 		<table class="placeAdTable">
+		
 			<tr>
-				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Animals
-						allowed</label></td>
-				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Smoking
-						inside allowed</label></td>
+				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Smoking inside allowed</label></td>
+				<td><form:checkbox id="field-internet" path="internet" value="1" /><label>WiFi available</label></td>
+				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar/Attic</label></td>
 			</tr>
+			
 			<tr>
-				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden
-						(co-use)</label></td>
-				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony
-						or Patio</label></td>
+				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Animals allowed</label></td>
+				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>TV Cable</label></td>
+				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden (co-use)</label></td
 			</tr>
+			
 			<tr>
-				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar
-						or Attic</label></td>
-				<td><form:checkbox id="field-furnished" path="furnished"
-						value="1" /><label>Furnished</label></td>
-			</tr>
-			<tr>
-				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>Cable
-						TV</label></td>
-				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label>
-				</td>
-			</tr>
-			<tr>
-				<td><form:checkbox id="field-internet" path="internet"
-						value="1" /><label>WiFi available</label></td>
+				<td><form:checkbox id="field-furnished" path="furnished" value="1" /><label>Furnished</label></td>
+				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label></td>
+				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony/Patio</label></td>			
 			</tr>
 
 		</table>
-		<br />
-		<form:textarea path="roomDescription" rows="10" cols="100"
-			placeholder="Room Description" />
+
+		<br/>
+	
+		<form:textarea path="roomDescription" rows="10" cols="100" placeholder="room Description" />
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
+		
+	</fieldset>
+	
+	<fieldset>
+		<legend>Preferences (optional)</legend>
+		<form:textarea path="preferences" rows="5" cols="100" placeholder="preferences concerning the tenant"></form:textarea>
 	</fieldset>
 
 	<%--
 	
 	removed because of customer wishes
 	
-	
-	
-	<br />
 	<fieldset>
 		<legend>Roommates (optional)</legend>
 		<p>If your roommates have an account, simply add them by email.</p>
@@ -285,21 +304,11 @@
 	</fieldset>
 
 	--%>
-	
-	
-	
-	
-	<br />
-	<fieldset>
-		<legend>Preferences (optional)</legend>
-		<form:textarea path="preferences" rows="5" cols="100"
-			placeholder="Preferences"></form:textarea>
-	</fieldset>
 
 	<fieldset>
 		<legend>Pictures (optional)</legend>
-		<br /> <label for="field-pictures">Pictures</label> <input
-			type="file" id="field-pictures" accept="image/*" multiple="multiple" />
+		<br /> 
+		<label for="field-pictures">Pictures</label> <input type="file" id="field-pictures" accept="image/*" multiple="multiple" />
 		<table id="uploaded-pictures" class="styledTable">
 			<tr>
 				<th id="name-column">Uploaded picture</th>
@@ -311,8 +320,7 @@
 	</fieldset>
 
 	<fieldset>
-		<legend>Visiting times (optional)</legend>
-
+		<legend>Visits timetable (optional)</legend>
 		<table>
 			<tr>
 				<td><input type="text" id="field-visitDay" /> <select
@@ -357,14 +365,12 @@
 					<div id="addedVisits"></div></td>
 
 			</tr>
-
 		</table>
 		<br>
 	</fieldset>
 
-
-
 	<br />
+	
 	<div>
 		<button type="submit">Submit</button>
 		<a href="/"><button type="button">Cancel</button></a>

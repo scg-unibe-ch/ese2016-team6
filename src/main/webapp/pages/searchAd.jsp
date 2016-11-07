@@ -34,13 +34,12 @@
 		
 		
 		if(roomNumbers.value == null || roomNumbers.value == "" || roomNumbers.value == "0")
-			roomNumbers.value = "0";
-		
+			roomNumbers.value = "0";	
 	});
 </script>
 
 
-<script>
+<!--<script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
@@ -65,7 +64,7 @@ function validateType(form)
 	}
 	filtered.checked = false;
 }
-</script>
+</script>-->
 
 <h1>Search for an ad</h1>
 <hr />
@@ -74,14 +73,14 @@ function validateType(form)
 	id="searchForm" autocomplete="off">
 
 	<fieldset>
-		<form:checkbox name="room" id="room" path="roomHelper" /><label for="room">Room</label>
+		<!--<form:checkbox name="room" id="room" path="roomHelper" /><label for="room">Room</label>
 		<form:checkbox name="studio" id="studio" path="studioHelper" /><label for="studio">Studio</label>
 		
 		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
 		<form:checkbox style="display:none" name="type" id="type" path="studio" />
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />-->
 		
 		<br />
 		
