@@ -27,8 +27,46 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
+	//Monthly rental
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;
+	
+	//direct sale price
+	@Min(value = 1, message = "Has to be equal to 1 or more")
+	private int salePrize;
+		
+	//Monthly rental
+	@Min(value = 1, message = "Has to be equal to 1 or more")
+	private int initialBid;
+		
+	public int getSalePrize() {
+		return salePrize;
+	}
+
+	public void setSalePrize(int salePrize) {
+		this.salePrize = salePrize;
+	}
+
+	public int getInitialBid() {
+		return initialBid;
+	}
+
+	public void setInitialBid(int initialBid) {
+		this.initialBid = initialBid;
+	}
+
+	public int getBidIncrease() {
+		return bidIncrease;
+	}
+
+	public void setBidIncrease(int bidIncrease) {
+		this.bidIncrease = bidIncrease;
+	}
+
+	//Monthly rental
+	@Min(value = 1, message = "Has to be equal to 1 or more")
+	private int bidIncrease;
+	
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;

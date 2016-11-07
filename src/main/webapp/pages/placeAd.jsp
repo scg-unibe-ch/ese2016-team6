@@ -131,7 +131,8 @@
 			
 			<tr>
 			<td><label for="field-title">Title of your ad :</label> 
-				<form:input id="field-title" path="title" placeholder="ad title" /></td>
+				<form:input id="field-title" path="title" placeholder="ad title" />
+				<form:errors path="title" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
@@ -142,7 +143,8 @@
 			
 			<tr>
 			<td><label for="field-street">Address :</label>
-				<form:input id="field-street" path="street" placeholder="street" /></td>
+				<form:input id="field-street" path="street" placeholder="street" />
+				<form:errors path="street" cssClass="validationErrorText" /></td>
 				
 			<td><label for="field-city">City :</label>
 				<form:input id="field-city" path="city" placeholder="city" />
@@ -161,10 +163,12 @@
 			
 			<tr>
 				<td><label for="moveInDate">Move-in date :</label>
-				<form:input type="text" id="field-moveInDate" path="moveInDate" /></td>
+				<form:input type="text" id="field-moveInDate" path="moveInDate" />
+				<form:errors path="moveInDate" cssClass="validationErrorText" /></td>
 				
 				<td><label for="moveOutDate">Move-out date (optional) :</label>
-				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
+				<form:input type="text" id="field-moveOutDate" path="moveOutDate" />
+				<form:errors path="moveOutDate" cssClass="validationErrorText" /></td>
 			</tr>
 
 		</table>
@@ -182,7 +186,8 @@
 			
 			<tr>
 				<td><label for="field-Prize">Monthly rental charges :</label>
-				<form:input id="for-rent" type="number" path="rent" step="50"/></br></br></td>
+				<form:input id="for-rent" type="number" path="prize" step="50"/>
+				<form:errors path="prize" cssClass="validationErrorText" /></br></br></td>
 			</tr>
 			
 			<tr>
@@ -195,15 +200,18 @@
 			
 			<tr>
 				<td><label for="field-Prize">Price for a direct sale</label>
-				<form:input id="for-sale" type="number" path="rent" step="50" /></td>
+				<form:input id="for-sale" type="number" path="salePrize" step="50" />
+				<form:errors path="salePrize" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="field-Prize">Initial bid for a sale through auction</label>
-				<form:input id="for-sale" type="number" path="rent" step="50"/></td>
+				<form:input id="for-sale" type="number" path="initialBid" step="50"/>
+				<form:errors path="initialBid" cssClass="validationErrorText" /></td>
 				
 				<td><label for="field-Prize">Automatic increment for each new bid</label>
-				<form:input id="for-sale" type="number" path="rent" step="2" /></td>			
+				<form:input id="for-sale" type="number" path="bidIncrease" step="2" />
+				<form:errors path="bidIncrease" cssClass="validationErrorText" /></td>			
 			</tr>
 			
 			<tr>
