@@ -9,8 +9,11 @@
 <pre>
 <a href="/">Home</a>   &gt;   Schedule</pre>
 
-<h2>Your presentations</h2>
 
+<table style="width=80%;">
+<tr>
+<td style = "min-width:600px">
+<h2>Your presentations</h2>
 <div id="presentationsDiv">			
 <c:choose>
 	<c:when test="${empty presentations}">
@@ -49,8 +52,10 @@
 		</table>
 	</c:otherwise>
 </c:choose>
-</div><br />
+</div>
+</td>
 
+<td style = "min-width:400px">
 <h2>Your visits</h2>
 
 <div id="visitsDiv">			
@@ -90,5 +95,9 @@
 	</c:otherwise>
 </c:choose>
 </div>
+</td>
+</tr>
+</table>
+
 
 <c:import url="template/footer.jsp" />
