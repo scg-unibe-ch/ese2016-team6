@@ -23,5 +23,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/Vali/Downloads/Java/javamail-1.4.7/mail.jar"/>
+	<classpathentry kind="lib" path="/Users/Vali/Downloads/Java/apache-logging-log4j.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
