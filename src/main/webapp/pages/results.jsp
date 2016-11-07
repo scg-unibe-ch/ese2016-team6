@@ -121,68 +121,6 @@ function sort_div_attribute() {
 
 <hr />
 
-<div>
-<select id="modus">
-    <option value="">Sort by:</option>
-    <option value="price_asc">Price (ascending)</option>
-    <option value="price_desc">Price (descending)</option>
-    <option value="moveIn_desc">Move-in date (earliest to latest)</option>
-    <option value="moveIn_asc">Move-in date (latest to earliest)</option>
-    <option value="dateAge_asc">Date created (youngest to oldest)</option>
-    <option value="dateAge_desc">Date created (oldest to youngest)</option>
-</select>
-
-<button onClick="sort_div_attribute()">Sort</button>	
-</div>
-<c:choose>
-	<c:when test="${empty results}">
-		<p>No results found!
-	</c:when>
-	<c:otherwise>
-		<div id="resultsDiv" class="resultsDiv">			
-			<c:forEach var="ad" items="${results}">
-				<div class="resultAd" data-price="${ad.prizePerMonth}" 
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
-							<i>
-								<%-- replaced with flat
-								<c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-								</c:choose>
-								--%>
-								
-								flat
-								
-								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
-								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
-								
-								</i>
-						</p>
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
-
-						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-							type="date" pattern="dd.MM.yyyy" />
-
-						<p>Move-in date: ${formattedMoveInDate }</p>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</c:otherwise>
-</c:choose>
-
 <form:form method="post" modelAttribute="searchForm" action="/results"
 	id="filterForm" autocomplete="off">
 
@@ -273,5 +211,94 @@ function sort_div_attribute() {
 		<button type="reset">Cancel</button>
 	</div>
 </form:form>
+
+
+
+<div>
+<select id="modus">
+    <option value="">Sort by:</option>
+    <option value="price_asc">Price (ascending)</option>
+    <option value="price_desc">Price (descending)</option>
+    <option value="moveIn_desc">Move-in date (earliest to latest)</option>
+    <option value="moveIn_asc">Move-in date (latest to earliest)</option>
+    <option value="dateAge_asc">Date created (youngest to oldest)</option>
+    <option value="dateAge_desc">Date created (oldest to youngest)</option>
+</select>
+
+<button onClick="sort_div_attribute()">Sort</button>	
+</div>
+<c:choose>
+	<c:when test="${empty results}">
+		<p>No results found!
+	</c:when>
+	<c:otherwise>
+		<div id="resultsDiv" class="resultsDiv" style="height:200px;">			
+			<c:forEach var="ad" items="${results}">
+				<div class="resultAd" data-price="${ad.prizePerMonth}" 
+								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" style="min-width:700px;">
+					
+					<table>
+						<tr>
+						<td>
+					<div class="resultLeft">
+						
+						
+						<a href="<c:url value='/ad?id=${ad.id}' />"><img
+							src="${ad.pictures[0].filePath}" /></a>
+						</td>
+						
+						<td style="width:500px">
+						<h2>
+							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
+						</h2>
+						<p>
+						For
+						<c:if test="${ad.rent=true}"> rent </c:if>
+						<c:if test="${ad.rent=false}"> sale </c:if>
+						</p>
+						
+						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+						
+						<p>
+							<i>
+								
+								
+								flat
+								
+								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
+								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
+								
+								</i>
+						</p>
+						
+						
+						
+						
+					</div>
+					</td>
+					
+					<td style="width:100px">
+					<div class="resultRight">
+						<h2>CHF ${ad.prizePerMonth }</h2>
+						<br /> <br />
+
+						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+							type="date" pattern="dd.MM.yyyy" />
+
+						<p>Move-in date: ${formattedMoveInDate }</p>
+					</div>
+					
+					</td>
+					</tr>
+					</table>
+						
+					
+				</div>
+			</c:forEach>
+		</div>
+	</c:otherwise>
+</c:choose>
+
+
 
 <c:import url="template/footer.jsp" />

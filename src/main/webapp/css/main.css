@@ -553,9 +553,9 @@ footer nav ul li {
 }
 
 #filterDiv {
-	width: 35%;
+	width: 90%;
 	margin-top: 30px;
-	float: right;
+	float: center;
 	padding: 10px;
 	margin-top: 10px;
 	border-style: solid;
@@ -565,10 +565,19 @@ footer nav ul li {
 }
 
 #resultsDiv {
-	width: 60%;
+	width: 90%;
 	margin-top: 10px;
 	float: left;
+	min-width: 1100px;
 }
+
+.resultAd {
+	width: 45%;
+	min-width: 550px;
+}
+
+
+
 
 #resultsDiv div {
 	height: 150px;
@@ -578,6 +587,7 @@ footer nav ul li {
 	border-color: #33ccff;
 	border-width: 3px;
 	border-radius: 10px;
+	
 }
 
 #resultsDiv div:first-child {
@@ -599,11 +609,13 @@ footer nav ul li {
 #resultsDiv .resultLeft {
 	float: left;
 	width: 75%;
+	
 }
 
 #resultsDiv .resultRight {
 	float: right;
 	width: 20%;
+	min-width: 100px;
 	text-align: right;
 	padding-right: 5px;
 }
