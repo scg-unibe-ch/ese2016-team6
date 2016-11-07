@@ -7,7 +7,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.log4j.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoggerInterceptor extends HandlerInterceptorAdapter{

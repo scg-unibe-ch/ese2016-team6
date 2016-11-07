@@ -6,16 +6,25 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
-  			  <groupId>javax.mail</groupId>
+  			 <groupId>javax.mail</groupId>
    			 <artifactId>mail</artifactId>
   		 	 <version>1.4.7</version>
 		</dependency>
 		<dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.16</version>
-        <scope>runtime</scope>
-    </dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>slf4j-log4j12</artifactId>
+       		<version>1.6.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>slf4j-api</artifactId>
+       		<version>1.6.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>slf4j-nop</artifactId>
+       		<version>1.6.0</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
