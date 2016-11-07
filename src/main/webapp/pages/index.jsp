@@ -107,7 +107,7 @@
 						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						
 						<br />
-<<<<<<< HEAD
+
 						<p>
 							
 							
@@ -123,22 +123,9 @@
  								<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
  								
 								 rooms
-=======
 
-							<%-- replaced with flat
-								<c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-								</c:choose>
-								--%>
 
-						<p>
-							<i>
-								flat
- 								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
- 								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
->>>>>>> origin/master
- 							</i>
+
 						</p>
 
 					</div>
