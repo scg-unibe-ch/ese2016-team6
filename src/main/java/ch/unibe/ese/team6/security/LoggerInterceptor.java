@@ -18,6 +18,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 			UUID requestId = UUID.randomUUID();
 				
+			
 			request.setAttribute("RequestId", requestId.toString());
 			Principal user = request.getUserPrincipal();
 
