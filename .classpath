@@ -28,8 +28,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="resources/mail.jar"/>
-	<classpathentry kind="lib" path="/Users/Vali/Documents/UNI/HS16/ESE/ese2016-team6/resources/slf4j-api-1.6.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Vali/Documents/UNI/HS16/ESE/ese2016-team6/resources/slf4j-nop-1.6.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Vali/Documents/UNI/HS16/ESE/ese2016-team6/resources/slf4j-log4j12-1.6.0.jar"/>
+	<classpathentry kind="lib" path="resources/slf4j-api-1.6.0.jar"/>
+	<classpathentry kind="lib" path="resources/slf4j-log4j12-1.6.0.jar"/>
+	<classpathentry kind="lib" path="resources/slf4j-nop-1.6.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
