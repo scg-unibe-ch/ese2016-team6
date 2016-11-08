@@ -19,7 +19,8 @@ public class PlaceAdForm {
 	@NotBlank(message = "Required")
 	private String street;
 	
-	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;üäö]*", message = "Please pick a city from the list")
+	@NotBlank(message = "Required")
+	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;]*", message = "Please pick a city from the list")
 	private String city;
 	
 	@NotBlank(message = "Required")
@@ -28,15 +29,15 @@ public class PlaceAdForm {
 	private String moveOutDate;
 
 	//Monthly rental
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;
 	
 	//direct sale price
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int salePrize;
 		
 	//Monthly rental
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int initialBid;
 		
 	public int getSalePrize() {
@@ -64,11 +65,11 @@ public class PlaceAdForm {
 	}
 
 	//Monthly rental
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int bidIncrease;
 	
 
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
 
 	@NotBlank(message = "Required")

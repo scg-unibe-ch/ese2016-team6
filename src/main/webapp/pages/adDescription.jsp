@@ -311,7 +311,6 @@
 		
 		<div class="adDescDiv">
 			<h2>Location details</h2>
-			<p>${shownAd.preferences}</p>
 			<table>
 				<tr>
 					<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
