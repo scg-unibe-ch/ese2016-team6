@@ -272,6 +272,32 @@
 	</fieldset>
 	
 	<fieldset>
+		<legend>Location details (optional)</legend>
+		<table class="placeAdTable">
+			<tr>
+				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
+				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" placeholder="e.g. 500" step="10" />
+				<form:errors path="proximityToPublicTransport" cssClass="validationErrorText" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
+				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" placeholder="e.g. 500" step="10" />
+				<form:errors path="proximityToSchool" cssClass="validationErrorText" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
+				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500" step="10" />
+				<form:errors path="proximityToSupermarket" cssClass="validationErrorText" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
+				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500" step="10" />
+				<form:errors path="proximityToNightlife" cssClass="validationErrorText" /></td>
+			</tr>
+		</table>
+	</fieldset>
+
+	<fieldset>
 		<legend>Preferences (optional)</legend>
 		<form:textarea path="preferences" rows="5" cols="100" placeholder="preferences concerning the tenant"></form:textarea>
 	</fieldset>

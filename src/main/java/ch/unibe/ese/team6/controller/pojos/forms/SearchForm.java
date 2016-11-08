@@ -138,6 +138,11 @@ public class SearchForm {
 	private boolean garage;
 	private boolean internet;
 
+	private int proximityToPublicTransport;
+	private int proximityToSchool;
+	private int proximityToSupermarket;
+	private int proximityToNightlife;
+	
 	private boolean roomHelper;
 
 	// the ugly stuff
@@ -220,6 +225,38 @@ public class SearchForm {
 		this.internet = internet;
 	}
 
+	public int getProximityToPublicTransport() {
+		return proximityToPublicTransport;
+	}
+	
+	public void setProximityToPublicTransport(int proximityToPublicTransport) {
+		this.proximityToPublicTransport = proximityToPublicTransport;
+	}
+	
+	public int getProximityToSchool() {
+		return proximityToSchool;
+	}
+	
+	public void setProximityToSchool(int proximityToSchool) {
+		this.proximityToSchool = proximityToSchool;
+	}
+
+	public int getProximityToSupermarket() {
+		return proximityToSupermarket;
+	}
+	
+	public void setProximityToSupermarket(int proximityToSupermarket) {
+		this.proximityToSupermarket = proximityToSupermarket;
+	}
+	
+	public int getProximityToNightlife() {
+		return proximityToNightlife;
+	}
+	
+	public void setProximityToNightlife(int proximityToNightlife) {
+		this.proximityToNightlife = proximityToNightlife;
+	}
+	
 	public String getEarliestMoveInDate() {
 		return earliestMoveInDate;
 	}

@@ -99,6 +99,18 @@ public class Ad {
 	@Column(nullable = false)
 	private boolean internet;
 
+	@Column(nullable = false)
+	private int proximityToPublicTransport;
+	
+	@Column(nullable = false)
+	private int proximityToSchool;
+
+	@Column(nullable = false)
+	private int proximityToSupermarket;
+
+	@Column(nullable = false)
+	private int proximityToNightlife;
+	
 	//Specifies what kind of property this property is (Studio, Room, Flat)
 	//taken out because it caused an error
 	/*
@@ -284,6 +296,38 @@ public class Ad {
 		this.internet = internet;
 	}
 
+	public int getProximityToPublicTransport() {
+		return proximityToPublicTransport;
+	}
+	
+	public void setProximityToPublicTransport(int proximityToPublicTransport) {
+		this.proximityToPublicTransport = proximityToPublicTransport;
+	}
+	
+	public int getProximityToSchool() {
+		return proximityToSchool;
+	}
+	
+	public void setProximityToSchool(int proximityToSchool) {
+		this.proximityToSchool = proximityToSchool;
+	}
+
+	public int getProximityToSupermarket() {
+		return proximityToSupermarket;
+	}
+	
+	public void setProximityToSupermarket(int proximityToSupermarket) {
+		this.proximityToSupermarket = proximityToSupermarket;
+	}
+	
+	public int getProximityToNightlife() {
+		return proximityToNightlife;
+	}
+	
+	public void setProximityToNightlife(int proximityToNightlife) {
+		this.proximityToNightlife = proximityToNightlife;
+	}
+	
 	public long getId() {
 		return id;
 	}

@@ -148,6 +148,12 @@ public class AdService {
 		ad.setGarage(placeAdForm.getGarage());
 		ad.setInternet(placeAdForm.getInternet());
 		
+		// ad location values
+		ad.setProximityToPublicTransport(placeAdForm.getProximityToPublicTransport());
+		ad.setProximityToSchool(placeAdForm.getProximityToSchool());
+		ad.setProximityToSupermarket(placeAdForm.getProximityToSupermarket());
+		ad.setProximityToNightlife(placeAdForm.getProximityToNightlife());
+		
 		//set add numerOfRooms
 		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
 		
@@ -605,6 +611,47 @@ public class AdService {
 					}		
 				}
 			}
+			
+			// public transport
+			if (searchForm.getProximityToPublicTransport() > 0) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (ad.getProximityToPublicTransport() > searchForm.getProximityToPublicTransport())
+						iterator.remove();
+				}
+			}
+			
+			// school
+			if (searchForm.getProximityToSchool() > 0) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (ad.getProximityToSchool() > searchForm.getProximityToSchool())
+						iterator.remove();
+				}
+			}
+			
+			// supermarket
+			if (searchForm.getProximityToSupermarket() > 0) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (ad.getProximityToSupermarket() > searchForm.getProximityToSupermarket())
+						iterator.remove();
+				}
+			}
+			
+			// night life
+			if (searchForm.getProximityToNightlife() > 0) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (ad.getProximityToNightlife() > searchForm.getProximityToNightlife())
+						iterator.remove();
+				}
+			}
+			
 			// locatedResults and premiumsFiltered should be disjunct
 			Iterator<Ad> prem = premiumsFiltered.iterator();
 			while(prem.hasNext()) {

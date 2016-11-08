@@ -312,7 +312,7 @@
 						</c:when>
 						<c:otherwise>
 							<form:checkbox id="field-cellar" path="cellar" /><label>Cellar
-						or Atticd</label>
+						or Attic</label>
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -427,7 +427,33 @@
 	</fieldset>
 	--%>
 	
-	
+	<br />
+	<fieldset>
+		<legend>Change Location details</legend>
+		<table class="placeAdTable">
+			<tr>
+				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
+				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" value="${ad.proximityToPublicTransport}" step="10" />
+				<form:errors path="proximityToPublicTransport" cssClass="validationErrorText" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
+				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" value="${ad.proximityToSchool}" step="10" />
+				<form:errors path="proximityToSchool" cssClass="validationErrorText" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
+				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" value="${ad.proximityToSupermarket}" step="10" />
+				<form:errors path="proximityToSupermarket" cssClass="validationErrorText" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
+				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" value="${ad.proximityToNightlife}" step="10" />
+				<form:errors path="proximityToNightlife" cssClass="validationErrorText" /></td>
+			</tr>
+		</table>
+	</fieldset>
+
 	<br />
 	<fieldset>
 		<legend>Change preferences</legend>

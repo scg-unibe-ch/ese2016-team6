@@ -309,12 +309,33 @@
 
 		--%>
 		
+		<div class="adDescDiv">
+			<h2>Location details</h2>
+			<p>${shownAd.preferences}</p>
+			<table>
+				<tr>
+					<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
+				</tr>
+				<tr>
+					<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
+				</tr>
+				<tr>
+					<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
+				</tr>
+				<tr>
+					<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
+				</tr>
+			</table>
+		</div>
+		<br />
+
 		
 		<div class="adDescDiv">
 			<h2>Preferences</h2>
 			<p>${shownAd.preferences}</p>
 		</div>
 		<br />
+
 
 		<div id="visitList" class="adDescDiv">
 			<h2>Visiting times</h2>
