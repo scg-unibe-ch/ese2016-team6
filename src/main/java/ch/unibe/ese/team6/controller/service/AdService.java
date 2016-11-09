@@ -363,15 +363,13 @@ public class AdService {
 			locatedResults.add(ad);
 		}
 
-		int max = 0;
-		List<Integer> zipcodes = distanceCalculator(searchedLocation, searchForm, max);
+		List<Integer> zipcodes = distanceCalculator(searchedLocation, searchForm, 0);
 		locatedResults = locatedResults.stream()
 				.filter(ad -> zipcodes.contains(ad.getZipcode()))
 				.collect(Collectors.toList());
 		
 		// same for a distance bigger than the users wants
-		int maxi = 30;
-		List<Integer> zipcodeP = distanceCalculator(searchedLocation, searchForm, maxi);
+		List<Integer> zipcodeP = distanceCalculator(searchedLocation, searchForm, 30);
 		premiumsFiltered = premiumsFiltered.stream()
 				.filter(ad -> zipcodeP.contains(ad.getZipcode()))
 				.collect(Collectors.toList());
