@@ -50,7 +50,7 @@
 		</ul>
 		<br />
 		
-			Or <a class="link" href="<c:url value="/signup" />">sign up</a> as a new user.
+			Or <a class="button"  href="<c:url value="/signup" />">sign up</a> as a new user.
 		
 	</c:otherwise>
 </c:choose>

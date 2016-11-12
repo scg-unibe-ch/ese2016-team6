@@ -16,73 +16,100 @@
 
 <!--<pre>Home</pre>-->
 
-<h1>Welcome to EstateArranger!</h1>
+<h1 style="text-align: center;">Welcome</h1>
 
 <c:choose>
 	<c:when test="${empty newest}">
-		<h2>No ads placed yet</h2>
+		<h2 style="text-align: center;">No ads placed yet</h2>
 	</c:when>
 	
 	<c:otherwise>
-		<div id="resultsDiv" class="resultsDiv">	
-			<h2>Our newest ads:</h2>		
+		<h2 style="text-align: center;">Our newest ads:</h2>
+		
+		<div id="resultsDiv" class="resultsDiv" style="margin: auto;">	
 			
-			
-			<table style = "width=100%">
+			<table id="indexTable">
 				<tr>
-					<th  style="min-width: 550px">
-					<h2>flats for rent</h2>
+					<th>
+					<h2 style="width:100%;text-align:center;">flats for rent</h2>
 					
 					</th>
-					<th  style="min-width: 550px">
-					<h2>flats for sale</h2>
+					<th>
+					<h2 style="width:100%;text-align:center;">flats for sale</h2>
 					
 					</th>
 				</tr>
 				
 				<tr>
-				<td>
+				<td valign="top">
 				
-				<c:forEach var="ad" items="${newest}">
+			<c:forEach var="ad" items="${newest}">
 			
-				<c:if test="${ad.rent==true}">
+				<%--must be changed--%>
+				<c:if test="${ad.rent==false}">
 			
 				<div class="resultAd">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
+					
+					<table id="resultTable" style="width:100%">
+							<tr>
+								<th colspan="3">
+									<h2>
+									<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
+								</h2>
+								</th>
+							</tr>
+							<tr>
+								<td>
+					
+									<div class="resultLeft">
+										<a href="<c:url value='/ad?id=${ad.id}' />"><img
+										src="${ad.pictures[0].filePath}" /></a>
+									</div>
+								</td>
 							
 							
 							
+								<td>
+									<div class="resultMiddle">
+						
+						
+									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+						
+									<p>
 							
-							<i>
-							
-								
-								
-								flat with
+									<i>
+									flat with
  								
- 								<c:if test="${ad.numberOfRooms==0}">  unspecified amount of  </c:if>
- 								<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
+										<c:if test="${ad.numberOfRooms==0}">  unspecified amount of  </c:if>
+										<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
  								
-								 rooms
- 							</i>
-						</p>
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
+									rooms
+									</p>
 
-						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-							type="date" pattern="dd.MM.yyyy" />
+									
+									
+									</div>
+									
+								</td>
+							
+							
+								<td>	
+							
+									<div class="resultRight">
+									<h2>CHF ${ad.prizePerMonth }</h2>
+									<br /> <br />
 
-						<p>Move-in date: ${formattedMoveInDate }</p>
-					</div>
+									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+										type="date" pattern="dd.MM.yyyy" />
+
+								<p>Move-in date: ${formattedMoveInDate }</p>
+									</div>
+								</td>
+							</tr>
+					
+					
+					
+					</table>
 				</div>
 				
 				</c:if>
@@ -91,53 +118,74 @@
 			</td>
 			
 			
-			<td>
+			<td valign="top">
 				
 			<c:forEach var="ad" items="${newest}">
 			
 				<c:if test="${ad.rent==false}">
 			
 				<div class="resultAd">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+					
+					<table id="resultTable" style="width:100%">
+							<tr>
+								<th colspan="3">
+									<h2>
+									<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
+								</h2>
+								</th>
+							</tr>
+							<tr>
+								<td>
+					
+									<div class="resultLeft">
+										<a href="<c:url value='/ad?id=${ad.id}' />"><img
+										src="${ad.pictures[0].filePath}" /></a>
+									</div>
+								</td>
+							
+							
+							
+								<td>
+									<div class="resultMiddle">
 						
-						<br />
-
-						<p>
+						
+									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+						
+									<p>
 							
-							
-							
-							
-							<i>
-							
-								
-								
-								flat with
+									<i>
+									flat with
  								
- 								<c:if test="${ad.numberOfRooms==0}">  unspecified amount of  </c:if>
- 								<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
+										<c:if test="${ad.numberOfRooms==0}">  unspecified amount of  </c:if>
+										<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
  								
-								 rooms
+									rooms
+									</p>
 
+									
+									
+									</div>
+									
+								</td>
+							
+							
+								<td>	
+							
+									<div class="resultRight">
+									<h2>CHF ${ad.prizePerMonth }</h2>
+									<br /> <br />
 
+									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+										type="date" pattern="dd.MM.yyyy" />
 
-						</p>
-
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
-
-						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-							type="date" pattern="dd.MM.yyyy" />
-
-						<p>Move-in date: ${formattedMoveInDate }</p>
-					</div>
+								<p>Move-in date: ${formattedMoveInDate }</p>
+									</div>
+								</td>
+							</tr>
+					
+					
+					
+					</table>
 				</div>
 				
 				</c:if>

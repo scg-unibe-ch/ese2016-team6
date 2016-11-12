@@ -12,7 +12,7 @@
 
 <table style="width=80%;">
 <tr>
-<td style = "min-width:600px">
+<td style = "min-width:600px" valign="top">
 <h2>Your presentations</h2>
 <div id="presentationsDiv">			
 <c:choose>
@@ -55,7 +55,7 @@
 </div>
 </td>
 
-<td style = "min-width:400px">
+<td style = "min-width:400px" valign="top">
 <h2>Your visits</h2>
 
 <div id="visitsDiv">			

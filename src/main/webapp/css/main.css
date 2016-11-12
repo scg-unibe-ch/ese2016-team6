@@ -4,7 +4,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, b, i, fieldset,
 	section, ol, ul, li {
 	margin: 0;
 	padding: 0;
-	font-family: "Arial Black", 'Helvetica', sans-serif;
+	font-family: "Arial", 'Helvetica', sans-serif;
 	font-size: 0.97em;
 }
 
@@ -25,21 +25,31 @@ h2 {
 }
 
 hr {
-	color: #33ccff;
-	background-color: MediumBlue;
+	color: white;
+	background-color: #ffcc99;
 	height: 4px;
 	margin-bottom: 40px;
 }
 
 .link {
-	color: #000066;
+	color: #660000;
 	text-decoration: underline;
 
 
 }
 
 .link:hover {
-	color: #66ccff;
+	color: #ff2200;
+}
+
+.headerlink{
+	color: #660000;
+	text-decoration: underline;
+	
+}
+
+.headerlink:hover{
+	color: #ffffff;
 }
 
 .slim {
@@ -49,7 +59,7 @@ hr {
 
 a {
 	text-decoration: none;
-	color: graytext;
+	color: black;
 }
 
 /* Breadcrumbs only*/
@@ -101,19 +111,22 @@ but not in one String (i.e. in the header) */
 }
 
 .styledTable {
-	background-color: #33ccff;
+	
+	background-color: #804000;
 	border-radius: 5px;
 	margin-top: 20px;
 }
 
 .styledTable th {
-	background-color: blue;
+	background-color: #804000;
 	color: white;
+	padding:0px 10px;
 }
 
 .styledTable td {
 	background-color: white;
 	padding: 5px 10px;
+	text-align:right;
 }
 
 input, select, textarea {
@@ -127,48 +140,100 @@ input[type="number"] {
 }
 
 label {
-	margin-right: 10px;
+	/*margin-right: 10px;
+	*/
 }
 
 button {
-	background-color: #33ccff;
-	color: white;
+	background-color: #ffe6cc;
+	color: black;
+	border-color: black;
+	
 	padding: 5px 10px;
-	border-radius: 5px;
-	border-color: white;
+	
 	border-style: solid;
-	font-size: 1.1em;
+	border-radius: 5px;
+	font-size: 1em;
+	
+	border-width: 1px;
+	
+	
 }
+
+button:hover {
+	
+	background-color: #ffcc99;
+	
+	cursor: pointer;
+}
+
+button:active {
+	
+	background-color: #b35900;
+	
+}
+
+
 
 .inactiveButton {
 	background-color: #bbbbbb;
 	color: white;
 	border-color: white;
+	cursor: not-allowed;
 }
 
 .button {
-	background-color: #33ccff;
-	color: white;
+	background-color: #ffe6cc;
+	color: black;
+	border-color: black;
+		
 	padding: 5px 10px;
 	border-radius: 5px;
-	border-color: white;
+	
 	border-style: solid;
-	font-size: 1.1em;
+	font-size: 1em;
+	border-width: 1px;
+	
+}
+
+
+.button:hover {
+	
+	background-color: #ffcc99;
+	
+	cursor: pointer;
+}
+
+.button:active {
+	background-color: #b35900;
 }
 
 .smallPlusButton {
+	
+	background-color: #ffe6cc;
+	border-color: black;
+	color: black;
+	
 	display: inline;
 	font-decoration: none;
-	background-color: #33ccff;
-	color: white;
-	width: 15px;
-	height: 15px;
-	padding: 0px 5px;
+	
+	
+	width: 30px;
+	height: 30px;
+	padding: 8px 8px;
 	text-align: center;
 	border-radius: 5px;
-	border-color: white;
+	
 	border-style: solid;
-	font-size: 1.5em;
+	font-size: 1em;
+	border-width: 1px;
+}
+
+.smallPlusButton:hover {
+	
+	
+	background-color: #ffcc99;
+	cursor: pointer;
 }
 
 #bookmarkButton {
@@ -176,7 +241,7 @@ button {
 	padding: 0px 5px 0px 5px;
 	border-width: 2px;
 	border-radius: 10px;
-	border-color: #33ccff;
+	border-color: #ffe6cc;
 	border-style: solid; 
 	color: grey;
 	font-size: 0.9em;
@@ -187,42 +252,38 @@ button {
 	padding: 0px 5px 0px 5px;
 	border-width: 2px;
 	border-radius: 10px;
-	border-color: #ff0000;
+	border-color: #ffe6cc;
 	border-style: solid; 
 	color: grey;
 	font-size: 0.9em;
 }
 
-button:hover {
-	color: #33ccff;
-	background-color: white;
-	border-color: #33ccff;
-	cursor: pointer;
-}
 
-.button:hover {
-	color: #33ccff;
-	background-color: white;
-	border-color: #33ccff;
-}
 
-.smallPlusButton:hover {
-	color: #33ccff;
-	background-color: white;
-	border-color: #33ccff;
-	cursor: pointer;
-}
+
+
 
 #bookmarkButton:hover {
-	border-color: blue;
 	
-	background-color: #66ccff;
+	cursor: pointer;
+	background-color:#ffcc99;
 }
 
 #bookmarkedButton:hover {
-	border-color: red;
-	background-color: #ff5050;
+	cursor: pointer;
+	background-color:#ffcc99;
 	
+	
+}
+
+
+#bookmarkButton:active {
+	background-color: #b35900;
+}
+
+
+#bookmarkedButton:active {
+	background-color: #b35900;
 }
 
 fieldset {
@@ -259,7 +320,7 @@ button {
 	width: 20%;
 	margin: auto;
 	padding: 10px 20px;
-	border-color: #33ccff;
+	border-color: #ffcc99;
 }
 
 .negative-message {
@@ -283,15 +344,18 @@ button {
 /* -------------------------------------------------------------------- */
 /* Header & Footer */
 header {
+	height:auto;
 	color: white;
-	background: MediumBlue;
+	background: #ff8447;
 	position: fixed;
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	height: 70px;
+	
 	z-index: 1;
-	min-width: 1100px;
+	
+	width:100%;
+	
 }
 
 header a {
@@ -316,11 +380,11 @@ header ul {
 
 header ul li {
 	float: right;
-	width: 120px;
+	width: 100px;
 	text-align: center;
 	line-height: 21px;
 	margin-top: 20px;
-	text-align: center;
+	
 }
 
 #profile_picture {
@@ -358,9 +422,10 @@ header ul li {
 }
 
 #profile_picture ul li {
-	margin-top: 0px;
+	margin-top:0px;
 	float: none;
-	width: 100%;
+	width: auto;
+	
 }
 
 #profile_picture ul li a {
@@ -368,18 +433,76 @@ header ul li {
 	text-align: left;
 }
 
-header ul li a {
+/*links in the header*/
+
+/*submit button for the header and other stuff*/
+
+#submitButton{
+	
+	width:100px;
+	
+	background-color: #ffcc99;
+	color: black;
+	border-color: #990000;
+	
+	border-width:1px;
+	
 	display: block;
-	padding: 5px 10px;
-	color: #fff;
-	background: DodgerBlue;
+	margin: 2px 5px;
+	padding: 2px 2px;
+	
+	
 	text-decoration: none;
+	
+	
+	
+	border-style: solid;
+	border-radius: 5px;
+	
+}
+
+#submitButton:hover {
+	background: #ffffb3;
+}
+
+#submitButton:active {
+	background: #b35900;
+}
+
+
+
+header ul li a {
+	
+	background-color: #ffcc99;
+	color: black;
+	border-color: #990000;
+	
+	border-width:1px;
+	
+	display: block;
+	margin: 2px 5px;
+	padding: 2px 2px;
+	
+	
+	text-decoration: none;
+	
+	
+	
+	border-style: solid;
+	border-radius: 5px;
 }
 
 header ul li a:hover {
-	color: #ffffff;
-	background: #33ccff;
+	
+	background: #ffffb3;
 }
+
+header ul li a:active {
+	
+	background: #b35900;
+}
+
+
 
 /* it does hide the drop down menu */
 header ul li ul {
@@ -400,18 +523,18 @@ header nav {
 
 footer {
 	color: white;
-	background: MediumBlue;
+	background: #ff8447;
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	height: 30px;
+	height: 0px;
 	text-align: center;
-	padding-top: 10px;
+	
 }
 
 footer nav {
-	margin-top: 8px;
+	
 }
 
 footer .link {
@@ -432,6 +555,32 @@ footer nav ul li {
 /* ----------------------------Individual pages------------------------ */
 /* -------------------------------------------------------------------- */
 
+
+/* -------------------------------------------------------------------- */
+/* index.jsp */
+
+/*the table that hlads all the results in the index*/
+
+#indexTable {
+	table-layout: fixed;
+	border-radius: 10px;
+	background-color: #ffcc99;
+}
+
+#indexTable tr {
+	background-color: #ffcc99;
+	color: white;
+}
+
+#indexTable th {
+	
+	background-color: #ffcc99;
+	color: black;
+	padding: 5px;
+	width:50%;
+}
+
+
 /* -------------------------------------------------------------------- */
 /* login.jsp */
 .test-users {
@@ -447,6 +596,13 @@ footer nav ul li {
   margin-top: -365px;
   margin-left: -486px;
 }
+
+#login-form{
+	
+	
+}
+
+
 
 /* -------------------------------------------------------------------- */
 /* placeAd.jsp */
@@ -518,28 +674,38 @@ footer nav ul li {
 
 /* -------------------------------------------------------------------- */
 /* results.jsp */
+
+
+/*the table that holds all the data of a single ad*/
 #resultTable {
-	border-radius: 5px;
-	background-color: #33ccff;
+	
+	table-layout: fixed;
+	border-radius: 10px;
+	background-color: #ffe6cc;
+	width:100%
+	
 }
 
 #resultTable tr {
-	background-color: white;
+	background-color: #ffe6cc;
+	color: black;
+	
 }
 
 #resultTable th {
-	background-color: #33ccff;
-	color: white;
+	
+	
+	background-color: #FFDD99;
+	color: black;
 	padding: 5px;
+	
 }
 
 #resultTable td {
 	padding: 5px;
 }
 
-#resultTable a {
-	text-decoration: none;
-}
+
 
 #userPicDiv {
 	float: left;
@@ -553,40 +719,51 @@ footer nav ul li {
 }
 
 #filterDiv {
-	width: 90%;
+	width: 98%;
 	margin-top: 30px;
 	float: center;
 	padding: 10px;
 	margin-top: 10px;
+	
 	border-style: solid;
-	border-color: #33ccff;
+	border-color: #ffcc99;
 	border-width: 3px;
 	border-radius: 10px;
 }
 
 #resultsDiv {
-	width: 90%;
+	width: 100%;
 	margin-top: 10px;
-	float: left;
-	min-width: 1100px;
+	vertical-align: top;
+	/*min-width: 600px;
+	*/
 }
 
 .resultAd {
-	width: 45%;
-	min-width: 550px;
+	
+	
+	width: 600px;
+	vertical-align: top;
+	display: inline-block;
+	
+	padding: 10px 10px;
 }
 
 
 
 
 #resultsDiv div {
-	height: 150px;
+	/*height: 150px;
 	padding: 10px;
 	margin-top: 20px;
+	*/
+	/*border-width: 3px;
 	border-style: solid;
-	border-color: #33ccff;
-	border-width: 3px;
+	border-color: #ff8447;
+	
+	
 	border-radius: 10px;
+	*/
 	
 }
 
@@ -606,16 +783,23 @@ footer nav ul li {
 	padding: 0;
 }
 
-#resultsDiv .resultLeft {
+.resultLeft {
 	float: left;
-	width: 75%;
+	width: 10%;
+	min-width: 80px;
 	
 }
 
-#resultsDiv .resultRight {
+
+.resultMiddle {
+	float: center;
+	
+}
+
+.resultRight {
 	float: right;
 	width: 20%;
-	min-width: 100px;
+	min-width: 200px;
 	text-align: right;
 	padding-right: 5px;
 }
@@ -747,21 +931,33 @@ footer nav ul li {
 }
 
 .adDescDiv {
-	border-color: #33ccff;
+	border-color: #ffcc99;
 	border-radius: 5px;
 	border-width: 3px;
 	border-style: solid;
 	padding: 15px;
 }
 
+/*buttons to send enquiries*/
 .thinButton {
-	background-color: #33ccff;
-	color: white;
-	padding: 2px 10px;
-	border-radius: 5px;
-	border-color: white;
+	
+	background-color: #ffe6cc;
+	color: black;
+	border-color: black;
+	
+	
+	
 	border-style: solid;
-	font-size: 1.1em;
+	border-radius: 5px;
+	font-size: 1em;
+	
+	border-width: 1px;
+	
+	
+
+	padding: 2px 10px;
+
+	
 	margin-left: 30px;
 }
 
@@ -787,8 +983,8 @@ footer nav ul li {
 /* messages.jsp */
 
 #messageList {
-	float: right;
-	width: 70%;
+	
+	width: 100%;
 	margin-right: 40px;
 }
 
@@ -803,7 +999,7 @@ footer nav ul li {
 
 #messageList table tr:hover {
 	cursor: pointer;
-	background-color: #ccffff;
+	background-color: #ffcc99;
 	color: graytext;
 }
 
@@ -812,39 +1008,44 @@ footer nav ul li {
 }
 
 #subjectColumn {
-	width: 40%;
+	width:200px;
 }
 
 #folders {
-	float: left;
-	width: 10%;
-	height: 70%;
-	margin-left: 30px;
-	border-color: #33ccff;
+	
+	display: inline-block;
+	
+	
+	border-color: #ffcc99;
 	border-radius: 5px;
 	border-width: 3px;
 	border-style: solid;
-	padding: 15px;
+	
+	
 }
 
 #folders h2 {
-	padding: 5px;
+	margin: 0px;
+	float:center;
+	padding: 10px;
 	color: graytext;
+	display: inline-block;
+	
 }
 
 #folders h2:hover {
-	background-color: #33ccff;
+	background-color: #ffcc99;
 	color: white;
 	cursor: pointer;
 }
 
 #messageDetail {
-	border-color: #33ccff;
+	border-color: #ffcc99;
 	border-radius: 5px;
 	border-width: 3px;
 	border-style: solid;
 	padding: 30px;
-	width: 80%;
+	width: 100%;
 	margin: auto;
 }
 
@@ -853,7 +1054,7 @@ footer nav ul li {
 }
 
 #folders a:hover {
-	background-color: #ccffff;
+	background-color: #ffcc99;
 	color: white;
 	cursor: pointer;
 }

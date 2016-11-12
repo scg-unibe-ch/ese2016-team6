@@ -146,9 +146,10 @@ function rentSaleOfAlert(alert) {
 		Square Meters
 			
 		<br />
-
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
+		
 		<button type="reset" tabindex="8">Cancel</button>
+		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
+		
 	</fieldset>
 
 </form:form> <br />
@@ -163,7 +164,7 @@ function rentSaleOfAlert(alert) {
 		<table class="styledTable" id="alerts">
 			<thead>
 			<tr>
-				<th>Type</th>
+				
 				<th>Rent/Sale</th>
 				<th>City</th>
 				<th>Radius</th>
@@ -199,6 +200,7 @@ function rentSaleOfAlert(alert) {
 					</c:otherwise>
 				</c:choose>
 				</td>
+				
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>

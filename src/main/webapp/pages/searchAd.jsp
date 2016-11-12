@@ -122,9 +122,9 @@ function validateType(form)
 		
 		<br />
 		
-		
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
 		<button type="reset" tabindex="8">Cancel</button>
+		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
+		
 	</fieldset>
 
 </form:form>

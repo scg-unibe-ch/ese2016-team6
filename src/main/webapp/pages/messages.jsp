@@ -21,49 +21,77 @@
 
 <h1>Messages</h1>
 <hr />
-<div id="folders">
-	<h2 id="inbox">Inbox</h2>
-	<h2 id="newMessage">New</h2>
-	<h2 id="sent">Sent</h2>
-</div>
-<div id="messageList">
-	<table class="styledTable">
-		<tr>
-			<th id="subjectColumn">Subject</th>
-			<th>Sender</th>
-			<th>Recipient</th>
-			<th>Date sent</th>
-		</tr>
-		<c:forEach items="${messages }" var="message">
-			<fmt:formatDate value="${message.dateSent}"
-				var="singleFormattedDateSent" type="date"
-				pattern="HH:mm, dd.MM.yyyy" />
 
-			<tr data-id="${message.id}" class="${message.state}">
-				<td>${message.subject }</td>
-				<td>${message.sender.email}</td>
-				<td>${message.recipient.email }</td>
-				<td>${singleFormattedDateSent}</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<hr />
-	<div id="messageDetail">
-		<h2>${messages[0].subject }</h2>
-		<h3>
-			<b>To: </b>${messages[0].recipient.email }
-		</h3>
-		<h3>
-			<b>From: </b> ${messages[0].sender.email }
-		</h3>
-		<h3>
-			<b>Date sent:</b> ${formattedDateSent}
-		</h3>
-		<br />
-		<p>${messages[0].text }</p>
-	</div>
-</div>
 
+<table>
+	<tr>
+		
+		<td valign="top" style="float:left;max-width:500px;">
+		
+		
+		<div style="text-align:center;">
+			<div id="folders">
+				<h2 id="inbox">Inbox</h2>
+				<h2 id="newMessage">New</h2>
+				<h2 id="sent">Sent</h2>
+			</div>
+
+		
+			<div id="messageList" >
+				<table class="styledTable" style="width:100%;">
+					<tr>
+						<th id="subjectColumn">Subject</th>
+						<th>Sender</th>
+						
+						<th>Recipient</th>
+						
+						<th>Date sent</th>
+					</tr>
+					<c:forEach items="${messages }" var="message">
+						<fmt:formatDate value="${message.dateSent}"
+							var="singleFormattedDateSent" type="date"
+							pattern="HH:mm, dd.MM.yyyy" />
+
+						<tr data-id="${message.id}" class="${message.state}">
+							<td>${message.subject }</td>
+							<td>${message.sender.email}</td>
+							
+							<td>${message.recipient.email }</td>
+							
+							<td>${singleFormattedDateSent}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</td>
+	
+	
+		<td valign="top">
+			<div id="messageList">
+				
+				<div id="messageDetail" style="width: 100%;">
+					<h2>${messages[0].subject }</h2>
+					<h3>
+						<b>To: </b>${messages[0].recipient.email }
+					</h3>
+					<h3>
+						<b>From: </b> ${messages[0].sender.email }
+					</h3>
+					<h3>
+						<b>Date sent:</b> ${formattedDateSent}
+					</h3>
+					<br />
+					<p>${messages[0].text }</p>
+				</div>
+			</div>
+		</td>
+	
+	
+
+	
+	</tr>
+</table>
+		
 <c:import url="getMessageForm.jsp" />
 
 

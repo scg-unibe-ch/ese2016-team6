@@ -20,8 +20,8 @@
 	<label>Message: </label>
 	<form:textarea path="text" id="msgTextarea" placeholder="Message" />
 	
-	<button type="submit" id="messageSend">Send</button>
 	<button type="button" id="messageCancel">Cancel</button>
+	<button type="submit" id="messageSend">Send</button>
 	
 	<br/>
 </form:form>
