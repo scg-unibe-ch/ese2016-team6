@@ -251,15 +251,269 @@
 <hr class="clearBoth" />
 
 <!--must depend on the kind of deal-->
-<section>
-	<div id="descriptionTexts">
-		<div class="adDescDiv">
+
+<table style="width:100%; border-collapse: separate;
+  border-spacing: 0px 10px;">
+<tr>
+<td style="width:50%;">
+
+	
+	<div class="adDescDiv">
 		<h2>Price corner</h2>
 		<p>${shownAd.roomDescription}</p>
 	</div>
-	<br/>
-</section>
+	
 
+</td>
+<td style="width:50%;">
+
+			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
+				<tr>
+				<td><h2>Advertiser</h2><br /></td>
+				</tr>
+
+				<tr>
+					<td><c:choose>
+							<c:when test="${shownAd.user.picture.filePath != null}">
+								<img src="${shownAd.user.picture.filePath}">
+							</c:when>
+							<c:otherwise>
+								<img src="/img/avatar.png">
+							</c:otherwise>
+						</c:choose></td>
+					
+					<td>${shownAd.user.username}</td>
+					
+					<td id="advertiserEmail">
+					<c:choose>
+						<c:when test="${loggedIn}">
+							<a href="/user?id=${shownAd.user.id}"><button type="button">Visit profile</button></a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login"><button class="thinInactiveButton" type="button">Login to visit profile</button></a>
+						</c:otherwise>
+					</c:choose>
+
+					<td>
+						<form>
+							<c:choose>
+								<c:when test="${loggedIn}">
+									<c:if test="${loggedInUserEmail != shownAd.user.username }">
+										<button id="newMsg" type="button">Contact Advertiser</button>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<a href="/login"><button class="thinInactiveButton" type="button">Login to contact advertiser</button></a>
+								</c:otherwise>
+							</c:choose>
+						</form>
+					</td>
+				</tr>
+			</table>
+
+
+
+</td>
+</tr>
+<tr>
+
+<td>
+<div class="adDescDiv">
+			<h2>Room Description</h2>
+			<p>${shownAd.roomDescription}</p>
+		</div>
+
+</td>
+
+
+<td>
+<div class="adDescDiv">
+			<h2>Location details</h2>
+			<table>
+				<tr>
+					<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
+				</tr>
+				<tr>
+					<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
+				</tr>
+				<tr>
+					<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
+				</tr>
+				<tr>
+					<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
+				</tr>
+			</table>
+		</div>
+</td>
+</tr>
+
+<tr>
+
+
+<td>
+<div class="adDescDiv">
+			<h2>Preferences</h2>
+			<p>${shownAd.preferences}</p>
+		</div>
+
+</td>
+
+<td>
+<div id="visitList" class="adDescDiv">
+			<h2>Visiting times</h2>
+			<table>
+				<c:forEach items="${visits }" var="visit">
+					<tr>
+						<td>
+							<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
+							&nbsp; from
+							<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
+							until
+							<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
+						</td>
+						<td><c:choose>
+								<c:when test="${loggedIn}">
+									<c:if test="${loggedInUserEmail != shownAd.user.username}">
+										<button class="thinButton" type="button" data-id="${visit.id}">Send
+											enquiry to advertiser</button>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<a href="/login"><button class="thinInactiveButton" type="button"
+										data-id="${visit.id}">Login to send enquiries</button></a>
+								</c:otherwise>
+							</c:choose></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+</td>
+
+</tr>
+
+<tr>
+<td>
+
+<table id="checkBoxTable" class="adDescDiv" style="width:93%">
+		<tr>
+			<td><h3>Smoking inside allowed</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		
+			<td style="padding-left:30px"><h3>Animals allowed</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+
+		<tr>
+			<td><h3>Furnished Room</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		
+			<td style="padding-left:30px"><h3>WiFi available</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.internet}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+
+		<tr>
+			<td><h3>Cable TV</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.cable}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		
+			<td style="padding-left:30px"><h3>Garage</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+
+		<tr>
+			<td><h3>Cellar</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		
+			<td style="padding-left:30px"><h3>Balcony</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+
+		<tr>
+			<td><h3>Garden</h3></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+
+	</table>
+
+
+</td>
+
+
+</tr>
+
+
+
+</table>
+
+<div id="msgDiv">
+<form class="msgForm">
+	<h2>Contact the advertiser</h2>
+	<br>
+	<br>
+	<label>Subject: <span>*</span></label>
+	<input  class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
+	<br><br>
+	<label>Message: </label>
+	<textarea id="msgTextarea" placeholder="Message" ></textarea>
+	<br/>
+	<button type="button" id="messageSend">Send</button>
+	<button type="button" id="messageCancel">Cancel</button>
+	</form>
+</div>
+
+<div id="confirmationDialog">
+	<form>
+	<p>Send enquiry to advertiser?</p>
+	<button type="button" id="confirmationDialogSend">Send</button>
+	<button type="button" id="confirmationDialogCancel">Cancel</button>
+	</form>
+</div>
+
+<%-- old code as backup just in case
 <section>
 	<div id="descriptionTexts">
 		<div class="adDescDiv">
@@ -268,9 +522,9 @@
 		</div>
 		<br />
 
-		<%-- Removed because of customer wished
+		  Removed because of customer wished
 		
-		<div class="adDescDiv">
+		 <div class="adDescDiv">
 			<h2>Roommates</h2>
 			<p>${shownAd.roommates}</p>
 			<c:forEach var="mate" items="${shownAd.registeredRoommates}">
@@ -305,9 +559,9 @@
 			</div>
 			</c:forEach>
 		</div>
-		<br />
+		<br />  */
 
-		--%>
+		
 		
 		<div class="adDescDiv">
 			<h2>Location details</h2>
@@ -367,6 +621,11 @@
 
 	</div>
 
+	
+		
+	
+	
+	
 	<table id="checkBoxTable" class="adDescDiv">
 		<tr>
 			<td><h3>Smoking inside allowed</h3></td>
@@ -464,7 +723,7 @@
 <div class="clearBoth"></div>
 <br>
 
-<table id="advertiserTable" class="adDescDiv">
+<table id="advertiserTable" class="adDescDiv" style="float:right">
 	<tr>
 	<td><h2>Advertiser</h2><br /></td>
 	</tr>
@@ -508,29 +767,7 @@
 	</tr>
 </table>
 
-<div id="msgDiv">
-<form class="msgForm">
-	<h2>Contact the advertiser</h2>
-	<br>
-	<br>
-	<label>Subject: <span>*</span></label>
-	<input  class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
-	<br><br>
-	<label>Message: </label>
-	<textarea id="msgTextarea" placeholder="Message" ></textarea>
-	<br/>
-	<button type="button" id="messageSend">Send</button>
-	<button type="button" id="messageCancel">Cancel</button>
-	</form>
-</div>
 
-<div id="confirmationDialog">
-	<form>
-	<p>Send enquiry to advertiser?</p>
-	<button type="button" id="confirmationDialogSend">Send</button>
-	<button type="button" id="confirmationDialogCancel">Cancel</button>
-	</form>
-</div>
-
+--%>
 
 <c:import url="template/footer.jsp" />

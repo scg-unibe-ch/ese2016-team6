@@ -45,8 +45,8 @@
 				
 			<c:forEach var="ad" items="${newest}">
 			
-				<%--must be changed--%>
-				<c:if test="${ad.rent==false}">
+				<%--must be changed to true--%>
+				<c:if test="${ad.rent==true}">
 			
 				<div class="resultAd">
 					

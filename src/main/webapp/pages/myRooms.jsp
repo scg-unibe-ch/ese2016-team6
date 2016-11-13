@@ -39,7 +39,7 @@
 			
 			<c:otherwise>
 				
-				<div id="resultsDiv"  class="resultsDiv" style="width:auto;">
+				<div id="resultsDiv"  class="resultsDiv" style="width: 100%;">
 				
 				
 						
