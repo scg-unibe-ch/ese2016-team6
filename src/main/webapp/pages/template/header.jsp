@@ -44,6 +44,7 @@
 <header>
 	<div class="left">
 		<a href="/"><img src="/img/logo.png"></a>
+		
 	</div>
 	
 	<div class="left" style="color:black">
