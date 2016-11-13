@@ -236,64 +236,75 @@ function sort_div_attribute() {
 		<p>No results found!
 	</c:when>
 	<c:otherwise>
-		<div id="resultsDiv" class="resultsDiv" style="height:200px;">			
+		<div id="resultsDiv" class="resultsDiv" style="float:left; width:100%;">			
 			<c:forEach var="ad" items="${results}">
 				<div class="resultAd" data-price="${ad.prizePerMonth}" 
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" style="min-width:700px;">
+								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
 					
-					<table>
+					<table id="resultTable" >
 						<tr>
-						<td>
-					<div class="resultLeft">
+						<th colspan="3">
+							<h2>
+								<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
+							</h2>
+						</th>
+						</tr>
+						<tr>
+							<td>
+								<div class="resultLeft">
 						
 						
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						</td>
+									<a href="<c:url value='/ad?id=${ad.id}' />"><img
+									src="${ad.pictures[0].filePath}" /></a>
+							
+								</div>
+							</td>
+							
+							
+							<td>
+								<div class="resultMiddle">
+									</br>
+									<p>
+									For
+									<c:if test="${ad.rent=true}"> rent </c:if>
+									<c:if test="${ad.rent=false}"> sale </c:if>
+									</p>
 						
-						<td style="width:500px">
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
-						</h2>
-						<p>
-						For
-						<c:if test="${ad.rent=true}"> rent </c:if>
-						<c:if test="${ad.rent=false}"> sale </c:if>
-						</p>
+									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 						
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						
-						<p>
-							<i>
+									<p>
+										<i>
 								
 								
-								flat
+											flat
 								
-								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
-								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
+											<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
+											<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
 								
-								</i>
-						</p>
+										</i>
+									</p>
+								</div>
+							</td>
 						
 						
-						
-						
-					</div>
-					</td>
+								
+							
+							
+							
 					
-					<td style="width:100px">
-					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
+							<td>
+								<div class="resultRight">
+									<h2>CHF ${ad.prizePerMonth }</h2>
+									<br /> <br />
 
-						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-							type="date" pattern="dd.MM.yyyy" />
+									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+										type="date" pattern="dd.MM.yyyy" />
 
-						<p>Move-in date: ${formattedMoveInDate }</p>
-					</div>
+									<p>Move-in date: ${formattedMoveInDate }</p>
+								</div>
 					
-					</td>
-					</tr>
+							</td>
+						</tr>
 					</table>
 						
 					

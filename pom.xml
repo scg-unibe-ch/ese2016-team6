@@ -204,6 +204,7 @@
 								</configuration>
 							</execution>
 						
+						
 							<execution>
 								<id>drop-zipcodes-table</id>
 								<phase>process-test-resources</phase>

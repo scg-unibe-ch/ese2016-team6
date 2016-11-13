@@ -369,7 +369,7 @@
 
 	<table id="checkBoxTable" class="adDescDiv">
 		<tr>
-			<td><h2>Smoking inside allowed</h2></td>
+			<td><h3>Smoking inside allowed</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
@@ -379,7 +379,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Animals allowed</h2></td>
+			<td><h3>Animals allowed</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
@@ -389,7 +389,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Furnished Room</h2></td>
+			<td><h3>Furnished Room</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
@@ -399,7 +399,7 @@
 		</tr>
 		
 		<tr>
-			<td><h2>WiFi available</h2></td>
+			<td><h3>WiFi available</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.internet}"><img src="/img/check-mark.png"></c:when>
@@ -409,7 +409,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Cable TV</h2></td>
+			<td><h3>Cable TV</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.cable}"><img src="/img/check-mark.png"></c:when>
@@ -419,7 +419,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Garage</h2></td>
+			<td><h3>Garage</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
@@ -429,7 +429,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Cellar</h2></td>
+			<td><h3>Cellar</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
@@ -439,7 +439,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Balcony</h2></td>
+			<td><h3>Balcony</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
@@ -449,7 +449,7 @@
 		</tr>
 
 		<tr>
-			<td><h2>Garden</h2></td>
+			<td><h3>Garden</h3></td>
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>

@@ -406,8 +406,9 @@
 	<br />
 	
 	<div>
-		<button type="submit">Submit</button>
+		
 		<a href="/"><button type="button">Cancel</button></a>
+		<button type="submit">Submit</button>
 	</div>
 
 </form:form>

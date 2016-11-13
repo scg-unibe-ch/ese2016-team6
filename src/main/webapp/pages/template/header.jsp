@@ -30,6 +30,7 @@
 	max-height: 200px;
 	overflow-y: auto;
 	overflow-x: hidden;
+	
 }
 </style>
 
@@ -44,9 +45,19 @@
 	<div class="left">
 		<a href="/"><img src="/img/logo.png"></a>
 	</div>
+	
+	<div class="left" style="color:black">
+		<a class="headerlink" href="/about">About us</a>
+		<a class="headerlink" href="/disclaimer">Disclaimer</a>
+		&copy;2014 by the FlatFoundrs. All rights reserved.
+	</div>	
+	
 	<div class="right">
 		<nav>
 			<ul>
+			
+				
+			
 				<c:choose>
 					<c:when test="${loggedIn}">
 					<script>
@@ -63,7 +74,10 @@
 								+ realUser.getLastName() + "</p>"); 
 						%>
 						</a>
-							<ul>
+					
+						<ul>
+						
+						
 								<li><a href="/profile/placeAd">Place an ad</a></li>
 								<li><a href="/profile/myRooms">My properties</a></li>
 								<li><a id="messageLink" href="/profile/messages"></a></li>
@@ -74,14 +88,62 @@
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
 								</li>
 								<li><a href="/logout">Logout</a></li>
-							</ul></li>
+						
+						
+						</ul>
+						</li>
+						
+						
+						<li><a href="<c:url value='/searchAd' />">Search</a></li>
 					</c:when>
+					
+					
 					<c:otherwise>
-						<li><a href="/login">Login</a></li>
+						
+						
+							<form id="login-form" method="post" action="/j_spring_security_check">
+									
+									<li><a class="link" id="submitButton" href="<c:url value="/signup" />">sign up</a></li>
+									
+									<li style=" width:auto;" >
+										<button type="submit" id="submitButton" class="button">Login</button>
+										</li>
+									
+									<li style="width:auto;padding: 5px 5px;" >
+										
+										<label for="field-email">Email:</label> 
+										<input name="j_username" id="field-email" />
+										
+										<label for="field-password">Password:</label> 
+										<input name="j_password" id="field-password" type="password" />
+									
+										
+									</li>
+										
+										
+										
+										<%-- <li><a href="/login" class="link">Login</a></li>--%>
+										
+										<li><a href="<c:url value='/searchAd' />">Search</a></li>
+										
+										
+								</form>
+						
+					
+						
+					
 					</c:otherwise>
 				</c:choose>
-				<li><a href="<c:url value='/searchAd' />">Search</a></li>
+				
+				
 			</ul>
+			
+			</br>
+			</br>
+			</br>
+			
+			
+
 		</nav>
 	</div>
 </header>
