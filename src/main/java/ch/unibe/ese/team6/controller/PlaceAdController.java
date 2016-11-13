@@ -155,6 +155,7 @@ public class PlaceAdController {
 
 			// reset the place ad form
 			this.placeAdForm = null;
+			
 			// reset the picture uploader
 			this.pictureUploader = null;
 

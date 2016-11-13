@@ -44,7 +44,7 @@
 			dateFormat : 'dd-mm-yy'
 		});
 		
-		$("#field-deadlineDay").datepicker({
+		$("#field-deadlineDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
 		
@@ -112,7 +112,45 @@
 			
 			$("#addedVisits").append(label + input);
 		});
+	
+	
+		<%--	manage deadline
+		$("#addVisitButton").click(function() {
+			var date = $("#field-visitDay").val();
+			if(date == ""){
+				return;
+			}
+			
+			var startHour = $("#startHour").val();
+			var startMinutes = $("#startMinutes").val();
+			var endHour = $("#endHour").val();
+			var endMinutes = $("#endMinutes").val();
+			
+			if (startHour > endHour) {
+				alert("Invalid times. The visit can't end before being started.");
+				return;
+			} else if (startHour == endHour && startMinutes >= endMinutes) {
+				alert("Invalid times. The visit can't end before being started.");
+				return;
+			}
+			
+			var newVisit = date + ";" + startHour + ":" + startMinutes + 
+				";" + endHour + ":" + endMinutes; 
+			var newVisitLabel = date + " " + startHour + ":" + startMinutes + 
+			" to " + endHour + ":" + endMinutes; 
+			
+			var index = $("#addedVisits input").length;
+			
+			var label = "<p>" + newVisitLabel + "</p>";
+			var input = "<input type='hidden' value='" + newVisit + "' name='visits[" + index + "]' />";
+			
+			$("#addedVisits").append(label + input);
+		});
+	
+		--%>
+		
 	});
+	
 </script>
 
 <pre><a href="/">Home</a>   &gt;   Place ad</pre>
@@ -136,28 +174,32 @@
 			</tr>
 			
 			<tr>
-			<td><label for="forRent">Status :</label>
-				<form:radiobutton id="for-sale" path="rent" value="0" checked="checked"/> For Rent 
-				<form:radiobutton id="for-rent" path="rent" value="1"/> For Sale </td>
-			</tr>
+			<td><label for="field-deal">Status :</label>
+			    <form:radiobutton id="field-deal" path="deal" value="forRent" checked="checked"/>For Rent
+				<form:radiobutton id="field-deal" path="deal" value="forSale"/>For Sale</td>
+			</tr>	
 			
 			<tr>
 			<td><label for="field-street">Address :</label>
 				<form:input id="field-street" path="street" placeholder="street" />
 				<form:errors path="street" cssClass="validationErrorText" /></td>
-				
+			</tr>
+			
+			<tr>
 			<td><label for="field-city">City :</label>
 				<form:input id="field-city" path="city" placeholder="city" />
 				<form:errors path="city" cssClass="validationErrorText" /></td>
 			</tr>
 
 			<tr>
-				<td><label for="field-SquareFootage">Square Meters :</label>
-					<form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" />
+				<td><label for="field-squareFootage">Square Meters (m²) :</label>
+					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
-					
-				<td><label for="field-NumberRooms">Number of Rooms :</label>
-					<form:input id="field-NumberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" />
+			</tr>
+			
+			<tr>		
+				<td><label for="field-numberRooms">Number of Rooms :</label>
+					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
@@ -165,7 +207,9 @@
 				<td><label for="moveInDate">Move-in date :</label>
 				<form:input type="text" id="field-moveInDate" path="moveInDate" />
 				<form:errors path="moveInDate" cssClass="validationErrorText" /></td>
-				
+			</tr>
+			
+			<tr>	
 				<td><label for="moveOutDate">Move-out date (optional) :</label>
 				<form:input type="text" id="field-moveOutDate" path="moveOutDate" />
 				<form:errors path="moveOutDate" cssClass="validationErrorText" /></td>
@@ -176,6 +220,7 @@
 	
 	<fieldset>
 		<legend>Type of deal</legend>
+		
 		<table class="placeAnAd">
 			
 			<!--the error message should work only if no field is filled out-->
@@ -185,10 +230,11 @@
 			</tr>
 			
 			<tr>
-				<td><label for="field-Prize">Monthly rental charges :</label>
-				<form:input id="for-rent" type="number" path="prize" step="50"/>
-				<form:errors path="prize" cssClass="validationErrorText" /></br></br></td>
+				<td><label for="field-priceRent">Monthly rental charges (CHF) :</label>
+				<form:input id="field-priceRent" type="number" path="priceRent" step="50"/>
+				<!--<form:errors path="priceRent" cssClass="validationErrorText" />--></br></br></td>
 			</tr>
+		
 			
 			<tr>
 				<td>If for Sale :</td>
@@ -196,28 +242,35 @@
 			
 			<tr>
 				<td><i>You can choose either "Direct sale", or "Sale through auction" or both</i><td>
+				<form:radiobutton id="field-sale" path="sale" value="direct" checked="checked"/>Direct sale
+				<form:radiobutton id="field-sale" path="sale" value="auction"/>Auction
+				<form:radiobutton id="field-sale" path="sale" value="bothAuctionAndDirect"/>Both
+				<!--<form:errors path="sale" cssClass="validationErrorText" />--></td>
 			</tr>
 			
 			<tr>
-				<td><label for="field-Prize">Price for a direct sale</label>
-				<form:input id="for-sale" type="number" path="salePrize" step="50" />
-				<form:errors path="salePrize" cssClass="validationErrorText" /></td>
+				<td><label for="field-priceSale">Price for a direct sale (CHF) :</label>
+				<form:input id="field-priceSale" type="number" path="priceSale" step="50" />
+				<!--<form:errors path="priceSale" cssClass="validationErrorText" />--></td>
 			</tr>
 			
 			<tr>
-				<td><label for="field-Prize">Initial bid for a sale through auction</label>
-				<form:input id="for-sale" type="number" path="initialBid" step="50"/>
-				<form:errors path="initialBid" cssClass="validationErrorText" /></td>
-				
-				<td><label for="field-Prize">Automatic increment for each new bid</label>
-				<form:input id="for-sale" type="number" path="bidIncrease" step="2" />
-				<form:errors path="bidIncrease" cssClass="validationErrorText" /></td>			
+				<td><label for="field-initialBid">Initial bid for a sale through auction (CHF) :</label>
+				<form:input id="field-initialBid" type="number" path="initialBid" step="50"/>
+				<!--<form:errors path="initialBid" cssClass="validationErrorText" />--></td>
+			</tr>
+			
+			<tr>				
+				<td><label for="field-increment">Automatic increment for each new bid (CHF) :</label>
+				<form:input id="field-increment" type="number" path="increment" step="50" />
+				<!--<form:errors path="increment" cssClass="validationErrorText" />--></td>			
 			</tr>
 			
 			<tr>
-				<td><label for="field-Prize">Deadline</label>
-					<input type="text" id="field-deadlineDay" />
-					<select id="startHour">
+				<td><label for="field-deadlineDate">Deadline</label>
+					<input id="field-deadlineDate" />
+					
+					<select id="field-deadlineHour">
 						<%
 							for (int i = 0; i < 24; i++) {
 									String hour = String.format("%02d", i);
@@ -226,7 +279,7 @@
 						%>
 					</select> 
 						
-					<select id="startMinutes">
+					<select id="field-deadlineMinute">
 						<%
 							for (int i = 0; i < 60; i++) {
 									String minute = String.format("%02d", i);
@@ -236,7 +289,6 @@
 					</select>
 				</td>
 			</tr>
-
 		</table>
 	</fieldset>
 
@@ -270,6 +322,7 @@
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
 		
 	</fieldset>
+	
 	
 	<fieldset>
 		<legend>Location details (optional)</legend>
@@ -406,10 +459,10 @@
 	<br />
 	
 	<div>
-		
 		<a href="/"><button type="button">Cancel</button></a>
 		<button type="submit">Submit</button>
 	</div>
+
 
 </form:form>
 
