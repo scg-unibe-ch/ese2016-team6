@@ -138,8 +138,14 @@
 	<fieldset>
 		<legend>Change General info</legend>
 		<table class="placeAdTable">
+		
 			<tr>
-				<td><label for="field-title">Ad Title</label></td>
+			<td><label for="field-title">Title of your ad :</label> 
+				<form:input id="field-title" path="title" value="${ad.title}" /></td>
+			</tr>		
+		
+		
+			<tr>
 				<td><label for="type-room">Type:</label></td>
 			</tr>
 			

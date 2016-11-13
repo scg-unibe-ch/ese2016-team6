@@ -222,7 +222,10 @@ public class PlaceAdForm {
 	
 	public void setDeadlineMinute(String deadlineMinute) {
 		this.deadlineMinute = deadlineMinute;
-	}	
+	}
+	
+	/*________________________________________*/
+	
 	//Monthly rental
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;

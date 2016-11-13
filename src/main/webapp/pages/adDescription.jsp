@@ -141,6 +141,9 @@
 	</c:choose>
 </h1>
 
+<tr>
+	<td><i><b><label id="formattedCreationDate">Ad created on : </i>${formattedCreationDate}</label></b></td>
+</tr>
 
 <hr />
 
@@ -171,41 +174,48 @@
 		--%>
 		
 		<tr>
-			<td><h2>Status</h2></td>
+			<td><h2>Status : </h2></td>
 			<td>
 				<c:choose>
-					<c:when test="${shownAd.rent}">For Sale</c:when>
+					<c:when test="${shownAd.deal == forSale}">For Sale</c:when>
 					<c:otherwise>For Rent</c:otherwise>
 				</c:choose>
 			</td>
 		</tr>
 
 		<tr>
-			<td><h2>Address</h2></td>
+			<td><h2>Address :</h2></td>
 			<td>
 				<a class="link" href="http://maps.google.com/?q=${shownAd.street}, ${shownAd.zipcode}, ${shownAd.city}">${shownAd.street},
 						${shownAd.zipcode} ${shownAd.city}</a>
 			</td>
 		</tr>
-
+		
+		<%-- 
 		<tr>
 			<td><h2>Price</h2></td>
 			<td>${shownAd.prizePerMonth}&#32;CHF</td>
 		</tr>
-
+		--%>
+		
 		<tr>
-			<td><h2>Square Meters</h2></td>
+			<td><h2>Area :</h2></td>
 			<td>${shownAd.squareFootage}&#32;m²</td>
 		</tr>
 		
 		<tr>
-			<td><h2>Number of Rooms</h2></td>
+			<td><h2>Number of Rooms :</h2></td>
 			<td>${shownAd.numberOfRooms}</td>
 		</tr>
 		
 		<tr>
-			<td><h2>Available from</h2>${formattedMoveInDate}</td>
-			<td><h2>to</h2>${formattedMoveOutDate}</td>
+			<td><h2>Available from : </h2></td>
+			<td>${formattedMoveInDate}</td>
+		</tr>
+		
+		<tr>
+			<td><h2>To :</h2></td>
+			<td>${formattedMoveOutDate}</td>
 		</tr>
 
 		
@@ -225,11 +235,6 @@
   		</tr>
  		</c:if>
 		--%>
-		
-		<tr>
-			<td><h2>Ad created on</h2></td>
-			<td>${formattedCreationDate}</td>
-		</tr>
 		
 	</table>
 </section>
@@ -255,16 +260,28 @@
 <table style="width:100%; border-collapse: separate;
   border-spacing: 0px 10px;">
 <tr>
-<td style="width:50%;">
 
-	
+<td style="width:50%;">	
 	<div class="adDescDiv">
 		<h2>Price corner</h2>
-		<p>${shownAd.roomDescription}</p>
+		<p><label>If for rent, rental charges (CHF per month) : </label>${shownAd.priceRent}</p>
+		<p><label>If for sale (CHF) :</label></p>
+		<p><label>- price for a direct sale : </label>${shownAd.priceSale}</p>
+		<p><label>- current bid (auction) : </label>${shownAd.initialBid}</p>
+		
+		</br>
+		
+		
+		<p><label >Make a higher bid :</label>
+		<%-- <form:input id="field-currentBid" type="number" path="currentBid"/></p>	
+		--%>
+		
+		<button type="submit">Submit</button></p>
+		
 	</div>
-	
-
 </td>
+
+
 <td style="width:50%;">
 
 			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
