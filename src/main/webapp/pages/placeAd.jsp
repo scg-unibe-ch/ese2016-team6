@@ -25,7 +25,7 @@
 			document.getElementById('type-auction').checked="";
         	document.getElementById('field-priceRent').style.visibility = "visible";
         	document.getElementById('field-priceSale').style.visibility = "hidden";
-        	document.getElementById('field-initialBid').style.visibility = "hidden";
+        	document.getElementById('field-currentBid').style.visibility = "hidden";
         	document.getElementById('field-increment').style.visibility = "hidden";
 			document.getElementById('field-deadlineDate').style.visibility = "hidden";
 			document.getElementById('field-deadlineHour').style.visibility = "hidden";
@@ -37,7 +37,7 @@
 			document.getElementById('type-auction').checked="";
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
-        	document.getElementById('field-initialBid').style.visibility = "hidden";
+        	document.getElementById('field-currentBid').style.visibility = "hidden";
         	document.getElementById('field-increment').style.visibility = "hidden";
 			document.getElementById('field-deadlineDate').style.visibility = "hidden";
 			document.getElementById('field-deadlineHour').style.visibility = "hidden";
@@ -49,7 +49,7 @@
 			document.getElementById('type-sale').checked="";
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
-        	document.getElementById('field-initialBid').style.visibility = "visible";
+        	document.getElementById('field-currentBid').style.visibility = "visible";
         	document.getElementById('field-increment').style.visibility = "visible";
 			document.getElementById('field-deadlineDate').style.visibility = "visible";
 			document.getElementById('field-deadlineHour').style.visibility = "visible";
@@ -149,10 +149,7 @@
 			
 			$("#addedVisits").append(label + input);
 		});
-<<<<<<< HEAD
-		
-=======
->>>>>>> d6fc6d154fb1702e67789b00917e54b54ceac745
+
 	});
 </script>
 
@@ -174,8 +171,8 @@
 			<td><label for="field-type">Type of deal:</label>
 				<%-- added name so that 'rent' is selected only--%>
 			    <form:radiobutton id="type-rent" name="radio1" path="rent" value="0" checked="checked"/>Rent
-			    <form:radiobutton id="type-sale" name="radio1" path="sale" value="1" />Sale
-				<form:radiobutton id="type-auction" name="radio1" path="auction" value="1"/>Auction</td>
+			    <form:radiobutton id="type-sale" name="radio1" path="sale" value="0" />Sale
+				<form:radiobutton id="type-auction" name="radio1" path="auction" value="0"/>Auction</td>
 			</tr>	
 
 			<tr>
@@ -222,14 +219,14 @@
 	</fieldset>
 	
 	<fieldset>
-		<legend>Type of deal</legend>
+		<legend>Deal</legend>
 		
 		<table class="placeAdTable">
 			
 			<tr>
 				<td><label for="field-priceRent">Monthly rental charges (CHF) :</label>
 				<form:input id="field-priceRent" type="number" path="prize" step="50" min="0"/>
-				<form:errors path="prize" cssClass="validationErrorText" /></br></br></td>
+				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
@@ -239,9 +236,9 @@
 			</tr>
 			
 			<tr>
-				<td><label for="field-initialBid">Initial bid for a sale through auction (CHF) :</label>
-				<form:input id="field-initialBid" type="number" path="initialBid" step="50" min="0"/>
-				<form:errors path="initialBid" cssClass="validationErrorText" /></td>
+				<td><label for="field-currentBid">Initial bid for a sale through auction (CHF) :</label>
+				<form:input id="field-currentBid" type="number" path="currentBid" step="50" min="0"/>
+				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
@@ -290,7 +287,7 @@
 			<tr>
 				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Animals allowed</label></td>
 				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>TV Cable</label></td>
-				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden (co-use)</label></td
+				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden (co-use)</label></td>
 			</tr>
 			
 			<tr>

@@ -307,10 +307,6 @@
  		</c:if>
 		--%>
 		
-		<tr>
-			<td><h2>Ad created on</h2></td>
-			<td>${formattedCreationDate}</td>
-		</tr>
 	</table>
 </section>
 
@@ -330,79 +326,9 @@
 </div>
 </table>
 
-<<<<<<< HEAD
-	<div class="adDescDiv">
-		<h2>Price corner</h2>
-		<p><label>If for rent, rental charges : </label>${shownAd.priceRent} CHF per month</p>
-		<p><label>If for sale :</label></p>
-		<p><label>- price for a direct sale : </label>${shownAd.priceSale} CHF</p>
-		<p><label>- current bid (auction) : </label>${shownAd.currentBid} CHF</p>
-		
-		<br/>
-		
-		<p id="timeLeft">Expiry date of the auction: <fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></p>
-		<br/>
-		<p><label for="field-currentBid">Make a higher bid :</label>
-		
-		<c:choose>
-        	<c:when test="${loggedIn}">
-            	<c:if test="${loggedInUserEmail != shownAd.user.username }">
-              		<div id="bidErrorDiv" style="color: #cc0000"></div>
-                    	<form>
-                        	<input class="bidInput" type="number" id="inputBid" value="${shownAd.currentBid}+${shownAd.increment}"/>
-                            	<br>
-                                    <button type="button" id="makeBid" class="bidButton">Let's go !</button>
-                       	</form>
-
-                       	<c:choose>
-                        	<c:when test="${shownAd.priceSale > 0}">
-                            	<script type="text/javascript">
-                                	$(document).ready(function () {
-                                   		$("#directSale").click(function () {
-                                        	$.post("/directSale", {id: "${shownAd.id}".done(function () {
-                                            	location.reload();
-                                           	});
-                                      	});
-                                     })
-                             	</script>
-                               	<br/>
-                                <p><button type="button" id="directSale" class="btn bidButton">Direct Sale</button> for CHF ${shownAd.priceSale}</p>
-                         	</c:when>
-                      	</c:choose>
-
-                        <br/>
-
-           		</c:if>
-      		</c:when>
-      	</c:choose>
- 	</div>
-                
-    <table id="bids" style='display:none'>
-    	<c:forEach items="${bids }" var="bid">
-         	<tr>
-             	<td>
-                	<fmt:formatDate value="${bid.timestamp}" pattern="dd-MM-yyyy "/>
-                    <fmt:formatDate value="${bid.timestamp}" pattern=" HH:mm "/>
-                     	${bid.user.firstName}
-                        ${bid.user.lastName}
-                        ${bid.amount} CHF
-                 </td>
-
-             </tr>
-          </c:forEach>
-     </table>
-	</div>
-
-=======
->>>>>>> d6fc6d154fb1702e67789b00917e54b54ceac745
 <hr class="clearBoth" />
 
-<!--must depend on the kind of deal-->
 
-<<<<<<< HEAD
-<table style="width:100%; border-collapse: separate;
-  border-spacing: 0px 10px;">
-=======
 <table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">
 	<tr>
 		<td style="width:50%;">	
@@ -427,7 +353,7 @@
 						
 						<%-- only shows this part if property for auction --%>
 						<c:if test="${shownAd.sale=='auction'||shownAd.sale=='bothAuctionAndDirect'}">
-							<p><h3><label>- current bid (auction) : </label>${shownAd.initialBid}</h3></p>
+							<p><h3><label>- current bid (auction) : </label>${shownAd.currentBid}</h3></p>
 							</br>
 					
 							<%-- This gets the sum of the current bid and the increment --%>
@@ -453,17 +379,27 @@
 									finalMinBid=cBid+inc;
 									%>
 					
+									<br/>
+				<p id="timeLeft">Expiry date of the auction: <fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></p>
+				<br/>
 					
-					
-							<p><label >Make a higher bid :</label>
-							<%--<form:input id="field-currentBid" type="number" path="currentBid" value=<%=finalMinBid%> min="<%=finalMinBid%>"/></p>	
-							--%>
-							<button type="submit">Submit</button></p>
-						</c:if>
-				</c:if>
-			</div>
-		</td>
->>>>>>> d6fc6d154fb1702e67789b00917e54b54ceac745
+				<p><label for="field-currentBid">Make a higher bid :</label>
+				<c:choose>
+        			<c:when test="${loggedIn}">
+            			<c:if test="${loggedInUserEmail != shownAd.user.username }">
+              				<div id="bidErrorDiv" style="color: #cc0000"></div>
+                    		<form><input class="bidInput" type="number" id="inputBid" value="${shownAd.currentBid}+${shownAd.increment}"/>
+                      				<br>
+                                  <button type="button" id="makeBid" class="bidButton">Let's go !</button>
+                       		</form>
+                       		<br/>
+           				</c:if>
+      				</c:when>
+      			</c:choose>
+		</c:if>
+	</c:if>
+</div>
+</td>
 
 
 		<td style="width:50%;">
@@ -649,16 +585,7 @@
 						</c:choose>
 					</td>
 				
-					<td style="padding-left:30px"><h3>Balcony</h3></td>
-					<td>
-						<c:choose>
-							<c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
-							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-						</c:choose>
-					</td>
-				</tr>
-		
-<<<<<<< HEAD
+
 			<td style="padding-left:30px"><h3>Balcony</h3></td>
 			<td>
 				<c:choose>
@@ -686,20 +613,6 @@
 
 </tr>
 
-=======
-				<tr>
-					<td><h3>Garden</h3></td>
-					<td>
-						<c:choose>
-							<c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
-							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-						</c:choose>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
->>>>>>> d6fc6d154fb1702e67789b00917e54b54ceac745
 </table>
 
 <div id="msgDiv">

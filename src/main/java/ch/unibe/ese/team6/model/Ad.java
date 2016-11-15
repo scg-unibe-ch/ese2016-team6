@@ -231,13 +231,15 @@ public class Ad {
 		this.deadlineMinute = deadlineMinute;
 	}
 
-	/*public int getPrizePerMonth() {
+	private int prizePerMonth;
+	
+	public int getPrizePerMonth() {
 		return prizePerMonth;
 	}
 
 	public void setPrizePerMonth(int prizePerMonth) {
 		this.prizePerMonth = prizePerMonth;
-	}*/
+	}
 	
 	/*
 	public void setPropertyType(KindOfProperty newType){

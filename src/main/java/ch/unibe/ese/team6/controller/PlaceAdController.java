@@ -81,7 +81,7 @@ public class PlaceAdController {
 	private AdService adService;
 
 	/** Shows the place ad form. */
-	@RequestMapping(value = "/profile/placeAd", method = RequestMethod.GET)
+	/*@RequestMapping(value = {"","/profile/placeAd"}, method = RequestMethod.GET, params="id")
 	public ModelAndView placeAd(@RequestParam("id") long id) throws IOException {
 		ModelAndView model = new ModelAndView("placeAd");
 
@@ -89,7 +89,7 @@ public class PlaceAdController {
 		if (pictureUploader == null) {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
-		
+		 
 		if(id!=0){
 			Ad ad  = adService.getAdById(id);
 			PlaceAdForm adForm  = new PlaceAdForm();
@@ -103,7 +103,8 @@ public class PlaceAdController {
 			adForm.setGarden(ad.getGarden());
 			adForm.setMoveInDate(ad.getMoveInDate().toString());
 			adForm.setNumberOfRooms(ad.getNumberOfRooms());
-			adForm.setPriceRent(ad.getPriceRent());
+			adForm.setDeal(ad.getDeal());
+			adForm.setSale(ad.getSale());
 			adForm.setRoomDescription(ad.getRoomDescription());
 			adForm.setSquareFootage(ad.getSquareFootage());
 			adForm.setSmokers(ad.getSmokers());
@@ -112,20 +113,19 @@ public class PlaceAdController {
 		}
 	
 		return model;
-	}
-
-	/** Shows the place ad form.*/
-	@RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET)
+	}*/
+	
+	/** Shows the place ad form. */
+	@RequestMapping(value = "/profile/placeAd", method = RequestMethod.GET)
 	public ModelAndView placeAd() throws IOException {
-    ModelAndView model = new ModelAndView("placeAd");
+		ModelAndView model = new ModelAndView("placeAd");
 
-    String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
-    if (pictureUploader == null) {
-        pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
-    }
-
-    return model;
-    }
+		String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
+		if (pictureUploader == null) {
+			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
+		}
+		return model;
+	}
 
 	/**
 	 * Uploads the pictures that are attached as multipart files to the request.

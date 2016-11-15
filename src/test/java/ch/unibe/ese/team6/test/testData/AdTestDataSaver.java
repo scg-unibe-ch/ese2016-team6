@@ -2,6 +2,7 @@ package ch.unibe.ese.team6.test.testData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.KindOfMembership;
+import ch.unibe.ese.team6.model.KindOfDeal;
+import ch.unibe.ese.team6.model.KindOfSale;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.dao.AdDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
@@ -285,6 +288,12 @@ public class AdTestDataSaver {
 		
 		Ad adBiel = new Ad();
 		adBiel.setZipcode(2503);
+		adBiel.setDeal(KindOfDeal.forSale);
+		adBiel.setSale(KindOfSale.auction);
+		adBiel.setPriceSale(150000);
+		adBiel.setCurrentBid(20000);
+		adBiel.setIncrement(3500);
+		adBiel.setExpireDate(getTimedDate(1566598));
 		adBiel.setMoveInDate(moveInDate6);
 		adBiel.setMoveOutDate(moveOutDate5);
 		adBiel.setCreationDate(creationDate6);
@@ -575,5 +584,11 @@ public class AdTestDataSaver {
 		picture.setFilePath(filePath);
 		return picture;
 	}
+	
+    private Date getTimedDate(int minutesToAdd) {
+        Calendar date = Calendar.getInstance();
+        long t = date.getTimeInMillis();
+        return new Date(t + (minutesToAdd * 60*1000));
+    }
 
 }
