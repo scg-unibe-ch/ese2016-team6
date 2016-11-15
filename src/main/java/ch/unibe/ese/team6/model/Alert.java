@@ -42,13 +42,19 @@ public class Alert {
 	@Column
 	private boolean bothRoomAndStudio;
 	
-	@Column(nullable = false)
+	@Column
 	private boolean forRent; // true if for rent, false if for sale
+
+	@Column
+	private boolean forSale;
 	
-	@Column(nullable = false)
+	@Column
+	private boolean bothRentAndSale;
+	
+	@Column
 	private int minSize;
 	
-	@Column(nullable = false)
+	@Column
 	private int maxSize;
 
 	@Column(nullable = false)
@@ -134,6 +140,22 @@ public class Alert {
 		this.forRent = rent;
 	}
 	
+	public boolean getForSale() {
+		return forSale;
+	}
+
+	public void setForSale(boolean sale) {
+		this.forSale = sale;
+	}
+	
+	public boolean getBothRentAndSale() {
+		return bothRentAndSale;
+	}
+
+	public void setBothRentAndSale(boolean bothRentAndSale) {
+		this.bothRentAndSale = bothRentAndSale;
+	}
+
 	public int getMinSize() {
 		return minSize;
 	}

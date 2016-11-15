@@ -63,6 +63,8 @@ public class AlertService {
 		alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
 		alert.setUser(user);
 		alert.setForRent(alertForm.getForRent());
+		alert.setForSale(alertForm.getForSale());
+		alert.setBothRentAndSale(alertForm.getBothRentAndSale());
 		alert.setMinSize(alertForm.getMinSize());
 		alert.setMaxSize(alertForm.getMaxSize());
 		alert.setNumberOfRooms(alertForm.getNumberOfRooms());
@@ -89,7 +91,7 @@ public class AlertService {
 	 */
 	@Transactional
 	public void triggerAlerts(Ad ad) {
-		int adPrice = ad.getPrizePerMonth();
+		int adPrice = ad.getPriceRent(); //ad.getPrizePerMonth removed from Ad.java
 		Iterable<Alert> alerts = alertDao.findByPriceGreaterThan(adPrice - 1);
 
 		// loop through all ads with matching city and price range, throw out
@@ -98,7 +100,8 @@ public class AlertService {
 		while (alertIterator.hasNext()) {
 			Alert alert = alertIterator.next();
 			if (typeMismatchWith(ad, alert) || radiusMismatchWith(ad, alert)
-					|| ad.getUser().equals(alert.getUser()) || sizeMismatchWith(ad, alert) || ad.getRent() == alert.getForRent() || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
+					|| ad.getUser().equals(alert.getUser()) || rentSaleMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
+					//|| ad.getUser().equals(alert.getUser()) || sizeMismatchWith(ad, alert) || ad.getRent() == alert.getForRent() || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
 				alertIterator.remove();
 		}
 
@@ -151,8 +154,17 @@ public class AlertService {
 		return mismatch;
 	}
 	
-	/** Checks if an ad has the size specified in the alert */
-	private boolean sizeMismatchWith(Ad ad, Alert alert) {
+	/** Checks if an ad is conforming to the criteria in an alert. */
+	private boolean rentSaleMismatchWith(Ad ad, Alert alert) {
+		boolean mismatch = false;
+		if (!alert.getBothRentAndSale()
+				&& ad.getRent() == alert.getForRent())
+			mismatch = true;
+		return mismatch;
+	}
+	
+	/** Checks if an ad has the size specified in the alert **/
+	/*private boolean sizeMismatchWith(Ad ad, Alert alert) {
 		if (alert.getMinSize() > ad.getSquareFootage()) {
 			return true;
 		}
@@ -160,7 +172,7 @@ public class AlertService {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/**
 	 * Checks whether an ad is for a place too far away from the alert.

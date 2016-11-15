@@ -19,6 +19,99 @@ public class PlaceAdForm {
 	@NotBlank(message = "Required")
 	private String title;
 	
+	@NotBlank(message = "Required")
+	private String street;
+	
+	//@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;]*", message = "Please pick a city from the list")
+	@Pattern(regexp = "^[0-9]{4} - [\\S]*", message = "Please pick a city from the list")
+	private String city;
+	
+	@NotBlank(message = "Required")
+	private String moveInDate;
+	
+	private String moveOutDate;
+
+	@Min(value = 1, message = "Has to be equal to 1 or more")
+	private int prize;
+
+	@Min(value = 1, message = "Has to be equal to 1 or more")
+	private int squareFootage;
+
+	@NotBlank(message = "Required")
+	private String roomDescription;
+
+	@Min(value = 1, message = "Has to be equal to 1 or more")
+	private int numberOfRooms;
+	
+	private KindOfDeal deal;
+	private KindOfSale sale;
+	private int priceRent;
+	private int priceSale;
+	private int increment;
+	private int currentBid;
+	private String deadlineDate;
+	private String deadlineHour;
+	private String deadlineMinute;
+	
+	//what type of property this property is
+	//taken out for now
+	/*
+	@NotBlank(message = "Required")
+	private KindOfProperty propertyType;
+	*/
+	
+	private String preferences;
+
+	// optional free text description
+	private String roommates;
+	
+	// First user are added as strings, then transformed
+	// to Users and added to the DB in through adService
+	private List<String> registeredRoommateEmails;
+	
+	// optional for input
+	private String roomFriends;
+	
+	//true if studio, false if room
+	private boolean studio;
+	
+	//true if rent, false if sale
+	private boolean rent;
+	//hprivate boolean sale;
+	private boolean auction;
+	
+	private boolean smokers;
+	private boolean animals;
+	private boolean garden;
+	private boolean balcony;
+	private boolean cellar;
+	private boolean furnished;
+	private boolean cable;
+	private boolean garage;
+	private boolean internet;
+	
+	private int proximityToPublicTransport;
+	private int proximityToSchool;
+	private int proximityToSupermarket;
+	private int proximityToNightlife;
+	
+	private List<String> visits;
+
+	private KindOfMembership kind;
+
+	
+	//gets and sets the property Type
+	//taken out for now
+	/*
+	public KindOfProperty getPropertyType(){
+		return propertyType;
+	}
+	
+	public void setPropertyType(KindOfProperty newType){
+		propertyType = newType;
+	}
+	*/
+
 	public String getTitle() {
 		return title;
 	}
@@ -26,12 +119,7 @@ public class PlaceAdForm {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	/*______________________*/
 
-	@NotBlank(message = "Required")
-	private String street;
-	
 	public String getStreet() {
 		return street;
 	}
@@ -40,11 +128,6 @@ public class PlaceAdForm {
 		this.street = street;
 	}
 	
-	/*______________________*/
-	
-	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;Ã¼Ã¤Ã¶]*", message = "Please pick a city from the list")
-	private String city;
-	
 	public String getCity() {
 		return city;
 	}
@@ -52,12 +135,7 @@ public class PlaceAdForm {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
-	/*______________________*/
-	
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int squareFootage;
-	
+
 	public int getSquareFootage() {
 		return squareFootage;
 	}
@@ -66,29 +144,13 @@ public class PlaceAdForm {
 		this.squareFootage = squareFootage;
 	}
 	
-	/*_____________________*/
-	
-	//specifies how many rooms this property has
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int numberOfRooms;
-	
-	//Gets and sets the number of rooms this property has and that the add will show
 	public int getNumberOfRooms(){
 		return numberOfRooms;
 	}
-		
-	//public void setNumberOfRooms(int newNumber){
-	//	numberOfRooms = newNumber;
-	//}
 	
 	public void setNumberOfRooms(int numberOfRooms){
 		this.numberOfRooms = numberOfRooms ;
 	}
-	
-	/*______________________*/
-	
-	@NotBlank(message = "Required")
-	private String moveInDate;
 	
 	public String getMoveInDate() {
 		return moveInDate;
@@ -97,10 +159,6 @@ public class PlaceAdForm {
 	public void setMoveInDate(String moveInDate) {
 		this.moveInDate = moveInDate;
 	}
-
-	/*________________________*/
-	
-	private String moveOutDate;
 	
 	public String getMoveOutDate() {
 		return moveOutDate;
@@ -110,11 +168,6 @@ public class PlaceAdForm {
 		this.moveOutDate = moveOutDate;
 	}
 	
-	/*___________AUCTION_______________*/
-	
-	
-	private KindOfDeal deal;
-	
 	public KindOfDeal getDeal() {
 		return deal;
 	}
@@ -123,9 +176,13 @@ public class PlaceAdForm {
 		this.deal = deal;
 	}
 	
-	/*__________________________________*/
+	public boolean getRent() {
+		return rent;
+	}
 	
-	private KindOfSale sale;
+	public void setRent(boolean rent) {
+		this.rent = rent;
+	}
 	
 	public KindOfSale getSale() {
 		return sale;
@@ -135,10 +192,13 @@ public class PlaceAdForm {
 		this.sale = sale;
 	}
 	
-	/*__________________________________*/
+	public boolean getAuction() {
+		return auction;
+	}
 	
-	//rental charges
-	private int priceRent;
+	public void setAuction(boolean auction) {
+		this.auction = auction;
+	}
 	
 	public int getPriceRent() {
 		return priceRent;
@@ -148,11 +208,6 @@ public class PlaceAdForm {
 		this.priceRent = priceRent;
 	}
 	
-	/*__________________________________*/
-	
-	//direct sale price
-	private int priceSale;
-	
 	public int getPriceSale() {
 		return priceSale;
 	}
@@ -161,9 +216,9 @@ public class PlaceAdForm {
 		this.priceSale = priceSale;
 	}
 	
+
 	/*__________________________________*/
 
-	private int currentBid;
 	
 	public int getCurrentBid() {
 		return currentBid;
@@ -175,9 +230,7 @@ public class PlaceAdForm {
 	
 	/*________________________________*/
 	
-	//auction : increment
-	private int increment;
-	
+
 	public int getIncrement() {
 		return increment;
 	}
@@ -187,11 +240,6 @@ public class PlaceAdForm {
 	}
 	
 	
-	/*____________________________________*/
-	
-	//auction : deadline
-	private String deadlineDate;
-	
 	public String getDeadlineDate() {
 		return deadlineDate;
 	}
@@ -199,10 +247,6 @@ public class PlaceAdForm {
 	public void setDeadlineDate(String deadlineDate) {
 		this.deadlineDate = deadlineDate;
 	}
-	
-	/*_____________________________________*/
-	
-	private String deadlineHour;
 	
 	public String getDeadlineHour() {
 		return deadlineHour;
@@ -212,10 +256,6 @@ public class PlaceAdForm {
 		this.deadlineHour = deadlineHour;
 	}
 	
-	/*_____________________________________*/
-	
-	private String deadlineMinute;
-	
 	public String getDeadlineMinute() {
 		return deadlineMinute;
 	}
@@ -223,12 +263,6 @@ public class PlaceAdForm {
 	public void setDeadlineMinute(String deadlineMinute) {
 		this.deadlineMinute = deadlineMinute;
 	}
-	
-	/*________________________________________*/
-	
-	//Monthly rental
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int prize;
 	
 	public int getPrize() {
 		return prize;
@@ -278,69 +312,6 @@ public class PlaceAdForm {
 	
 
 
-
-	@NotBlank(message = "Required")
-	private String roomDescription;
-
-	
-	//what type of property this property is
-	//taken out for now
-	/*
-	@NotBlank(message = "Required")
-	private KindOfProperty propertyType;
-	*/
-	
-	private String preferences;
-
-	// optional free text description
-	private String roommates;
-	
-	// First user are added as strings, then transformed
-	// to Users and added to the DB in through adService
-	private List<String> registeredRoommateEmails;
-	
-	// optional for input
-	private String roomFriends;
-	
-	//true if studio, false if room
-	private boolean studio;
-	
-	//true if rent, false if sale
-	private boolean rent;
-	
-	private boolean smokers;
-	private boolean animals;
-	private boolean garden;
-	private boolean balcony;
-	private boolean cellar;
-	private boolean furnished;
-	private boolean cable;
-	private boolean garage;
-	private boolean internet;
-	
-	private int proximityToPublicTransport;
-	private int proximityToSchool;
-	private int proximityToSupermarket;
-	private int proximityToNightlife;
-	
-	private List<String> visits;
-
-	private KindOfMembership kind;
-
-	
-	//gets and sets the property Type
-	//taken out for now
-	/*
-	public KindOfProperty getPropertyType(){
-		return propertyType;
-	}
-	
-	public void setPropertyType(KindOfProperty newType){
-		propertyType = newType;
-	}
-	*/
-	
-
 	public String getRoomDescription() {
 		return roomDescription;
 	}
@@ -356,14 +327,6 @@ public class PlaceAdForm {
 	public void setPreferences(String preferences) {
 		this.preferences = preferences;
 	}
-
-	//public String getRoommates() {
-	//	return roommates;
-	//}
-
-	//public void setRoommates(String roommates) {
-	//	this.roommates = roommates;
-	//}
 
 	public boolean isSmokers() {
 		return smokers;
@@ -483,17 +446,7 @@ public class PlaceAdForm {
 	}
 	
 	public void setStudio(boolean studio) {
-		
 		this.studio = studio;
-		
-	}
-
-	public boolean getRent() {
-		return rent;
-	}
-	
-	public void setRent(boolean rent) {
-		this.rent = rent;
 	}
 	
 	public List<String> getRegisteredRoommateEmails() {

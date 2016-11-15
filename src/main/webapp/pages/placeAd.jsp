@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"
-	contentType="text/html;charset=utf-8"%>
+	contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -18,7 +18,44 @@
 		// save it to a hidden field
 		// iterate through it
 		// if there is id == x then make "Bookmark Me" to "bookmarked"
-		
+
+
+    	$("#type-rent").on("click", function(){
+			document.getElementById('type-sale').checked="";
+			document.getElementById('type-auction').checked="";
+        	document.getElementById('field-priceRent').style.visibility = "visible";
+        	document.getElementById('field-priceSale').style.visibility = "hidden";
+        	document.getElementById('field-initialBid').style.visibility = "hidden";
+        	document.getElementById('field-increment').style.visibility = "hidden";
+			document.getElementById('field-deadlineDate').style.visibility = "hidden";
+			document.getElementById('field-deadlineHour').style.visibility = "hidden";
+			document.getElementById('field-deadlineMinute').style.visibility = "hidden";
+    	});
+
+		$("#type-sale").on("click", function(){
+			document.getElementById('type-rent').checked="";
+			document.getElementById('type-auction').checked="";
+			document.getElementById('field-priceRent').style.visibility = "hidden";
+        	document.getElementById('field-priceSale').style.visibility = "visible";
+        	document.getElementById('field-initialBid').style.visibility = "hidden";
+        	document.getElementById('field-increment').style.visibility = "hidden";
+			document.getElementById('field-deadlineDate').style.visibility = "hidden";
+			document.getElementById('field-deadlineHour').style.visibility = "hidden";
+			document.getElementById('field-deadlineMinute').style.visibility = "hidden";
+   		});
+
+    	$("#type-auction").on("click", function(){
+    		document.getElementById('type-rent').checked="";
+			document.getElementById('type-sale').checked="";
+			document.getElementById('field-priceRent').style.visibility = "hidden";
+        	document.getElementById('field-priceSale').style.visibility = "visible";
+        	document.getElementById('field-initialBid').style.visibility = "visible";
+        	document.getElementById('field-increment').style.visibility = "visible";
+			document.getElementById('field-deadlineDate').style.visibility = "visible";
+			document.getElementById('field-deadlineHour').style.visibility = "visible";
+			document.getElementById('field-deadlineMinute').style.visibility = "visible";
+    	});
+
 		$("#field-city").autocomplete({
 			minLength : 2
 		});
@@ -112,15 +149,16 @@
 			
 			$("#addedVisits").append(label + input);
 		});
+<<<<<<< HEAD
 		
+=======
+>>>>>>> d6fc6d154fb1702e67789b00917e54b54ceac745
 	});
-	
 </script>
 
 <pre><a href="/">Home</a>   &gt;   Place ad</pre>
 
 <h1>Place an ad</h1>
-
 <hr />
 
 <form:form method="post" modelAttribute="placeAdForm"
@@ -131,22 +169,23 @@
 		<legend>General description</legend>
 		<table class="placeAdTable">
 			
+			
 			<tr>
-			<td><label for="field-title">Title of your ad :</label> 
-				<form:input id="field-title" path="title" placeholder="ad title" />
-				<form:errors path="title" cssClass="validationErrorText" /></td>
+			<td><label for="field-type">Type of deal:</label>
+				<%-- added name so that 'rent' is selected only--%>
+			    <form:radiobutton id="type-rent" name="radio1" path="rent" value="0" checked="checked"/>Rent
+			    <form:radiobutton id="type-sale" name="radio1" path="sale" value="1" />Sale
+				<form:radiobutton id="type-auction" name="radio1" path="auction" value="1"/>Auction</td>
+			</tr>	
+
+			<tr>
+				<td><label for="field-title">Title of your ad :</label> 
+				<form:input id="field-title" path="title" placeholder="ad title" /></td>
 			</tr>
 			
 			<tr>
-			<td><label for="field-deal">Status :</label>
-			    <form:radiobutton id="field-deal" path="deal" value="forRent" checked="checked"/>For Rent
-				<form:radiobutton id="field-deal" path="deal" value="forSale"/>For Sale</td>
-			</tr>	
-			
-			<tr>
 			<td><label for="field-street">Address :</label>
-				<form:input id="field-street" path="street" placeholder="street" />
-				<form:errors path="street" cssClass="validationErrorText" /></td>
+				<form:input id="field-street" path="street" placeholder="street" /></td>
 			</tr>
 			
 			<tr>
@@ -157,26 +196,24 @@
 
 			<tr>
 				<td><label for="field-squareFootage">Square Meters (m²) :</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" />
+					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" min="0" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
-			<tr>		
+			<tr>
 				<td><label for="field-numberRooms">Number of Rooms :</label>
-					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" />
+					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" min="0" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="moveInDate">Move-in date :</label>
-				<form:input type="text" id="field-moveInDate" path="moveInDate" />
-				<form:errors path="moveInDate" cssClass="validationErrorText" /></td>
+				<form:input type="text" id="field-moveInDate" path="moveInDate" /></td>
 			</tr>
 			
-			<tr>	
+			<tr>
 				<td><label for="moveOutDate">Move-out date (optional) :</label>
-				<form:input type="text" id="field-moveOutDate" path="moveOutDate" />
-				<form:errors path="moveOutDate" cssClass="validationErrorText" /></td>
+				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
 			</tr>
 
 
@@ -187,49 +224,30 @@
 	<fieldset>
 		<legend>Type of deal</legend>
 		
-		<table class="placeAnAd">
-			
-			<!--the error message should work only if no field is filled out-->
-			
-			<tr>
-				<td>If for Rent :<td>
-			</tr>
+		<table class="placeAdTable">
 			
 			<tr>
 				<td><label for="field-priceRent">Monthly rental charges (CHF) :</label>
-				<form:input id="field-priceRent" type="number" path="priceRent" step="50"/>
-				<!--<form:errors path="priceRent" cssClass="validationErrorText" />--></br></br></td>
+				<form:input id="field-priceRent" type="number" path="prize" step="50" min="0"/>
+				<form:errors path="prize" cssClass="validationErrorText" /></br></br></td>
 			</tr>
 		
-			
-			<tr>
-				<td>If for Sale :</td>
-			</tr>
-			
-			<tr>
-				<td><i>You can choose either "Direct sale", or "Sale through auction" or both</i><td>
-				<form:radiobutton id="field-sale" path="sale" value="direct" checked="checked"/>Direct sale
-				<form:radiobutton id="field-sale" path="sale" value="auction"/>Auction
-				<form:radiobutton id="field-sale" path="sale" value="bothAuctionAndDirect"/>Both
-				<!--<form:errors path="sale" cssClass="validationErrorText" />--></td>
-			</tr>
-			
 			<tr>
 				<td><label for="field-priceSale">Price for a direct sale (CHF) :</label>
-				<form:input id="field-priceSale" type="number" path="priceSale" step="50" />
-				<!--<form:errors path="priceSale" cssClass="validationErrorText" />--></td>
+				<form:input id="field-priceSale" type="number" path="prize" step="50" min="0" />
+				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="field-initialBid">Initial bid for a sale through auction (CHF) :</label>
-				<form:input id="field-initialBid" type="number" path="initialBid" step="50"/>
-				<!--<form:errors path="initialBid" cssClass="validationErrorText" />--></td>
+				<form:input id="field-initialBid" type="number" path="initialBid" step="50" min="0"/>
+				<form:errors path="initialBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
 				<td><label for="field-increment">Automatic increment for each new bid (CHF) :</label>
-				<form:input id="field-increment" type="number" path="increment" step="50" />
-				<!--<form:errors path="increment" cssClass="validationErrorText" />--></td>			
+				<form:input id="field-increment" type="number" path="increment" step="50" min="0"/>
+				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
 			
 			<tr>
@@ -296,23 +314,19 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
-				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" placeholder="e.g. 500" step="10" />
-				<form:errors path="proximityToPublicTransport" cssClass="validationErrorText" /></td>
+				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" placeholder="e.g. 500" step="10" /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
-				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" placeholder="e.g. 500" step="10" />
-				<form:errors path="proximityToSchool" cssClass="validationErrorText" /></td>
+				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" placeholder="e.g. 500" step="10" /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
-				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500" step="10" />
-				<form:errors path="proximityToSupermarket" cssClass="validationErrorText" /></td>
+				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500" step="10"  /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
-				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500" step="10" />
-				<form:errors path="proximityToNightlife" cssClass="validationErrorText" /></td>
+				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500" step="10"  /></td>
 			</tr>
 		</table>
 	</fieldset>
@@ -321,44 +335,7 @@
 		<legend>Preferences (optional)</legend>
 		<form:textarea path="preferences" rows="5" cols="100" placeholder="preferences concerning the tenant"></form:textarea>
 	</fieldset>
-
-	<%--
 	
-	removed because of customer wishes
-	
-	<fieldset>
-		<legend>Roommates (optional)</legend>
-		<p>If your roommates have an account, simply add them by email.</p>
-
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="roomFriends">Add by email</label></td>
-			</tr>
-
-			<tr>
-				<td id="roommateCell"><form:input type="text" id="roomFriends"
-						path="roomFriends" placeholder="email" />
-
-					<div id="addbutton" class="smallPlusButton">+</div></td>
-			</tr>
-			<tr>
-				<td><p id="addedRoommates" path="addedRoommates">Added
-						roommates:</p></td>
-			</tr>
-		</table>
-
-		<br />
-		<p>If the roommates do not have accounts or you wish to give
-			further information, you can add a text in which you describe the
-			roommates.</p>
-		<br/>
-		<form:textarea path="roommates" rows="10" cols="100"
-			placeholder="Roommates" />
-		<form:errors path="roommates" cssClass="validationErrorText" />
-	</fieldset>
-
-	--%>
-
 	<fieldset>
 		<legend>Pictures (optional)</legend>
 		<br /> 
