@@ -491,9 +491,7 @@ public class PlaceAdForm {
 	}
 	
 	public void setStudio(boolean studio) {
-		
 		this.studio = studio;
-		
 	}
 
 	public boolean getRent() {
