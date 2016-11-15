@@ -32,6 +32,17 @@ public class SearchForm {
 	@Min(value = 0, message = "In your dreams.")
 	private Integer prize;
 	
+	@NotNull(message = "Requires a number")
+	@Min(value = 0, message = "In your dreams.")
+	private Integer price;
+	
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
 	
 	//specifies how many rooms a Flat must have
 	//@NotNull(message = "Requires a number")
@@ -328,4 +339,5 @@ public class SearchForm {
 	public void setKindOfMembershipUser(boolean kindOfMembershipUser) {
 		this.kindOfMembershipUser = kindOfMembershipUser;
 	}
+	
 }

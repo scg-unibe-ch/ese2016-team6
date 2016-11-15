@@ -112,42 +112,6 @@
 			
 			$("#addedVisits").append(label + input);
 		});
-	
-	
-		<%--	manage deadline
-		$("#addVisitButton").click(function() {
-			var date = $("#field-visitDay").val();
-			if(date == ""){
-				return;
-			}
-			
-			var startHour = $("#startHour").val();
-			var startMinutes = $("#startMinutes").val();
-			var endHour = $("#endHour").val();
-			var endMinutes = $("#endMinutes").val();
-			
-			if (startHour > endHour) {
-				alert("Invalid times. The visit can't end before being started.");
-				return;
-			} else if (startHour == endHour && startMinutes >= endMinutes) {
-				alert("Invalid times. The visit can't end before being started.");
-				return;
-			}
-			
-			var newVisit = date + ";" + startHour + ":" + startMinutes + 
-				";" + endHour + ":" + endMinutes; 
-			var newVisitLabel = date + " " + startHour + ":" + startMinutes + 
-			" to " + endHour + ":" + endMinutes; 
-			
-			var index = $("#addedVisits input").length;
-			
-			var label = "<p>" + newVisitLabel + "</p>";
-			var input = "<input type='hidden' value='" + newVisit + "' name='visits[" + index + "]' />";
-			
-			$("#addedVisits").append(label + input);
-		});
-	
-		--%>
 		
 	});
 	
@@ -214,6 +178,8 @@
 				<form:input type="text" id="field-moveOutDate" path="moveOutDate" />
 				<form:errors path="moveOutDate" cssClass="validationErrorText" /></td>
 			</tr>
+
+
 
 		</table>
 	</fieldset>
@@ -289,6 +255,7 @@
 					</select>
 				</td>
 			</tr>
+			
 		</table>
 	</fieldset>
 

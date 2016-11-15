@@ -59,8 +59,14 @@ public class EditAdService {
 		ad.setTitle(placeAdForm.getTitle());
 
 		ad.setStreet(placeAdForm.getStreet());
+		
+		ad.setCity(placeAdForm.getCity());
 
-		ad.setStudio(placeAdForm.getStudio());
+		//ad.setStudio(placeAdForm.getStudio());
+		
+		ad.setSquareFootage(placeAdForm.getSquareFootage());
+		
+		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
 
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
@@ -95,8 +101,26 @@ public class EditAdService {
 		} catch (NumberFormatException e) {
 		}
 
-		ad.setPrizePerMonth(placeAdForm.getPrize());
-		ad.setSquareFootage(placeAdForm.getSquareFootage());
+		/* AUCTION */
+		
+		ad.setDeal(placeAdForm.getDeal());
+		ad.setSale(placeAdForm.getSale());
+		ad.setPriceRent(placeAdForm.getPriceRent());
+		ad.setPriceSale(placeAdForm.getPriceSale());
+		ad.setIncrement(placeAdForm.getIncrement());
+		ad.setCurrentBid(placeAdForm.getCurrentBid());
+		ad.setDeadlineDate(placeAdForm.getDeadlineDate());
+		ad.setDeadlineHour(placeAdForm.getDeadlineHour());
+		ad.setDeadlineMinute(placeAdForm.getDeadlineMinute());
+		
+		//write a function for current bid
+		
+		
+		/*________*/	
+		
+		
+		
+		//ad.setPrizePerMonth(placeAdForm.getPrize());
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());

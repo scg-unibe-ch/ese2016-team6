@@ -22,14 +22,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ch.unibe.ese.team6.controller.service.*;
 import ch.unibe.ese.team6.controller.pojos.PictureUploader;
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
-import ch.unibe.ese.team6.controller.service.AdService;
-import ch.unibe.ese.team6.controller.service.AlertService;
-import ch.unibe.ese.team6.controller.service.BookmarkService;
-import ch.unibe.ese.team6.controller.service.MessageService;
-import ch.unibe.ese.team6.controller.service.UserService;
-import ch.unibe.ese.team6.controller.service.VisitService;
+
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.util.PictureMeta;
@@ -86,15 +82,50 @@ public class PlaceAdController {
 
 	/** Shows the place ad form. */
 	@RequestMapping(value = "/profile/placeAd", method = RequestMethod.GET)
-	public ModelAndView placeAd() throws IOException {
+	public ModelAndView placeAd(@RequestParam("id") long id) throws IOException {
 		ModelAndView model = new ModelAndView("placeAd");
 
 		String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
 		if (pictureUploader == null) {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
+		
+		if(id!=0){
+			Ad ad  = adService.getAdById(id);
+			PlaceAdForm adForm  = new PlaceAdForm();
+			adForm.setTitle(ad.getTitle());
+			adForm.setAnimals(ad.getAnimals());
+			adForm.setBalcony(ad.getBalcony());
+			adForm.setCellar(ad.getCellar());
+			adForm.setCity(ad.getCity());
+			adForm.setFurnished(ad.getFurnished());
+			adForm.setGarage(ad.getGarage());
+			adForm.setGarden(ad.getGarden());
+			adForm.setMoveInDate(ad.getMoveInDate().toString());
+			adForm.setNumberOfRooms(ad.getNumberOfRooms());
+			adForm.setPriceRent(ad.getPriceRent());
+			adForm.setRoomDescription(ad.getRoomDescription());
+			adForm.setSquareFootage(ad.getSquareFootage());
+			adForm.setSmokers(ad.getSmokers());
+			//this.placeAdForm = adForm;
+			model.addObject("placeAdForm",adForm);
+		}
+	
 		return model;
 	}
+
+	/** Shows the place ad form.*/
+	@RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET)
+	public ModelAndView placeAd() throws IOException {
+    ModelAndView model = new ModelAndView("placeAd");
+
+    String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
+    if (pictureUploader == null) {
+        pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
+    }
+
+    return model;
+    }
 
 	/**
 	 * Uploads the pictures that are attached as multipart files to the request.

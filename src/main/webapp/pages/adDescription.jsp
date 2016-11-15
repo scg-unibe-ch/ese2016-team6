@@ -14,6 +14,18 @@
 
 <pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>
 
+<c:choose>
+		<c:when test="${loggedIn}">
+			<c:if test="${loggedInUserEmail == shownAd.user.username }">
+				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
+					<button type="button">Edit Ad</button>
+				</a>
+			</c:if>
+		</c:when>
+</c:choose>
+<br>
+<br>
+
 <script src="/js/image_slider.js"></script>
 <script src="/js/adDescription.js"></script>
 
@@ -111,9 +123,74 @@
 				})
 			}
 		});
-	});
+
+        $("#makeBid").click(function () {
+            if ($("#inputBid").val() != "") {
+                var id = ${shownAd.id};
+                var currentBid = ${shownAd.currentBid};
+                var inputBid = $("#inputBid").val();
+
+                if (inputBid > currentBid) {
+                   $("#bidErrorDiv").html("");
+                   $.post("ad/makeBid", {amount: amount, id: id}, function () {
+                   // alert("You bid: " + amount + " CHF");
+                   $("#inputBid").val("");
+                   location.reload();
+                 })
+                 } else {
+                   $("#bidErrorDiv").html("You have to make a higher bid than the current one.")
+                    }
+                }
+
+            }
+        });
+    });
 		
 </script>
+
+    <script>
+        function showTimeLeft() {
+            //We need getTime() to make the countdown compatible with all browsers.
+            var expired = ${shownAd.expireDate.getTime()};
+            var current = new Date();
+
+            if (current > expired || ${shownAd.expired}) {
+                $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
+            } else {
+                var msec = expired - current;
+
+                var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+
+                msec -= dd * 1000 * 60 * 60 * 24;
+                var hh = Math.floor(msec / 1000 / 60 / 60);
+                msec -= hh * 1000 * 60 * 60;
+                var mm = Math.floor(msec / 1000 / 60);
+                msec -= mm * 1000 * 60;
+                var ss = Math.floor(msec / 1000);
+                msec -= ss * 1000;
+                if (dd > 0) {
+                    $('#timeLeft').html("Time Left: " + dd + " Days, " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
+                }
+                else {
+                    if (hh > 0) {
+                        $('#timeLeft').html("Time Left: " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
+                    }
+                    else {
+                        if (mm > 0) {
+                            $('#timeLeft').html("Time Left: " + +mm + " Minutes, " + ss + " Seconds");
+                        }
+                        else {
+                            $('#timeLeft').html("Time Left: " + ss + " Seconds");
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        var timer = setInterval(showTimeLeft, 1000);
+    </script>
 
 
 <!-- format the dates -->
@@ -141,24 +218,18 @@
 	</c:choose>
 </h1>
 
+
+
 <tr>
 	<td><i><b><label id="formattedCreationDate">Ad created on : </i>${formattedCreationDate}</label></b></td>
 </tr>
 
 <hr />
 
+<br/>
+<br/>
+
 <section>
-	<c:choose>
-		<c:when test="${loggedIn}">
-			<c:if test="${loggedInUserEmail == shownAd.user.username }">
-				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
-					<button type="button">Edit Ad</button>
-				</a>
-			</c:if>
-		</c:when>
-	</c:choose>
-	<br>
-	<br>
 
 	<table id="adDescTable" class="adDescDiv">
 		
@@ -239,6 +310,7 @@
 	</table>
 </section>
 
+<table>
 <div id="image-slider">
 	<div id="left-arrow">
 		<img src="/img/left-arrow.png" />
@@ -252,6 +324,69 @@
 		<img src="/img/right-arrow.png" />
 	</div>
 </div>
+</table>
+
+	<div class="adDescDiv">
+		<h2>Price corner</h2>
+		<p><label>If for rent, rental charges : </label>${shownAd.priceRent} CHF per month</p>
+		<p><label>If for sale :</label></p>
+		<p><label>- price for a direct sale : </label>${shownAd.priceSale} CHF</p>
+		<p><label>- current bid (auction) : </label>${shownAd.currentBid} CHF</p>
+		
+		<br/>
+		
+		<p id="timeLeft">Expiry date of the auction: <fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></p>
+		<br/>
+		<p><label for="field-currentBid">Make a higher bid :</label>
+		
+		<c:choose>
+        	<c:when test="${loggedIn}">
+            	<c:if test="${loggedInUserEmail != shownAd.user.username }">
+              		<div id="bidErrorDiv" style="color: #cc0000"></div>
+                    	<form>
+                        	<input class="bidInput" type="number" id="inputBid" value="${shownAd.currentBid}+${shownAd.increment}"/>
+                            	<br>
+                                    <button type="button" id="makeBid" class="bidButton">Let's go !</button>
+                       	</form>
+
+                       	<c:choose>
+                        	<c:when test="${shownAd.priceSale > 0}">
+                            	<script type="text/javascript">
+                                	$(document).ready(function () {
+                                   		$("#directSale").click(function () {
+                                        	$.post("/directSale", {id: "${shownAd.id}".done(function () {
+                                            	location.reload();
+                                           	});
+                                      	});
+                                     })
+                             	</script>
+                               	<br/>
+                                <p><button type="button" id="directSale" class="btn bidButton">Direct Sale</button> for CHF ${shownAd.priceSale}</p>
+                         	</c:when>
+                      	</c:choose>
+
+                        <br/>
+
+           		</c:if>
+      		</c:when>
+      	</c:choose>
+ 	</div>
+                
+    <table id="bids" style='display:none'>
+    	<c:forEach items="${bids }" var="bid">
+         	<tr>
+             	<td>
+                	<fmt:formatDate value="${bid.timestamp}" pattern="dd-MM-yyyy "/>
+                    <fmt:formatDate value="${bid.timestamp}" pattern=" HH:mm "/>
+                     	${bid.user.firstName}
+                        ${bid.user.lastName}
+                        ${bid.amount} CHF
+                 </td>
+
+             </tr>
+          </c:forEach>
+     </table>
+	</div>
 
 <hr class="clearBoth" />
 
@@ -259,28 +394,6 @@
 
 <table style="width:100%; border-collapse: separate;
   border-spacing: 0px 10px;">
-<tr>
-
-<td style="width:50%;">	
-	<div class="adDescDiv">
-		<h2>Price corner</h2>
-		<p><label>If for rent, rental charges (CHF per month) : </label>${shownAd.priceRent}</p>
-		<p><label>If for sale (CHF) :</label></p>
-		<p><label>- price for a direct sale : </label>${shownAd.priceSale}</p>
-		<p><label>- current bid (auction) : </label>${shownAd.initialBid}</p>
-		
-		</br>
-		
-		
-		<p><label >Make a higher bid :</label>
-		<%-- <form:input id="field-currentBid" type="number" path="currentBid"/></p>	
-		--%>
-		
-		<button type="submit">Submit</button></p>
-		
-	</div>
-</td>
-
 
 <td style="width:50%;">
 
@@ -501,8 +614,6 @@
 
 
 </tr>
-
-
 
 </table>
 

@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 
 import ch.unibe.ese.team6.model.KindOfMembership;
-import ch.unibe.ese.team6.model.KindOfProperty;
+//import ch.unibe.ese.team6.model.KindOfProperty;
 import ch.unibe.ese.team6.model.KindOfDeal;
 import ch.unibe.ese.team6.model.KindOfSale;
 
@@ -163,6 +163,18 @@ public class PlaceAdForm {
 	
 	/*__________________________________*/
 
+	private int currentBid;
+	
+	public int getCurrentBid() {
+		return currentBid;
+	}
+
+	public void setCurrentBid(int currentBid) {
+		this.currentBid = currentBid;
+	}
+	
+	/*________________________________*/
+	
 	//auction : increment
 	private int increment;
 	
@@ -174,18 +186,6 @@ public class PlaceAdForm {
 		this.increment = increment;
 	}
 	
-	/*____________________________________*/
-	
-	//auction : initial bid
-	private int initialBid;
-	
-	public int getInitialBid() {
-		return initialBid;
-	}
-	
-	public void setInitialBid(int initialBid) {
-		this.initialBid = initialBid;
-	}
 	
 	/*____________________________________*/
 	
@@ -258,14 +258,6 @@ public class PlaceAdForm {
 
 	public void setSalePrize(int salePrize) {
 		//this.salePrize = salePrize;
-	}
-
-	public int getInitialBid() {
-		return initialBid;
-	}
-
-	public void setInitialBid(int initialBid) {
-		this.initialBid = initialBid;
 	}
 
 	public int getBidIncrease() {

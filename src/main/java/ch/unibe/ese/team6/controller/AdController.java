@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
+import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.service.AdService;
 import ch.unibe.ese.team6.controller.service.BookmarkService;
 import ch.unibe.ese.team6.controller.service.MessageService;
@@ -153,4 +155,34 @@ public class AdController {
 		return model;
 	}
 
+	/* AUCTION */
+	/*@RequestMapping(value = "/ad?id=${ad.id}", method = RequestMethod.POST)
+	public ModelAndView create(@Valid Ad ad,
+			BindingResult result, RedirectAttributes redirectAttributes,
+			Principal principal) {
+		ModelAndView model = new ModelAndView("adDescription");
+		
+		if (!result.hasErrors()) {
+			String username = principal.getName();
+			User user = userService.findUserByUsername(username);
+
+			//List<String> fileNames = pictureUploader.getFileNames();
+			//Ad ad = adService.saveFrom(placeAdForm, fileNames, user);
+
+			// triggers all alerts that a bid was made
+			//alertService.triggerAlerts(ad);
+
+			// reset the place ad form
+			//this.placeAdForm = null;
+
+			model = new ModelAndView("redirect:/ad?id=" + ad.getId());
+			redirectAttributes.addFlashAttribute("confirmationMessage",
+					"Bid made successfully");
+		} else {
+			model = new ModelAndView("adDescription");
+		}
+		return model;
+	}
+	/*_________*/
+	
 }

@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.mail.*;
@@ -83,20 +84,25 @@ public class AdService {
 		Date now = new Date();
 		ad.setCreationDate(now);
 
-		ad.setTitle(placeAdForm.getTitle());
-
-		ad.setStreet(placeAdForm.getStreet());
-
-		//ad.setStudio(placeAdForm.getStudio());
+        // Set expire date to 3 days after creation
+        Date expire = new Date();
+        expire.setTime(expire.getTime() + TimeUnit.DAYS.toMillis(3));
+        ad.setExpireDate(expire);		
 		
-		ad.setRent(placeAdForm.getRent());
-
-
+		ad.setTitle(placeAdForm.getTitle());
+		ad.setStreet(placeAdForm.getStreet());
+		
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
 		ad.setZipcode(Integer.parseInt(zip));
 		ad.setCity(placeAdForm.getCity().substring(7));
+
+		ad.setSquareFootage(placeAdForm.getSquareFootage());
+		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
 		
+		//ad.setStudio(placeAdForm.getStudio());
+		//ad.setRent(placeAdForm.getRent());
+
 		Calendar calendar = Calendar.getInstance();
 		// java.util.Calendar uses a month range of 0-11 instead of the
 		// XMLGregorianCalendar which uses 1-12
@@ -125,9 +131,25 @@ public class AdService {
 		} catch (NumberFormatException e) {
 		}
 
-		ad.setPrizePerMonth(placeAdForm.getPrize());
-		ad.setSquareFootage(placeAdForm.getSquareFootage());
-
+		/* AUCTION */
+		
+		ad.setDeal(placeAdForm.getDeal());
+		ad.setSale(placeAdForm.getSale());
+		
+		ad.setPriceRent(placeAdForm.getPriceRent());
+		ad.setPriceSale(placeAdForm.getPriceSale());
+		ad.setIncrement(placeAdForm.getIncrement());
+		ad.setCurrentBid(placeAdForm.getCurrentBid());
+		
+		/*ad.setDeadlineDate(placeAdForm.getDeadlineDate());
+		ad.setDeadlineHour(placeAdForm.getDeadlineHour());
+		ad.setDeadlineMinute(placeAdForm.getDeadlineMinute());*/
+		
+		
+		/*________*/
+		
+		
+		//ad.setPrizePerMonth(placeAdForm.getPrize());
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
 		
@@ -136,6 +158,7 @@ public class AdService {
 		ad.setRoommates(placeAdForm.getRoommates());
 		*/
 		
+		/*_______________________*/
 		
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
@@ -154,8 +177,6 @@ public class AdService {
 		ad.setProximityToSupermarket(placeAdForm.getProximityToSupermarket());
 		ad.setProximityToNightlife(placeAdForm.getProximityToNightlife());
 		
-		//set add numerOfRooms
-		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
 		
 		//set property Type
 		//taken out for now
@@ -193,6 +214,7 @@ public class AdService {
 		ad.setRegisteredRoommates(registeredUserRommates);
 		*/
 		
+		/*__________________________________________*/
 		
 		// visits
 		List<Visit> visits = new LinkedList<>();
@@ -256,6 +278,16 @@ public class AdService {
 		}
 	}
 
+    /**
+     * Changes the price of an ad. 
+     */
+    @Transactional
+    public void changeCurrentBid(Ad ad, int amount) {
+        ad.setCurrentBid(amount);
+        adDao.save(ad);
+    }
+	
+	
 	/**
 	 * Gets the ad that has the given id.
 	 * 
@@ -280,6 +312,8 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> getNewestAds(int newest) {
 		Iterable<Ad> allAds = adDao.findAll();
+	    //if (!premium) allAds = adDao.findByPremiumAndExpired(false, false);
+	    //else allAds = adDao.findByPremiumAndExpired(true, false);
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
 			ads.add(ad);
@@ -333,6 +367,8 @@ public class AdService {
 					searchForm.getStudio(), searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
 		}
 
+	       results = adDao.findByPriceLessThanAndExpired(searchForm.getPrice() + 1, false);
+		
 		//for the premium user ads list
 		List<Ad> premiumsFiltered = new ArrayList<>();
 		for(Ad ad : adsFromPremium) {
