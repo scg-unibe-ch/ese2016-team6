@@ -167,9 +167,10 @@
 			
 			<tr>
 			<td><label for="field-type">Type of deal:</label>
-			    <form:radiobutton id="type-rent" path="rent" value="0" checked="checked"/>Rent
-			    <form:radiobutton id="type-sale" path="sale" value="1" checked="checked"/>Sale
-				<form:radiobutton id="type-auction" path="auction" value="1" checked="checked"/>Auction</td>
+				<%-- added name so that 'rent' is selected only--%>
+			    <form:radiobutton id="type-rent" name="radio1" path="rent" value="0" checked="checked"/>Rent
+			    <form:radiobutton id="type-sale" name="radio1" path="sale" value="1" />Sale
+				<form:radiobutton id="type-auction" name="radio1" path="auction" value="1"/>Auction</td>
 			</tr>	
 
 			<tr>
@@ -190,13 +191,13 @@
 
 			<tr>
 				<td><label for="field-squareFootage">Square Meters (m²) :</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" />
+					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" min="0" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="field-numberRooms">Number of Rooms :</label>
-					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" />
+					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" min="0" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
@@ -220,25 +221,25 @@
 			
 			<tr>
 				<td><label for="field-priceRent">Monthly rental charges (CHF) :</label>
-				<form:input id="field-priceRent" type="number" path="prize" step="50"/>
+				<form:input id="field-priceRent" type="number" path="prize" step="50" min="0"/>
 				<form:errors path="prize" cssClass="validationErrorText" /></br></br></td>
 			</tr>
 		
 			<tr>
 				<td><label for="field-priceSale">Price for a direct sale (CHF) :</label>
-				<form:input id="field-priceSale" type="number" path="prize" step="50" />
+				<form:input id="field-priceSale" type="number" path="prize" step="50" min="0" />
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="field-initialBid">Initial bid for a sale through auction (CHF) :</label>
-				<form:input id="field-initialBid" type="number" path="initialBid" step="50"/>
+				<form:input id="field-initialBid" type="number" path="initialBid" step="50" min="0"/>
 				<form:errors path="initialBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
 				<td><label for="field-increment">Automatic increment for each new bid (CHF) :</label>
-				<form:input id="field-increment" type="number" path="increment" step="50" />
+				<form:input id="field-increment" type="number" path="increment" step="50" min="0"/>
 				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
 			
@@ -313,11 +314,11 @@
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
-				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500" step="10" /></td>
+				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500" step="10"  /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
-				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500" step="10" /></td>
+				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500" step="10"  /></td>
 			</tr>
 		</table>
 	</fieldset>
