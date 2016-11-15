@@ -143,7 +143,7 @@ public class Ad {
 	
 	//true if for rent, false if for sale
 	@Column(nullable=false)
-	private boolean rent;
+	private boolean rent = true;
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

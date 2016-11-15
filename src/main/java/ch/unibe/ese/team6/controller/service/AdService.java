@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,6 +29,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
+import ch.unibe.ese.team6.model.KindOfDeal;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.User;
@@ -305,32 +307,30 @@ public class AdService {
 	 */
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
-		Iterable<Ad> results = null;
+		Iterable<Ad> results = Arrays.asList((new Ad[0]));
 
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 		
-		// we use this method if we are looking for rooms AND studios
-		if (searchForm.getBothRoomAndStudio()) {
-			/*
-			results = adDao
-					.findByPrizePerMonthLessThan(searchForm.getPrize() + 1);
+		
+		if (searchForm.getForRent()&&searchForm.getForSale()) {
 			
-			*/
 			
 			//Now searches for rooms with minimum number of rooms
 			results = adDao
 					.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1,searchForm.getNumberOfRooms());
 		}
-		// we use this method if we are looking EITHER for rooms OR for studios
-		else {
-			/*
-			results = adDao.findByStudioAndPrizePerMonthLessThan(
-					searchForm.getStudio(), searchForm.getPrize() + 1);
-			*/
+		
+		else if(searchForm.getForRent()) {
 			
 			//Now searches for rooms with minimum number of rooms
-			results = adDao.findByStudioAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
-					searchForm.getStudio(), searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+			results = adDao.findByRentAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
+					true, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+		}
+		else if(searchForm.getForSale()){
+			
+			results = adDao.findByRentAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
+					false, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+			
 		}
 
 		//for the premium user ads list
@@ -339,15 +339,6 @@ public class AdService {
 			premiumsFiltered.add(ad);
 		}
 		
-		//attempt to filter by rooms
-		
-		/*
-		while (results.iterator().hasNext()) {
-			Ad ad = results.iterator().next();
-			if (ad.getNumberOfRooms()<searchForm.getNumberOfRooms())
-				results.iterator().remove();
-		}
-		*/		
 		
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);

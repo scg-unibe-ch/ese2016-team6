@@ -165,6 +165,7 @@
 		<legend>General description</legend>
 		<table class="placeAdTable">
 			
+			
 			<tr>
 			<td><label for="field-type">Type of deal:</label>
 				<%-- added name so that 'rent' is selected only--%>
