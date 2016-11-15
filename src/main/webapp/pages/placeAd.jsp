@@ -118,6 +118,9 @@
 			}
 		});
 		
+		
+		
+		
 		$("#addVisitButton").click(function() {
 			var date = $("#field-visitDay").val();
 			if(date == ""){

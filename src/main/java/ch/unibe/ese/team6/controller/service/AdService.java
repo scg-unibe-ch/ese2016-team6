@@ -30,6 +30,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.KindOfDeal;
+import ch.unibe.ese.team6.model.KindOfSale;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.User;
@@ -91,10 +92,25 @@ public class AdService {
 
 		ad.setStudio(placeAdForm.getStudio());
 		
-	
+		//transports rent variable
 		ad.setRent(placeAdForm.getRent());
 
-	
+		//transports for deal variable
+		if(placeAdForm.getRent()==true)ad.setDeal(KindOfDeal.forRent);
+		if(placeAdForm.getRent()==false)ad.setDeal(KindOfDeal.forSale);
+		
+		//transports for sale variable
+		if(placeAdForm.getSale()==true) ad.setSale(KindOfSale.direct);
+		if(placeAdForm.getAuction()==true) ad.setSale(KindOfSale.auction);
+		
+		//transports for rent and sale prices variable
+		ad.setPriceRent(placeAdForm.getPriceRent());
+		ad.setPriceSale(placeAdForm.getPriceSale());
+		
+		//transports for auction prices variable
+		ad.setCurrentBid(placeAdForm.getInitialBid());
+		ad.setIncrement(placeAdForm.getIncrement());
+		
 		
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);

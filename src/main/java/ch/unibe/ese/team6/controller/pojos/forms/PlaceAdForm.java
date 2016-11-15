@@ -31,7 +31,7 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	@Min(value = 0, message = "Has to be equal to 0 or more")
 	private int prize;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")

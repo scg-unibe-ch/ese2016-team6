@@ -267,6 +267,7 @@
 			<div class="adDescDiv">
 				<h2>Price corner</h2>
 				
+				
 				<%-- note: to disable the ifs just add ||true inside brackets after the ' and before the } --%>
 				<%-- only shows this part if property for rent --%>
 				<c:if test="${shownAd.rent==true}">
@@ -285,8 +286,7 @@
 						
 						<%-- only shows this part if property for auction --%>
 						<c:if test="${shownAd.sale=='auction'||shownAd.sale=='bothAuctionAndDirect'}">
-							<p><h3><label>- current bid (auction) : </label>${shownAd.initialBid}</h3></p>
-							</br>
+							
 					
 							<%-- This gets the sum of the current bid and the increment --%>
 									<%!
@@ -313,12 +313,26 @@
 					
 					
 					
+								<p><h3><label>- current bid (auction) : </label>${shownAd.currentBid}</h3></p>
+								</br>
+							<c:choose>
+							<c:when test="${loggedIn}">
+					
 							<p><label >Make a higher bid :</label>
 							<%--<form:input id="field-currentBid" type="number" path="currentBid" value=<%=finalMinBid%> min="<%=finalMinBid%>"/></p>	
 							--%>
 							<button type="submit">Submit</button></p>
+							
+							</c:when>
+							<c:otherwise>
+								Please log in in order to use the auction house
+							</c:otherwise>
+				
+							</c:choose>
 						</c:if>
-				</c:if>
+					</c:if>
+				
+				
 			</div>
 		</td>
 
