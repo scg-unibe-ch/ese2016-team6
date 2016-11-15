@@ -266,41 +266,59 @@
 		<td style="width:50%;">	
 			<div class="adDescDiv">
 				<h2>Price corner</h2>
-				<p><label>If for rent, rental charges (CHF per month) : </label>${shownAd.priceRent}</p>
-				<p><label>If for sale (CHF) :</label></p>
-				<p><label>- price for a direct sale : </label>${shownAd.priceSale}</p>
-				<p><label>- current bid (auction) : </label>${shownAd.initialBid}</p>
-				</br>
-		
-				<%!
-						int cBid = 0,
-							inc = 0,
-							finalMinBid = 0;
-							%>
-						<%
-						try{
-							cBid = Integer.parseInt("${shownAd.currentBid}");
-						 }
-							catch (Exception e){
-								
-							}
-						try{
-							cBid = Integer.parseInt("${shownAd.increment}");
-						 }
-							catch (Exception e){
-								
-							}
-							
-						finalMinBid=cBid+inc;
-						%>
-		
-		
-		
-				<p><label >Make a higher bid :</label>
-				<%--<form:input id="field-currentBid" type="number" path="currentBid" value=<%=finalMinBid%> min="<%=finalMinBid%>"/></p>	
-				--%>
-				<button type="submit">Submit</button></p>
 				
+				<%-- note: to disable the ifs just add ||true inside brackets after the ' and before the } --%>
+				<%-- only shows this part if property for rent --%>
+				<c:if test="${shownAd.deal=='forRent'}">
+					<p><h3><label>If for rent, rental charges (CHF per month) : </label>${shownAd.prizePerMonth}</h3></p>
+				</c:if>
+				
+				<%-- only shows this part if property for sale --%>
+				<c:if test="${shownAd.deal=='forSale'}">
+					<p><h3><label>If for sale (CHF) :</label></h3></p>
+					
+					
+						<%-- only shows this part if property for directsale --%>
+						<c:if test="${shownAd.sale=='direct'||shownAd.sale=='bothAuctionAndDirect'}">
+							<p><h3><label>- price for a direct sale : </label>${shownAd.priceSale}</h3></p>
+						</c:if>
+						
+						<%-- only shows this part if property for auction --%>
+						<c:if test="${shownAd.sale=='auction'||shownAd.sale=='bothAuctionAndDirect'}">
+							<p><h3><label>- current bid (auction) : </label>${shownAd.initialBid}</h3></p>
+							</br>
+					
+							<%-- This gets the sum of the current bid and the increment --%>
+									<%!
+									int cBid = 0,
+										inc = 0,
+										finalMinBid = 0;
+									%>
+									<%
+									try{
+										cBid = Integer.parseInt("${shownAd.currentBid}");
+									 }
+										catch (Exception e){
+											
+										}
+									try{
+										cBid = Integer.parseInt("${shownAd.increment}");
+									 }
+										catch (Exception e){
+											
+										}
+										
+									finalMinBid=cBid+inc;
+									%>
+					
+					
+					
+							<p><label >Make a higher bid :</label>
+							<%--<form:input id="field-currentBid" type="number" path="currentBid" value=<%=finalMinBid%> min="<%=finalMinBid%>"/></p>	
+							--%>
+							<button type="submit">Submit</button></p>
+						</c:if>
+				</c:if>
 			</div>
 		</td>
 
