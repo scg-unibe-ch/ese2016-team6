@@ -31,7 +31,7 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	@Min(value = 0, message = "Has to be equal to 0 or more")
 	private int prize;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
@@ -76,9 +76,15 @@ public class PlaceAdForm {
 	private boolean studio;
 	
 	//true if rent, false if sale
+
 	private boolean rent;
-	//hprivate boolean sale;
+	//private boolean sale;
 	private boolean auction;
+
+	/*private boolean rent = false;
+	private boolean sale = false;
+	private boolean auction = false;*/
+
 	
 	private boolean smokers;
 	private boolean animals;

@@ -44,4 +44,7 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 
 	public Iterable<Ad> findByExpireDateLessThanAndExpired(Date date, boolean expired);
 
+	public Iterable<Ad> findByRent(boolean rent);
+	
+
 }

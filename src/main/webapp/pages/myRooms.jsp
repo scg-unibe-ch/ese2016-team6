@@ -72,8 +72,8 @@
 											</br>
 											<p>
 											For
-											<c:if test="${ad.rent=true}"> rent </c:if>
-											<c:if test="${ad.rent=false}"> sale </c:if>
+											<c:if test="${ad.rent==true}"> rent </c:if>
+											<c:if test="${ad.rent==false}"> sale </c:if>
 											</p>
 								
 											<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>

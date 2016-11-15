@@ -31,6 +31,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
 import ch.unibe.ese.team6.model.KindOfDeal;
+import ch.unibe.ese.team6.model.KindOfSale;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.User;
@@ -95,6 +96,25 @@ public class AdService {
 		ad.setStreet(placeAdForm.getStreet());
 		ad.setStudio(placeAdForm.getStudio());
 		
+		//transports rent variable
+		ad.setRent(placeAdForm.getRent());
+
+		//transports for deal variable
+		if(placeAdForm.getRent()==true)ad.setDeal(KindOfDeal.forRent);
+		if(placeAdForm.getRent()==false)ad.setDeal(KindOfDeal.forSale);
+		
+		//transports for sale variable
+		if(placeAdForm.getSale()==KindOfSale.direct) ad.setSale(KindOfSale.direct);//getSale==false
+		if(placeAdForm.getAuction()==true) ad.setSale(KindOfSale.auction);
+		
+		//transports for rent and sale prices variable
+		ad.setPriceRent(placeAdForm.getPriceRent());
+		ad.setPriceSale(placeAdForm.getPriceSale());
+		
+		//transports for auction prices variable
+		ad.setCurrentBid(placeAdForm.getCurrentBid());
+		ad.setIncrement(placeAdForm.getIncrement());
+
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
 		ad.setZipcode(Integer.parseInt(zip));
@@ -331,6 +351,29 @@ public class AdService {
 			fourNewest.add(ads.get(i));
 		return fourNewest;
 	}
+	
+	
+	/**
+	 * Returns the newest ads that are filtered by rent in the database. Parameter 'newest' says how many.
+	 */
+	@Transactional
+	public Iterable<Ad> getNewestRentAds(int newest, boolean rent) {
+		Iterable<Ad> allAds = adDao.findByRent(rent);
+		List<Ad> ads = new ArrayList<Ad>();
+		for (Ad ad : allAds)
+			ads.add(ad);
+		Collections.sort(ads, new Comparator<Ad>() {
+			@Override
+			public int compare(Ad ad1, Ad ad2) {
+				return ad2.getCreationDate().compareTo(ad1.getCreationDate());
+			}
+		});
+		List<Ad> fourNewest = new ArrayList<Ad>();
+		for (int i = 0; i < newest; i++)
+			if(i<ads.size())fourNewest.add(ads.get(i));
+		return fourNewest;
+	}
+	
 
 	/**
 	 * Returns all ads that match the parameters given by the form. This list
