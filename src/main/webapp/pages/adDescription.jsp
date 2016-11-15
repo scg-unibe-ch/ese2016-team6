@@ -177,8 +177,8 @@
 			<td><h2>Status : </h2></td>
 			<td>
 				<c:choose>
-					<c:when test="${shownAd.rent}">For Sale</c:when>
-					<c:otherwise>For Rent</c:otherwise>
+					<c:when test="${shownAd.rent}">For rent </c:when>
+					<c:otherwise>For sale</c:otherwise>
 				</c:choose>
 			</td>
 		</tr>
@@ -269,12 +269,12 @@
 				
 				<%-- note: to disable the ifs just add ||true inside brackets after the ' and before the } --%>
 				<%-- only shows this part if property for rent --%>
-				<c:if test="${shownAd.deal=='forRent'}">
+				<c:if test="${shownAd.rent==true}">
 					<p><h3><label>If for rent, rental charges (CHF per month) : </label>${shownAd.prizePerMonth}</h3></p>
 				</c:if>
 				
 				<%-- only shows this part if property for sale --%>
-				<c:if test="${shownAd.deal=='forSale'}">
+				<c:if test="${shownAd.rent==false}">
 					<p><h3><label>If for sale (CHF) :</label></h3></p>
 					
 					

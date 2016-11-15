@@ -169,7 +169,7 @@
 			<tr>
 			<td><label for="field-type">Type of deal:</label>
 				<%-- added name so that 'rent' is selected only--%>
-			    <form:radiobutton id="type-rent" name="radio1" path="rent" value="0" checked="checked"/>Rent
+			    <form:radiobutton id="type-rent" name="radio1" path="rent" value="1" checked="checked"/>Rent
 			    <form:radiobutton id="type-sale" name="radio1" path="sale" value="1" />Sale
 				<form:radiobutton id="type-auction" name="radio1" path="auction" value="1"/>Auction</td>
 			</tr>	
