@@ -21,6 +21,7 @@
 	var shownAdvertisementID = "${shownAd.id}";
 	var shownAdvertisement = "${shownAd}";
 	
+	
 	function attachBookmarkClickHandler(){
 		$("#bookmarkButton").click(function() {
 			
@@ -111,6 +112,17 @@
 				})
 			}
 		});
+		
+		
+		
+			
+			
+			
+			
+			
+		}
+		
+		
 	});
 		
 </script>
@@ -264,20 +276,83 @@
 <td style="width:50%;">	
 	<div class="adDescDiv">
 		<h2>Price corner</h2>
-		<p><label>If for rent, rental charges (CHF per month) : </label>${shownAd.priceRent}</p>
-		<p><label>If for sale (CHF) :</label></p>
-		<p><label>- price for a direct sale : </label>${shownAd.priceSale}</p>
-		<p><label>- current bid (auction) : </label>${shownAd.initialBid}</p>
+		<c:if test="${shownAd.deal=='forRent'}">
+			<p><label>Property for rent with rental charges of (CHF per month) : </label>${shownAd.prizePerMonth}</p>
+		</c:if>
+		
+		<c:if test="${shownAd.deal=='forSale'}">
+				<p><label>Property for for sale (CHF) :</label></p>
+			<c:if test="${shownAd.sale=='direct'}">
+				<p><label>- price for a direct sale : </label>${shownAd.priceSale}</p>
+			</c:if>
+			<c:if test="${shownAd.sale=='auction'}">
+				<p><label>- current bid (auction) : </label>${shownAd.currentBid}</p>
+			
+		</c:if>
+		</c:if>
 		
 		</br>
 		
-		
+		<%-- error here asks for the definition of field-currentBid--%>
 		<p><label >Make a higher bid :</label>
-		<%-- <form:input id="field-currentBid" type="number" path="currentBid"/></p>	
-		--%>
 		
-		<button type="submit">Submit</button></p>
+		<form:form method="post" modelAttribute="placeAdForm"
+			action="/profile/editAd" id="placeAdForm" autocomplete="off"
+			enctype="multipart/form-data">
+			<input type="hidden" name="adId" value="${shownAd.id }" />
+			
+			<%-- all attributes of the room must be repeated here! --%>
+			<input type="hidden" name="title" value="${shownAd.title}" />
+			<input type="hidden" name="rent" value="${shownAd.rent}" />
+			<input type="hidden" name="street" value="${shownAd.street}" />
+			
+			<input type="hidden" name="city" value="${shownAd.zipcode} - ${shownAd.city}" />
+			<input type="hidden" name="moveInDate" value="${shownAd.moveInDate}" />
+			<input type="hidden" name="moveOutDate" value="${shownAd.moveOutDate}" />
+			
+			
+			<input type="hidden" name="squareFootage" value="${shownAd.squareFootage}" />
+			<input type="hidden" name="numberOfRooms" value=1 />
+			
+			<input type="hidden" name="smokers" value="${shownAd.smokers}" />
+			<input type="hidden" name="animals" value="${shownAd.animals}" />
+			<input type="hidden" name="garden" value="${shownAd.garden}" />
+			<input type="hidden" name="roomDescription" value="${shownAd.roomDescription}" />
+			<input type="hidden" name="animals" value="${shownAd.animals}" />
+			<input type="hidden" name="animals" value="${shownAd.animals}" />
+			
+			
+			<%!
+			int cBid = 0,
+				inc = 0,
+				finalMinBid = 0;
+				%>
+			<%
+			try{
+				cBid = Integer.parseInt("${shownAd.currentBid}");
+			 }
+				catch (Exception e){
+					
+				}
+			try{
+				cBid = Integer.parseInt("${shownAd.increment}");
+			 }
+				catch (Exception e){
+					
+				}
+				
+			finalMinBid=cBid+inc;
+			%>
 		
+			<input id="field-currentBid" type="number" path="currentBid"/ value="${shownAd.currentBid}" min=<%=finalMinBid%>></p>	
+			<button type="submit">Submit</button></p>
+			
+		</form:form>
+			
+		
+		
+		
+			
 	</div>
 </td>
 

@@ -175,7 +175,7 @@ public class Ad {
 	/*___________AUCTION_______________*/
 	
 	
-	private KindOfDeal deal;
+	private KindOfDeal deal = KindOfDeal.forRent;
 	
 	public KindOfDeal getDeal() {
 		return deal;
