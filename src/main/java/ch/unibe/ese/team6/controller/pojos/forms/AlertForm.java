@@ -37,6 +37,11 @@ public class AlertForm {
 	private boolean bothRoomAndStudio;
 	
 	private boolean forRent;
+	private boolean forSale;
+	private boolean bothRentAndSale;
+	
+	@AssertFalse(message = "Please select either or both types")
+	private boolean noRentNoSale;
 	
 	private int minSize;
 	private int maxSize;
@@ -124,6 +129,30 @@ public class AlertForm {
 		this.forRent = forRent;
 	}
 
+	public boolean getForSale() {
+		return forSale;
+	}
+
+	public void setForSale(boolean forSale) {
+		this.forSale = forSale;
+	}
+
+	public boolean getNoRentNoSale() {
+		return noRentNoSale;
+	}
+
+	public void setNoRentNoSale(boolean noRentNoSale) {
+		this.noRentNoSale = noRentNoSale;
+	}
+
+	public boolean getBothRentAndSale() {
+		return bothRentAndSale;
+	}
+
+	public void setBothRentAndSale(boolean bothRentAndSale) {
+		this.bothRentAndSale = bothRentAndSale;
+	}
+	
 	public int getMinSize() {
 		return minSize;
 	}

@@ -9,7 +9,7 @@
 <c:import url="template/header.jsp" />
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
 
-<!--<script>
+<script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
@@ -34,7 +34,7 @@ function validateType(form)
 	}
 	filtered.checked = true;
 }
-</script>-->
+</script>
 
 <script>
 /*
@@ -121,7 +121,6 @@ function sort_div_attribute() {
 
 <hr />
 
-
 <div>
 <select id="modus">
     <option value="">Sort by:</option>
@@ -135,7 +134,6 @@ function sort_div_attribute() {
 
 <button onClick="sort_div_attribute()">Sort</button>	
 </div>
-
 
 <form:form method="post" modelAttribute="searchForm" action="/results"
 	id="filterForm" autocomplete="off">

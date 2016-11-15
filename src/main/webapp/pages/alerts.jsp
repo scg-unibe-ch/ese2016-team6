@@ -17,7 +17,7 @@ function deleteAlert(button) {
 }
 </script>
 
-<!-- <script>
+<script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
@@ -38,6 +38,24 @@ function validateType(form)
 		neither.checked = false;
 	}
 	
+	var rent = document.getElementById('rent');
+	var sale = document.getElementById('sale');
+	var neitherRentSale = document.getElementById('neitherRentSale');
+	var bothRentAndSale = document.getElementById('bothRentAndSale');
+	
+	if(rent.checked && sale.checked) {
+		bothRentAndSale.checked = true;
+		neitherRentSale.checked = false;
+	}
+	else if(!rent.checked && !sale.checked) {
+		bothRentAndSale.checked = false;
+		neitherRentSale.checked = true;
+	}
+	else {
+		bothRentAndSale.checked = false;
+		neitherRentSale.checked = false;
+	}
+	
 	var minsize = document.getElementById('minSize');
 	var maxsize = document.getElementById('maxSize');
 	
@@ -49,9 +67,9 @@ function validateType(form)
 		maxSize = 1000000;
 	}
 }
-</script> -->
+</script>
 
-<!-- <script>
+<script>
 function typeOfAlert(alert) {
 	if(alert.getBothRoomAndStudio())
 		return "Both"
@@ -60,14 +78,16 @@ function typeOfAlert(alert) {
 	else
 		return "Room"
 }	
-</script> -->
+</script>
 
 <script>
 function rentSaleOfAlert(alert) {
-	if(alert.forRent())
-		return "For Rent"
-	else
+	if(alert.getBothRentAndSale())
+		return "Both"
+	else if(alert.getForSale())
 		return "For Sale"
+	else
+		return "For Rent"
 }	
 </script>
 	
@@ -104,15 +124,18 @@ function rentSaleOfAlert(alert) {
 	id="alertForm" autocomplete="off">
 
 	<fieldset>
-		<!-- <form:checkbox name="room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
 		
 		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br /> -->
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br />
 		
-		<form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
-		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br />
+		<!--<form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
+		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br /> -->
+		<form:checkbox style="display:none" name="neitherRentSale" id="neitherRentSale" path="noRentNoSale" />
+		<form:checkbox style="display:none" name="bothRentAndSale" id="bothRentAndSale" path="bothRentAndSale" />
+		<form:errors path="noRentNoSale" cssClass="validationErrorText" /><br />
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -147,9 +170,8 @@ function rentSaleOfAlert(alert) {
 			
 		<br />
 		
-		<button type="reset" tabindex="8">Cancel</button>
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
-		
+		<button type="reset" tabindex="8">Cancel</button>
 	</fieldset>
 
 </form:form> <br />
@@ -164,7 +186,6 @@ function rentSaleOfAlert(alert) {
 		<table class="styledTable" id="alerts">
 			<thead>
 			<tr>
-				
 				<th>Rent/Sale</th>
 				<th>City</th>
 				<th>Radius</th>
@@ -192,6 +213,20 @@ function rentSaleOfAlert(alert) {
 				
 				<td>
 				<c:choose>
+					<c:when test="${alert.bothRentAndSale}">
+						Both
+					</c:when>
+					<c:when test="${alert.forSale}">
+						For Sale
+					</c:when>
+					<c:otherwise>
+						For Rent
+					</c:otherwise>
+				</c:choose>
+				</td>
+				
+				<!-- <td>
+				<c:choose>
 					<c:when test="${alert.forRent}">
 						For Rent
 					</c:when>
@@ -199,7 +234,7 @@ function rentSaleOfAlert(alert) {
 						For Sale
 					</c:otherwise>
 				</c:choose>
-				</td>
+				</td> -->
 				
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>

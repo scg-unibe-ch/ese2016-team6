@@ -183,6 +183,16 @@
 			</td>
 		</tr>
 
+		<%--beforebreak<tr>
+			<td><h2>Status : </h2></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.rent}">For Sale</c:when>
+					<c:otherwise>For Rent</c:otherwise>
+				</c:choose>
+			</td>
+		</tr> --%>
+
 		<tr>
 			<td><h2>Address :</h2></td>
 			<td>
@@ -236,6 +246,10 @@
  		</c:if>
 		--%>
 		
+		<tr>
+			<td><h2>Ad created on</h2></td>
+			<td>${formattedCreationDate}</td>
+		</tr>
 	</table>
 </section>
 

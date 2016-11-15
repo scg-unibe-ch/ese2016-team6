@@ -25,18 +25,14 @@
 	
 	<c:otherwise>
 		<h2 style="text-align: center;">Our newest ads:</h2>
-		
-		<div id="resultsDiv" class="resultsDiv" style="margin: auto;">	
-			
+		<div id="resultsDiv" class="resultsDiv" style="margin: auto;">
 			<table id="indexTable">
 				<tr>
 					<th>
 					<h2 style="width:100%;text-align:center;">flats for rent</h2>
-					
 					</th>
 					<th>
 					<h2 style="width:100%;text-align:center;">flats for sale</h2>
-					
 					</th>
 				</tr>
 				

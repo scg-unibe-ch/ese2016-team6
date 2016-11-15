@@ -112,51 +112,12 @@
 			
 			$("#addedVisits").append(label + input);
 		});
-	
-	
-		<%--	manage deadline
-		$("#addVisitButton").click(function() {
-			var date = $("#field-visitDay").val();
-			if(date == ""){
-				return;
-			}
-			
-			var startHour = $("#startHour").val();
-			var startMinutes = $("#startMinutes").val();
-			var endHour = $("#endHour").val();
-			var endMinutes = $("#endMinutes").val();
-			
-			if (startHour > endHour) {
-				alert("Invalid times. The visit can't end before being started.");
-				return;
-			} else if (startHour == endHour && startMinutes >= endMinutes) {
-				alert("Invalid times. The visit can't end before being started.");
-				return;
-			}
-			
-			var newVisit = date + ";" + startHour + ":" + startMinutes + 
-				";" + endHour + ":" + endMinutes; 
-			var newVisitLabel = date + " " + startHour + ":" + startMinutes + 
-			" to " + endHour + ":" + endMinutes; 
-			
-			var index = $("#addedVisits input").length;
-			
-			var label = "<p>" + newVisitLabel + "</p>";
-			var input = "<input type='hidden' value='" + newVisit + "' name='visits[" + index + "]' />";
-			
-			$("#addedVisits").append(label + input);
-		});
-	
-		--%>
-		
 	});
-	
 </script>
 
 <pre><a href="/">Home</a>   &gt;   Place ad</pre>
 
 <h1>Place an ad</h1>
-
 <hr />
 
 <form:form method="post" modelAttribute="placeAdForm"
@@ -168,21 +129,19 @@
 		<table class="placeAdTable">
 			
 			<tr>
-			<td><label for="field-title">Title of your ad :</label> 
-				<form:input id="field-title" path="title" placeholder="ad title" />
-				<form:errors path="title" cssClass="validationErrorText" /></td>
+				<td><label for="field-title">Title of your ad :</label> 
+				<form:input id="field-title" path="title" placeholder="ad title" /></td>
 			</tr>
 			
 			<tr>
 			<td><label for="field-deal">Status :</label>
-			    <form:radiobutton id="field-deal" path="deal" value="forRent" checked="checked"/>For Rent
+			    <form:radiobutton id="field-deal" path="deal" value="forRent"/>For Rent
 				<form:radiobutton id="field-deal" path="deal" value="forSale"/>For Sale</td>
 			</tr>	
 			
 			<tr>
 			<td><label for="field-street">Address :</label>
-				<form:input id="field-street" path="street" placeholder="street" />
-				<form:errors path="street" cssClass="validationErrorText" /></td>
+				<form:input id="field-street" path="street" placeholder="street" /></td>
 			</tr>
 			
 			<tr>
@@ -197,7 +156,7 @@
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
-			<tr>		
+			<tr>
 				<td><label for="field-numberRooms">Number of Rooms :</label>
 					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
@@ -205,14 +164,12 @@
 			
 			<tr>
 				<td><label for="moveInDate">Move-in date :</label>
-				<form:input type="text" id="field-moveInDate" path="moveInDate" />
-				<form:errors path="moveInDate" cssClass="validationErrorText" /></td>
+				<form:input type="text" id="field-moveInDate" path="moveInDate" /></td>
 			</tr>
 			
-			<tr>	
+			<tr>
 				<td><label for="moveOutDate">Move-out date (optional) :</label>
-				<form:input type="text" id="field-moveOutDate" path="moveOutDate" />
-				<form:errors path="moveOutDate" cssClass="validationErrorText" /></td>
+				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
 			</tr>
 
 		</table>
@@ -232,7 +189,7 @@
 			<tr>
 				<td><label for="field-priceRent">Monthly rental charges (CHF) :</label>
 				<form:input id="field-priceRent" type="number" path="priceRent" step="50"/>
-				<!--<form:errors path="priceRent" cssClass="validationErrorText" />--></br></br></td>
+				<form:errors path="priceRent" cssClass="validationErrorText" /></br></br></td>
 			</tr>
 		
 			
@@ -245,25 +202,25 @@
 				<form:radiobutton id="field-sale" path="sale" value="direct" checked="checked"/>Direct sale
 				<form:radiobutton id="field-sale" path="sale" value="auction"/>Auction
 				<form:radiobutton id="field-sale" path="sale" value="bothAuctionAndDirect"/>Both
-				<!--<form:errors path="sale" cssClass="validationErrorText" />--></td>
+				<form:errors path="sale" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="field-priceSale">Price for a direct sale (CHF) :</label>
 				<form:input id="field-priceSale" type="number" path="priceSale" step="50" />
-				<!--<form:errors path="priceSale" cssClass="validationErrorText" />--></td>
+				<form:errors path="priceSale" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="field-initialBid">Initial bid for a sale through auction (CHF) :</label>
 				<form:input id="field-initialBid" type="number" path="initialBid" step="50"/>
-				<!--<form:errors path="initialBid" cssClass="validationErrorText" />--></td>
+				<form:errors path="initialBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
 				<td><label for="field-increment">Automatic increment for each new bid (CHF) :</label>
 				<form:input id="field-increment" type="number" path="increment" step="50" />
-				<!--<form:errors path="increment" cssClass="validationErrorText" />--></td>			
+				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
 			
 			<tr>

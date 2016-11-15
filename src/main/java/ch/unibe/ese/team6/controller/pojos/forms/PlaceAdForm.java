@@ -19,276 +19,42 @@ public class PlaceAdForm {
 	@NotBlank(message = "Required")
 	private String title;
 	
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	/*______________________*/
-
 	@NotBlank(message = "Required")
 	private String street;
 	
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-	
-	/*______________________*/
-	
-	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;Ã¼Ã¤Ã¶]*", message = "Please pick a city from the list")
+	//@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;]*", message = "Please pick a city from the list")
+	@Pattern(regexp = "^[0-9]{4} - [\\S]*", message = "Please pick a city from the list")
 	private String city;
-	
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-	
-	/*______________________*/
-	
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int squareFootage;
-	
-	public int getSquareFootage() {
-		return squareFootage;
-	}
-
-	public void setSquareFootage(int squareFootage) {
-		this.squareFootage = squareFootage;
-	}
-	
-	/*_____________________*/
-	
-	//specifies how many rooms this property has
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int numberOfRooms;
-	
-	//Gets and sets the number of rooms this property has and that the add will show
-	public int getNumberOfRooms(){
-		return numberOfRooms;
-	}
-		
-	//public void setNumberOfRooms(int newNumber){
-	//	numberOfRooms = newNumber;
-	//}
-	
-	public void setNumberOfRooms(int numberOfRooms){
-		this.numberOfRooms = numberOfRooms ;
-	}
-	
-	/*______________________*/
 	
 	@NotBlank(message = "Required")
 	private String moveInDate;
 	
-	public String getMoveInDate() {
-		return moveInDate;
-	}
-
-	public void setMoveInDate(String moveInDate) {
-		this.moveInDate = moveInDate;
-	}
-
-	/*________________________*/
-	
 	private String moveOutDate;
-	
-	public String getMoveOutDate() {
-		return moveOutDate;
-	}
 
-	public void setMoveOutDate(String moveOutDate) {
-		this.moveOutDate = moveOutDate;
-	}
-	
-	/*___________AUCTION_______________*/
-	
-	
-	private KindOfDeal deal;
-	
-	public KindOfDeal getDeal() {
-		return deal;
-	}
-	
-	public void setDeal(KindOfDeal deal) {
-		this.deal = deal;
-	}
-	
-	/*__________________________________*/
-	
-	private KindOfSale sale;
-	
-	public KindOfSale getSale() {
-		return sale;
-	}
-	
-	public void setSale(KindOfSale sale) {
-		this.sale = sale;
-	}
-	
-	/*__________________________________*/
-	
-	//rental charges
-	private int priceRent;
-	
-	public int getPriceRent() {
-		return priceRent;
-	}
-	
-	public void setPriceRent(int priceRent){
-		this.priceRent = priceRent;
-	}
-	
-	/*__________________________________*/
-	
-	//direct sale price
-	private int priceSale;
-	
-	public int getPriceSale() {
-		return priceSale;
-	}
-	
-	public void setPriceSale(int priceSale){
-		this.priceSale = priceSale;
-	}
-	
-	/*__________________________________*/
-
-	//auction : increment
-	private int increment;
-	
-	public int getIncrement() {
-		return increment;
-	}
-	
-	public void setIncrement(int increment) {
-		this.increment = increment;
-	}
-	
-	/*____________________________________*/
-	
-	//auction : initial bid
-	private int initialBid;
-	
-	public int getInitialBid() {
-		return initialBid;
-	}
-	
-	public void setInitialBid(int initialBid) {
-		this.initialBid = initialBid;
-	}
-	
-	/*____________________________________*/
-	
-	//auction : deadline
-	private String deadlineDate;
-	
-	public String getDeadlineDate() {
-		return deadlineDate;
-	}
-	
-	public void setDeadlineDate(String deadlineDate) {
-		this.deadlineDate = deadlineDate;
-	}
-	
-	/*_____________________________________*/
-	
-	private String deadlineHour;
-	
-	public String getDeadlineHour() {
-		return deadlineHour;
-	}
-	
-	public void setDeadlineHour(String deadlineHour) {
-		this.deadlineHour = deadlineHour;
-	}
-	
-	/*_____________________________________*/
-	
-	private String deadlineMinute;
-	
-	public String getDeadlineMinute() {
-		return deadlineMinute;
-	}
-	
-	public void setDeadlineMinute(String deadlineMinute) {
-		this.deadlineMinute = deadlineMinute;
-	}
-	
-	/*________________________________________*/
-	
-	//Monthly rental
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;
-	
-	public int getPrize() {
-		return prize;
-	}
 
-	public void setPrize(int prize) {
-		this.prize = prize;
-	}
-	
-	
-	/*______________________________________*/
-	
-	/* SET BY PAT TO FIX BUGS
-	
-	
-	//direct sale price
 	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int salePrize;
-		
-	//auction
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int initialBid;
-	
-	public int getSalePrize() {
-		return salePrize;
-	}
-
-	public void setSalePrize(int salePrize) {
-		//this.salePrize = salePrize;
-	}
-
-	public int getInitialBid() {
-		return initialBid;
-	}
-
-	public void setInitialBid(int initialBid) {
-		this.initialBid = initialBid;
-	}
-
-	public int getBidIncrease() {
-		return bidIncrease;
-	}
-
-	public void setBidIncrease(int bidIncrease) {
-		this.bidIncrease = bidIncrease;
-	}
-
-	//Monthly rental
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int bidIncrease;
-	
-	*/
-	
-	/*___________________________*/
-	
-
-
+	private int squareFootage;
 
 	@NotBlank(message = "Required")
 	private String roomDescription;
+
+	@Min(value = 1, message = "Has to be equal to 1 or more")
+	private int numberOfRooms;
+	
+	
+	private KindOfDeal deal;
+	private KindOfSale sale;
+	
+	private int priceRent;
+	private int priceSale;
+	private int increment;
+	private int initialBid;
+	private String deadlineDate;
+	private String deadlineHour;
+	private String deadlineMinute;
+	
 
 	
 	//what type of property this property is
@@ -347,8 +113,143 @@ public class PlaceAdForm {
 		propertyType = newType;
 	}
 	*/
-	
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public int getSquareFootage() {
+		return squareFootage;
+	}
+
+	public void setSquareFootage(int squareFootage) {
+		this.squareFootage = squareFootage;
+	}
+	
+	public int getNumberOfRooms(){
+		return numberOfRooms;
+	}
+	
+	public void setNumberOfRooms(int numberOfRooms){
+		this.numberOfRooms = numberOfRooms ;
+	}
+	
+	public String getMoveInDate() {
+		return moveInDate;
+	}
+
+	public void setMoveInDate(String moveInDate) {
+		this.moveInDate = moveInDate;
+	}
+	
+	public String getMoveOutDate() {
+		return moveOutDate;
+	}
+
+	public void setMoveOutDate(String moveOutDate) {
+		this.moveOutDate = moveOutDate;
+	}
+	
+	public KindOfDeal getDeal() {
+		return deal;
+	}
+	
+	public void setDeal(KindOfDeal deal) {
+		this.deal = deal;
+	}
+	
+	public KindOfSale getSale() {
+		return sale;
+	}
+	
+	public void setSale(KindOfSale sale) {
+		this.sale = sale;
+	}
+	
+	public int getPriceRent() {
+		return priceRent;
+	}
+	
+	public void setPriceRent(int priceRent){
+		this.priceRent = priceRent;
+	}
+	
+	public int getPriceSale() {
+		return priceSale;
+	}
+	
+	public void setPriceSale(int priceSale){
+		this.priceSale = priceSale;
+	}
+	
+	public int getIncrement() {
+		return increment;
+	}
+	
+	public void setIncrement(int increment) {
+		this.increment = increment;
+	}
+	
+	public int getInitialBid() {
+		return initialBid;
+	}
+	
+	public void setInitialBid(int initialBid) {
+		this.initialBid = initialBid;
+	}
+	
+	public String getDeadlineDate() {
+		return deadlineDate;
+	}
+	
+	public void setDeadlineDate(String deadlineDate) {
+		this.deadlineDate = deadlineDate;
+	}
+	
+	public String getDeadlineHour() {
+		return deadlineHour;
+	}
+	
+	public void setDeadlineHour(String deadlineHour) {
+		this.deadlineHour = deadlineHour;
+	}
+	
+	public String getDeadlineMinute() {
+		return deadlineMinute;
+	}
+	
+	public void setDeadlineMinute(String deadlineMinute) {
+		this.deadlineMinute = deadlineMinute;
+	}
+	
+	public int getPrize() {
+		return prize;
+	}
+
+	public void setPrize(int prize) {
+		this.prize = prize;
+	}
+	
 	public String getRoomDescription() {
 		return roomDescription;
 	}
@@ -364,14 +265,6 @@ public class PlaceAdForm {
 	public void setPreferences(String preferences) {
 		this.preferences = preferences;
 	}
-
-	//public String getRoommates() {
-	//	return roommates;
-	//}
-
-	//public void setRoommates(String roommates) {
-	//	this.roommates = roommates;
-	//}
 
 	public boolean isSmokers() {
 		return smokers;

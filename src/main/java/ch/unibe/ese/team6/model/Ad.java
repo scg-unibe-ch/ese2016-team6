@@ -30,293 +30,50 @@ public class Ad {
 	@GeneratedValue
 	private long id;
 	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	/*______________________*/
-	
 	@Column(nullable = false)
 	private String title;
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	/*______________________*/
 	
 	@Column(nullable = false)
 	private String street;
-	
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-	
-	/*______________________*/
 
 	@Column(nullable = false)
-	private String city;	
-	
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	/*______________________*/	
+	private String city;
 	
 	@Column(nullable = false)
 	private int zipcode;
 	
-	public int getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(int zipcode) {
-		this.zipcode = zipcode;
-	}
-	
-	/*______________________*/	
-	
 	@Column(nullable = false)
 	private int squareFootage;
-
-	public int getSquareFootage() {
-		return squareFootage;
-	}
-
-	public void setSquareFootage(int squareFootage) {
-		this.squareFootage = squareFootage;
-	}
 	
-	/*______________________*/
-	
-	
-	//specifies how many rooms the property in the add has
 	@Column(nullable = false)
 	private int numberOfRooms;
-	
-	//Gets the number of rooms this Property has
-	public int getNumberOfRooms(){
-		
-		return numberOfRooms;
-	}
-	
-	
-	public void setNumberOfRooms(int numberOfRooms){
-		
-		this.numberOfRooms = numberOfRooms;
-	}
-	
-	/*______________________*/
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date moveInDate;
 
-	public Date getMoveInDate() {
-		return moveInDate;
-	}
-
-	public void setMoveInDate(Date moveInDate) {
-		this.moveInDate = moveInDate;
-	}
-
-	/*______________________*/		
-	
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = true)
 	private Date moveOutDate;	
-	
-	public void setMoveOutDate(Date moveOutDate) {
-		this.moveOutDate = moveOutDate;
-	}
-
-	public Date getMoveOutDate() {
-		return moveOutDate;
-	}
-	
-	/*______________________*/	
-	
-	public Date getDate(boolean date) {
-		if (date)
-			return moveInDate;
-		else
-			return moveOutDate;
-	}
-	
-	/*______________________*/	
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 	
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	
-	/*___________AUCTION_______________*/
-	
-	
 	private KindOfDeal deal;
-	
-	public KindOfDeal getDeal() {
-		return deal;
-	}
-	
-	public void setDeal(KindOfDeal deal) {
-		this.deal = deal;
-	}
-	
-	/*__________________________________*/
-	
 	private KindOfSale sale;
-	
-	public KindOfSale getSale() {
-		return sale;
-	}
-	
-	public void setSale(KindOfSale sale) {
-		this.sale = sale;
-	}
-	
-	/*__________________________________*/
-	
-	//rental charges
 	private int priceRent;
-	
-	public int getPriceRent() {
-		return priceRent;
-	}
-	
-	public void setPriceRent(int priceRent){
-		this.priceRent = priceRent;
-	}
-	
-	/*__________________________________*/
-	
-	//direct sale price
 	private int priceSale;
-	
-	public int getPriceSale() {
-		return priceSale;
-	}
-	
-	public void setPriceSale(int priceSale){
-		this.priceSale = priceSale;
-	}
-	
-	/*__________________________________*/
-
-	//auction : increment
 	private int increment;
-	
-	public int getIncrement() {
-		return increment;
-	}
-	
-	public void setIncrement(int increment) {
-		this.increment = increment;
-	}
-	
-	/*____________________________________*/
-	
-	//auction : initial bid
 	private int initialBid;
-	
-	public int getInitialBid() {
-		return initialBid;
-	}
-	
-	public void setInitialBid(int initialBid) {
-		this.initialBid = initialBid;
-	}
-
-	
-	/*____________________________________*/
-	
-	//auction : current bid
 	private int currentBid;
-	
-	public int getCurrentBid() {
-		return currentBid;
-	}
-	
-	public void setCurrentBid(int currentBid) {
-		this.currentBid = currentBid;
-	}
-	
-	/*____________________________________*/
-	
-	//auction : deadline
 	private String deadlineDate;
-	
-	public String getDeadlineDate() {
-		return deadlineDate;
-	}
-	
-	public void setDeadlineDate(String deadlineDate) {
-		this.deadlineDate = deadlineDate;
-	}
-	
-	/*_____________________________________*/
-	
 	private String deadlineHour;
-	
-	public String getDeadlineHour() {
-		return deadlineHour;
-	}
-	
-	public void setDeadlineHour(String deadlineHour) {
-		this.deadlineHour = deadlineHour;
-	}
-	
-	/*_____________________________________*/
-	
 	private String deadlineMinute;
-	
-	public String getDeadlineMinute() {
-		return deadlineMinute;
-	}
-	
-	public void setDeadlineMinute(String deadlineMinute) {
-		this.deadlineMinute = deadlineMinute;
-	}
-	
-	/*________________________________________*/	
-	
 	
 	@Column(nullable = false)
 	private int prizePerMonth;
 	
-	public int getPrizePerMonth() {
-		return prizePerMonth;
-	}
-
-	public void setPrizePerMonth(int prizePerMonth) {
-		this.prizePerMonth = prizePerMonth;
-	}
-	
-	/*______________________*/
-	
-
 	@Column(nullable = false)
 	@Lob
 	private String roomDescription;
@@ -400,6 +157,13 @@ public class Ad {
 	@OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Visit> visits;
 
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	
 	public boolean getKindOFMembershipOfUser() {
 		return kindOfMembershipOfUser;
@@ -413,6 +177,101 @@ public class Ad {
 		}
 	}
 
+	public int getNumberOfRooms(){
+		return numberOfRooms;
+	}
+	
+	public void setNumberOfRooms(int numberOfRooms){
+		this.numberOfRooms = numberOfRooms;
+	}
+	
+	public KindOfDeal getDeal() {
+		return deal;
+	}
+	
+	public void setDeal(KindOfDeal deal) {
+		this.deal = deal;
+	}
+
+	public KindOfSale getSale() {
+		return sale;
+	}
+	
+	public void setSale(KindOfSale sale) {
+		this.sale = sale;
+	}
+
+	public int getPriceRent() {
+		return priceRent;
+	}
+	
+	public void setPriceRent(int priceRent){
+		this.priceRent = priceRent;
+	}
+
+	public int getPriceSale() {
+		return priceSale;
+	}
+	
+	public void setPriceSale(int priceSale){
+		this.priceSale = priceSale;
+	}
+
+	public int getIncrement() {
+		return increment;
+	}
+	
+	public void setIncrement(int increment) {
+		this.increment = increment;
+	}
+
+	public int getInitialBid() {
+		return initialBid;
+	}
+	
+	public void setInitialBid(int initialBid) {
+		this.initialBid = initialBid;
+	}
+
+	public int getCurrentBid() {
+		return currentBid;
+	}
+	
+	public void setCurrentBid(int currentBid) {
+		this.currentBid = currentBid;
+	}
+
+	public String getDeadlineDate() {
+		return deadlineDate;
+	}
+	
+	public void setDeadlineDate(String deadlineDate) {
+		this.deadlineDate = deadlineDate;
+	}
+
+	public String getDeadlineHour() {
+		return deadlineHour;
+	}
+	
+	public void setDeadlineHour(String deadlineHour) {
+		this.deadlineHour = deadlineHour;
+	}
+
+	public String getDeadlineMinute() {
+		return deadlineMinute;
+	}
+	
+	public void setDeadlineMinute(String deadlineMinute) {
+		this.deadlineMinute = deadlineMinute;
+	}
+
+	public int getPrizePerMonth() {
+		return prizePerMonth;
+	}
+
+	public void setPrizePerMonth(int prizePerMonth) {
+		this.prizePerMonth = prizePerMonth;
+	}
 	
 	/*
 	public void setPropertyType(KindOfProperty newType){
@@ -534,6 +393,22 @@ public class Ad {
 		this.internet = internet;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public int getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
+	
 	public int getProximityToPublicTransport() {
 		return proximityToPublicTransport;
 	}
@@ -566,7 +441,30 @@ public class Ad {
 		this.proximityToNightlife = proximityToNightlife;
 	}
 	
+	public Date getMoveInDate() {
+		return moveInDate;
+	}
 
+	public void setMoveInDate(Date moveInDate) {
+		this.moveInDate = moveInDate;
+	}
+
+	public void setMoveOutDate(Date moveOutDate) {
+		this.moveOutDate = moveOutDate;
+	}
+
+	public Date getMoveOutDate() {
+		return moveOutDate;
+	}
+	
+	public int getSquareFootage() {
+		return squareFootage;
+	}
+
+	public void setSquareFootage(int squareFootage) {
+		this.squareFootage = squareFootage;
+	}
+	
 	public String getRoomDescription() {
 		return roomDescription;
 	}
@@ -607,6 +505,36 @@ public class Ad {
 		this.user = user;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Date getDate(boolean date) {
+		if (date)
+			return moveInDate;
+		else
+			return moveOutDate;
+	}
 
 	public List<User> getRegisteredRoommates() {
 		return registeredRoommates;
