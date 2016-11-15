@@ -38,7 +38,7 @@
 				
 				<tr>
 					<td valign="top">
-						<c:forEach var="ad" items="${newest}">
+						<c:forEach var="ad" items="${newestRent}">
 							
 							<c:if test="${ad.rent==true}">
 								<div class="resultAd">
@@ -88,7 +88,7 @@
 			
 			
 					<td valign="top">
-						<c:forEach var="ad" items="${newest}">
+						<c:forEach var="ad" items="${newestSale}">
 							<c:if test="${ad.rent==false}">
 								<div class="resultAd">
 									<table id="resultTable" style="width:100%">

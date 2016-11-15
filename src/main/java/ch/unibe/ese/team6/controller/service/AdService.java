@@ -298,6 +298,29 @@ public class AdService {
 			fourNewest.add(ads.get(i));
 		return fourNewest;
 	}
+	
+	
+	/**
+	 * Returns the newest ads that are filtered by rent in the database. Parameter 'newest' says how many.
+	 */
+	@Transactional
+	public Iterable<Ad> getNewestRentAds(int newest, boolean rent) {
+		Iterable<Ad> allAds = adDao.findByRent(rent);
+		List<Ad> ads = new ArrayList<Ad>();
+		for (Ad ad : allAds)
+			ads.add(ad);
+		Collections.sort(ads, new Comparator<Ad>() {
+			@Override
+			public int compare(Ad ad1, Ad ad2) {
+				return ad2.getCreationDate().compareTo(ad1.getCreationDate());
+			}
+		});
+		List<Ad> fourNewest = new ArrayList<Ad>();
+		for (int i = 0; i < newest; i++)
+			if(i<ads.size())fourNewest.add(ads.get(i));
+		return fourNewest;
+	}
+	
 
 	/**
 	 * Returns all ads that match the parameters given by the form. This list
