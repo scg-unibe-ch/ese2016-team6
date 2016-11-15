@@ -60,7 +60,7 @@ public class Ad {
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 	
-	private KindOfDeal deal;
+	private KindOfDeal deal = KindOfDeal.forRent;
 	private KindOfSale sale;
 	private int priceRent;
 	private int priceSale;

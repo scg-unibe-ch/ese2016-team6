@@ -39,8 +39,8 @@
 				<tr>
 					<td valign="top">
 						<c:forEach var="ad" items="${newest}">
-							<%--must be changed to true--%>
-							<c:if test="${ad.rent==true}">
+							
+							<c:if test="${ad.deal=='forRent'}">
 								<div class="resultAd">
 									<table id="resultTable" style="width:100%">
 										<tr>
@@ -89,7 +89,7 @@
 			
 					<td valign="top">
 						<c:forEach var="ad" items="${newest}">
-							<c:if test="${ad.rent==false}">
+							<c:if test="${ad.deal=='forSale'}">
 								<div class="resultAd">
 									<table id="resultTable" style="width:100%">
 										<tr>

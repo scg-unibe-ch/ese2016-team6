@@ -272,10 +272,35 @@
 				<p><label>- current bid (auction) : </label>${shownAd.initialBid}</p>
 				</br>
 		
+				<%!
+						int cBid = 0,
+							inc = 0,
+							finalMinBid = 0;
+							%>
+						<%
+						try{
+							cBid = Integer.parseInt("${shownAd.currentBid}");
+						 }
+							catch (Exception e){
+								
+							}
+						try{
+							cBid = Integer.parseInt("${shownAd.increment}");
+						 }
+							catch (Exception e){
+								
+							}
+							
+						finalMinBid=cBid+inc;
+						%>
+		
+		
+		
 				<p><label >Make a higher bid :</label>
-				<%-- <form:input id="field-currentBid" type="number" path="currentBid"/></p>	
+				<%--<form:input id="field-currentBid" type="number" path="currentBid" value=<%=finalMinBid%> min="<%=finalMinBid%>"/></p>	
 				--%>
 				<button type="submit">Submit</button></p>
+				
 			</div>
 		</td>
 
