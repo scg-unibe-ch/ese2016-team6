@@ -56,6 +56,7 @@ function validateType(form)
 		neitherRentSale.checked = false;
 	}
 	
+	/*
 	var minsize = document.getElementById('minSize');
 	var maxsize = document.getElementById('maxSize');
 	
@@ -66,6 +67,7 @@ function validateType(form)
 	if(maxSize == null) {
 		maxSize = 1000000;
 	}
+	*/
 }
 </script>
 
@@ -111,8 +113,8 @@ function rentSaleOfAlert(alert) {
 			price.value = "500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
 			radius.value = "5";
-		if(maxSize.value == null || maxSize.value == "" || maxSize.value == "0")
-			maxSize.value = "1000000";
+		//if(maxSize.value == null || maxSize.value == "" || maxSize.value == "0")
+		//	maxSize.value = "1000000";
 	});
 </script>
 
@@ -133,6 +135,9 @@ function rentSaleOfAlert(alert) {
 		
 		<!--<form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
 		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br /> -->
+		<form:checkbox name="rent" id="rent" path="forRent" /><label>For Rent</label>
+		<form:checkbox name="sale" id="sale" path="forSale" /><label>For Sale</label>
+
 		<form:checkbox style="display:none" name="neitherRentSale" id="neitherRentSale" path="noRentNoSale" />
 		<form:checkbox style="display:none" name="bothRentAndSale" id="bothRentAndSale" path="bothRentAndSale" />
 		<form:errors path="noRentNoSale" cssClass="validationErrorText" /><br />
@@ -157,7 +162,7 @@ function rentSaleOfAlert(alert) {
 		<label for="numberOfRooms">Number of Rooms (min.):</label>
 		<form:input id="roomsInput" type="number" path="numberOfRooms"
 			placeholder="e.g. 3" step="1" />
-		
+		<!--
 		<br />
 		
 		<label for="minSize">Size (min.):</label>
@@ -167,7 +172,7 @@ function rentSaleOfAlert(alert) {
 		<label for="maxSize">Size (max.):</label>
 		<form:input id="maxSize" type="number" path="maxSize" step="5"/>
 		Square Meters
-			
+		-->
 		<br />
 		
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
@@ -225,37 +230,26 @@ function rentSaleOfAlert(alert) {
 				</c:choose>
 				</td>
 				
-				<!-- <td>
-				<c:choose>
-					<c:when test="${alert.forRent}">
-						For Rent
-					</c:when>
-					<c:otherwise>
-						For Sale
-					</c:otherwise>
-				</c:choose>
-				</td> -->
-				
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>
 				<td>${alert.numberOfRooms}</td>
-				<td>
-				<c:choose>
-					<c:when test="${alert.minSize != 0 && alert.maxSize == 1000000}">
-						greater than ${alert.minSize} Square Meters
-					</c:when>
-					<c:when test="${alert.minSize == 0 && alert.maxSize == 1000000}">
-						all
-					</c:when>
-					<c:when test="${alert.minSize == alert.maxSize}">
-						${alert.maxSize} Square Meters
-					</c:when>						
-					<c:otherwise>
-						${alert.minSize} - ${alert.maxSize} Square Meters
-					</c:otherwise>
-				</c:choose>
-				</td>
+				<!--<td>
+					<c:choose>
+						<c:when test="${alert.minSize != 0 && alert.maxSize == 1000000}">
+							greater than ${alert.minSize} Square Meters
+						</c:when>
+						<c:when test="${alert.minSize == 0 && alert.maxSize == 1000000}">
+							all
+						</c:when>
+						<c:when test="${alert.minSize == alert.maxSize}">
+							${alert.maxSize} Square Meters
+						</c:when>						
+						<c:otherwise>
+							${alert.minSize} - ${alert.maxSize} Square Meters
+						</c:otherwise>
+					</c:choose>
+				</td>-->
 				<td><button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button></td>
 			</tr>
 		</c:forEach>

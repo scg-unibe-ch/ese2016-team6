@@ -177,21 +177,11 @@
 			<td><h2>Status : </h2></td>
 			<td>
 				<c:choose>
-					<c:when test="${shownAd.deal == forSale}">For Sale</c:when>
-					<c:otherwise>For Rent</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<%--beforebreak<tr>
-			<td><h2>Status : </h2></td>
-			<td>
-				<c:choose>
 					<c:when test="${shownAd.rent}">For Sale</c:when>
 					<c:otherwise>For Rent</c:otherwise>
 				</c:choose>
 			</td>
-		</tr> --%>
+		</tr>
 
 		<tr>
 			<td><h2>Address :</h2></td>
@@ -271,36 +261,29 @@
 
 <!--must depend on the kind of deal-->
 
-<table style="width:100%; border-collapse: separate;
-  border-spacing: 0px 10px;">
-<tr>
-
-<td style="width:50%;">	
-	<div class="adDescDiv">
-		<h2>Price corner</h2>
-		<p><label>If for rent, rental charges (CHF per month) : </label>${shownAd.priceRent}</p>
-		<p><label>If for sale (CHF) :</label></p>
-		<p><label>- price for a direct sale : </label>${shownAd.priceSale}</p>
-		<p><label>- current bid (auction) : </label>${shownAd.initialBid}</p>
+<table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">
+	<tr>
+		<td style="width:50%;">	
+			<div class="adDescDiv">
+				<h2>Price corner</h2>
+				<p><label>If for rent, rental charges (CHF per month) : </label>${shownAd.priceRent}</p>
+				<p><label>If for sale (CHF) :</label></p>
+				<p><label>- price for a direct sale : </label>${shownAd.priceSale}</p>
+				<p><label>- current bid (auction) : </label>${shownAd.initialBid}</p>
+				</br>
 		
-		</br>
-		
-		
-		<p><label >Make a higher bid :</label>
-		<%-- <form:input id="field-currentBid" type="number" path="currentBid"/></p>	
-		--%>
-		
-		<button type="submit">Submit</button></p>
-		
-	</div>
-</td>
+				<p><label >Make a higher bid :</label>
+				<%-- <form:input id="field-currentBid" type="number" path="currentBid"/></p>	
+				--%>
+				<button type="submit">Submit</button></p>
+			</div>
+		</td>
 
 
-<td style="width:50%;">
-
+		<td style="width:50%;">
 			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
 				<tr>
-				<td><h2>Advertiser</h2><br /></td>
+					<td><h2>Advertiser</h2><br /></td>
 				</tr>
 
 				<tr>
@@ -341,183 +324,166 @@
 					</td>
 				</tr>
 			</table>
+		</td>
+	</tr>
 
+	<tr>
+		<td>
+			<div class="adDescDiv">
+				<h2>Room Description</h2>
+				<p>${shownAd.roomDescription}</p>
+			</div>
+		</td>
 
-
-</td>
-</tr>
-<tr>
-
-<td>
-<div class="adDescDiv">
-			<h2>Room Description</h2>
-			<p>${shownAd.roomDescription}</p>
-		</div>
-
-</td>
-
-
-<td>
-<div class="adDescDiv">
-			<h2>Location details</h2>
-			<table>
-				<tr>
-					<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
-				</tr>
-				<tr>
-					<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
-				</tr>
-				<tr>
-					<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
-				</tr>
-				<tr>
-					<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
-				</tr>
-			</table>
-		</div>
-</td>
-</tr>
-
-<tr>
-
-
-<td>
-<div class="adDescDiv">
-			<h2>Preferences</h2>
-			<p>${shownAd.preferences}</p>
-		</div>
-
-</td>
-
-<td>
-<div id="visitList" class="adDescDiv">
-			<h2>Visiting times</h2>
-			<table>
-				<c:forEach items="${visits }" var="visit">
+		<td>
+			<div class="adDescDiv">
+				<h2>Location details</h2>
+				<table>
 					<tr>
-						<td>
-							<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
-							&nbsp; from
-							<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
-							until
-							<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
-						</td>
-						<td><c:choose>
-								<c:when test="${loggedIn}">
-									<c:if test="${loggedInUserEmail != shownAd.user.username}">
-										<button class="thinButton" type="button" data-id="${visit.id}">Send
-											enquiry to advertiser</button>
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<a href="/login"><button class="thinInactiveButton" type="button"
-										data-id="${visit.id}">Login to send enquiries</button></a>
-								</c:otherwise>
-							</c:choose></td>
+						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
 					</tr>
-				</c:forEach>
+					<tr>
+						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
+					</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<div class="adDescDiv">
+				<h2>Preferences</h2>
+				<p>${shownAd.preferences}</p>
+			</div>
+		</td>
+
+		<td>
+			<div id="visitList" class="adDescDiv">
+				<h2>Visiting times</h2>
+				<table>
+					<c:forEach items="${visits }" var="visit">
+						<tr>
+							<td>
+								<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
+								&nbsp; from
+								<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
+								until
+								<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
+							</td>
+							<td><c:choose>
+									<c:when test="${loggedIn}">
+										<c:if test="${loggedInUserEmail != shownAd.user.username}">
+											<button class="thinButton" type="button" data-id="${visit.id}">Send
+												enquiry to advertiser</button>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<a href="/login"><button class="thinInactiveButton" type="button"
+											data-id="${visit.id}">Login to send enquiries</button></a>
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<table id="checkBoxTable" class="adDescDiv" style="width:93%">
+				<tr>
+					<td><h3>Smoking inside allowed</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				
+					<td style="padding-left:30px"><h3>Animals allowed</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+		
+				<tr>
+					<td><h3>Furnished Room</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				
+					<td style="padding-left:30px"><h3>WiFi available</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.internet}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+		
+				<tr>
+					<td><h3>Cable TV</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.cable}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				
+					<td style="padding-left:30px"><h3>Garage</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+
+				<tr>
+					<td><h3>Cellar</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				
+					<td style="padding-left:30px"><h3>Balcony</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+		
+				<tr>
+					<td><h3>Garden</h3></td>
+					<td>
+						<c:choose>
+							<c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
+							<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
 			</table>
-		</div>
-</td>
-
-</tr>
-
-<tr>
-<td>
-
-<table id="checkBoxTable" class="adDescDiv" style="width:93%">
-		<tr>
-			<td><h3>Smoking inside allowed</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		
-			<td style="padding-left:30px"><h3>Animals allowed</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Furnished Room</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		
-			<td style="padding-left:30px"><h3>WiFi available</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.internet}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Cable TV</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.cable}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		
-			<td style="padding-left:30px"><h3>Garage</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Cellar</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		
-			<td style="padding-left:30px"><h3>Balcony</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Garden</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-	</table>
-
-
-</td>
-
-
-</tr>
-
-
-
+		</td>
+	</tr>
 </table>
 
 <div id="msgDiv">
@@ -544,261 +510,5 @@
 	</form>
 </div>
 
-<%-- old code as backup just in case
-<section>
-	<div id="descriptionTexts">
-		<div class="adDescDiv">
-			<h2>Room Description</h2>
-			<p>${shownAd.roomDescription}</p>
-		</div>
-		<br />
-
-		  Removed because of customer wished
-		
-		 <div class="adDescDiv">
-			<h2>Roommates</h2>
-			<p>${shownAd.roommates}</p>
-			<c:forEach var="mate" items="${shownAd.registeredRoommates}">
-				<div class="roommate">
-				<table id="mate">
-					<tr>
-						<td>
-						<a href="/user?id=${mate.id}">
-						<c:choose>
-							<c:when test="${mate.picture.filePath != null}">
-								<img src="${mate.picture.filePath}">
-							</c:when>
-							<c:otherwise>
-								<img src="/img/avatar.png">
-							</c:otherwise>
-						</c:choose>
-						</a>
-						</td>
-						<td>${mate.firstName} ${mate.lastName}</td>
-						<td>${mate.username}</td>
-						<td>
-						<c:choose>
-							<c:when test="${mate.gender == 'MALE'}">
-								male
-							</c:when>
-							<c:otherwise>
-								female
-							</c:otherwise>
-						</c:choose></td>
-					</tr>
-				</table>
-			</div>
-			</c:forEach>
-		</div>
-		<br />  */
-
-		
-		
-		<div class="adDescDiv">
-			<h2>Location details</h2>
-			<table>
-				<tr>
-					<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
-				</tr>
-				<tr>
-					<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
-				</tr>
-				<tr>
-					<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
-				</tr>
-				<tr>
-					<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
-				</tr>
-			</table>
-		</div>
-		<br />
-
-		
-		<div class="adDescDiv">
-			<h2>Preferences</h2>
-			<p>${shownAd.preferences}</p>
-		</div>
-		<br />
-
-
-		<div id="visitList" class="adDescDiv">
-			<h2>Visiting times</h2>
-			<table>
-				<c:forEach items="${visits }" var="visit">
-					<tr>
-						<td>
-							<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
-							&nbsp; from
-							<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
-							until
-							<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
-						</td>
-						<td><c:choose>
-								<c:when test="${loggedIn}">
-									<c:if test="${loggedInUserEmail != shownAd.user.username}">
-										<button class="thinButton" type="button" data-id="${visit.id}">Send
-											enquiry to advertiser</button>
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<a href="/login"><button class="thinInactiveButton" type="button"
-										data-id="${visit.id}">Login to send enquiries</button></a>
-								</c:otherwise>
-							</c:choose></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-
-	</div>
-
-	
-		
-	
-	
-	
-	<table id="checkBoxTable" class="adDescDiv">
-		<tr>
-			<td><h3>Smoking inside allowed</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Animals allowed</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Furnished Room</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-		
-		<tr>
-			<td><h3>WiFi available</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.internet}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Cable TV</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.cable}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Garage</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Cellar</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Balcony</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h3>Garden</h3></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-	</table>
-</section>
-
-<div class="clearBoth"></div>
-<br>
-
-<table id="advertiserTable" class="adDescDiv" style="float:right">
-	<tr>
-	<td><h2>Advertiser</h2><br /></td>
-	</tr>
-
-	<tr>
-		<td><c:choose>
-				<c:when test="${shownAd.user.picture.filePath != null}">
-					<img src="${shownAd.user.picture.filePath}">
-				</c:when>
-				<c:otherwise>
-					<img src="/img/avatar.png">
-				</c:otherwise>
-			</c:choose></td>
-		
-		<td>${shownAd.user.username}</td>
-		
-		<td id="advertiserEmail">
-		<c:choose>
-			<c:when test="${loggedIn}">
-				<a href="/user?id=${shownAd.user.id}"><button type="button">Visit profile</button></a>
-			</c:when>
-			<c:otherwise>
-				<a href="/login"><button class="thinInactiveButton" type="button">Login to visit profile</button></a>
-			</c:otherwise>
-		</c:choose>
-
-		<td>
-			<form>
-				<c:choose>
-					<c:when test="${loggedIn}">
-						<c:if test="${loggedInUserEmail != shownAd.user.username }">
-							<button id="newMsg" type="button">Contact Advertiser</button>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<a href="/login"><button class="thinInactiveButton" type="button">Login to contact advertiser</button></a>
-					</c:otherwise>
-				</c:choose>
-			</form>
-		</td>
-	</tr>
-</table>
-
-
---%>
 
 <c:import url="template/footer.jsp" />

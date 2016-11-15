@@ -45,7 +45,6 @@ public class PlaceAdForm {
 	
 	
 	private KindOfDeal deal;
-	private KindOfSale sale;
 	
 	private int priceRent;
 	private int priceSale;
@@ -81,6 +80,8 @@ public class PlaceAdForm {
 	
 	//true if rent, false if sale
 	private boolean rent;
+	private boolean sale;
+	private boolean auction;
 	
 	private boolean smokers;
 	private boolean animals;
@@ -178,12 +179,28 @@ public class PlaceAdForm {
 		this.deal = deal;
 	}
 	
-	public KindOfSale getSale() {
+	public boolean getRent() {
+		return rent;
+	}
+	
+	public void setRent(boolean rent) {
+		this.rent = rent;
+	}
+	
+	public boolean getSale() {
 		return sale;
 	}
 	
-	public void setSale(KindOfSale sale) {
+	public void setSale(boolean sale) {
 		this.sale = sale;
+	}
+	
+	public boolean getAuction() {
+		return auction;
+	}
+	
+	public void setAuction(boolean auction) {
+		this.auction = auction;
 	}
 	
 	public int getPriceRent() {
@@ -387,14 +404,6 @@ public class PlaceAdForm {
 		
 		this.studio = studio;
 		
-	}
-
-	public boolean getRent() {
-		return rent;
-	}
-	
-	public void setRent(boolean rent) {
-		this.rent = rent;
 	}
 	
 	public List<String> getRegisteredRoommateEmails() {
