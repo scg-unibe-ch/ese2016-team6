@@ -293,11 +293,12 @@ public class AdTestDataSaver {
 		adBiel.setPriceSale(150000);
 		adBiel.setCurrentBid(20000);
 		adBiel.setIncrement(3500);
-		adBiel.setExpireDate(getTimedDate(1566598));
+		adBiel.setExpireDate(getTimedDate(99999999));
 		adBiel.setMoveInDate(moveInDate6);
 		adBiel.setMoveOutDate(moveOutDate5);
 		adBiel.setCreationDate(creationDate6);
 		adBiel.setPrizePerMonth(480);
+		adBiel.setNumberOfRooms(4);
 		adBiel.setSquareFootage(10);
 		adBiel.setStudio(true);
 		adBiel.setSmokers(true);
@@ -550,6 +551,8 @@ public class AdTestDataSaver {
 		adLocarno.setMoveInDate(moveInDate6);
 		adLocarno.setMoveOutDate(moveOutDate5);
 		adLocarno.setCreationDate(creationDate6);
+		adLocarno.setDeal(KindOfDeal.forRent);
+		adLocarno.setRent(true);
 		adLocarno.setPrizePerMonth(960);
 		adLocarno.setSquareFootage(42);
 		adLocarno.setStudio(false);
@@ -585,7 +588,7 @@ public class AdTestDataSaver {
 		return picture;
 	}
 	
-    private Date getTimedDate(int minutesToAdd) {
+    private Date getTimedDate(long minutesToAdd) {
         Calendar date = Calendar.getInstance();
         long t = date.getTimeInMillis();
         return new Date(t + (minutesToAdd * 60*1000));

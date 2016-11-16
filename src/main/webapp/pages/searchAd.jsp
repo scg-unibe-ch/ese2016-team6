@@ -38,7 +38,7 @@
 	});
 </script>
 
-
+<%-- 
 <script>
 function validateType(form)
 {
@@ -64,7 +64,7 @@ function validateType(form)
 	}
 	filtered.checked = false;
 }
-</script>
+</script>--%>
 
 <h1>Search for an ad</h1>
 <hr />
@@ -116,8 +116,6 @@ function validateType(form)
 			placeholder="e.g. 5" step="1" />
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
-		
-	
 		
 		
 		<br />

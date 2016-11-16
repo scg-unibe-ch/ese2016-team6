@@ -9,7 +9,7 @@
 <c:import url="template/header.jsp" />
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
 
-<script>
+<%-- <script>
 function validateType(form)
 {
 	var room = document.getElementById('room');
@@ -34,7 +34,7 @@ function validateType(form)
 	}
 	filtered.checked = true;
 }
-</script>
+</script>--%>
 
 <script>
 /*
