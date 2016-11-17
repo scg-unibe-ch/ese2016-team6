@@ -125,24 +125,22 @@
 		});
 
         $("#makeBid").click(function () {
-            if ($("#inputBid").val() != "") {
+            if ($("#bidAmount").val() != "") {
+                var amount = $("#bidAmount").val();
                 var id = ${shownAd.id};
                 var currentBid = ${shownAd.currentBid};
-                var inputBid = $("#inputBid").val();
 
-                if (inputBid > currentBid) {
-                   $("#bidErrorDiv").html("");
-                   $.post("ad/makeBid", {amount: amount, id: id}, function () {
-                   // alert("You bid: " + amount + " CHF");
-                   $("#inputBid").val("");
-                   location.reload();
-                 })
-                 } else {
-                   $("#bidErrorDiv").html("You have to make a higher bid than the current one.")
-                    }
+                   <%-- if (amount > currentBid) {--%>
+                       <%-- $("#bidErrorDiv").html("");--%>
+                        $.post("ad/makeBid", {amount: amount, id: id}, function () {
+                            // alert("You bid: " + amount + " CHF");
+                            $("#bidAmount").val("");
+                            location.reload();
+                        })
+                   <%-- } else {
+                        $("#bidErrorDiv").html("You have to bid higher than the current price.")
+                    }--%>
                 }
-
-            }
         });
     });
 		
@@ -154,9 +152,9 @@
             var expired = ${shownAd.expireDate.getTime()};
             var current = new Date();
 
-            if (current > expired || ${shownAd.expired}) {
+           <%-- if (current > expired || ${shownAd.expired}) {
                 $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
-            } else {
+            } else {--%>
                 var msec = expired - current;
 
                 var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
@@ -221,7 +219,7 @@
 
 
 <tr>
-	<td><i><b><label id="formattedCreationDate">Ad created on : </i>${formattedCreationDate}</label></b></td>
+	<td><label id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label></td>
 </tr>
 
 <hr />
@@ -261,13 +259,7 @@
 						${shownAd.zipcode} ${shownAd.city}</a>
 			</td>
 		</tr>
-		
-		<%-- 
-		<tr>
-			<td><h2>Price</h2></td>
-			<td>${shownAd.prizePerMonth}&#32;CHF</td>
-		</tr>
-		--%>
+	
 		
 		<tr>
 			<td><h2>Area :</h2></td>
@@ -310,7 +302,7 @@
 	</table>
 </section>
 
-<table>
+
 <div id="image-slider">
 	<div id="left-arrow">
 		<img src="/img/left-arrow.png" />
@@ -324,7 +316,7 @@
 		<img src="/img/right-arrow.png" />
 	</div>
 </div>
-</table>
+
 
 <hr class="clearBoth" />
 
@@ -332,31 +324,32 @@
 <table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">
 	<tr>
 		<td style="width:50%;">	
-			<div class="adDescDiv">
+			<div id="bidList" class="adDescDiv">
+				<%--<div id="bidInfo"> --%>
 				<h2>Price corner</h2>
-				
+				<br/>
 				
 				<%-- note: to disable the ifs just add ||true inside brackets after the ' and before the } --%>
 				<%-- only shows this part if property for rent --%>
 				<c:if test="${shownAd.rent==true}">
-					<p><h3><label>If for rent, rental charges (CHF per month) : </label>${shownAd.prizePerMonth}</h3></p>
+					<h3><label>This property is for rent for : </label>${shownAd.prizePerMonth} CHF/month</h3>
 				</c:if>
 				
 				<%-- only shows this part if property for sale --%>
 				<c:if test="${shownAd.rent==false}">
-					<p><h3><label>If for sale (CHF) :</label></h3></p>
-					
+					<%-- <p><h3><label>If for sale (CHF) :</label></h3></p> --%>
 					
 						<%-- only shows this part if property for directsale --%>
 						<c:if test="${shownAd.sale=='direct'||shownAd.sale=='bothAuctionAndDirect'}">
-							<p><h3><label>- price for a direct sale : </label>${shownAd.priceSale}</h3></p>
+							<h3><label>This property is for sale ! Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
 						</c:if>
 						
 						<%-- only shows this part if property for auction --%>
 						<c:if test="${shownAd.sale=='auction'||shownAd.sale=='bothAuctionAndDirect'}">
 
-							<p><h3><label>- current bid (auction) : </label>${shownAd.currentBid}</h3></p>
-							<br/>
+							<h3><label>This property is for sale through auction ! Amount of the current bid : </label> CHF ${shownAd.currentBid}</h3>
+							<h2 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h2>
+						
 					
 							<%-- This gets the sum of the current bid and the increment --%>
 									<%!
@@ -381,28 +374,24 @@
 									finalMinBid=cBid+inc;
 									%>
 					
-									<br/>
-				<p id="timeLeft">Expiry date of the auction: <fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></p>
-				<br/>
-					
-				<p><label for="field-currentBid">Make a higher bid :</label>
 				<c:choose>
         			<c:when test="${loggedIn}">
             			<c:if test="${loggedInUserEmail != shownAd.user.username }">
-              				<div id="bidErrorDiv" style="color: #cc0000"></div>
-                    		<form><input class="bidInput" type="number" id="inputBid" value="${shownAd.currentBid}+${shownAd.increment}"/>
-                      				<br>
+              				<form><label for="field-currentBid">Make a higher bid :</label>
+                    		<input class="bidInput" type="number" id="bidAmount" value="${shownAd.currentBid}" step="${shownAd.increment}"/>
                                   <button type="button" id="makeBid" class="bidButton">Let's go !</button>
                        		</form>
                        		<br/>
            				</c:if>
       				</c:when>
       				<c:otherwise>
+      				<br/>
 					Please log in to use the auction
 					</c:otherwise>
       			</c:choose>
 		</c:if>
 	</c:if>
+	<%-- </div>--%>
 </div>
 </td>
 
