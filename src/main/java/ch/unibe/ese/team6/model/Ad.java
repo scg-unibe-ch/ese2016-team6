@@ -553,13 +553,14 @@ public class Ad {
 			return moveOutDate;
 	}
 
+	/*
 	public List<User> getRegisteredRoommates() {
 		return registeredRoommates;
 	}
 
 	public void setRegisteredRoommates(List<User> registeredRoommates) {
 		this.registeredRoommates = registeredRoommates;
-	}
+	}*/
 
 	public List<Visit> getVisits() {
 		return visits;
@@ -672,7 +673,7 @@ public class Ad {
 	
 	
 	/*roommates & registered roommates*/
-	
+/*	
 	
 	private String roommates;
 
@@ -687,7 +688,7 @@ public class Ad {
 	public void setRoommates(String roommates) {
 		this.roommates = roommates;
 	}
-
+ */
 	
 	
 }

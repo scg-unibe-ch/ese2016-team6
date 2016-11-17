@@ -12,8 +12,8 @@
 <script>
 function validateType(form)
 {
-	var room = document.getElementById('room');
-	var studio = document.getElementById('studio');
+	var rent = document.getElementById('rent');
+	var sale = document.getElementById('sale');
 	var neither = document.getElementById('neither');
 	var both = document.getElementById('both');
 	var type = document.getElementById('type');
@@ -108,11 +108,11 @@ function sort_div_attribute() {
 		$("#field-latestMoveInDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
-		$("#field-earliestMoveOutDate").datepicker({
+	<!--	$("#field-earliestMoveOutDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
 		$("#field-latestMoveOutDate").datepicker({
-			dateFormat : 'dd-mm-yy'
+			dateFormat : 'dd-mm-yy' -->
 		});
 	});
 </script>
@@ -202,6 +202,11 @@ function sort_div_attribute() {
 		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
 		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label> <br/>
 	
+		<form:checkbox style="display:none" name="neitherS" id="neitherS" path="noSellNoRent" />
+		<form:checkbox style="display:none" name="bothS" id="bothS" path="bothSellAndRent" />
+		<form:checkbox style="display:none" name="typeS" id="typeS" path="forSale" />
+		<form:errors path="noSellNoRent" cssClass="validationErrorText" /> <br />
+	
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />
@@ -276,9 +281,6 @@ function sort_div_attribute() {
 	</div>
 </form:form>
 
-
-
-
 <c:choose>
 	<c:when test="${empty results}">
 		<p>No results found!
@@ -289,7 +291,7 @@ function sort_div_attribute() {
 				<div class="resultAd" data-price="${ad.prizePerMonth}" 
 								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
 					
-					<table id="resultTable" >
+				 	<table id="resultTable" >
 						<tr>
 							<th colspan="3">
 								<h2>
@@ -307,7 +309,6 @@ function sort_div_attribute() {
 							
 							<td>
 								<div class="resultMiddle">
-									</br>
 									<p>
 										For
 										<c:if test="${ad.rent==true}"> rent </c:if>

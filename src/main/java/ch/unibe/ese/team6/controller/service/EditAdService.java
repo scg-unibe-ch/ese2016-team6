@@ -258,7 +258,7 @@ public class EditAdService {
 	public void deleteRoommate(long roommateId, long adId) {
 		Ad ad = adService.getAdById(adId);
 		User roommate = userService.findUserById(roommateId);
-		ad.getRegisteredRoommates().remove(roommate);
+		//ad.getRegisteredRoommates().remove(roommate);
 		adDao.save(ad);
 
 	}

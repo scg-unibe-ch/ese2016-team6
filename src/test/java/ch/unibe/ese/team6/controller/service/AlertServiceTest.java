@@ -141,7 +141,7 @@ public class AlertServiceTest {
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");
 		oltenResidence.setPreferences("blah");
-		oltenResidence.setRoommates("None");
+	//	oltenResidence.setRoommates("None");
 		oltenResidence.setUser(thomyF);
 		oltenResidence.setTitle("Olten Residence");
 		oltenResidence.setStreet("Florastr. 100");
