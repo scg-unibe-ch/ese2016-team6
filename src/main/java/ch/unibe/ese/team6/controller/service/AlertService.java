@@ -58,15 +58,15 @@ public class AlertService {
 
 		alert.setPrice(alertForm.getPrice());
 		alert.setRadius(alertForm.getRadius());
-		alert.setRoom(alertForm.getRoom());
-		alert.setStudio(alertForm.getStudio());
+	//	alert.setRoom(alertForm.getRoom());
+	//	alert.setStudio(alertForm.getStudio());
 		alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
 		alert.setUser(user);
 		alert.setForRent(alertForm.getForRent());
 		alert.setForSale(alertForm.getForSale());
 		alert.setBothRentAndSale(alertForm.getBothRentAndSale());
 		alert.setMinSize(alertForm.getMinSize());
-		alert.setMaxSize(alertForm.getMaxSize());
+		alert.setMaxSize(alert.getMinSize());
 		alert.setNumberOfRooms(alertForm.getNumberOfRooms());
 		alertDao.save(alert);
 	}
@@ -164,7 +164,7 @@ public class AlertService {
 	}
 	
 	/** Checks if an ad has the size specified in the alert **/
-	/*private boolean sizeMismatchWith(Ad ad, Alert alert) {
+	private boolean sizeMismatchWith(Ad ad, Alert alert) {
 		if (alert.getMinSize() > ad.getSquareFootage()) {
 			return true;
 		}
@@ -172,7 +172,7 @@ public class AlertService {
 			return true;
 		}
 		return false;
-	}*/
+	}
 
 	/**
 	 * Checks whether an ad is for a place too far away from the alert.
