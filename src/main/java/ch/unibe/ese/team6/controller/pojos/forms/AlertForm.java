@@ -14,8 +14,8 @@ public class AlertForm {
 	
 	private User user;
 
-	private boolean studio;
-	private boolean room;
+//	private boolean studio;
+//	private boolean room;
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -31,8 +31,8 @@ public class AlertForm {
 	
 	private int zipCode;
 
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRoomNoStudio;
+/*	@AssertFalse(message = "Please select either or both types")
+	private boolean noRoomNoStudio;*/
 
 	private boolean bothRoomAndStudio;
 	
@@ -43,10 +43,17 @@ public class AlertForm {
 	@AssertFalse(message = "Please select either or both types")
 	private boolean noRentNoSale;
 	
+	@Min(value = 0, message = "Please enter a positive minimal Size")
 	private int minSize;
+	
+	@Min(value = 0, message = "Please enter a positive maximal Size")
 	private int maxSize;
 	
+	@Min(value = 0, message = "Minimal Size must be smaller than the maximal Size")
+	public int isValid = maxSize-minSize;
+	
 	@NotNull(message = "Requires a number")
+	@Min(value = 0, message = "Please enter a positive Number of Rooms")
 	private int numberOfRooms;
 
 	public String getCity() {
@@ -81,29 +88,6 @@ public class AlertForm {
 		this.price = price;
 	}
 
-	public boolean getStudio() {
-		return studio;
-	}
-
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-
-	public boolean getRoom() {
-		return room;
-	}
-
-	public void setRoom(boolean room) {
-		this.room = room;
-	}
-
-	public boolean getNoRoomNoStudio() {
-		return noRoomNoStudio;
-	}
-
-	public void setNoRoomNoStudio(boolean noRoomNoStudio) {
-		this.noRoomNoStudio = noRoomNoStudio;
-	}
 
 	public boolean getBothRoomAndStudio() {
 		return bothRoomAndStudio;

@@ -26,6 +26,7 @@ import ch.unibe.ese.team6.model.KindOfSale;
 @Entity
 public class Ad {
 
+	
 	/*_____GENERAL DESCRIPTION____*/
 	
 	@Id
@@ -62,9 +63,10 @@ public class Ad {
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 	
-	/*_________PRICE CORNER______________*/
+	/*_________To Be Removed______________*/
 	
 	//to remove asap
+	//cannot be removed yet, there seems to be some dependencies on it
 	private int price;
 	
 	public int getPrice() {
@@ -75,10 +77,26 @@ public class Ad {
 		this.price= price;
 	}
 	
-	/*___________________________________*/
 	
-	//rental charges
 
+	// to be deleted
+	@Column(nullable = false)
+	private boolean rent;
+
+	public boolean getRent() {
+		return rent;
+	}
+
+	public void setRent(boolean rent) {
+		this.rent = rent;
+	}
+	/* ___________________________________ */
+	
+	
+
+	
+
+	//sale type
 	private KindOfDeal deal = KindOfDeal.forRent;
 	private KindOfSale sale;
 
@@ -231,6 +249,9 @@ public class Ad {
 		this.deadlineMinute = deadlineMinute;
 	}
 
+	
+	//value used to store the price of rent. Do not use.
+	//do not delete either, it is necessary to get the default value of the current ads.
 	private int prizePerMonth;
 	
 	public int getPrizePerMonth() {
@@ -239,6 +260,7 @@ public class Ad {
 
 	public void setPrizePerMonth(int prizePerMonth) {
 		this.prizePerMonth = prizePerMonth;
+		this.priceRent = prizePerMonth;
 	}
 	
 	/*
@@ -553,13 +575,14 @@ public class Ad {
 			return moveOutDate;
 	}
 
+	/*
 	public List<User> getRegisteredRoommates() {
 		return registeredRoommates;
 	}
 
 	public void setRegisteredRoommates(List<User> registeredRoommates) {
 		this.registeredRoommates = registeredRoommates;
-	}
+	}*/
 
 	public List<Visit> getVisits() {
 		return visits;
@@ -658,21 +681,13 @@ public class Ad {
 		this.studio = studio;
 	}
 	
-	//true if for rent, false if for sale
-	@Column(nullable=false)
-	private boolean rent;
 	
-	public boolean getRent() {
-		return rent;
-	}
 	
-	public void setRent(boolean rent){
-		this.rent = rent;
-	}
+	
 	
 	
 	/*roommates & registered roommates*/
-	
+/*	
 	
 	private String roommates;
 
@@ -687,7 +702,7 @@ public class Ad {
 	public void setRoommates(String roommates) {
 		this.roommates = roommates;
 	}
-
+ */
 	
 	
 }

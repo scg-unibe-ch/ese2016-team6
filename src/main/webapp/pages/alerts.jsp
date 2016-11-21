@@ -19,25 +19,7 @@ function deleteAlert(button) {
 
 <script>
 function validateType(form)
-{
-	var room = document.getElementById('room');
-	var studio = document.getElementById('studio');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	
-	if(room.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!room.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-	}
-	
+{	
 	var rent = document.getElementById('rent');
 	var sale = document.getElementById('sale');
 	var neitherRentSale = document.getElementById('neitherRentSale');
@@ -56,30 +38,11 @@ function validateType(form)
 		neitherRentSale.checked = false;
 	}
 	
-	/*
+	
 	var minsize = document.getElementById('minSize');
 	var maxsize = document.getElementById('maxSize');
-	
-	if(minSize == null) {
-		minSize = 0;
-	}
-	
-	if(maxSize == null) {
-		maxSize = 1000000;
-	}
-	*/
+	var isValid = maxsize-minsize;
 }
-</script>
-
-<script>
-function typeOfAlert(alert) {
-	if(alert.getBothRoomAndStudio())
-		return "Both"
-	else if(alert.getStudio())
-		return "Studio"
-	else
-		return "Room"
-}	
 </script>
 
 <script>
@@ -113,8 +76,6 @@ function rentSaleOfAlert(alert) {
 			price.value = "500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
 			radius.value = "5";
-		//if(maxSize.value == null || maxSize.value == "" || maxSize.value == "0")
-		//	maxSize.value = "1000000";
 	});
 </script>
 
@@ -125,22 +86,15 @@ function rentSaleOfAlert(alert) {
 <form:form method="post" modelAttribute="alertForm" action="/profile/alerts"
 	id="alertForm" autocomplete="off">
 
-	<fieldset>
-		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
-		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
-		
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br />
-		
-		<!--<form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
+	<fieldset>		
+		<!-- <form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
 		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br /> -->
 		<form:checkbox name="rent" id="rent" path="forRent" /><label>For Rent</label>
 		<form:checkbox name="sale" id="sale" path="forSale" /><label>For Sale</label>
 
 		<form:checkbox style="display:none" name="neitherRentSale" id="neitherRentSale" path="noRentNoSale" />
 		<form:checkbox style="display:none" name="bothRentAndSale" id="bothRentAndSale" path="bothRentAndSale" />
-		<form:errors path="noRentNoSale" cssClass="validationErrorText" /><br />
+		<form:errors path="noRentNoSale" cssClass="validationErrorText" /><br /> 
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -152,7 +106,9 @@ function rentSaleOfAlert(alert) {
 			placeholder="e.g. 5" step="1" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
-		<br /> <label for="price">Price (max.):</label>
+		<br /> 
+		
+		<label for="price">Price (max.):</label>
 		<form:input id="priceInput" type="number" path="price"
 			placeholder="e.g. 5" step="50" />
 		CHF
@@ -161,18 +117,25 @@ function rentSaleOfAlert(alert) {
 		
 		<label for="numberOfRooms">Number of Rooms (min.):</label>
 		<form:input id="roomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 3" step="1" />
-		<!--
+			placeholder="e.g. 3" step="1"  default="1"/>
+		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		<br />
 		
 		<label for="minSize">Size (min.):</label>
-		<form:input id="minSize" type="number" path="minSize" step="5"/>
+		<form:input id="minSize" type="number" path="minSize" placeholder="e.g. 0" step="5" default="0"/>
 		Square Meters
-			
+		<form:errors path="minSize" cssClass="validationErrorText" />
+		
 		<label for="maxSize">Size (max.):</label>
-		<form:input id="maxSize" type="number" path="maxSize" step="5"/>
+		<form:input id="maxSize" type="number" path="maxSize" placeholder="e.g. 1" step="5" default="1000000"/>
 		Square Meters
-		-->
+		<form:errors path="maxSize" cssClass="validationErrorText" /> 
+		
+	<!--	<div id="isValid">
+		<form:hidden id="isValid" type="number" path="isValid" />
+		<form:errors path="isValid" cssClass="validationErrorText" /> 
+		</div> -->
+		
 		<br />
 		
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
@@ -234,7 +197,7 @@ function rentSaleOfAlert(alert) {
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>
 				<td>${alert.numberOfRooms}</td>
-				<!--<td>
+				<td>
 					<c:choose>
 						<c:when test="${alert.minSize != 0 && alert.maxSize == 1000000}">
 							greater than ${alert.minSize} Square Meters
@@ -249,7 +212,7 @@ function rentSaleOfAlert(alert) {
 							${alert.minSize} - ${alert.maxSize} Square Meters
 						</c:otherwise>
 					</c:choose>
-				</td>-->
+				</td>
 				<td><button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button></td>
 			</tr>
 		</c:forEach>

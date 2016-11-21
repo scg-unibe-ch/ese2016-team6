@@ -2,6 +2,11 @@ package ch.unibe.ese.team6.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.validation.Valid;
 
@@ -23,6 +28,7 @@ import ch.unibe.ese.team6.controller.service.UserService;
 import ch.unibe.ese.team6.controller.service.UserUpdateService;
 import ch.unibe.ese.team6.controller.service.VisitService;
 import ch.unibe.ese.team6.model.Ad;
+import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.Visit;
 
@@ -46,6 +52,10 @@ public class ProfileController {
 
 	@Autowired
 	private AdService adService;
+	
+	@Autowired
+	@Qualifier("authenticationManager")
+	protected AuthenticationManager authenticationManager;
 
 	/** Returns the login page. */
 	@RequestMapping(value = "/login")
@@ -103,10 +113,15 @@ public class ProfileController {
 		ModelAndView model;
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
+		KindOfMembership kind = user.getKindOfMembership();
 		if (!bindingResult.hasErrors()) {
-			userUpdateService.updateFrom(editProfileForm);
+			userUpdateService.updateFrom(editProfileForm, user, kind);
+			Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+			Authentication result = authenticationManager.authenticate(request);
+			SecurityContextHolder.getContext().setAuthentication(result);			
 			model = new ModelAndView("updatedProfile");
 			model.addObject("message", "Your Profile has been updated!");
+			model.addObject("editProfileForm", new EditProfileForm());
 			model.addObject("currentUser", user);
 			return model;
 		} else {
@@ -123,6 +138,9 @@ public class ProfileController {
 		ModelAndView model = new ModelAndView("user");
 		User user = userService.findUserById(id);
 		if (principal != null) {
+			Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+			Authentication result = authenticationManager.authenticate(request);
+			SecurityContextHolder.getContext().setAuthentication(result);
 			String username = principal.getName();
 			User user2 = userService.findUserByUsername(username);
 			long principalID = user2.getId();

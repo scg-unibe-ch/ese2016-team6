@@ -24,41 +24,34 @@ public class UserUpdateService {
 	
 	@Autowired
 	private UserDao userDao;
-
-	@Autowired
-	private UserService userService;
 	
 	@Autowired
 	private SignupService signupService;
 
 	/** Handles updating an existing user in the database. */
 	@Transactional
-	public void updateFrom(EditProfileForm editProfileForm) {
+	public void updateFrom(EditProfileForm editProfileForm, User user, KindOfMembership kind) {
 		
-		User currentUser = userService.findUserByUsername(editProfileForm.getUsername());
-		KindOfMembership kindfirst = currentUser.getKindOfMembership();
-		
-		currentUser.setFirstName(editProfileForm.getFirstName());
-		currentUser.setLastName(editProfileForm.getLastName());
-		currentUser.setPassword(editProfileForm.getPassword());
-		currentUser.setAboutMe(editProfileForm.getAboutMe());
-		currentUser.setKindOfMembership(editProfileForm.getKindOfMembership());
+		user.setUsername(editProfileForm.getUsername());
+		user.setFirstName(editProfileForm.getFirstName());
+		user.setLastName(editProfileForm.getLastName());
+		user.setPassword(editProfileForm.getPassword());
+		user.setAboutMe(editProfileForm.getAboutMe());
+		user.setKindOfMembership(editProfileForm.getKindOfMembership());
+		user.setEmail(editProfileForm.getUsername());
 
-		userDao.save(currentUser);
+		userDao.save(user);
 		
-		if(!kindfirst.equals(currentUser.getKindOfMembership())) {
-			if(currentUser.getKindOfMembership().equals((KindOfMembership.PREMIUM))) {
+		if(!kind.equals(user.getKindOfMembership())) {
+			if(user.getKindOfMembership().equals((KindOfMembership.PREMIUM))) {
 				signupService.timer2.purge();
 				signupService.timer = new Timer();
-				signupService.sendPayMessage(currentUser);
+				signupService.sendPayMessage(user);
 			} else {
 				signupService.timer.purge();
 				signupService.timer2 = new Timer();
-				signupService.sendsMessageAndEmailForNormalUserWeekly(currentUser);
+				signupService.sendsMessageAndEmailForNormalUserWeekly(user);
 			}
 		}	
 	}
-
-	
-	
 }

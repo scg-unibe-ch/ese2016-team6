@@ -113,15 +113,14 @@ function validateType(form)
 		<label for="numberRoomsInput">Rooms (min.):</label>
 		
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 5" step="1" />
+			placeholder="e.g. 5" step="1" default="0"/>
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		
-		
 		<br />
 		
-		<button type="reset" tabindex="8">Cancel</button>
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
+		<button type="reset" class="btn btn-default" tabindex="8">Cancel</button>
+		<button type="submit" class="btn btn-default" tabindex="7" onClick="validateType(this.form)">Search</button>
 		
 	</fieldset>
 

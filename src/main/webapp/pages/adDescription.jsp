@@ -245,10 +245,24 @@
 		<tr>
 			<td><h2>Status : </h2></td>
 			<td>
-				<c:choose>
-					<c:when test="${shownAd.rent}">For rent </c:when>
-					<c:otherwise>For sale</c:otherwise>
-				</c:choose>
+				
+					<c:if test="${shownAd.deal=='forRent'}"> For rent </c:if>
+					<c:if test="${shownAd.deal=='forSale'}"> 
+						<c:if test="${shownAd.sale=='direct'}">
+						For direct Sale
+						</c:if>
+						
+						<c:if test="${shownAd.sale=='auction'}">
+						For auction
+						</c:if>
+					
+						<c:if test="${shownAd.sale=='bothAuctionAndDirect'}">
+						For auction with quick buy option
+						</c:if>
+					
+					</c:if>
+					
+				
 			</td>
 		</tr>
 
@@ -331,12 +345,12 @@
 				
 				<%-- note: to disable the ifs just add ||true inside brackets after the ' and before the } --%>
 				<%-- only shows this part if property for rent --%>
-				<c:if test="${shownAd.rent==true}">
+				<c:if test="${shownAd.deal=='forRent'}">
 					<h3><label>This property is for rent for : </label>${shownAd.prizePerMonth} CHF/month</h3>
 				</c:if>
 				
 				<%-- only shows this part if property for sale --%>
-				<c:if test="${shownAd.rent==false}">
+				<c:if test="${shownAd.deal=='forSale'}">
 					<%-- <p><h3><label>If for sale (CHF) :</label></h3></p> --%>
 					
 						<%-- only shows this part if property for directsale --%>

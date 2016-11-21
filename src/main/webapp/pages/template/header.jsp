@@ -8,6 +8,8 @@
 
 <!DOCTYPE html>
 <head>
+
+<link rel="icon" href="/img/newIcon.png">
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/css/main.css">
 <link rel="stylesheet" type="text/css"
