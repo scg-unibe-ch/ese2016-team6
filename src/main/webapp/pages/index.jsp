@@ -16,15 +16,19 @@
 
 <!--<pre>Home</pre>-->
 
-<h1 style="text-align: center;">Welcome</h1>
+<br/>
+<h1 style="text-align: center;">Welcome !</h1>
+<br/>
+<br/>
 
 <c:choose>
 	<c:when test="${empty newest}">
-		<h2 style="text-align: center;">No ads placed yet</h2>
+		<h2 style="text-align: center;"><i>No ads placed yet</i></h2>
 	</c:when>
 	
 	<c:otherwise>
-		<h2 style="text-align: center;">Our newest ads:</h2>
+		<h2 style="text-align: center;"><i>See below our newest ads</i></h2>
+		<br/>
 		<div id="resultsDiv" class="resultsDiv" style="margin: auto;">
 			<table id="indexTable">
 				<tr>
