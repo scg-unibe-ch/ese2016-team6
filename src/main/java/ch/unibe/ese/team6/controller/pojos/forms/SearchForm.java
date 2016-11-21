@@ -32,6 +32,11 @@ public class SearchForm {
 	@Min(value = 0, message = "In your dreams.")
 	private Integer prize;
 	
+	
+	
+	/*
+	 * Why do we have this?
+	 * 
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "In your dreams.")
 	private Integer price;
@@ -43,18 +48,19 @@ public class SearchForm {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	*/
 	
 	//specifies how many rooms a Flat must have
 	//@NotNull(message = "Requires a number")
-	@Min(value = 0, message = "Cannot search for studios or flats with no rooms")
+	@Min(value = 0, message = "Cannot search for flats with no rooms")
 	private int numberOfRooms;
 	
-
+	
 	@AssertFalse(message = "Please select either or both types")
 	private boolean noRoomNoStudio;
 
 	private boolean bothRoomAndStudio;
-
+	
 	
 	public int getNumberOfRooms(){
 		return numberOfRooms;
@@ -95,7 +101,8 @@ public class SearchForm {
 	public void setStudio(boolean studio) {
 		this.studio = studio;
 	}
-
+ 
+	
 	public boolean getNoRoomNoStudio() {
 		return noRoomNoStudio;
 	}
@@ -111,6 +118,7 @@ public class SearchForm {
 	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
 		this.bothRoomAndStudio = bothRoomAndStudio;
 	}
+	
 	
 	public boolean getRent(){
 		return rent;

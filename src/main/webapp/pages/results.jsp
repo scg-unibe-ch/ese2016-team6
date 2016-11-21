@@ -121,6 +121,9 @@ function sort_div_attribute() {
 
 <hr />
 
+
+
+
 <div>
 <select id="modus">
     <option value="">Sort by:</option>
@@ -132,96 +135,43 @@ function sort_div_attribute() {
     <option value="dateAge_desc">Date created (oldest to youngest)</option>
 </select>
 
+
+
+
 <button onClick="sort_div_attribute()">Sort</button>	
 </div>
-<%--
-<c:choose>
-	<c:when test="${empty results}">
-		<p>No results found!
-	</c:when>
-	<c:otherwise>
-		<div id="resultsDiv" class="resultsDiv">			
-			<c:forEach var="ad" items="${results}">
-				<div class="resultAd" data-price="${ad.prizePerMonth}" 
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
-							<i>
-								<!-- replaced with flat
-								<c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-								</c:choose>
-								-->
-								
-								flat
-								
-								<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
-								<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
-								
-								</i>
-						</p>
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
-
-						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-							type="date" pattern="dd.MM.yyyy" />
-
-						<p>Move-in date: ${formattedMoveInDate }</p>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</c:otherwise>
-</c:choose>
---%>
 
 <form:form method="post" modelAttribute="searchForm" action="/results"
 	id="filterForm" autocomplete="off">
 
 	<div id="filterDiv">
 		<h2>Filter results:</h2>
-		<!--<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
-		<form:checkbox name="studio" id="studio" path="studioHelper" /><label>Studio</label>
-	
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:checkbox style="display:none" name="type" id="type" path="studio" />
-		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />-->
+		
 		
 		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
 		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label> <br/>
 	
-		<form:checkbox style="display:none" name="neitherS" id="neitherS" path="noSellNoRent" />
-		<form:checkbox style="display:none" name="bothS" id="bothS" path="bothSellAndRent" />
-		<form:checkbox style="display:none" name="typeS" id="typeS" path="forSale" />
-		<form:errors path="noSellNoRent" cssClass="validationErrorText" /> <br />
 	
-		<label for="city">City / zip code:</label>
-		<form:input type="text" name="city" id="city" path="city"
-			placeholder="e.g. Bern" tabindex="3" />
-		<form:errors path="city" cssClass="validationErrorText" /><br />
-			
-		<label for="radius">Within radius of (max.):</label>
-		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="5" />
-		km
-		<form:errors path="radius" cssClass="validationErrorText" />
 		<br /> <label for="prize">Price (max.):</label>
 		<form:input id="prizeInput" type="number" path="prize"
 			placeholder="e.g. 5" step="50" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" /><br />
+		
+		<label for="radius">Within radius of (max.):</label>
+		<form:input id="radiusInput" type="number" path="radius"
+			placeholder="e.g. 5" step="5" />
+		km
+		<form:errors path="radius" cssClass="validationErrorText" />
+		<br />
+	
+		<label for="city">City / zip code:</label>
+		<form:input type="text" name="city" id="city" path="city"
+			placeholder="e.g. Bern" tabindex="3" />
+		<form:errors path="city" cssClass="validationErrorText" />
+		
+		<br />
+	
 		
 		<hr class="slim">		
 		
@@ -281,6 +231,7 @@ function sort_div_attribute() {
 	</div>
 </form:form>
 
+
 <c:choose>
 	<c:when test="${empty results}">
 		<p>No results found!
@@ -310,9 +261,13 @@ function sort_div_attribute() {
 							<td>
 								<div class="resultMiddle">
 									<p>
-										For
-										<c:if test="${ad.rent==true}"> rent </c:if>
-										<c:if test="${ad.rent==false}"> sale </c:if>
+										<c:if test="${ad.deal=='forRent'}"> For rent</c:if>
+										<c:if test="${ad.deal=='forSale'}"> 
+											<c:if test="${ad.sale=='direct'}"> For sale</c:if>
+											<c:if test="${ad.sale=='auction'}"> For auction</c:if>
+											<c:if test="${ad.sale=='bothAuctionAndDirect'}"> For auction/sale</c:if>
+										</c:if>
+										
 									</p>
 									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 									<p>
@@ -341,7 +296,6 @@ function sort_div_attribute() {
 		</div>
 	</c:otherwise>
 </c:choose>
-
 
 
 <c:import url="template/footer.jsp" />

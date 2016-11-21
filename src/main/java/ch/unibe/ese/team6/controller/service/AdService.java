@@ -395,30 +395,44 @@ public class AdService {
 		Iterable<Ad> results = Arrays.asList((new Ad[0]));
 
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
+
+
+		
+		results = adDao.findAll();
 		
 		
 		if (searchForm.getForRent()&&searchForm.getForSale()) {
 			
 			
-			//Now searches for rooms with minimum number of rooms
+			/*Searches for rooms with
+			 * the prize per monoth being below x
+			 * the numberof rooms being equal or greater than y
+			 * 
+			 * 
+			 */
 			results = adDao
 					.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1,searchForm.getNumberOfRooms());
 		}
 		
 		else if(searchForm.getForRent()) {
 			
-			//Now searches for rooms with minimum number of rooms
-			results = adDao.findByRentAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
-					true, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+			
+			results = adDao.findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
+					KindOfDeal.forRent, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+			
+			
 		}
 		else if(searchForm.getForSale()){
 			
-			results = adDao.findByRentAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
-					false, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+			results = adDao.findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
+					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
 			
 		}
-
-	       results = adDao.findByPriceLessThanAndExpired(searchForm.getPrice() + 1, false);
+		
+		
+			//checks for not expired ads
+	       //results = adDao.findByPriceLessThanAndExpired(searchForm.getPrice() + 1, false);
+		
 		
 		//for the premium user ads list
 		List<Ad> premiumsFiltered = new ArrayList<>();
