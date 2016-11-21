@@ -36,8 +36,12 @@
 		});
 		
 		$("#field-visitDay").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
+			
+			
 		});
+		
+		
 		
 		
 		$("#addbutton").click(function() {
@@ -78,6 +82,7 @@
 			if(date == ""){
 				return;
 			}
+			
 			
 			var startHour = $("#startHour").val();
 			var startMinutes = $("#startMinutes").val();
@@ -451,7 +456,7 @@
 		<table>
 			<tr>
 				<td>
-					<input type="text" id="field-visitDay" />
+					<input type="text" readonly="readonly" id="field-visitDay" />
 					
 					<select id="startHour">
  					<% 

@@ -78,7 +78,7 @@
 		});
 		
 		$("#field-visitDay").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
 		$("#field-deadlineDate").datepicker({
@@ -356,7 +356,7 @@
 		<legend>Visits timetable (optional)</legend>
 		<table>
 			<tr>
-				<td><input type="text" id="field-visitDay" /> <select
+				<td><input type="text" id="field-visitDay" readonly="readonly" /> <select
 					id="startHour">
 						<%
 							for (int i = 0; i < 24; i++) {

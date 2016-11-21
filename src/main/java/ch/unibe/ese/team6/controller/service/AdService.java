@@ -104,8 +104,9 @@ public class AdService {
 		if(placeAdForm.getRent()==false)ad.setDeal(KindOfDeal.forSale);
 		
 		//transports for sale variable
-		if(placeAdForm.getSale()==KindOfSale.direct) ad.setSale(KindOfSale.direct);//getSale==false
-		if(placeAdForm.getAuction()==true) ad.setSale(KindOfSale.auction);
+		//if(placeAdForm.getSale()==KindOfSale.direct) ad.setSale(KindOfSale.direct);//getSale==false
+		//if(placeAdForm.getAuction()==true) ad.setSale(KindOfSale.auction);
+		ad.setSale(placeAdForm.getSale());
 		
 		//transports for rent and sale prices variable
 		ad.setPriceRent(placeAdForm.getPriceRent());
@@ -358,7 +359,13 @@ public class AdService {
 	 */
 	@Transactional
 	public Iterable<Ad> getNewestRentAds(int newest, boolean rent) {
-		Iterable<Ad> allAds = adDao.findByRent(rent);
+		KindOfDeal deal;
+		if(rent) deal = KindOfDeal.forRent;
+		else deal = KindOfDeal.forSale;
+		
+		//Iterable<Ad> allAds = adDao.findByRent(rent);
+		
+		Iterable<Ad> allAds = adDao.findByDeal(deal);
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
 			ads.add(ad);
