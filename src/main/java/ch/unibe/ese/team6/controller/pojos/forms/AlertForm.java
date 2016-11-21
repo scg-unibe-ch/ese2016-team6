@@ -51,7 +51,7 @@ public class AlertForm {
 	private int maxSize;
 	
 	@Min(value = 0, message = "Minimal Size must be smaller than the maximal Size")
-	public int isValid;
+	public int isValid = maxSize-minSize;
 	
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "Please enter a positive Number of Rooms")

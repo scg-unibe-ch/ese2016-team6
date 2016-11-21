@@ -131,9 +131,10 @@ function rentSaleOfAlert(alert) {
 		Square Meters
 		<form:errors path="maxSize" cssClass="validationErrorText" /> 
 		
-	<!--  	<c:when test="${maxSize<minSize}">
-				<option:error path="isValid" cssClass="validationErrorText" </option:error>
-			</c:when> -->
+	<!--	<div id="isValid">
+		<form:hidden id="isValid" type="number" path="isValid" />
+		<form:errors path="isValid" cssClass="validationErrorText" /> 
+		</div> -->
 		
 		<br />
 		
