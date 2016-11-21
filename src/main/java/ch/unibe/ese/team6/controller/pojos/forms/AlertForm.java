@@ -89,29 +89,6 @@ public class AlertForm {
 		this.price = price;
 	}
 
-/*	public boolean getStudio() {
-		return studio;
-	}
-
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-
-	public boolean getRoom() {
-		return room;
-	}
-
-	public void setRoom(boolean room) {
-		this.room = room;
-	}
-
-	public boolean getNoRoomNoStudio() {
-		return noRoomNoStudio;
-	}
-
-	public void setNoRoomNoStudio(boolean noRoomNoStudio) {
-		this.noRoomNoStudio = noRoomNoStudio;
-	}*/
 
 	public boolean getBothRoomAndStudio() {
 		return bothRoomAndStudio;

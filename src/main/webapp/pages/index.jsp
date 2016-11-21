@@ -32,7 +32,7 @@
 						<h2 style="width:100%;text-align:center;">flats for rent</h2>
 					</th>
 					<th>
-						<h2 style="width:100%;text-align:center;">flats for sale</h2>
+						<h2 style="width:100%;text-align:center;">flats for sale and/or auction</h2>
 					</th>
 				</tr>
 				
@@ -40,7 +40,7 @@
 					<td valign="top">
 						<c:forEach var="ad" items="${newestRent}">
 							
-							<c:if test="${ad.rent==true}">
+							
 								<div class="resultAd">
 									<table id="resultTable" style="width:100%">
 										<tr>
@@ -72,7 +72,8 @@
 										
 											<td>
 												<div class="resultRight">
-													<h2>CHF ${ad.prizePerMonth }</h2>
+													<h2>CHF ${ad.priceRent }/Month</h2> 
+													
 													<br /> <br />
 													<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 														type="date" pattern="dd.MM.yyyy" />
@@ -82,14 +83,14 @@
 										</tr>
 									</table>
 								</div>
-							</c:if>
+							
 						</c:forEach>
 					</td>
 			
 			
 					<td valign="top">
 						<c:forEach var="ad" items="${newestSale}">
-							<c:if test="${ad.rent==false}">
+							
 								<div class="resultAd">
 									<table id="resultTable" style="width:100%">
 										<tr>
@@ -106,9 +107,10 @@
 													<a href="<c:url value='/ad?id=${ad.id}' />"><img src="${ad.pictures[0].filePath}" /></a>
 												</div>
 											</td>
-
+												
 											<td>
 												<div class="resultMiddle">
+												
 													<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 													<p>
 														<i>
@@ -122,7 +124,17 @@
 										
 											<td>
 												<div class="resultRight">
-													<h2>CHF ${ad.prizePerMonth }</h2>
+													<p>
+													<c:if test="${ad.sale=='direct'}"> <h2>For sale</h2></c:if>
+													<c:if test="${ad.sale=='auction'}"> <h2>For auction</h2></c:if>
+													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>For auction/sale</h2></c:if>
+													
+													</p>
+												
+													<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale }</h2></c:if>
+													<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid }</h2></c:if>
+													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid }</h2></c:if>
+													
 													<br /> <br />
 													<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 														type="date" pattern="dd.MM.yyyy" />
@@ -132,7 +144,7 @@
 										</tr>
 									</table>
 								</div>
-							</c:if>
+							
 						</c:forEach>
 					</td>
 				</tr>
