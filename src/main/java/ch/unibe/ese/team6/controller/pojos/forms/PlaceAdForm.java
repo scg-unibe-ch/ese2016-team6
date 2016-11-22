@@ -76,7 +76,6 @@ public class PlaceAdForm {
 	private boolean studio;
 	
 	//true if rent, false if sale
-
 	private boolean rent;
 	//private boolean sale;
 	private boolean auction;

@@ -173,7 +173,9 @@ public class PlaceAdController {
 	public ModelAndView create(@Valid PlaceAdForm placeAdForm,
 			BindingResult result, RedirectAttributes redirectAttributes,
 			Principal principal) {
+		
 		ModelAndView model = new ModelAndView("placeAd");
+		
 		if (!result.hasErrors()) {
 			String username = principal.getName();
 			User user = userService.findUserByUsername(username);

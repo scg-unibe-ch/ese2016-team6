@@ -19,6 +19,28 @@
 		// iterate through it
 		// if there is id == x then make "Bookmark Me" to "bookmarked"
 
+		
+		
+		document.getElementById('type-sale').checked="";
+		document.getElementById('type-auction').checked="";
+		document.getElementById('field-priceRent').style.visibility = "visible";
+		document.getElementById('field-priceSale').style.visibility = "hidden";
+		document.getElementById('field-currentBid').style.visibility = "hidden";
+		document.getElementById('field-increment').style.visibility = "hidden";
+		document.getElementById('field-deadlineDate').style.visibility = "hidden";
+		document.getElementById('field-deadlineHour').style.visibility = "hidden";
+		document.getElementById('field-deadlineMinute').style.visibility = "hidden";
+		
+		document.getElementById('rentLabel').style.visibility = "visible";
+		document.getElementById('saleLabel').style.visibility = "hidden";
+		document.getElementById('bidLabel').style.visibility = "hidden";
+		document.getElementById('incLabel').style.visibility = "hidden";
+		document.getElementById('deadLabel').style.visibility = "hidden";
+		
+		
+		document.getElementById('ActualDeal').value = "forRent";
+		
+		
 
     	$("#type-rent").on("click", function(){
 			document.getElementById('type-sale').checked="";
@@ -30,6 +52,16 @@
 			document.getElementById('field-deadlineDate').style.visibility = "hidden";
 			document.getElementById('field-deadlineHour').style.visibility = "hidden";
 			document.getElementById('field-deadlineMinute').style.visibility = "hidden";
+			
+			document.getElementById('rentLabel').style.visibility = "visible";
+			document.getElementById('saleLabel').style.visibility = "hidden";
+			document.getElementById('bidLabel').style.visibility = "hidden";
+			document.getElementById('incLabel').style.visibility = "hidden";
+			document.getElementById('deadLabel').style.visibility = "hidden";
+			
+			
+			document.getElementById('ActualDeal').value = "forRent";
+			
     	});
 
 		$("#type-sale").on("click", function(){
@@ -42,6 +74,16 @@
 			document.getElementById('field-deadlineDate').style.visibility = "hidden";
 			document.getElementById('field-deadlineHour').style.visibility = "hidden";
 			document.getElementById('field-deadlineMinute').style.visibility = "hidden";
+			
+			
+			document.getElementById('rentLabel').style.visibility = "hidden";
+			document.getElementById('saleLabel').style.visibility = "visible";
+			document.getElementById('bidLabel').style.visibility = "hidden";
+			document.getElementById('incLabel').style.visibility = "hidden";
+			document.getElementById('deadLabel').style.visibility = "hidden";
+			
+			document.getElementById('ActualSale').value = "direct";
+			document.getElementById('ActualDeal').value = "forSale";
    		});
 
     	$("#type-auction").on("click", function(){
@@ -54,6 +96,16 @@
 			document.getElementById('field-deadlineDate').style.visibility = "visible";
 			document.getElementById('field-deadlineHour').style.visibility = "visible";
 			document.getElementById('field-deadlineMinute').style.visibility = "visible";
+			
+			
+			document.getElementById('rentLabel').style.visibility = "hidden";
+			document.getElementById('saleLabel').style.visibility = "visible";
+			document.getElementById('bidLabel').style.visibility = "visible";
+			document.getElementById('incLabel').style.visibility = "visible";
+			document.getElementById('deadLabel').style.visibility = "visible";
+			
+			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
+			document.getElementById('ActualDeal').value = "forSale";
     	});
 
 		$("#field-city").autocomplete({
@@ -172,11 +224,21 @@
 			
 			<tr>
 			<td><label for="field-type">Type of deal:</label>
-				<%-- added name so that 'rent' is selected only--%>
-
-			    <form:radiobutton id="type-rent" name="radio1" path="rent" value="0" checked="checked"/>Rent
-			    <form:radiobutton id="type-sale" name="radio1" path="sale" value="0" />Sale
-				<form:radiobutton id="type-auction" name="radio1" path="auction" value="0"/>Auction</td>
+				
+				<!-- uses the scripts above to put the values of the radio buttons in these two invisible fields
+				these two invisible fields are then written into the form
+				-->
+				<form:input type="hidden" id="ActualSale" path="sale"  value="direct" readonly="readonly" />
+				<form:input type="hidden" id="ActualDeal" path="deal"  value="forRent" readonly="readonly" />
+				
+				<input id="type-rent" type="radio" name="sale" value="forRent" checked="checked"> Rent
+				<input id="type-sale"  type="radio" name="sale" value="forSale"> Sale
+				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction
+				
+				
+				
+				
+				</td>
 
 			</tr>	
 
@@ -198,7 +260,7 @@
 
 			<tr>
 				<td><label for="field-squareFootage">Square Meters (m²) :</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="2" min="0" />
+					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="1" min="0" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
@@ -229,31 +291,31 @@
 		<table class="placeAdTable">
 			
 			<tr>
-				<td><label for="field-priceRent">Monthly rental charges (CHF) :</label>
+				<td><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) :</label>
 				<form:input id="field-priceRent" type="number" path="prize" step="50" min="0"/>
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
-				<td><label for="field-priceSale">Price for a direct sale (CHF) :</label>
+				<td><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) :</label>
 				<form:input id="field-priceSale" type="number" path="prize" step="50" min="0" />
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td><label for="field-currentBid">Initial bid for a sale through auction (CHF) :</label>
+				<td><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) :</label>
 				<form:input id="field-currentBid" type="number" path="currentBid" step="50" min="0"/>
 				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
-				<td><label for="field-increment">Automatic increment for each new bid (CHF) :</label>
+				<td><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) :</label>
 				<form:input id="field-increment" type="number" path="increment" step="50" min="0"/>
 				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
 			
 			<tr>
-				<td><label for="field-deadlineDate">Deadline</label>
+				<td><label id="deadLabel" for="field-deadlineDate">Deadline</label>
 					<input id="field-deadlineDate" />
 					
 					<select id="field-deadlineHour">
