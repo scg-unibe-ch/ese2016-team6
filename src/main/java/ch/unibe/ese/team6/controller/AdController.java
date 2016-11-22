@@ -24,7 +24,9 @@ import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.controller.service.UserService;
 import ch.unibe.ese.team6.controller.service.VisitService;
 import ch.unibe.ese.team6.model.Ad;
+import ch.unibe.ese.team6.model.Bid;
 import ch.unibe.ese.team6.model.User;
+import ch.unibe.ese.team6.model.dao.BidDao;
 
 /**
  * This controller handles all requests concerning displaying ads and
@@ -44,6 +46,9 @@ public class AdController {
 
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private BidDao bidDao;
 
 	@Autowired
 	private VisitService visitService;
@@ -56,6 +61,13 @@ public class AdController {
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
 
+		//ad the latest bid as well
+		Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
+		
+		
+		model.addObject("latestBid", bid);
+		
+		
 		String loggedInUserEmail = (principal == null) ? "" : principal
 				.getName();
 		model.addObject("loggedInUserEmail", loggedInUserEmail);

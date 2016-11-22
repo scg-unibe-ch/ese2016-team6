@@ -86,6 +86,11 @@
 		attachBookmarkClickHandler();
 		attachBookmarkedClickHandler();
 		
+		var minBid = ${shownAd.currentBid} + ${shownAd.increment};
+		
+		document.getElementById('bidAmount').min = minBid;
+		document.getElementById('bidAmount').value = minBid;
+		
 		$.post("/bookmark", {id: shownAdvertisementID, screening: true, bookmarked: true}, function(data) {
 			if(data == 3) {
 				$('#bookmarkButton').replaceWith($('<a class="right" id="bookmarkedButton">' + "Bookmarked" + '</a>'));
@@ -366,58 +371,77 @@
 							<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
 						
 					
-							<%-- This gets the sum of the current bid and the increment --%>
-									<%!
-									int cBid = 0,
-										inc = 0,
-										finalMinBid = 0;
-									%>
-									<%
-									try{
-										cBid = Integer.parseInt("${shownAd.currentBid}");
-									 }
-										catch (Exception e){
+							
+								<div>
+								
+								<c:choose>
+									<c:when test="${loggedIn}">
+								
+								
+									<c:if test="${loggedInUserEmail != shownAd.user.username }">
+										<form action="/ad/makeBid" method="post">
+							
+											<form><label for="field-currentBid">Make a higher bid :</label>
+											<input type="hidden" name="id" value="${shownAd.id}">
+											<input class="bidInput" type="number" name ="amount" id="bidAmount"/>
+											<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
+											</form>
+							
+										<form>
+									</c:if>
+									
+								
+								
+								
+								<c:if test="${latestBid.user != null}">
+								<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
+									
+									
+									<table>
+										<tr>
+											<td>
+												current highest bidder : ${latestBid.user.username}
+											</td>
 											
-										}
-									try{
-										cBid = Integer.parseInt("${shownAd.increment}");
-									 }
-										catch (Exception e){
+											<td>
+												<c:choose>
+													<c:when test="${latestBid.user.picture.filePath != null}">
+														<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
+													</c:when>
+													<c:otherwise>
+														<img src="/img/avatar.png">
+													</c:otherwise>
+												</c:choose>
+											</td>					
 											
-										}
-										
-									finalMinBid=cBid+inc;
-									%>
-					
-					
-								<form action="/ad/makeBid" method="post">
-					
-									<form><label for="field-currentBid">Make a higher bid :</label>
-									<input type="hidden" name="id" value="${shownAd.id}">
-									<input class="bidInput" type="number" name ="amount" id="bidAmount" value="${shownAd.currentBid}" step="${shownAd.increment}"/>
-									<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
-									</form>
-					
-								<form>
-					
-					
-					<!-- wierd stuff going on
-						<c:choose>
-							<c:when test="${loggedIn}||1==1">
-								 <c:if test="${loggedInUserEmail != shownAd.user.username }"> 
-									<form><label for="field-currentBid">Make a higher bid :</label>
-									<input class="bidInput" type="number" id="bidAmount" value="${shownAd.currentBid}" step="${shownAd.increment}"/>
-										  <button type="button" id="makeBid" class="bidButton">Let's go !</button>
-									</form>
-									<br/>
-								</c:if> 
-							</c:when>
-							<c:otherwise>
-							<br/>
-							Please log in to use the auction
-							</c:otherwise>
+											
+										</tr>	
+										<tr>
+											<td>
+												with a bid of : ${latestBid.amount} CHF
+											</td>
+											<td>
+											This offer was made: 
+											<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
+											</td>
+										</tr>
+									</table>
+								</div>
+								
+								</c:if>
+								
+								<c:if test="${latestBid.user == null}">
+									noone has made a bid yet. Be the first to make an offer.
+								</c:if>
+							</div>
+							
+								</c:when>
+								<c:otherwise>
+									Please log in to use the auction
+								</c:otherwise>
 						</c:choose>
-						-->
+						
+					
 						</c:if>
 				</c:if>
 	
