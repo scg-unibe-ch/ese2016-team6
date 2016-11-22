@@ -12,9 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.controller.service.AdService;
-import ch.unibe.ese.team6.controller.service.UserService;
-import ch.unibe.ese.team6.model.dao.AdDao;
-import net.sf.ehcache.search.Results;
 
 /** Handles all requests concerning the search for ads. */
 @Controller
@@ -23,11 +20,6 @@ public class SearchController {
 	@Autowired
 	private AdService adService;
 
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private AdDao adDao;
 
 	/**
 	 * The search form that is used for searching. It is saved between request
@@ -39,6 +31,8 @@ public class SearchController {
 	@RequestMapping(value = "/searchAd", method = RequestMethod.GET)
 	public ModelAndView searchAd() {
 		ModelAndView model = new ModelAndView("searchAd");
+		searchForm = new SearchForm();
+		model.addObject(searchForm);
 		return model;
 	}
 

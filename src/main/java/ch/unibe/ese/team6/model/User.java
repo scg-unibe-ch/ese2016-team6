@@ -67,6 +67,8 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Ad> bookmarkedAds;
 
+	private boolean isGoogleUser;
+
 	public long getId() {
 		return id;
 	}
@@ -207,5 +209,18 @@ public class User {
 	
 	public long getPeriodOfPreiumMembership() {
 		return 60000*24*7;
+	}
+
+	public boolean getIsGoogleUser(){
+		return this.isGoogleUser;
+	}
+	
+	public void setIsGoogleUser(boolean googleUser){
+		this.isGoogleUser = googleUser;
+	}
+	
+	public void setGooglePicture(String googlePicture) {
+		// TODO Auto-generated method stub
+		
 	}
 }

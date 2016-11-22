@@ -66,7 +66,8 @@ public class AlertService {
 		alert.setForSale(alertForm.getForSale());
 		alert.setBothRentAndSale(alertForm.getBothRentAndSale());
 		alert.setMinSize(alertForm.getMinSize());
-		alert.setMaxSize(alert.getMinSize());
+		alert.setMaxSize(alert.getMaxSize());
+		alertForm.getIsValid();
 		alert.setNumberOfRooms(alertForm.getNumberOfRooms());
 		alertDao.save(alert);
 	}

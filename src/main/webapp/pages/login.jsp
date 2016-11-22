@@ -9,6 +9,11 @@
 <!-- check if user is logged in -->
 <security:authorize var="loggedIn" url="/profile" />
 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
+
+
 <c:import url="template/header.jsp" />
 
 <pre>
@@ -32,6 +37,15 @@
 				name="j_password" id="field-password" type="password" />
 			<button type="submit">Login</button>
 		</form>
+		Or <a class="button"  href="<c:url value="/signup" />">sign up</a> as a new user.
+		<br>
+		
+		<p>
+			Or login with your Google account: <div class="g-signin2" data-onsuccess="onSignIn"></div>
+						</c:otherwise>
+					</c:choose>
+		
+		
 		<br />
 		<h2>Test users</h2>
 
@@ -41,18 +55,42 @@
 			<li>Email: <i>user@bern.com</i>, password: <i>password</i></li>
 			<li>Email: <i>oprah@winfrey.com</i>, password: <i>password</i></li>
 		</ul>
-		<br />
+		<br />	
+<div>
+	<form:form id="googleForm" type="hidden" class="form-horizontal" method="post"
+		modelAttribute="googleForm" action="./googlelogin">
 
-		<h2>Roommates for AdBern</h2>
-		<ul class="test-users">
-			<li>Email: <i>hans@unibe.ch</i>, password: <i>password</i></li>
-			<li>Email: <i>mathilda@unibe.ch</i>, password: <i>password</i></li>
-		</ul>
-		<br />
-		
-			Or <a class="button"  href="<c:url value="/signup" />">sign up</a> as a new user.
-		
-	</c:otherwise>
-</c:choose>
+			<spring:bind path="firstName">
+						<form:input type="hidden" path="firstName" cssClass="form-control"
+							id="field-firstName" />
+			</spring:bind>
 
+			<spring:bind path="lastName">
+						<form:input type="hidden" path="lastName" id="field-lastName"
+							cssClass="form-control" />
+			</spring:bind>
+
+			<spring:bind path="email">	
+						<form:input type="hidden" path="email" id="field-mail"
+							cssClass="form-control" />
+			</spring:bind>
+		<button type="submit" style="visibility:hidden;" class="btn btn-primary" value="signup" id="googleButton"
+				>Sign up</button>
+				
+		</form:form>
+	</div>	
+	<script>
+	function onSignIn(googleUser) {
+	 	var profile = googleUser.getBasicProfile();
+		$("#field-firstName").val(profile.getGivenName());
+		$("#field-lastName").val(profile.getFamilyName());
+		$("#field-mail").val(profile.getEmail());
+		$("#field-googlePicture").val(profile.getImageUrl());
+		var auth2 = gapi.auth2.getAuthInstance();
+    	auth2.signOut();
+		$("#googleButton").click();
+		
+	}
+</script>
+		
 <c:import url="template/footer.jsp" />
