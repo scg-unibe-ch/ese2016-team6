@@ -46,30 +46,46 @@
 <header>
 	<div class="left">
 		<a href="/"><img src="/img/logo.png"></a>
+		<br/>
 		
-	</div>
-	
-	<div class="left" style="color:black">
+		
+		<!--
+		<div class="left" style="color:black" style="float:left">
 		<a class="headerlink" href="/about">About us</a>
 		<a class="headerlink" href="/disclaimer">Disclaimer</a>
 		&copy;2014 by the FlatFoundrs. All rights reserved.
+		
+		-->
 	</div>	
+		
+		
+	</div>
+	
+	
 	
 	<div class="right">
 		<nav>
-			<ul>
-			
+			<ul id="headerButtons">
+				
 				
 			
 				<c:choose>
 					<c:when test="${loggedIn}">
+					
+					
 					<script>
 						$(document).ready(unreadMessages("header"));
 					</script>
 					
 					<!-- include user details -->
 					<%@include file='/pages/getUserPicture.jsp' %>
-						<li id="profile_picture"><a href="#">
+						<li class="headerButton" id="profile_picture" >
+						
+						
+						
+						<a href="#">
+						
+						
 						<% 
 							out.print("<img src='" + filePath + "' />");
 
@@ -78,26 +94,26 @@
 						%>
 						</a>
 					
-						<ul>
+					
 						
 						
-								<li><a href="/profile/placeAd">Place an ad</a></li>
-								<li><a href="/profile/myRooms">My properties</a></li>
-								<li><a id="messageLink" href="/profile/messages"></a></li>
-								<li><a href="/profile/enquiries">Enquiries</a></li>
-								<li><a href="/profile/schedule">Schedule</a></li>
-								<li><a href="/profile/alerts">Alerts</a></li>
-								<li>
+					
+						<ul  id="ProfileDropList">
+								<li class="ProfileListItem" style="top:65px;"><a href="/profile/placeAd">Place an ad</a></li>
+								<li class="ProfileListItem" style="top:90px;"><a href="/profile/myRooms">My properties</a></li>
+								<li class="ProfileListItem" style="top:115px;"><a id="messageLink" href="/profile/messages"></a></li>
+								<li class="ProfileListItem" style="top:140px;"><a href="/profile/enquiries">Enquiries</a></li>
+								<li class="ProfileListItem" style="top:165px;"><a href="/profile/schedule">Schedule</a></li>
+								<li class="ProfileListItem" style="top:190px;"><a href="/profile/alerts">Alerts</a></li>
+								<li class="ProfileListItem" style="top:215px;">
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
 								</li>
-								<li><a href="/logout">Logout</a></li>
-						
-						
+								<li class="ProfileListItem" style="top:240px;"><a href="/logout">Logout</a></li>
 						</ul>
 						</li>
 						
 						
-						<li><a href="<c:url value='/searchAd' />">Search</a></li>
+						<li class="headerButton"><a href="<c:url value='/searchAd' />" >Search</a></li>
 					</c:when>
 					
 					
