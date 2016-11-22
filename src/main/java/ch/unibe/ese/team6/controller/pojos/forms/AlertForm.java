@@ -1,6 +1,7 @@
 package ch.unibe.ese.team6.controller.pojos.forms;
 
 import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -49,8 +50,8 @@ public class AlertForm {
 	@Min(value = 0, message = "Please enter a positive maximal Size")
 	private int maxSize;
 	
-	@Min(value = 0, message = "Minimal Size must be smaller than the maximal Size")
-	public int isValid = maxSize-minSize;
+	@AssertTrue(message = "Minimal Size must be smaller than the maximal Size")
+	public boolean isValid;
 	
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "Please enter a positive Number of Rooms")
@@ -159,5 +160,16 @@ public class AlertForm {
 	
 	public void setNumberOfRooms(int rooms) {
 		this.numberOfRooms = rooms;
+	}
+	
+	public boolean getIsValid() {
+		return isValid;
+	}
+	
+	public void setIsValid(){
+		if(maxSize<minSize) {
+			this.isValid = false;
+		}
+		this.isValid = true;
 	}
 }

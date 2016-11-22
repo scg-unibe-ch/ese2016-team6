@@ -41,7 +41,7 @@ function validateType(form)
 	
 	var minsize = document.getElementById('minSize');
 	var maxsize = document.getElementById('maxSize');
-	var isValid = maxsize-minsize;
+	var isValid = document.getElementById('isValid');
 }
 </script>
 
@@ -131,10 +131,9 @@ function rentSaleOfAlert(alert) {
 		Square Meters
 		<form:errors path="maxSize" cssClass="validationErrorText" /> 
 		
-	<!--	<div id="isValid">
-		<form:hidden id="isValid" type="number" path="isValid" />
-		<form:errors path="isValid" cssClass="validationErrorText" /> 
-		</div> -->
+		<label for="isValid"></label>
+		<form:input style="display:none" id="isValid" type="booelan" path="isValid" />
+		<form:errors path="isValid" cssClass="validationErrorText" />
 		
 		<br />
 		
@@ -199,10 +198,10 @@ function rentSaleOfAlert(alert) {
 				<td>${alert.numberOfRooms}</td>
 				<td>
 					<c:choose>
-						<c:when test="${alert.minSize != 0 && alert.maxSize == 1000000}">
+						<c:when test="${alert.minSize != 0 && (alert.maxSize == 1000000 || alert.maxSize == 0)}">
 							greater than ${alert.minSize} Square Meters
 						</c:when>
-						<c:when test="${alert.minSize == 0 && alert.maxSize == 1000000}">
+						<c:when test="${alert.minSize == 0 && (alert.maxSize == 1000000 || alert.maxSize == 0)}">
 							all
 						</c:when>
 						<c:when test="${alert.minSize == alert.maxSize}">
