@@ -101,6 +101,7 @@ public class EditAdController {
 			Ad ad = editAdService.saveFrom(placeAdForm, fileNames, user, adId);
 
 			// triggers all alerts that match the placed ad
+			//caused an error 22/11/2016
 			alertService.triggerAlerts(ad);
 
 			// reset the picture uploader

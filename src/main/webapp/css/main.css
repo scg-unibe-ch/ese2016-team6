@@ -347,6 +347,7 @@ header {
 	height:auto;
 	color: white;
 	background: #ff8447;
+	
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -356,6 +357,12 @@ header {
 	
 	width:100%;
 	
+}
+
+#OrangeBox{
+	background: #ff8447;
+	width:100%;
+	display: inline-block;
 }
 
 header a {
@@ -378,6 +385,12 @@ header ul {
 	list-style: none;
 }
 
+
+
+
+
+
+
 header ul li {
 	float: right;
 	width: 100px;
@@ -385,7 +398,49 @@ header ul li {
 	line-height: 21px;
 	margin-top: 20px;
 	
+	
+	
 }
+
+
+#ProfileDropList li{
+	
+	text-align: center;
+	width:170px;
+	position:absolute;
+	height:40px;
+	margin-top: 0px;
+	
+}
+
+.ProfileListItem{
+	
+	border-radius: 0px;
+	border-radius: 0px;
+}
+
+
+header ul li a {
+	
+	background-color: #ffcc99;
+	color: black;
+	border-color: #990000;
+	
+	border-width:1px;
+	
+	display: block;
+	margin: 2px 5px;
+	padding: 2px 2px;
+	
+	
+	text-decoration: none;
+	
+	
+	
+	border-style: solid;
+	border-radius: 5px;
+}
+
 
 #profile_picture {
 	width: 170px;
@@ -409,11 +464,11 @@ header ul li {
 	height: 60px;
 	float: left;
 }
-
+/*
 #profile_picture a {
 	height: 60px;
 }
-
+*/
 #profile_picture .text {
 	float: center;
 	height: 100%;
@@ -421,10 +476,11 @@ header ul li {
 	margin-right: 10px;
 }
 
+/*
 #profile_picture ul li {
 	margin-top:0px;
 	float: none;
-	width: auto;
+	//width: auto;
 	
 }
 
@@ -432,6 +488,7 @@ header ul li {
 	height: 25px;
 	text-align: left;
 }
+*/
 
 /*links in the header*/
 
@@ -471,26 +528,7 @@ header ul li {
 
 
 
-header ul li a {
-	
-	background-color: #ffcc99;
-	color: black;
-	border-color: #990000;
-	
-	border-width:1px;
-	
-	display: block;
-	margin: 2px 5px;
-	padding: 2px 2px;
-	
-	
-	text-decoration: none;
-	
-	
-	
-	border-style: solid;
-	border-radius: 5px;
-}
+
 
 header ul li a:hover {
 	

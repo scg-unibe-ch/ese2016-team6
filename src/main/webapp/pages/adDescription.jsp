@@ -339,30 +339,31 @@
 	<tr>
 		<td style="width:50%;">	
 			<div id="bidList" class="adDescDiv">
-				<%--<div id="bidInfo"> --%>
+				
 				<h2>Price corner</h2>
 				<br/>
 				
-				<%-- note: to disable the ifs just add ||true inside brackets after the ' and before the } --%>
-				<%-- only shows this part if property for rent --%>
+				<!-- note: to disable the ifs just add ||true inside brackets after the ' and before the } -->
+				<!-- only shows this part if property for rent -->
 				<c:if test="${shownAd.deal=='forRent'}">
 					<h3><label>This property is for rent for : </label>${shownAd.prizePerMonth} CHF/month</h3>
 				</c:if>
 				
-				<%-- only shows this part if property for sale --%>
+				<!-- only shows this part if property for sale -->
 				<c:if test="${shownAd.deal=='forSale'}">
-					<%-- <p><h3><label>If for sale (CHF) :</label></h3></p> --%>
+					<!-- <p><h3><label>If for sale (CHF) :</label></h3></p> -->
 					
-						<%-- only shows this part if property for directsale --%>
+						<!-- only shows this part if property for directsale -->
 						<c:if test="${shownAd.sale=='direct'||shownAd.sale=='bothAuctionAndDirect'}">
 							<h3><label>This property is for sale ! Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
 						</c:if>
 						
-						<%-- only shows this part if property for auction --%>
+						<!-- only shows this part if property for auction -->
 						<c:if test="${shownAd.sale=='auction'||shownAd.sale=='bothAuctionAndDirect'}">
 
-							<h3><label>This property is for sale through auction ! Amount of the current bid : </label> CHF ${shownAd.currentBid}</h3>
-							<h2 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h2>
+							<h3><label>This property is for sale through auction ! </br> Amount of the current bid : </label> CHF ${shownAd.currentBid}</h3>
+							<h3><label>Minimum increment :</label> CHF ${shownAd.increment}</h3>
+							<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
 						
 					
 							<%-- This gets the sum of the current bid and the increment --%>
@@ -388,24 +389,38 @@
 									finalMinBid=cBid+inc;
 									%>
 					
-				<c:choose>
-        			<c:when test="${loggedIn}">
-            			<c:if test="${loggedInUserEmail != shownAd.user.username }">
-              				<form><label for="field-currentBid">Make a higher bid :</label>
-                    		<input class="bidInput" type="number" id="bidAmount" value="${shownAd.currentBid}" step="${shownAd.increment}"/>
-                                  <button type="button" id="makeBid" class="bidButton">Let's go !</button>
-                       		</form>
-                       		<br/>
-           				</c:if>
-      				</c:when>
-      				<c:otherwise>
-      				<br/>
-					Please log in to use the auction
-					</c:otherwise>
-      			</c:choose>
-		</c:if>
-	</c:if>
-	<%-- </div>--%>
+					
+								<form action="/ad/makeBid" method="post">
+					
+									<form><label for="field-currentBid">Make a higher bid :</label>
+									<input type="hidden" name="id" value="${shownAd.id}">
+									<input class="bidInput" type="number" name ="amount" id="bidAmount" value="${shownAd.currentBid}" step="${shownAd.increment}"/>
+									<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
+									</form>
+					
+								<form>
+					
+					
+					<!-- wierd stuff going on
+						<c:choose>
+							<c:when test="${loggedIn}||1==1">
+								 <c:if test="${loggedInUserEmail != shownAd.user.username }"> 
+									<form><label for="field-currentBid">Make a higher bid :</label>
+									<input class="bidInput" type="number" id="bidAmount" value="${shownAd.currentBid}" step="${shownAd.increment}"/>
+										  <button type="button" id="makeBid" class="bidButton">Let's go !</button>
+									</form>
+									<br/>
+								</c:if> 
+							</c:when>
+							<c:otherwise>
+							<br/>
+							Please log in to use the auction
+							</c:otherwise>
+						</c:choose>
+						-->
+						</c:if>
+				</c:if>
+	
 </div>
 </td>
 

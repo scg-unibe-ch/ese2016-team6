@@ -92,6 +92,11 @@ public class AlertService {
 	 */
 	@Transactional
 	public void triggerAlerts(Ad ad) {
+		
+		/*
+		 * There is an error here that causes a crash. a null pointer or index out of bounds error.
+		 */
+		
 		int adPrice = ad.getPriceRent(); //ad.getPrizePerMonth removed from Ad.java
 		Iterable<Alert> alerts = alertDao.findByPriceGreaterThan(adPrice - 1);
 
@@ -106,6 +111,7 @@ public class AlertService {
 				alertIterator.remove();
 		}
 
+		
 		// send only one message per user, no matter how many alerts were
 		// triggered
 		List<User> users = new ArrayList<User>();
@@ -128,7 +134,11 @@ public class AlertService {
 			message.setDateSent(now);
 			messageDao.save(message);
 		}
+		
+		
 	}
+
+	
 
 	/**
 	 * Returns the text for an alert message with the properties of the given

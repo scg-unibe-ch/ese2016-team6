@@ -396,10 +396,6 @@ public class AdService {
 
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 
-
-		
-		results = adDao.findAll();
-		
 		
 		if (searchForm.getForRent()&&searchForm.getForSale()) {
 			
