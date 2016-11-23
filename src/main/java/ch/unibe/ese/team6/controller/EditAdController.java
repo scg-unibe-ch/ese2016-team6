@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ch.unibe.ese.team6.controller.exceptions.ForbiddenException;
 import ch.unibe.ese.team6.controller.pojos.PictureUploader;
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.service.AdService;
@@ -67,6 +68,14 @@ public class EditAdController {
 	public ModelAndView editAdPage(@RequestParam long id, Principal principal) {
 		ModelAndView model = new ModelAndView("editAd");
 		Ad ad = adService.getAdById(id);
+		
+		String username = principal.getName();
+		User user = userService.findUserByUsername(username);
+
+		if (!user.equals(ad.getUser())) {
+			throw new ForbiddenException();
+		}
+		
 		model.addObject("ad", ad);
 
 		PlaceAdForm form = editAdService.fillForm(ad);
@@ -88,11 +97,16 @@ public class EditAdController {
 	public ModelAndView editAdPageWithForm(@Valid PlaceAdForm placeAdForm,
 			BindingResult result, Principal principal,
 			RedirectAttributes redirectAttributes, @RequestParam long adId) {
-		ModelAndView model = new ModelAndView("placeAd");
+		ModelAndView model = new ModelAndView("editAd");
 		if (!result.hasErrors()) {
 			String username = principal.getName();
 			User user = userService.findUserByUsername(username);
 
+			Ad currentAd = this.adService.getAdById(adId);
+			if (!user.equals(currentAd.getUser())) {
+				throw new ForbiddenException();
+			}
+			
 			String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
 			if (pictureUploader == null) {
 				pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
