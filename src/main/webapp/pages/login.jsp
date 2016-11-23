@@ -13,7 +13,6 @@
 
 <meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
 
-<script src="https://www.facebook.com/connect/login_success.html" async defer></script>
 
 
 <c:import url="template/header.jsp" />
@@ -22,6 +21,15 @@
 	<a href="/">Home</a>   &gt;   Login</pre>
 
 <h1>Login</h1>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <c:choose>
 	<c:when test="${loggedIn}">
@@ -81,6 +89,9 @@
 				
 		</form:form>
 	</div>	
+	
+	<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
+	
 	<script>
 	function onSignIn(googleUser) {
 	 	var profile = googleUser.getBasicProfile();
@@ -93,6 +104,7 @@
 		$("#googleButton").click();
 		
 	}
+	
 </script>
 
 
