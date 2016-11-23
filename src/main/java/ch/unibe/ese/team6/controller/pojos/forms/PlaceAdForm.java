@@ -63,7 +63,7 @@ public class PlaceAdForm {
 	private String preferences;
 
 	// optional free text description
-	private String roommates;
+	//private String roommates;
 	
 	// First user are added as strings, then transformed
 	// to Users and added to the DB in through adService

@@ -1,44 +1,38 @@
 package ch.unibe.ese.team6.controller.service;
 
 import java.security.SecureRandom;
-import java.util.HashSet;
-import java.util.Set;
 import java.math.BigInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ch.unibe.ese.team6.controller.pojos.forms.FacebookLoginForm;
 import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.model.User;
-import ch.unibe.ese.team6.model.UserRole;
 import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.Gender;
 import ch.unibe.ese.team6.model.dao.UserDao;
 
 /** Handles the persisting of new users signing up with google */
 @Service
-public class GoogleSignupService {
+public class FacebookSignupService {
 	
 	@Autowired
 	private UserDao userDao;
 	
 	@Autowired
 	private MessageService messageService;
-	
-	private static final String DEFAULT_ROLE = "ROLE_USER";
-	
-	@Autowired
-	private SignupService signupService;
 
 	/** Handles persisting a new user to the database. */
 	@Transactional
-	public void saveFrom(GoogleSignupForm googleForm) {
+	public void saveFrom(FacebookLoginForm facebookForm) {
 		User user = new User();
-		user.setUsername(googleForm.getEmail());
-		user.setEmail(googleForm.getEmail());
-		user.setFirstName(googleForm.getFirstName());
-		user.setLastName(googleForm.getLastName());
+		user.setUsername(facebookForm.getEmail());
+		user.setEmail(facebookForm.getEmail());
+		user.setFirstName(facebookForm.getFirstName());
+		user.setLastName(facebookForm.getLastName());
 		
 		final SecureRandom rndm = new SecureRandom();
 		String randomPassword = new BigInteger(50, rndm).toString(32);
@@ -50,22 +44,11 @@ public class GoogleSignupService {
 		
 		user.setKindOfMembership(KindOfMembership.NORMAL);
 		
-		Set<UserRole> userRoles = new HashSet<>();
-		UserRole role = new UserRole();
-		role.setRole(DEFAULT_ROLE);
-		role.setUser(user);
-		userRoles.add(role);
-		
-		user.setUserRoles(userRoles);
-		
 		userDao.save(user);
 		
-		String tex = "Thanks for signing up at EstateArranger. Here is your new Password: " + user.getPassword() + "\n"
-				+ "And your Username is: " + user.getUsername();
+		String tex = "Thanks for signing up at EstateArranger. Here is your new Password: " + randomPassword;
 		String sub = "EstateArranger!";
 		messageService.sendEmail(user, sub, tex);
-		
-		signupService.sendsMessageAndEmailForNormalUserWeekly(user);
 	}
 	
 	/**

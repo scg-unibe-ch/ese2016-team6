@@ -13,6 +13,8 @@
 
 <meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
 
+<script src="https://www.facebook.com/connect/login_success.html" async defer></script>
+
 
 <c:import url="template/header.jsp" />
 
@@ -92,5 +94,7 @@
 		
 	}
 </script>
+
+
 		
 <c:import url="template/footer.jsp" />

@@ -166,10 +166,7 @@ public class AlertForm {
 		return isValid;
 	}
 	
-	public void setIsValid(){
-		if(maxSize<minSize) {
-			this.isValid = false;
-		}
-		this.isValid = true;
+	public void setIsValid(boolean valid){
+		this.isValid = valid;
 	}
 }
