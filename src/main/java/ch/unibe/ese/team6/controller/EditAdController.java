@@ -197,18 +197,4 @@ public class EditAdController {
 			pictureUploader.deletePicture(url, realPath);
 		}
 	}
-
-	/**
-	 * Deletes the roommate with the given id.
-	 * 
-	 * @param userId
-	 *            the id of the user to delete
-	 * @param adId
-	 *            the id of the ad to delete the user from
-	 */
-	@RequestMapping(value = "/profile/editAd/deleteRoommate", method = RequestMethod.POST)
-	public @ResponseBody void deleteRoommate(@RequestParam long userId,
-			@RequestParam long adId) {
-		editAdService.deleteRoommate(userId, adId);
-	}
 }
