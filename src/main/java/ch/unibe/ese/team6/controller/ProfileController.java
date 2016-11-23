@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ch.unibe.ese.team6.controller.pojos.forms.EditProfileForm;
+import ch.unibe.ese.team6.controller.pojos.forms.FacebookLoginForm;
 import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SignupForm;
 import ch.unibe.ese.team6.controller.service.AdService;
+import ch.unibe.ese.team6.controller.service.FacebookLoginService;
+import ch.unibe.ese.team6.controller.service.FacebookSignupService;
 import ch.unibe.ese.team6.controller.service.GoogleLoginService;
 import ch.unibe.ese.team6.controller.service.GoogleSignupService;
 import ch.unibe.ese.team6.controller.service.SignupService;
@@ -50,6 +53,12 @@ public class ProfileController {
 
 	@Autowired
 	private UserUpdateService userUpdateService;
+	
+	@Autowired
+	private FacebookLoginService facebookLoginService;
+	
+	@Autowired
+	private FacebookSignupService facebookSignupService;
 	
 	@Autowired
 	private GoogleSignupService googleSignupService;
@@ -84,6 +93,18 @@ public class ProfileController {
 			googleSignupService.saveFrom(googleForm);
 		}
 		googleLoginService.loginFrom(googleForm);
+		model.addObject("searchForm", new SearchForm());
+		return model;
+	}
+	
+	/** Handles Google sign in. */
+	@RequestMapping(value = "/facebooklogin", method = RequestMethod.GET)
+	public ModelAndView facebookLogin(FacebookLoginForm facebookLoginForm) {
+		ModelAndView model = new ModelAndView("index");
+		if(!facebookSignupService.doesUserWithUsernameExist(facebookLoginForm.getEmail())){
+			facebookSignupService.saveFrom(facebookLoginForm);
+		}
+		facebookLoginService.loginFrom(facebookLoginForm);
 		model.addObject("searchForm", new SearchForm());
 		return model;
 	}
