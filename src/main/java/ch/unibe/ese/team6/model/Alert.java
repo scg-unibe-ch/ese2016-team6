@@ -56,6 +56,9 @@ public class Alert {
 	
 	@Column
 	private int maxSize;
+	
+	@Column
+	private boolean isValid;
 
 	@Column(nullable = false)
 	private int numberOfRooms;
@@ -178,5 +181,14 @@ public class Alert {
 
 	public void setNumberOfRooms(int rooms) {
 		this.numberOfRooms = rooms;
+	}
+
+	public void setIsValid(boolean isValid) {
+		this.isValid = isValid;
+		
+	}
+	
+	public boolean getIsValid() {
+		return isValid;
 	}
 }

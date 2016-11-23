@@ -63,6 +63,7 @@ public class SignupService {
 		user.setEnabled(true);
 		user.setGender(signupForm.getGender());
 		user.setKindOfMembership(signupForm.getKindOfMembership());
+		user.setIsGoogleUser(false);
 		
 		Set<UserRole> userRoles = new HashSet<>();
 		UserRole role = new UserRole();

@@ -146,7 +146,6 @@ public class ProfileController {
 			SecurityContextHolder.getContext().setAuthentication(result);			
 			model = new ModelAndView("updatedProfile");
 			model.addObject("message", "Your Profile has been updated!");
-			model.addObject("editProfileForm", new EditProfileForm());
 			model.addObject("currentUser", user);
 			return model;
 		} else {
@@ -163,9 +162,6 @@ public class ProfileController {
 		ModelAndView model = new ModelAndView("user");
 		User user = userService.findUserById(id);
 		if (principal != null) {
-			Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
-			Authentication result = authenticationManager.authenticate(request);
-			SecurityContextHolder.getContext().setAuthentication(result);
 			String username = principal.getName();
 			User user2 = userService.findUserByUsername(username);
 			long principalID = user2.getId();

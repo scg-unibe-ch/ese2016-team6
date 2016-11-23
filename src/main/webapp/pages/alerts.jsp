@@ -42,6 +42,11 @@ function validateType(form)
 	var minsize = document.getElementById('minSize');
 	var maxsize = document.getElementById('maxSize');
 	var isValid = document.getElementById('isValid');
+	if(maxsize.value < minsize.value) {
+		isValid.checked = false;
+	} else {
+		isValid.checked = true;
+	}
 }
 </script>
 
@@ -131,8 +136,7 @@ function rentSaleOfAlert(alert) {
 		Square Meters
 		<form:errors path="maxSize" cssClass="validationErrorText" /> 
 		
-		<label for="isValid"></label>
-		<form:input style="display:none" id="isValid" type="booelan" path="isValid" />
+		<form:checkbox id="isValid" style="display:none" name="isValid" path="isValid" />
 		<form:errors path="isValid" cssClass="validationErrorText" />
 		
 		<br />
