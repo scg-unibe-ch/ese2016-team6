@@ -34,9 +34,6 @@ public class EditAdService {
 	@Autowired
 	private AdPictureDao adPictureDao;
 
-	@Autowired
-	private UserService userService;
-
 	/**
 	 * Handles persisting an edited ad to the database.
 	 * 
@@ -60,14 +57,6 @@ public class EditAdService {
 
 		ad.setStreet(placeAdForm.getStreet());
 		
-		ad.setCity(placeAdForm.getCity());
-
-		//ad.setStudio(placeAdForm.getStudio());
-		
-		ad.setSquareFootage(placeAdForm.getSquareFootage());
-		
-		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
-
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
 		ad.setZipcode(Integer.parseInt(zip));
@@ -100,8 +89,6 @@ public class EditAdService {
 			}
 		} catch (NumberFormatException e) {
 		}
-
-		/* AUCTION */
 		
 		ad.setDeal(placeAdForm.getDeal());
 		ad.setSale(placeAdForm.getSale());
@@ -109,28 +96,20 @@ public class EditAdService {
 		ad.setPriceSale(placeAdForm.getPriceSale());
 		ad.setIncrement(placeAdForm.getIncrement());
 		ad.setCurrentBid(placeAdForm.getCurrentBid());
+		// properly add Deadline Date/Hour/Minute above - change to dates from strings
 		ad.setDeadlineDate(placeAdForm.getDeadlineDate());
 		ad.setDeadlineHour(placeAdForm.getDeadlineHour());
 		ad.setDeadlineMinute(placeAdForm.getDeadlineMinute());
 		
-		//write a function for current bid
-		
-		
-		/*________*/	
-		
-		
-		
-		//ad.setPrizePerMonth(placeAdForm.getPrize());
-
+		ad.setSquareFootage(placeAdForm.getSquareFootage());
+		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
+		ad.setProximityToPublicTransport(placeAdForm.getProximityToPublicTransport());
+		ad.setProximityToSchool(placeAdForm.getProximityToSchool());
+		ad.setProximityToSupermarket(placeAdForm.getProximityToSupermarket());
+		ad.setProximityToNightlife(placeAdForm.getProximityToNightlife());
 		ad.setPreferences(placeAdForm.getPreferences());
 		
-		/*Removed due to customer wishes
-		ad.setRoommates(placeAdForm.getRoommates());
-		*/
-		
-		
-		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
 		ad.setAnimals(placeAdForm.isAnimals());
 		ad.setGarden(placeAdForm.getGarden());
@@ -157,28 +136,6 @@ public class EditAdService {
 		}
 		ad.setPictures(pictures);
 
-		/*
-		 * Roommates are saved in the form as strings. They need to be converted
-		 * into Users and saved as a List which will be accessible through the
-		 * ad object itself.
-		 */
-		
-		
-		/* Removed due to customer wishes
-		List<User> registeredUserRommates = new LinkedList<>();
-		if (placeAdForm.getRegisteredRoommateEmails() != null) {
-			for (String userEmail : placeAdForm.getRegisteredRoommateEmails()) {
-				User roommateUser = userService.findUserByUsername(userEmail);
-				registeredUserRommates.add(roommateUser);
-			}
-		}
-		// add existing roommates
-		for (User roommates : ad.getRegisteredRoommates()) {
-			registeredUserRommates.add(roommates);
-		}
-		ad.setRegisteredRoommates(registeredUserRommates);
-		 */
-		
 		
 		// visits
 		List<Visit> visits = new LinkedList<>();
@@ -239,28 +196,46 @@ public class EditAdService {
 	 */
 	public PlaceAdForm fillForm(Ad ad) {
 		PlaceAdForm adForm = new PlaceAdForm();
-
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		adForm.setTitle(ad.getTitle());
+		adForm.setStreet(ad.getStreet());
+		adForm.setCity(String.format("%d - %s", ad.getZipcode(), ad.getCity().replaceAll("/", ";")));
+		if (ad.getMoveInDate() != null){
+			adForm.setMoveInDate(dateFormat.format(ad.getMoveInDate()));
+		}
+		if (ad.getMoveOutDate() != null){
+			adForm.setMoveOutDate(dateFormat.format(ad.getMoveOutDate()));
+		}
+		adForm.setDeal(ad.getDeal());
+		adForm.setSale(ad.getSale());
+		adForm.setPriceRent(ad.getPriceRent());
+		adForm.setPriceSale(ad.getPriceSale());
+		adForm.setIncrement(ad.getIncrement());
+		adForm.setCurrentBid(ad.getCurrentBid());
+		//add simple formats for date, hours and minutes
+		adForm.setDeadlineDate(ad.getDeadlineDate());
+		adForm.setDeadlineHour(ad.getDeadlineHour());
+		adForm.setDeadlineMinute(ad.getDeadlineMinute());
+		
+		adForm.setSquareFootage(ad.getSquareFootage());
 		adForm.setRoomDescription(ad.getRoomDescription());
+		adForm.setNumberOfRooms(ad.getNumberOfRooms());
+		adForm.setProximityToPublicTransport(ad.getProximityToPublicTransport());
+		adForm.setProximityToSchool(ad.getProximityToSchool());
+		adForm.setProximityToSupermarket(ad.getProximityToSupermarket());
+		adForm.setProximityToNightlife(ad.getProximityToNightlife());
 		adForm.setPreferences(ad.getPreferences());
-		//adForm.setRoommates(ad.getRoommates());
-
+		adForm.setSmokers(ad.getSmokers());
+		adForm.setAnimals(ad.getAnimals());
+		adForm.setGarden(ad.getGarden());
+		adForm.setBalcony(ad.getBalcony());
+		adForm.setCellar(ad.getCellar());
+		adForm.setFurnished(ad.getFurnished());
+		adForm.setCable(ad.getCable());
+		adForm.setGarage(ad.getGarage());
+		adForm.setInternet(ad.getInternet());
+		
 		return adForm;
 	}
-
-	/**
-	 * Deletes the roommate with the given id from the ad with the given id.
-	 * 
-	 * @param roommateId
-	 *            the user to delete as roommate
-	 * @param adId
-	 *            the ad to delete the roommate from
-	 */
-	public void deleteRoommate(long roommateId, long adId) {
-		Ad ad = adService.getAdById(adId);
-		User roommate = userService.findUserById(roommateId);
-		//ad.getRegisteredRoommates().remove(roommate);
-		adDao.save(ad);
-
-	}
-
 }

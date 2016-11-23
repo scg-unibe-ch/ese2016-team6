@@ -12,3 +12,4 @@ log/*
 
 .metadata
 /bin/
+/temp/
