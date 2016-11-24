@@ -61,6 +61,7 @@ public class SignupService {
 		user.setLastName(signupForm.getLastName());
 		user.setPassword(signupForm.getPassword());
 		user.setEnabled(true);
+		user.setIsGoogleUser(false);
 		user.setGender(signupForm.getGender());
 		user.setKindOfMembership(signupForm.getKindOfMembership());
 		user.setIsGoogleUser(false);

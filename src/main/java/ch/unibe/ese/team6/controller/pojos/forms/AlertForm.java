@@ -35,13 +35,13 @@ public class AlertForm {
 /*	@AssertFalse(message = "Please select either or both types")
 	private boolean noRoomNoStudio;*/
 
-	private boolean bothRoomAndStudio;
+//	private boolean bothRoomAndStudio;
 	
 	private boolean forRent;
 	private boolean forSale;
-	private boolean bothRentAndSale;
+//	private boolean bothRentAndSale;
 	
-	@AssertFalse(message = "Please select either or both types")
+	@AssertFalse(message = "Please select either of both Types")
 	private boolean noRentNoSale;
 	
 	@Min(value = 0, message = "Please enter a positive minimal Size")
@@ -90,13 +90,13 @@ public class AlertForm {
 	}
 
 
-	public boolean getBothRoomAndStudio() {
+/*	public boolean getBothRoomAndStudio() {
 		return bothRoomAndStudio;
 	}
 
 	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
 		this.bothRoomAndStudio = bothRoomAndStudio;
-	}
+	}*/
 	
 	public User getUser() {
 		return user;
@@ -122,7 +122,7 @@ public class AlertForm {
 		this.forSale = forSale;
 	}
 
-	public boolean getNoRentNoSale() {
+/*	public boolean getNoRentNoSale() {
 		return noRentNoSale;
 	}
 
@@ -136,7 +136,7 @@ public class AlertForm {
 
 	public void setBothRentAndSale(boolean bothRentAndSale) {
 		this.bothRentAndSale = bothRentAndSale;
-	}
+	}*/
 	
 	public int getMinSize() {
 		return minSize;

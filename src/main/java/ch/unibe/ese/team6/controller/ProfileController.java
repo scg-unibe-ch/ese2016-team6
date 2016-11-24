@@ -1,5 +1,6 @@
 package ch.unibe.ese.team6.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.validation.Valid;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -99,8 +102,23 @@ public class ProfileController {
 	
 	/** Handles Google sign in. */
 	@RequestMapping(value = "/facebooklogin", method = RequestMethod.GET)
-	public ModelAndView facebookLogin(FacebookLoginForm facebookLoginForm) {
-		ModelAndView model = new ModelAndView("index");
+	public ModelAndView facebookLogin(@RequestParam("code") String code, FacebookLoginForm facebookLoginForm) {
+		String url = "https://graph.facebook.com/oauth/access_token?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&client_secret=140bd59332d4e2f8fcc61aa3f3706bc8&code=" + code;
+		try {
+			Document doc = Jsoup.connect(url).get();
+			
+			System.out.println(doc.toString());
+		} catch (IOException e) {
+			ModelAndView model = new ModelAndView("index");
+			model.addObject("message",
+					"Something went wrong, please contact the WebAdmin if the problem persists!");
+			e.printStackTrace();
+		}
+		
+		ModelAndView model = new ModelAndView("index");		
+	//	"https://graph.facebook.com/me?access_token=" . $_SESSION["fb_access_code"] . "&fields=email,user_birthday");
+    //    $user_information_array = json_decode($user_information, true);
+		
 		if(!facebookSignupService.doesUserWithUsernameExist(facebookLoginForm.getEmail())){
 			facebookSignupService.saveFrom(facebookLoginForm);
 		}

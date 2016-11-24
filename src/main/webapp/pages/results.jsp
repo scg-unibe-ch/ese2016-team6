@@ -112,8 +112,8 @@ function sort_div_attribute() {
 			dateFormat : 'dd-mm-yy'
 		});
 		$("#field-latestMoveOutDate").datepicker({
-			dateFormat : 'dd-mm-yy' -->
-		});
+			dateFormat : 'dd-mm-yy'
+		});-->
 	});
 </script>
 
@@ -147,9 +147,13 @@ function sort_div_attribute() {
 	<div id="filterDiv">
 		<h2>Filter results:</h2>
 		
-		
-		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
-		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label> <br/>
+		<form>
+    		<input type="radio" id="forRent" name="RentSale" value="forRent" checked="checked">
+    		<label for="forRent"> For Rent</label> 
+   			<input type="radio" id="forSale" name="RentSale" value="forSale">
+   			<label for="forSale"> For Sale</label>
+  		</form>
+		<br />
 	
 	
 		<br /> <label for="prize">Price (max.):</label>

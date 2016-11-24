@@ -83,10 +83,9 @@ function validateType(form)
 		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />-->
 		
 		<br />
-		
-		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
-		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label>
-		
+		<form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
+		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br />
+			
 		<br />
 		
 		<label for="city">City / zip code:</label>
@@ -120,7 +119,7 @@ function validateType(form)
 		<br />
 		
 		<button type="reset" class="btn btn-default" tabindex="8">Cancel</button>
-		<button type="submit" class="btn btn-default" tabindex="7" onClick="validateType(this.form)">Search</button>
+		<button type="submit" class="btn btn-default" tabindex="7" >Search</button>
 		
 	</fieldset>
 
