@@ -19,14 +19,14 @@ function deleteAlert(button) {
 
 <script>
 $(document).ready(function() {
-	$("#forSale").on("click", function(){
-		document.getElementById('forSale').value = true;
-		document.getElementById('forRent').value = false;
+	$("#type-sale").on("click", function(){
+		document.getElementById('forSale').checked = true;
+		document.getElementById('forRent').checked = false;
 	});
 
-	$("#forRent").on("click", function(){
-		document.getElementById('forRent').value = true;
-		document.getElementById('forSale').value = false;
+	$("#type-rent").on("click", function(){
+		document.getElementById('forRent').checked = true;
+		document.getElementById('forSale').checked = false;
 	});
 });	
 </script>
@@ -84,10 +84,13 @@ function rentSaleOfAlert(alert) {
 <form:form method="post" modelAttribute="alertForm" action="/profile/alerts"
 	id="alertForm" autocomplete="off">
 
+			<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
+			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
+	
 	<fieldset>		
 		<form>
-    		<input type="radio" id="forRent" name="RentSale" checked="checked"> For Rent
-   			<input type="radio" id="forSale" name="RentSale"> For Sale
+    		<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
+   			<input type="radio" id="type-sale" name="RentSale"> For Sale
   		</form>
 		<br />
 		

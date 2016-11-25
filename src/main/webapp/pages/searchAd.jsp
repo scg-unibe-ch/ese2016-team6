@@ -37,6 +37,19 @@
 			roomNumbers.value = "0";	
 	});
 </script>
+<script>
+$(document).ready(function() {
+	$("#type-sale").on("click", function(){
+		document.getElementById('forSale').checked = true;
+		document.getElementById('forRent').checked = false;
+	});
+
+	$("#type-rent").on("click", function(){
+		document.getElementById('forRent').checked = true;
+		document.getElementById('forSale').checked = false;
+	});
+});	
+</script>
 
 <%-- 
 <script>
@@ -73,19 +86,13 @@ function validateType(form)
 	id="searchForm" autocomplete="off">
 
 	<fieldset>
-		<!--<form:checkbox name="room" id="room" path="roomHelper" /><label for="room">Room</label>
-		<form:checkbox name="studio" id="studio" path="studioHelper" /><label for="studio">Studio</label>
-		
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:checkbox style="display:none" name="type" id="type" path="studio" />
-		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />-->
-		
-		<br />
-		<form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
-		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br />
+		<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
+			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
 			
+		<form>
+    		<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
+   			<input type="radio" id="type-sale" name="RentSale"> For Sale
+  		</form>
 		<br />
 		
 		<label for="city">City / zip code:</label>

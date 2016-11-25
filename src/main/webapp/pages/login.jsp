@@ -66,6 +66,7 @@
 			<li>Email: <i>oprah@winfrey.com</i>, password: <i>password</i></li>
 		</ul>
 		<br />	
+
 <div>
 	<form:form id="googleForm" type="hidden" class="form-horizontal" method="post"
 		modelAttribute="googleForm" action="./googlelogin">
