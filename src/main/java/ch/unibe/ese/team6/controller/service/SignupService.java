@@ -55,10 +55,14 @@ public class SignupService {
 	@Transactional
 	public void saveFrom(SignupForm signupForm) {
 		User user = new User();
-		user.setUsername(signupForm.getEmail());
-		user.setEmail(signupForm.getEmail());
+		
 		user.setFirstName(signupForm.getFirstName());
 		user.setLastName(signupForm.getLastName());
+
+		user.setUsername(signupForm.getEmail());
+		user.setEmail(signupForm.getEmail());
+		boolean isValid = signupForm.getIsValid();
+		assert(isValid);
 		user.setPassword(signupForm.getPassword());
 		user.setEnabled(true);
 		user.setIsGoogleUser(false);

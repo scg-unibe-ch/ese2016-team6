@@ -106,8 +106,18 @@ public class ProfileController {
 		String url = "https://graph.facebook.com/oauth/access_token?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&client_secret=140bd59332d4e2f8fcc61aa3f3706bc8&code=" + code;
 		try {
 			Document doc = Jsoup.connect(url).get();
+			String docS = doc.toString();
+			String[] out = docS.split("=");
+			String[] out2 = out[1].split("&");
+			String url2 = "https://graph.facebook.com/me?access_token="	+ out2[0] + "&fields=email";
 			
-			System.out.println(doc.toString());
+			Document doc2 = Jsoup.connect(url2).ignoreContentType(true).get();
+			String docS2 = doc2.toString();
+			
+			System.out.println("\n\n");
+			System.out.println(docS2);
+			System.out.println("\n\n");
+			
 		} catch (IOException e) {
 			ModelAndView model = new ModelAndView("index");
 			model.addObject("message",
@@ -144,6 +154,7 @@ public class ProfileController {
 		if (!bindingResult.hasErrors()) {
 			signupService.saveFrom(signupForm);
 			model = new ModelAndView("login");
+			model.addObject("googleForm", new GoogleSignupForm());
 			model.addObject("confirmationMessage", "Signup complete!");
 		} else {
 			model = new ModelAndView("signup");
@@ -171,8 +182,7 @@ public class ProfileController {
 
 	/** Handles the request for editing the user profile. */
 	@RequestMapping(value = "/profile/editProfile", method = RequestMethod.POST)
-	public ModelAndView editProfileResultPage(
-			@Valid EditProfileForm editProfileForm,
+	public ModelAndView editProfileResultPage(@Valid EditProfileForm editProfileForm,
 			BindingResult bindingResult, Principal principal) {
 		ModelAndView model;
 		String username = principal.getName();

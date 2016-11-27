@@ -51,7 +51,10 @@
 		<br>
 		
 		<p>
-			Or login with your Google account: <div class="g-signin2" data-onsuccess="onSignIn"></div>
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+					
+		<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
+			
 						</c:otherwise>
 					</c:choose>
 		
@@ -85,14 +88,19 @@
 						<form:input type="hidden" path="email" id="field-mail"
 							cssClass="form-control" />
 			</spring:bind>
+			
+			<spring:bind path="googlePicture">	
+						<form:input type="hidden" path="googlePicture" id="field-googlePicture"
+							cssClass="form-control" />					
+			</spring:bind>
+			
 		<button type="submit" style="visibility:hidden;" class="btn btn-primary" value="signup" id="googleButton"
 				>Sign up</button>
 				
 		</form:form>
 	</div>	
 	
-	<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
-
+	
 	<script>
 	function onSignIn(googleUser) {
 	 	var profile = googleUser.getBasicProfile();
