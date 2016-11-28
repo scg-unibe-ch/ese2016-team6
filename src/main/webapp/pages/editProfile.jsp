@@ -66,9 +66,17 @@ function testForKind(kindOfUser, kind) {
 	<tr>
 		<td class="spacingTable"><label for="kindOfMembership">Kind of Membership:</label><a>&emsp;&thinsp;</a>
 		<form:select path="kindOfMembership">	
-							<form:option value="NORMAL" label="Normal" selected="testForKind(${currentUser.kindOfMembership}, NORMAL)"/>
-							<form:option value="PREMIUM" label="Premium" selected="testForKind(${currentUser.kindOfMembership}, PREMIUM)"/>	
-					</form:select>
+			<c:choose>
+			<c:when test="${currentUser.getKindOfMembershipBo()}">
+				<form:option value="NORMAL" label="Normal" />
+				<form:option value="PREMIUM" label="Premium" selected="selected" />				
+			</c:when>
+			<c:otherwise>
+				<form:option value="NORMAL" label="Normal" selected="selected" />
+				<form:option value="PREMIUM" label="Premium" />				
+			</c:otherwise>
+			</c:choose>
+		</form:select>
 	</tr>
 
 	<tr>

@@ -164,7 +164,7 @@ public class User {
 	public void setBookmarkedAds(List<Ad> bookmarkedAds) {
 		this.bookmarkedAds = bookmarkedAds;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
