@@ -30,14 +30,16 @@ function validateType(form) {
 	});
 });
 </script>
-
+<!--
 <pre>
 	<a href="/">Home</a>   &gt;   Sign up</pre>
-
-<h1>Sign up</h1>
-<form:form id="signupForm" method="post" modelAttribute="signupForm"
+	-->
+	
+	
+<h1 style="text-align:center;">Sign up</h1>
+<form:form style="margin:auto;" id="signupForm" method="post" modelAttribute="signupForm"
 	action="signup">
-	<fieldset>
+	<fieldset >
 		<legend>Enter Your Information</legend>
 
 		<table>

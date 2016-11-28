@@ -503,6 +503,7 @@ header ul li a {
 	border-color: #990000;
 	
 	border-width:1px;
+	border-style: solid;
 	
 	display: block;
 	margin: 2px 5px;
@@ -513,7 +514,7 @@ header ul li a {
 	
 	
 	
-	border-style: solid;
+	
 	border-radius: 5px;
 	
 }
@@ -627,6 +628,8 @@ footer nav ul li {
 }
 
 
+
+
 /* -------------------------------------------------------------------- */
 /* login.jsp */
 .test-users {
@@ -728,7 +731,14 @@ footer nav ul li {
 	table-layout: fixed;
 	border-radius: 10px;
 	background-color: #ffe6cc;
-	width:100%
+	width:100%;
+	
+	
+	border-color: #ffa64d;
+	
+	border-width:2px;
+	border-style: solid;
+	
 	
 }
 
@@ -749,6 +759,8 @@ footer nav ul li {
 
 #resultTable td {
 	padding: 5px;
+	
+	
 }
 
 
@@ -854,8 +866,8 @@ footer nav ul li {
 /* adDescription.jsp */
 
 #adDescTable {
-	width: 40%;
-	float: left;
+	
+	
 }
 
 #adDescTable h2 {
@@ -914,28 +926,33 @@ footer nav ul li {
 }
 
 #image-slider {
+	
+	/*
+	
 	height: 350px;
-	float: right;
 	width: 600px;
+	
 	margin-bottom: 30px;
+	*/
 }
 
 #images {
 	float: left;
-	width: 500px;
-	height: 350px;
+	width: 400px;
+	height: 300px;
 	position: relative;
 }
 
 #images img {
-	height: 350px;
+	max-width: 400px;
+	height: 300px;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	margin: auto;
 	display: none;
-	max-width: 450px;
+	
 }
 
 #images img:first-child {

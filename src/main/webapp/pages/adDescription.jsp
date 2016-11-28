@@ -12,8 +12,9 @@
 
 <c:import url="template/header.jsp" />
 
+<!--
 <pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>
-
+-->
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">
@@ -23,8 +24,7 @@
 			</c:if>
 		</c:when>
 </c:choose>
-<br>
-<br>
+
 
 <script src="/js/image_slider.js"></script>
 <script src="/js/adDescription.js"></script>
@@ -213,134 +213,142 @@
 </c:choose>
 
 
-<h1 id="shownAdTitle">${shownAd.title}
+<h1 id="shownAdTitle" style="font-size: 1em;"><b>${shownAd.title}</b>
 	<c:choose>
 		<c:when test="${loggedIn}">
 			<a class="right" id="bookmarkButton">Bookmark Ad</a>
 		</c:when>
 	</c:choose>
+	
+
+	<label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
 </h1>
 
 
 
-<tr>
-	<td><label id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label></td>
-</tr>
-
-<hr />
-
-<br/>
-<br/>
-
-<section>
-
-	<table id="adDescTable" class="adDescDiv">
-		
-		<%--removed because room/studio difference no longer important
-			<td><h2>Type</h2></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.studio}">Studio</c:when>
-					<c:otherwise>Room</c:otherwise>
-				</c:choose>
-			</td>
-
-		--%>
-		
-		<tr>
-			<td><h2>Status : </h2></td>
-			<td>
-				
-					<c:if test="${shownAd.deal=='forRent'}"> For rent </c:if>
-					<c:if test="${shownAd.deal=='forSale'}"> 
-						<c:if test="${shownAd.sale=='direct'}">
-						For direct Sale
-						</c:if>
-						
-						<c:if test="${shownAd.sale=='auction'}">
-						For auction
-						</c:if>
-					
-						<c:if test="${shownAd.sale=='bothAuctionAndDirect'}">
-						For auction with quick buy option
-						</c:if>
-					
-					</c:if>
-					
-				
-			</td>
-		</tr>
-
-		<tr>
-			<td><h2>Address :</h2></td>
-			<td>
-				<a class="link" href="http://maps.google.com/?q=${shownAd.street}, ${shownAd.zipcode}, ${shownAd.city}">${shownAd.street},
-						${shownAd.zipcode} ${shownAd.city}</a>
-			</td>
-		</tr>
-	
-		
-		<tr>
-			<td><h2>Area :</h2></td>
-			<td>${shownAd.squareFootage}&#32;m²</td>
-		</tr>
-		
-		<tr>
-			<td><h2>Number of Rooms :</h2></td>
-			<td>${shownAd.numberOfRooms}</td>
-		</tr>
-		
-		<tr>
-			<td><h2>Available from : </h2></td>
-			<td>${formattedMoveInDate}</td>
-		</tr>
-		
-		<tr>
-			<td><h2>To :</h2></td>
-			<td>${formattedMoveOutDate}</td>
-		</tr>
-
-		
-		<%--removed because room/studio difference no longer important
-		<c:if test="${shownAd.studio}">
-  		<tr>
-  			<td><h2>Number of Rooms</h2></td>
- 			<td>${shownAd.numberOfRooms}</td>
- 			<c:if test="${shownAd.numberOfRooms>0}">
- 				<td>${shownAd.numberOfRooms}</td>
- 			</c:if>
- 			
- 			<c:if test="${shownAd.numberOfRooms==0}">
- 				<td>unspecified</td>
- 			</c:if>
- 			
-  		</tr>
- 		</c:if>
-		--%>
-		
-	</table>
-</section>
 
 
-<div id="image-slider">
-	<div id="left-arrow">
-		<img src="/img/left-arrow.png" />
-	</div>
-	<div id="images">
-		<c:forEach items="${shownAd.pictures}" var="picture">
-			<img src="${picture.filePath}" />
-		</c:forEach>
-	</div>
-	<div id="right-arrow">
-		<img src="/img/right-arrow.png" />
-	</div>
-</div>
 
-
-<hr class="clearBoth" />
-
+<hr style="margin:0px" />
 
 <table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">
+	<tr>
+		<section style="height:100%;width:100%">
+		<td style="width:50%">
+			
+				
+					<table id="adDescTable" class="adDescDiv">
+						<tr>
+							<td><h2>Status : </h2></td>
+							<td>
+								
+									<c:if test="${shownAd.deal=='forRent'}"> For rent </c:if>
+									<c:if test="${shownAd.deal=='forSale'}"> 
+										<c:if test="${shownAd.sale=='direct'}">
+										For direct Sale
+										</c:if>
+										
+										<c:if test="${shownAd.sale=='auction'}">
+										For auction
+										</c:if>
+									
+										<c:if test="${shownAd.sale=='bothAuctionAndDirect'}">
+										For auction with quick buy option
+										</c:if>
+									
+									</c:if>
+									
+								
+							</td>
+						</tr>
+						
+						
+						<tr>
+						
+							<td>
+								<h2>Ad created on : </h2>
+							</td>
+						
+							<td>
+							
+								${formattedCreationDate}
+							
+							</td>
+							
+						</tr>
+						
+						
+
+						<tr>
+							<td><h2>Address :</h2></td>
+							<td>
+								<a class="link" href="http://maps.google.com/?q=${shownAd.street}, ${shownAd.zipcode}, ${shownAd.city}">${shownAd.street},
+										${shownAd.zipcode} ${shownAd.city}</a>
+							</td>
+						</tr>
+					
+						
+						<tr>
+							<td><h2>Area :</h2></td>
+							<td>${shownAd.squareFootage}&#32;m²</td>
+						</tr>
+						
+						<tr>
+							<td><h2>Number of Rooms :</h2></td>
+							<td>${shownAd.numberOfRooms}</td>
+						</tr>
+						
+						<tr>
+							<td><h2>Available from : </h2></td>
+							<td>${formattedMoveInDate}</td>
+						</tr>
+						
+						<tr>
+							<td><h2>To :</h2></td>
+							<td>${formattedMoveOutDate}</td>
+						</tr>
+
+						
+						<!--
+						removed because room/studio difference no longer important
+						<c:if test="${shownAd.studio}">
+						<tr>
+							<td><h2>Number of Rooms</h2></td>
+							<td>${shownAd.numberOfRooms}</td>
+							<c:if test="${shownAd.numberOfRooms>0}">
+								<td>${shownAd.numberOfRooms}</td>
+							</c:if>
+							
+							<c:if test="${shownAd.numberOfRooms==0}">
+								<td>unspecified</td>
+							</c:if>
+							
+						</tr>
+						</c:if>
+						-->
+						
+					</table>
+				
+			
+		</td>
+		</section>
+		<td style="width:50%;">
+			<div id="image-slider" class="adDescDiv">
+				<div id="left-arrow">
+					<img src="/img/left-arrow.png" />
+				</div>
+				<div id="images">
+					<c:forEach items="${shownAd.pictures}" var="picture">
+						<img src="${picture.filePath}" />
+					</c:forEach>
+				</div>
+				<div id="right-arrow">
+					<img src="/img/right-arrow.png" />
+				</div>
+			</div>
+		</td>
+	
+	</tr>
 	<tr>
 		<td style="width:50%;">	
 			<div id="bidList" class="adDescDiv">
@@ -431,13 +439,17 @@
 								</c:if>
 								
 								<c:if test="${latestBid.user == null}">
-									noone has made a bid yet. Be the first to make an offer.
+								<h3>
+									noone has made a bid yet.
+								</h3>
 								</c:if>
 							</div>
 							
 								</c:when>
 								<c:otherwise>
+								<h3>
 									Please log in to use the auction
+								</h3>
 								</c:otherwise>
 						</c:choose>
 						

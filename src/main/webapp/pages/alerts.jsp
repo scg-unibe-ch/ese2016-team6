@@ -5,9 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <c:import url="template/header.jsp" />
-
+<!--
 <pre><a href="/">Home</a>   &gt;   Alerts</pre>
-
+-->
 <script>
 function deleteAlert(button) {
 	var id = $(button).attr("data-id");

@@ -13,9 +13,9 @@
 
 </script>
 
-
+<!--
 <pre><a href="/">Home</a>   &gt;   My properties</pre>
-
+-->
 
 		<table id="indexTable">
 			<tr>

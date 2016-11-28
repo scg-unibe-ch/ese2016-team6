@@ -62,6 +62,8 @@
 			
 			document.getElementById('ActualDeal').value = "forRent";
 			
+			document.getElementById('preference').style.visibility = "visible";
+			
     	});
 
 		$("#type-sale").on("click", function(){
@@ -84,6 +86,8 @@
 			
 			document.getElementById('ActualSale').value = "direct";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+				document.getElementById('preference').style.visibility = "hidden";
    		});
 
     	$("#type-auction").on("click", function(){
@@ -106,6 +110,8 @@
 			
 			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+				document.getElementById('preference').style.visibility = "hidden";
     	});
 
 		$("#field-city").autocomplete({
@@ -208,16 +214,25 @@
 	});
 </script>
 
+<!--
 <pre><a href="/">Home</a>   &gt;   Place ad</pre>
+-->
 
 <h1>Place an ad</h1>
 <hr />
 
+
+
 <form:form method="post" modelAttribute="placeAdForm"
 	action="/profile/placeAd" id="placeAdForm" autocomplete="off"
-	enctype="multipart/form-data">
-
-	<fieldset>
+	enctype="multipart/form-data" style="width:100%">
+	<table style="width:100%;height:100%;table-layout: fixed;">
+	<tr>
+	
+	
+	<td style="width:50%;height:320px;">
+	
+	<fieldset style="height:100%;" >
 		<legend>General description</legend>
 		<table class="placeAdTable">
 			
@@ -285,7 +300,10 @@
 		</table>
 	</fieldset>
 	
-	<fieldset>
+	</td>
+	
+	<td style="width:50%;height:320px;">
+	<fieldset style="height:100%;" >
 		<legend>Deal</legend>
 		
 		<table class="placeAdTable">
@@ -340,40 +358,58 @@
 			
 		</table>
 	</fieldset>
-
-	<fieldset>
+	</td>
+	
+	</tr>
+	
+	<tr>
+	
+	<td style="width:100%;height:500px;">
+	<fieldset style="height:100%;" >
 		<legend>Room content</legend>
 		<table class="placeAdTable">
 		
 			<tr>
 				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Smoking inside allowed</label></td>
 				<td><form:checkbox id="field-internet" path="internet" value="1" /><label>WiFi available</label></td>
-				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar/Attic</label></td>
+				
 			</tr>
 			
 			<tr>
 				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Animals allowed</label></td>
 				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>TV Cable</label></td>
-				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden (co-use)</label></td>
+				
 			</tr>
 			
 			<tr>
 				<td><form:checkbox id="field-furnished" path="furnished" value="1" /><label>Furnished</label></td>
 				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label></td>
-				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony/Patio</label></td>			
+						
+			</tr>
+			
+			<tr>
+				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar/Attic</label></td>
+				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden (co-use)</label></td>
+			</tr>
+			
+			<tr>
+				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony/Patio</label></td>	
 			</tr>
 
 		</table>
 
 		<br/>
 	
-		<form:textarea path="roomDescription" rows="10" cols="100" placeholder="room Description" />
+		<form:textarea path="roomDescription" rows="10" cols="80" placeholder="room Description" />
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
 		
 	</fieldset>
+	</td>
 	
 	
-	<fieldset>
+	
+	<td style="width:50%;height:500px;">
+	<fieldset style="height:100%;" >
 		<legend>Location details (optional)</legend>
 		<table class="placeAdTable">
 			<tr>
@@ -394,13 +430,24 @@
 			</tr>
 		</table>
 	</fieldset>
-
-	<fieldset>
+	</td>
+	
+	</tr>
+	
+	<tr>
+	
+	<td style="width:50%;height:210px;">
+	
+	<fieldset id="preference" style="height:100%;">
 		<legend>Preferences (optional)</legend>
-		<form:textarea path="preferences" rows="5" cols="100" placeholder="preferences concerning the tenant"></form:textarea>
+		<form:textarea path="preferences" rows="5" cols="80" placeholder="preferences concerning the tenant"></form:textarea>
 	</fieldset>
 	
-	<fieldset>
+	</td>
+	
+	<td style="width:50%;height:210px;">
+	
+	<fieldset style="height:100%;">
 		<legend>Pictures (optional)</legend>
 		<br /> 
 		<label for="field-pictures">Pictures</label> <input type="file" id="field-pictures" accept="image/*" multiple="multiple" />
@@ -414,7 +461,11 @@
 		<br>
 	</fieldset>
 
-	<fieldset>
+	</td>
+	
+	<td>
+	
+	<fieldset style="height:100%;">
 		<legend>Visits timetable (optional)</legend>
 		<table>
 			<tr>
@@ -463,6 +514,13 @@
 		</table>
 		<br>
 	</fieldset>
+	
+	
+	</td>
+	
+	</tr>
+	
+	</table>
 
 	<br />
 	

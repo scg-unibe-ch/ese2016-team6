@@ -7,9 +7,12 @@
 
 
 <c:import url="template/header.jsp" />
+<!-- 
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
+-->
 
-<%-- <script>
+<!-- 
+<script>
 function validateType(form)
 {
 	var rent = document.getElementById('rent');
@@ -34,7 +37,8 @@ function validateType(form)
 	}
 	filtered.checked = true;
 }
-</script>--%>
+</script>
+-->
 
 <script>
 /*
@@ -122,7 +126,10 @@ function sort_div_attribute() {
 <hr />
 
 
-
+<table style="width:100%;border-collapse: separate;
+	border-spacing: 50px 0;table-layout: fixed;">
+<tr>
+<td valign="top">
 
 <div>
 <select id="modus">
@@ -236,6 +243,10 @@ function sort_div_attribute() {
 </form:form>
 
 
+
+</td>
+<td>
+
 <c:choose>
 	<c:when test="${empty results}">
 		<p>No results found!
@@ -301,5 +312,8 @@ function sort_div_attribute() {
 	</c:otherwise>
 </c:choose>
 
+</td>
+</tr>
+</table>
 
 <c:import url="template/footer.jsp" />

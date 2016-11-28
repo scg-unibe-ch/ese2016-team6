@@ -42,14 +42,10 @@ public class AuctionController {
 
     @Autowired
     private AuctionService auctionService;
-
     
-    @Autowired
-    private BidDao bidDao;
+  
     
-    @Autowired
-    private UserDao userDao;
-    
+ // TODO must be removed
     @Autowired
 	private AdController adController;
     
@@ -91,9 +87,11 @@ public class AuctionController {
         
         //attempt to call the ad discription page to relad the page
         
-       
+        //return adController.ad(id,principal);
         
-        return adController.ad(id,principal);
+        ModelAndView model = new ModelAndView("redirect:/ad?id=" + ad.getId());
+		
+		return model;
     }
 
     /**
@@ -106,41 +104,5 @@ public class AuctionController {
         auctionService.instantBuy(id, user);
     }
     
-    
-    /**
-     * saves a bid from a user
-     * 
-     */
-    @Transactional
-	public void saveBid(int amount,Ad ad, Principal principal){
-    	
-    	
-    	Bid bid = new Bid();
-    	
-    	bid.setUser(userDao.findByUsername( principal.getName() ) );
-    	bid.setAmount(amount);
-    	bid.setTimestamp(new Date());
-    	
-    	bidDao.save(bid);
-    	
-    	
-    }
-    
-    /**
-     * gets the latest bid from an ad
-     * 
-     */
-    @Transactional
-	public Bid getBid(Ad ad){
-    	
-    	
-    	Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
-    	
-    
-    	
-    	return bid;
-    	
-    	
-    }
     
 }

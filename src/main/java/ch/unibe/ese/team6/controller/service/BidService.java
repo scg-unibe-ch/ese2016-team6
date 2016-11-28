@@ -58,5 +58,16 @@ public class BidService {
         }
     }
 
+    @Transactional
+    public void saveBid(Bid bid){
+    	bidDao.save(bid);
+    	
+    }
+    
+    
+    public Bid getTopBid(Ad ad){
+    	return bidDao.findTop1ByAdOrderByAmountDesc(ad);
+    }
+    
 
 }
