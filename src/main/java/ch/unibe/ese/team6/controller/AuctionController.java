@@ -85,9 +85,7 @@ public class AuctionController {
         //commented out till bugs are fixed
         //alertService.triggerAlerts(ad);
         
-        //attempt to call the ad discription page to relad the page
-        
-        //return adController.ad(id,principal);
+       
         
         ModelAndView model = new ModelAndView("redirect:/ad?id=" + ad.getId());
 		

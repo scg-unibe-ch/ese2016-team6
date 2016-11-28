@@ -66,6 +66,7 @@ public class EditAdController {
 	 */
 	@RequestMapping(value = "/profile/editAd", method = RequestMethod.GET)
 	public ModelAndView editAdPage(@RequestParam long id, Principal principal) {
+		
 		ModelAndView model = new ModelAndView("editAd");
 		Ad ad = adService.getAdById(id);
 		
@@ -115,8 +116,8 @@ public class EditAdController {
 			Ad ad = editAdService.saveFrom(placeAdForm, fileNames, user, adId);
 
 			// triggers all alerts that match the placed ad
-			//caused an error 22/11/2016
-			alertService.triggerAlerts(ad);
+			
+			//alertService.triggerAlerts(ad);
 
 			// reset the picture uploader
 			this.pictureUploader = null;

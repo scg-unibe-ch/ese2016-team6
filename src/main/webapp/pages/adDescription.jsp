@@ -212,13 +212,14 @@
 	</c:otherwise>
 </c:choose>
 
-
-<h1 id="shownAdTitle" style="font-size: 1em;"><b>${shownAd.title}</b>
 	<c:choose>
 		<c:when test="${loggedIn}">
-			<a class="right" id="bookmarkButton">Bookmark Ad</a>
+			<h1><a class="right" id="bookmarkButton">Bookmark Ad</a></h1>
 		</c:when>
 	</c:choose>
+
+<h1 id="shownAdTitle" style="font-size: 1em;"><b>${shownAd.title}</b>
+	
 	
 
 	<label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>

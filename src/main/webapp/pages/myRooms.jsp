@@ -71,9 +71,12 @@
 										<div class="resultMiddle">
 											</br>
 											<p>
-											For
-											<c:if test="${ad.rent==true}"> rent </c:if>
-											<c:if test="${ad.rent==false}"> sale </c:if>
+											<c:if test="${ad.deal=='forRent'}"> <h3>For rent</h3></c:if>
+											<c:if test="${ad.deal=='forSale'}">
+												<c:if test="${ad.sale=='direct'}"> <h3>For sale</h3></c:if>
+												<c:if test="${ad.sale=='auction'}"> <h3>For auction</h3></c:if>
+												<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>For auction/sale</h3></c:if>
+											</c:if>
 											</p>
 								
 											<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
@@ -156,9 +159,12 @@
 										<div class="resultMiddle">
 											</br>
 											<p>
-											For
-											<c:if test="${ad.rent=true}"> rent </c:if>
-											<c:if test="${ad.rent=false}"> sale </c:if>
+											<c:if test="${ad.deal=='forRent'}"> <h3>For rent</h3></c:if>
+											<c:if test="${ad.deal=='forSale'}">
+												<c:if test="${ad.sale=='direct'}"> <h3>For sale</h3></c:if>
+												<c:if test="${ad.sale=='auction'}"> <h3>For auction</h3></c:if>
+												<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>For auction/sale</h3></c:if>
+											</c:if>
 											</p>
 								
 											<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>

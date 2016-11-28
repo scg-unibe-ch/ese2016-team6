@@ -202,10 +202,23 @@ public class AuctionService {
 
         if(bid != null) {
             User receiver = bid.getUser();
-            messageService.sendMessage(userDao.findByUsername("EstateArranger"), receiver, "Overbid",
-                    "You have been overbid by "+user.getFirstName()+
-                    " on the property" + "<a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle() +"</a>.</br>"+
-                    "The new highest bid is "+ad.getCurrentBid());
+            
+            StringBuilder messageBuilder = new StringBuilder();
+            messageBuilder.append("You have been overbid by ");
+            messageBuilder.append(user.getFirstName());
+            messageBuilder.append( " on the property");
+            messageBuilder.append( "<a href= ../ad?id=");
+            messageBuilder.append(ad.getId());
+            messageBuilder.append(" style=\"color: #0000ff\">");
+            messageBuilder.append(ad.getTitle());
+            messageBuilder.append("</a>.</br>");
+            messageBuilder.append( "The new highest bid is ");
+            messageBuilder.append(ad.getCurrentBid());
+            
+            
+            
+            messageService.sendMessage(userDao.findByUsername("System"), receiver, "Overbid",
+                    messageBuilder.toString());
         }
     }
 }
