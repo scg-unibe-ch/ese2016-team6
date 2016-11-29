@@ -15,6 +15,7 @@
 <!--
 <pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>
 -->
+
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">

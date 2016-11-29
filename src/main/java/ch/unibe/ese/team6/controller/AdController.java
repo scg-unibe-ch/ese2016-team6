@@ -50,8 +50,6 @@ public class AdController {
 	
 	@Autowired
 	private BidService bidservice;
-	
-	
 
 	@Autowired
 	private VisitService visitService;
@@ -149,6 +147,7 @@ public class AdController {
 	 * Fetches information about bookmarked rooms and own ads and attaches this
 	 * information to the myRooms page in order to be displayed.
 	 */
+	
 	@RequestMapping(value = "/profile/myRooms", method = RequestMethod.GET)
 	public ModelAndView myRooms(Principal principal) {
 		ModelAndView model;
@@ -169,6 +168,29 @@ public class AdController {
 
 		return model;
 	}
+	
+	
+	@RequestMapping(value = "/profile/myBookmarks", method = RequestMethod.GET)
+	public ModelAndView myBookmarks(Principal principal) {
+		ModelAndView model;
+		User user;
+		if (principal != null) {
+			model = new ModelAndView("myBookmarks");
+			String username = principal.getName();
+			user = userService.findUserByUsername(username);
+
+			Iterable<Ad> ownAds = adService.getAdsByUser(user);
+
+			model.addObject("bookmarkedAdvertisements", user.getBookmarkedAds());
+			model.addObject("ownAdvertisements", ownAds);
+			return model;
+		} else {
+			model = new ModelAndView("home");
+		}
+
+		return model;
+	}
+
 
 	/* AUCTION */
 	/*@RequestMapping(value = "/ad?id=${ad.id}", method = RequestMethod.POST)
