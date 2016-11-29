@@ -21,8 +21,9 @@
 
 		
 		
-		document.getElementById('type-sale').checked="";
-		document.getElementById('type-auction').checked="";
+		//document.getElementById('type-sale').checked="";
+		//document.getElementById('type-auction').checked="";
+		
 		document.getElementById('field-priceRent').style.visibility = "visible";
 		document.getElementById('field-priceSale').style.visibility = "hidden";
 		document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -63,6 +64,8 @@
 			document.getElementById('ActualDeal').value = "forRent";
 			document.getElementyById('field-priceSale').value = "100000000";
 			
+			document.getElementById('preference').style.visibility = "visible";
+			
     	});
 
 		$("#type-sale").on("click", function(){
@@ -85,7 +88,10 @@
 			
 			document.getElementById('ActualSale').value = "direct";
 			document.getElementById('ActualDeal').value = "forSale";
+
 			document.getElementyById('field-priceRent').value = "100000000";
+			document.getElementById('preference').style.visibility = "hidden";
+
    		});
 
     	$("#type-auction").on("click", function(){
@@ -109,7 +115,9 @@
 			
 			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
 			document.getElementById('ActualDeal').value = "forSale";
+
 			document.getElementyById('field-priceRent').value = "100000000";
+			document.getElementById('preference').style.visibility = "hidden";
     	});
 
 		$("#field-city").autocomplete({
@@ -126,11 +134,11 @@
 		});
 		
 		$("#field-moveInDate").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
 		$("#field-moveOutDate").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
 		$("#field-visitDay").datepicker({
@@ -138,7 +146,7 @@
 		});
 		
 		$("#field-deadlineDate").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
 		$("#addbutton").click(function() {
@@ -212,23 +220,32 @@
 	});
 </script>
 
+<!--
 <pre><a href="/">Home</a>   &gt;   Place ad</pre>
+-->
 
 <h1>Place an ad </h1><p> Every Field with a * needs to be filled out </p>
 <hr />
 
+
+
 <form:form method="post" modelAttribute="placeAdForm"
 	action="/profile/placeAd" id="placeAdForm" autocomplete="off"
-	enctype="multipart/form-data">
-
-	<fieldset>
+	enctype="multipart/form-data" style="width:100%">
+	<table style="width:100%;height:100%;table-layout: fixed;">
+	<tr>
+	
+	
+	<td style="width:50%;height:320px;">
+	
+	<fieldset style="height:100%;" >
 		<legend>General description</legend>
 		<table class="placeAdTable">
 			
 			
 			<tr>
-			<td><label for="field-type">Type of deal*:</label>
-				
+			<td style="background-color:#fff9f9"><label for="field-type">Type of deal*:</label>
+
 				<!-- uses the scripts above to put the values of the radio buttons in these two invisible fields
 				these two invisible fields are then written into the form
 				-->
@@ -241,37 +258,37 @@
 				</td>
 			</tr>	
 			<tr>
-				<td><label for="field-title">Title of your ad *:</label> 
+				<td style="background-color:#fff9f9"><label for="field-title">Title of your ad *:</label> 
 				<form:input id="field-title" path="title" placeholder="ad title" />
 				<form:errors path="title" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-			<td><label for="field-street">Address *:</label>
+			<td style="background-color:#fff9f9"><label for="field-street">Address *:</label>
 				<form:input id="field-street" path="street" placeholder="street" /></td>
 				<form:errors path="street" cssClass="validationErrorText" />
 			</tr>
 			
 			<tr>
-			<td><label for="field-city">City *:</label>
+			<td style="background-color:#fff9f9"><label for="field-city">City *:</label>
 				<form:input id="field-city" path="city" placeholder="city" />
 				<form:errors path="city" cssClass="validationErrorText" /></td>
 			</tr>
 
 			<tr>
-				<td><label for="field-squareFootage">Square Meters (m²) *:</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters" step="1" min="0" />
+				<td style="background-color:#fff9f9"><label for="field-squareFootage">Square Meters (m²) *:</label>
+					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters"  min="0" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td><label for="field-numberRooms">Number of Rooms *:</label>
-					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" step="1" min="0" />
+				<td style="background-color:#fff9f9"><label for="field-numberRooms">Number of Rooms *:</label>
+					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" min="0" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td><label for="moveInDate">Move-in date *:</label>
+				<td style="background-color:#fff9f9"><label for="moveInDate">Move-in date *:</label>
 				<form:input type="text" id="field-moveInDate" path="moveInDate" />
 				<form:errors path="moveInDate" cssClass="validationErrorText" /></td>
 			</tr>
@@ -280,43 +297,43 @@
 				<td><label for="moveOutDate">Move-out date :</label>
 				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
 			</tr>
-
-
-
 		</table>
 	</fieldset>
 	
-	<fieldset>
+	</td>
+	
+	<td style="width:50%;height:320px;">
+	<fieldset style="height:100%;" >
 		<legend>Deal</legend>
 		
 		<table class="placeAdTable">
 			
 			<tr>
-				<td><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) *:</label>
-				<form:input id="field-priceRent" type="number" path="prize" step="50" min="0"/>
+				<td style="background-color:#fff9f9"><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) *:</label>
+				<form:input id="field-priceRent" type="number" path="prize"  min="0"/>
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
-				<td><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) *:</label>
-				<form:input id="field-priceSale" type="number" path="prize" step="50" min="0" />
+				<td style="background-color:#fff9f9"><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) *:</label>
+				<form:input id="field-priceSale" type="number" path="prize" min="0" />
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) *:</label>
-				<form:input id="field-currentBid" type="number" path="currentBid" step="50" min="0"/>
+				<td style="background-color:#fff9f9"><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) *:</label>
+				<form:input id="field-currentBid" type="number" path="currentBid" min="0"/>
 				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
-				<td><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) *:</label>
-				<form:input id="field-increment" type="number" path="increment" step="50" min="0"/>
-				<form:errors path="increment" cssClass="validationErrorText" /></td>			</tr>
+				<td style="background-color:#fff9f9"><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) *:</label>
+				<form:input id="field-increment" type="number" path="increment" min="0"/>
+				<form:errors path="increment" cssClass="validationErrorText" /></td>			
+			</tr>
 			
-			<tr>			
-
-				<td><label id="deadLabel" for="field-deadlineDate">Deadline</label>
+			<tr>
+				<td style="background-color:#fff9f9"><label id="deadLabel" for="field-deadlineDate">Deadline</label>
 					<input id="field-deadlineDate" />
 					
 					<select id="field-deadlineHour">
@@ -341,67 +358,101 @@
 			
 		</table>
 	</fieldset>
-
-	<fieldset>
+	</td>
+	
+	</tr>
+	
+	<tr>
+	
+	<td style="width:100%;height:400px;">
+	<fieldset style="height:100%;" >
 		<legend>Room content</legend>
 		<table class="placeAdTable">
 		
 			<tr>
 				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Smoking inside allowed</label></td>
 				<td><form:checkbox id="field-internet" path="internet" value="1" /><label>WiFi available</label></td>
-				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar/Attic</label></td>
+				
 			</tr>
 			
 			<tr>
 				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Animals allowed</label></td>
 				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>TV Cable</label></td>
-				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden (co-use)</label></td>
+				
 			</tr>
 			
 			<tr>
 				<td><form:checkbox id="field-furnished" path="furnished" value="1" /><label>Furnished</label></td>
 				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label></td>
-				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony/Patio</label></td>			
+						
+			</tr>
+			
+			<tr>
+				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar/Attic</label></td>
+				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden (co-use)</label></td>
+			</tr>
+			
+			<tr>
+				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony/Patio</label></td>	
 			</tr>
 
+			
+			<tr>
+				<td colspan="2" >
+					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="80" placeholder="room Description" />
+					<form:errors path="roomDescription" cssClass="validationErrorText" />
+				</td>
+			</tr>
 		</table>
-
 		<br/>
 	
 		<form:textarea path="roomDescription" rows="10" cols="100" placeholder="room Description*" />
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
-		
 	</fieldset>
+	</td>
 	
 	
-	<fieldset>
+	
+	<td style="width:50%;height:400px;">
+	<fieldset style="height:100%;" >
 		<legend>Location details (optional)</legend>
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
-				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" placeholder="e.g. 500" step="10" /></td>
+				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" placeholder="e.g. 500" /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
-				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" placeholder="e.g. 500" step="10" /></td>
+				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" placeholder="e.g. 500"  /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
-				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500" step="10"  /></td>
+				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500"   /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
-				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500" step="10"  /></td>
+				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500"   /></td>
 			</tr>
 		</table>
 	</fieldset>
-
-	<fieldset>
+	</td>
+	
+	</tr>
+	
+	<tr>
+	
+	<td style="width:50%;height:210px;">
+	
+	<fieldset id="preference" style="height:100%;">
 		<legend>Preferences (optional)</legend>
-		<form:textarea path="preferences" rows="5" cols="100" placeholder="preferences concerning the tenant"></form:textarea>
+		<form:textarea path="preferences" rows="5" cols="80" placeholder="preferences concerning the tenant"></form:textarea>
 	</fieldset>
 	
-	<fieldset>
+	</td>
+	
+	<td style="width:50%;height:210px;">
+	
+	<fieldset style="height:100%;">
 		<legend>Pictures (optional)</legend>
 		<br /> 
 		<label for="field-pictures">Pictures</label> <input type="file" id="field-pictures" accept="image/*" multiple="multiple" />
@@ -415,7 +466,11 @@
 		<br>
 	</fieldset>
 
-	<fieldset>
+	</td>
+	
+	<td>
+	
+	<fieldset style="height:100%;">
 		<legend>Visits timetable (optional)</legend>
 		<table>
 			<tr>
@@ -464,6 +519,13 @@
 		</table>
 		<br>
 	</fieldset>
+	
+	
+	</td>
+	
+	</tr>
+	
+	</table>
 
 	<br />
 	

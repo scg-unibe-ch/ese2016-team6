@@ -16,10 +16,7 @@
 
 <!--<pre>Home</pre>-->
 
-<br/>
-<h1 style="text-align: center;">Welcome !</h1>
-<br/>
-<br/>
+
 
 <c:choose>
 	<c:when test="${empty newest}">
@@ -27,7 +24,7 @@
 	</c:when>
 	
 	<c:otherwise>
-		<h2 style="text-align: center;"><i>See below our newest ads</i></h2>
+		
 		<br/>
 		<div id="resultsDiv" class="resultsDiv" style="margin: auto;">
 			<table id="indexTable">

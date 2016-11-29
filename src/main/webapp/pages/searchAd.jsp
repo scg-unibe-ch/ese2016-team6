@@ -6,7 +6,7 @@
 
 <c:import url="template/header.jsp" />
 
-<pre><a href="/">Home</a>   &gt;   Search</pre>
+<!-- <pre><a href="/">Home</a>   &gt;   Search</pre> -->
 
 <script>
 	$(document).ready(function() {
@@ -39,6 +39,12 @@
 </script>
 <script>
 $(document).ready(function() {
+	
+	
+	document.getElementById('forRent').checked = true;
+	document.getElementById('forSale').checked = false;
+	
+	
 	$("#type-sale").on("click", function(){
 		document.getElementById('forSale').checked = true;
 		document.getElementById('forRent').checked = false;
@@ -51,7 +57,7 @@ $(document).ready(function() {
 });	
 </script>
 
-<%-- 
+<!-- 
 <script>
 function validateType(form)
 {
@@ -77,7 +83,8 @@ function validateType(form)
 	}
 	filtered.checked = false;
 }
-</script>--%>
+</script>
+-->
 
 <h1>Search for an ad</h1>
 <hr />
@@ -103,14 +110,14 @@ function validateType(form)
 
 		<label for="radiusInput">Within radius of (max.):</label>
 		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="5" />
+			placeholder="e.g. 5" min="0" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
 		
 		
 		<br /> <label for="prizeInput">Price (max.):</label>
 		<form:input id="prizeInput" type="number" path="prize"
-			placeholder="e.g. 5" step="50" />
+			placeholder="e.g. 5" min="0" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" />
 		<br />
@@ -119,7 +126,7 @@ function validateType(form)
 		<label for="numberRoomsInput">Rooms (min.):</label>
 		
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 5" step="1" default="0"/>
+			placeholder="e.g. 5" default="0" min="0"/>
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		

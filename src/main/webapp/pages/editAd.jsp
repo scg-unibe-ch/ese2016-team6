@@ -92,14 +92,14 @@
 			autoFocus : true
 		});
 		$("#field-moveInDate").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		$("#field-moveOutDate").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
 		$("#field-visitDay").datepicker({
-			dateFormat : 'dd-mm-yy'
+			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
 		
@@ -204,9 +204,11 @@
 
 			<tr>
 				<td><label for="field-type">Type of deal:</label>
+				
 					
-					<form:input type="hidden" id="ActualSale" path="sale"  value="direct" readonly="readonly" />
-					<form:input type="hidden" id="ActualDeal" path="deal"  value="forRent" readonly="readonly" />
+					
+					<form:input type="hidden" id="ActualDeal" path="deal"  value="forSale" readonly="readonly" />	
+					<form:input type="hidden" id="ActualDeal" path="deal"  value="bothAuctionAndDirect" readonly="readonly" />
 					
 					<c:choose>
 						<c:when test="${ad.deal eq 'forRent'}">
@@ -217,7 +219,7 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${ad.deal eq 'forSale'}">
+						<c:when test="${ad.deal eq 'forSale' && ad.sale eq 'direct'}">
 							<input id="type-sale" type="radio" name="sale" value="forSale" checked="checked" />Sale
 						</c:when>
 						<c:otherwise>
@@ -225,13 +227,16 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${ad.sale eq 'auction'}">
+						<c:when test="${ad.sale eq 'bothAuctionAndDirect' && ad.deal eq 'forSale'}">
 							<input id="type-auction" type="radio" name="sale" value="forAuction" checked="checked" />Auction
 						</c:when>
 						<c:otherwise>
 							<input id="type-auction" type="radio" name="sale" value="forAuction" />Auction
 						</c:otherwise>
 					</c:choose>
+					
+					${ad.deal}
+					${ad.sale}
 				</td>
 
 			</tr>
@@ -254,13 +259,13 @@
 
 			<tr>
 				<td><label for="field-squareFootage">Square Meters (m²) :</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" value="${ad.squareFootage}" step="1" min="0" />
+					<form:input id="field-squareFootage" type="number" path="squareFootage" value="${ad.squareFootage}" min="0" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="field-numberRooms">Number of Rooms :</label>
-					<form:input id="field-numberRooms" type="number" path="numberOfRooms" value="${ad.numberOfRooms}" step="1" min="0" />
+					<form:input id="field-numberRooms" type="number" path="numberOfRooms" value="${ad.numberOfRooms}" min="0" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
@@ -284,25 +289,25 @@
 
 			<tr>
 				<td><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) :</label>
-				<form:input id="field-priceRent" type="number" path="prize" value="${ad.priceRent}" step="50" min="0"/>
+				<form:input id="field-priceRent" type="number" path="prize" value="${ad.priceRent}" min="0"/>
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
 				<td><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) :</label>
-				<form:input id="field-priceSale" type="number" path="prize" value="${ad.priceSale}" step="50" min="0" />
+				<form:input id="field-priceSale" type="number" path="prize" value="${ad.priceSale}" min="0" />
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) :</label>
-				<form:input id="field-currentBid" type="number" path="currentBid" value="${ad.currentBid}" step="50" min="0"/>
+				<form:input id="field-currentBid" type="number" path="currentBid" value="${ad.currentBid}" min="0"/>
 				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
 				<td><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) :</label>
-				<form:input id="field-increment" type="number" path="increment" value="${ad.increment}" step="50" min="0"/>
+				<form:input id="field-increment" type="number" path="increment" value="${ad.increment}" min="0"/>
 				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
 			
@@ -519,19 +524,19 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
-				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" value="${ad.proximityToPublicTransport}" step="10" /></td>
+				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" value="${ad.proximityToPublicTransport}" /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
-				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" value="${ad.proximityToSchool}" step="10" /></td>
+				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" value="${ad.proximityToSchool}" /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
-				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" value="${ad.proximityToSupermarket}" step="10" /></td>
+				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" value="${ad.proximityToSupermarket}" /></td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
-				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" value="${ad.proximityToNightlife}" step="10" /></td>
+				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" value="${ad.proximityToNightlife}" /></td>
 			</tr>
 		</table>
 	</fieldset>

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.service.AdService;
+import ch.unibe.ese.team6.controller.service.BidService;
 import ch.unibe.ese.team6.controller.service.BookmarkService;
 import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.controller.service.UserService;
@@ -48,7 +49,9 @@ public class AdController {
 	private MessageService messageService;
 	
 	@Autowired
-	private BidDao bidDao;
+	private BidService bidservice;
+	
+	
 
 	@Autowired
 	private VisitService visitService;
@@ -62,7 +65,7 @@ public class AdController {
 		model.addObject("messageForm", new MessageForm());
 
 		//ad the latest bid as well
-		Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
+		Bid bid = bidservice.getTopBid(ad);
 		
 		
 		model.addObject("latestBid", bid);
