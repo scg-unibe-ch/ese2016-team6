@@ -4,7 +4,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team6.controller.service.*;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Bid;
-import ch.unibe.ese.team6.model.RedirectInfo;
+
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.dao.BidDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
