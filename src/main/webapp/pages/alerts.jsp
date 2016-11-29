@@ -5,9 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <c:import url="template/header.jsp" />
-
+<!--
 <pre><a href="/">Home</a>   &gt;   Alerts</pre>
-
+-->
 <script>
 function deleteAlert(button) {
 	var id = $(button).attr("data-id");
@@ -18,43 +18,36 @@ function deleteAlert(button) {
 </script>
 
 <script>
+$(document).ready(function() {
+	$("#type-sale").on("click", function(){
+		document.getElementById('forSale').checked = true;
+		document.getElementById('forRent').checked = false;
+	});
+
+	$("#type-rent").on("click", function(){
+		document.getElementById('forRent').checked = true;
+		document.getElementById('forSale').checked = false;
+	});
+});	
+</script>
+
+<script>
 function validateType(form)
 {	
-	var rent = document.getElementById('rent');
-	var sale = document.getElementById('sale');
-	var neitherRentSale = document.getElementById('neitherRentSale');
-	var bothRentAndSale = document.getElementById('bothRentAndSale');
-	
-	if(rent.checked && sale.checked) {
-		bothRentAndSale.checked = true;
-		neitherRentSale.checked = false;
-	}
-	else if(!rent.checked && !sale.checked) {
-		bothRentAndSale.checked = false;
-		neitherRentSale.checked = true;
-	}
-	else {
-		bothRentAndSale.checked = false;
-		neitherRentSale.checked = false;
-	}
-	
-	
 	var minsize = document.getElementById('minSize');
 	var maxsize = document.getElementById('maxSize');
 	var isValid = document.getElementById('isValid');
 	if(maxsize.value < minsize.value) {
-		isValid.checked = false;
+		document.getElementById('isValid').checked = false;
 	} else {
-		isValid.checked = true;
+		document.getElementById('isValid').checked = true;
 	}
 }
 </script>
 
 <script>
 function rentSaleOfAlert(alert) {
-	if(alert.getBothRentAndSale())
-		return "Both"
-	else if(alert.getForSale())
+	if(forSale.checked)
 		return "For Sale"
 	else
 		return "For Rent"
@@ -91,15 +84,15 @@ function rentSaleOfAlert(alert) {
 <form:form method="post" modelAttribute="alertForm" action="/profile/alerts"
 	id="alertForm" autocomplete="off">
 
+			<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
+			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
+	
 	<fieldset>		
-		<!-- <form:radiobutton name="forRent" id="forRent" path="forRent" value="1" checked="checked" /> For Rent
-		<form:radiobutton name="forSale" id="forSale" path="forRent" value="0" /> For Sale <br /> -->
-		<form:checkbox name="rent" id="rent" path="forRent" /><label>For Rent</label>
-		<form:checkbox name="sale" id="sale" path="forSale" /><label>For Sale</label>
-
-		<form:checkbox style="display:none" name="neitherRentSale" id="neitherRentSale" path="noRentNoSale" />
-		<form:checkbox style="display:none" name="bothRentAndSale" id="bothRentAndSale" path="bothRentAndSale" />
-		<form:errors path="noRentNoSale" cssClass="validationErrorText" /><br /> 
+		<form>
+    		<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
+   			<input type="radio" id="type-sale" name="RentSale"> For Sale
+  		</form>
+		<br />
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -107,15 +100,13 @@ function rentSaleOfAlert(alert) {
 		<form:errors path="city" cssClass="validationErrorText" />
 		
 		<label for="radius">Within radius of (max.):</label>
-		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="1" />
+		<form:input id="radiusInput" type="number" path="radius" step="1" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
 		<br /> 
 		
 		<label for="price">Price (max.):</label>
-		<form:input id="priceInput" type="number" path="price"
-			placeholder="e.g. 5" step="50" />
+		<form:input id="priceInput" type="number" path="price" step="50" />
 		CHF
 		<form:errors path="price" cssClass="validationErrorText" />
 		<br />
@@ -136,7 +127,7 @@ function rentSaleOfAlert(alert) {
 		Square Meters
 		<form:errors path="maxSize" cssClass="validationErrorText" /> 
 		
-		<form:checkbox id="isValid" style="display:none" name="isValid" path="isValid" />
+		<form:checkbox id="isValid" style="display:none" name="isValid" path="isValid" readonly="readonly"/>
 		<form:errors path="isValid" cssClass="validationErrorText" />
 		
 		<br />
@@ -184,9 +175,6 @@ function rentSaleOfAlert(alert) {
 				
 				<td>
 				<c:choose>
-					<c:when test="${alert.bothRentAndSale}">
-						Both
-					</c:when>
 					<c:when test="${alert.forSale}">
 						For Sale
 					</c:when>

@@ -4,22 +4,29 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
+
 
 <c:import url="template/header.jsp" />
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome to EstateArranger</title>
+<title>Welcome to HomeLender</title>
+
+
 </head>
 
 <body>
 
-<!--<pre>Home</pre>-->
-
-<br/>
-<h1 style="text-align: center;">Welcome !</h1>
-<br/>
-<br/>
+<!-- imports the new login window found in template/NewLoginPop.jsp -->
+<!-- This must be in the body of each page in order for the login screen to work -->
+<c:import url="template/NewLoginPop.jsp" />
+	
 
 <c:choose>
 	<c:when test="${empty newest}">
@@ -27,7 +34,7 @@
 	</c:when>
 	
 	<c:otherwise>
-		<h2 style="text-align: center;"><i>See below our newest ads</i></h2>
+		
 		<br/>
 		<div id="resultsDiv" class="resultsDiv" style="margin: auto;">
 			<table id="indexTable">
@@ -156,5 +163,7 @@
 		</div>
 	</c:otherwise>
 </c:choose>
+
+
 
 <c:import url="template/footer.jsp" /><br />

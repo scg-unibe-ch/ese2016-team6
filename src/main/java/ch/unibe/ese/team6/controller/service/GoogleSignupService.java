@@ -47,6 +47,9 @@ public class GoogleSignupService {
 		user.setEnabled(true);
 		user.setGender(Gender.OTHER);
 		user.setIsGoogleUser(true);
+		user.setIsFacebookUser(false);
+		user.setGooglePicture(googleForm.getGooglePicture());
+
 		
 		user.setKindOfMembership(KindOfMembership.NORMAL);
 		
@@ -60,9 +63,9 @@ public class GoogleSignupService {
 		
 		userDao.save(user);
 		
-		String tex = "Thanks for signing up at EstateArranger. Here is your new Password: " + user.getPassword() + "\n"
+		String tex = "Thanks for signing up at HomeLender. Here is your new Password: " + user.getPassword() + "\n"
 				+ "And your Username is: " + user.getUsername();
-		String sub = "EstateArranger!";
+		String sub = "HomeLender!";
 		messageService.sendEmail(user, sub, tex);
 		
 		signupService.sendsMessageAndEmailForNormalUserWeekly(user);

@@ -16,6 +16,8 @@ public class GoogleSignupForm {
 	@Pattern(regexp = "[a-zA-Z\u00E4\u00F6\u00FC\u00C4\u00D6\u00DC]+", message = "Last name must be a valid name")
 	@NotNull
 	private String lastName;
+	
+	private String googlePicture;
 
 
 	public String getEmail() {
@@ -42,4 +44,11 @@ public class GoogleSignupForm {
 		this.lastName = lastName;
 	}
 
+	public String getGooglePicture(){
+		return googlePicture;
+	}
+	
+	public void setGooglePicture(String url){
+		this.googlePicture = url;
+	}
 }

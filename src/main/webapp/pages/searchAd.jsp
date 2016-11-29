@@ -6,7 +6,7 @@
 
 <c:import url="template/header.jsp" />
 
-<pre><a href="/">Home</a>   &gt;   Search</pre>
+<!-- <pre><a href="/">Home</a>   &gt;   Search</pre> -->
 
 <script>
 	$(document).ready(function() {
@@ -37,8 +37,27 @@
 			roomNumbers.value = "0";	
 	});
 </script>
+<script>
+$(document).ready(function() {
+	
+	
+	document.getElementById('forRent').checked = true;
+	document.getElementById('forSale').checked = false;
+	
+	
+	$("#type-sale").on("click", function(){
+		document.getElementById('forSale').checked = true;
+		document.getElementById('forRent').checked = false;
+	});
 
-<%-- 
+	$("#type-rent").on("click", function(){
+		document.getElementById('forRent').checked = true;
+		document.getElementById('forSale').checked = false;
+	});
+});	
+</script>
+
+<!-- 
 <script>
 function validateType(form)
 {
@@ -64,7 +83,8 @@ function validateType(form)
 	}
 	filtered.checked = false;
 }
-</script>--%>
+</script>
+-->
 
 <h1>Search for an ad</h1>
 <hr />
@@ -73,20 +93,13 @@ function validateType(form)
 	id="searchForm" autocomplete="off">
 
 	<fieldset>
-		<!--<form:checkbox name="room" id="room" path="roomHelper" /><label for="room">Room</label>
-		<form:checkbox name="studio" id="studio" path="studioHelper" /><label for="studio">Studio</label>
-		
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:checkbox style="display:none" name="type" id="type" path="studio" />
-		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />-->
-		
-		<br />
-		
-		<form:checkbox name="rent" id="rent" path="forRent"/><label>For Rent</label>
-		<form:checkbox name="sale" id="sale" path="forSale"/><label>For Sale</label>
-		
+		<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
+			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
+			
+		<form>
+    		<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
+   			<input type="radio" id="type-sale" name="RentSale"> For Sale
+  		</form>
 		<br />
 		
 		<label for="city">City / zip code:</label>
@@ -97,14 +110,14 @@ function validateType(form)
 
 		<label for="radiusInput">Within radius of (max.):</label>
 		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="5" />
+			placeholder="e.g. 5" min="0" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
 		
 		
 		<br /> <label for="prizeInput">Price (max.):</label>
 		<form:input id="prizeInput" type="number" path="prize"
-			placeholder="e.g. 5" step="50" />
+			placeholder="e.g. 5" min="0" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" />
 		<br />
@@ -113,14 +126,14 @@ function validateType(form)
 		<label for="numberRoomsInput">Rooms (min.):</label>
 		
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 5" step="1" default="0"/>
+			placeholder="e.g. 5" default="0" min="0"/>
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		
 		<br />
 		
 		<button type="reset" class="btn btn-default" tabindex="8">Cancel</button>
-		<button type="submit" class="btn btn-default" tabindex="7" onClick="validateType(this.form)">Search</button>
+		<button type="submit" class="btn btn-default" tabindex="7" >Search</button>
 		
 	</fieldset>
 

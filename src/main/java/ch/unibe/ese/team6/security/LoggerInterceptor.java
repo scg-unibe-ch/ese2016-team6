@@ -12,7 +12,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoggerInterceptor extends HandlerInterceptorAdapter{
 
-		private static final Logger logger = Logger.getLogger("Ithaca logger");
+		private static final Logger logger = Logger.getLogger("HomeLender logger");
 
 		@Override
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

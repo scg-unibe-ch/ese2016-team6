@@ -6,9 +6,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:import url="template/header.jsp" />
+<!--
 <pre>
 <a href="/">Home</a>   &gt;   Schedule</pre>
-
+-->
 
 <table style="width=80%;">
 <tr>

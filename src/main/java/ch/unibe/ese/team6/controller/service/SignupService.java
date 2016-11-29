@@ -55,15 +55,20 @@ public class SignupService {
 	@Transactional
 	public void saveFrom(SignupForm signupForm) {
 		User user = new User();
-		user.setUsername(signupForm.getEmail());
-		user.setEmail(signupForm.getEmail());
+		
 		user.setFirstName(signupForm.getFirstName());
 		user.setLastName(signupForm.getLastName());
+
+		user.setUsername(signupForm.getEmail());
+		user.setEmail(signupForm.getEmail());
+		boolean isValid = signupForm.getIsValid();
+		assert(isValid);
 		user.setPassword(signupForm.getPassword());
 		user.setEnabled(true);
+		user.setIsGoogleUser(false);
 		user.setGender(signupForm.getGender());
 		user.setKindOfMembership(signupForm.getKindOfMembership());
-		user.setIsGoogleUser(false);
+		user.setIsFacebookUser(false);
 		
 		Set<UserRole> userRoles = new HashSet<>();
 		UserRole role = new UserRole();
@@ -119,7 +124,7 @@ public class SignupService {
 	public void sendPayMessage(User user) {
 			timer.schedule(new PayMessager(user), user.getPeriodOfPreiumMembership());
 		
-			String sub = "Welcome to EstateArranger!";
+			String sub = "Welcome to HomeLender!";
 			String txt = "You have to pay " + user.getPriceForPremiumMembereship() 
 			+ " CHF into our bank account for the Premium Membership!";
 			

@@ -60,11 +60,11 @@ public class AlertService {
 		alert.setRadius(alertForm.getRadius());
 	//	alert.setRoom(alertForm.getRoom());
 	//	alert.setStudio(alertForm.getStudio());
-		alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
+	//	alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
 		alert.setUser(user);
 		alert.setForRent(alertForm.getForRent());
 		alert.setForSale(alertForm.getForSale());
-		alert.setBothRentAndSale(alertForm.getBothRentAndSale());
+		//alert.setBothRentAndSale(alertForm.getBothRentAndSale());
 		alert.setMinSize(alertForm.getMinSize());
 		alert.setMaxSize(alertForm.getMaxSize());
 		alert.setIsValid(alertForm.getIsValid());
@@ -95,6 +95,7 @@ public class AlertService {
 		
 		/*
 		 * There is an error here that causes a crash. a null pointer or index out of bounds error.
+		 * Was because it still checked for the Room and Studios in the add.
 		 */
 		
 		int adPrice = ad.getPriceRent(); //ad.getPrizePerMonth removed from Ad.java
@@ -105,9 +106,9 @@ public class AlertService {
 		Iterator<Alert> alertIterator = alerts.iterator();
 		while (alertIterator.hasNext()) {
 			Alert alert = alertIterator.next();
-			if (typeMismatchWith(ad, alert) || radiusMismatchWith(ad, alert)
-					|| ad.getUser().equals(alert.getUser()) || rentSaleMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
-					//|| ad.getUser().equals(alert.getUser()) || sizeMismatchWith(ad, alert) || ad.getRent() == alert.getForRent() || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
+			if (rentSaleMismatchWith(ad, alert) || radiusMismatchWith(ad, alert)
+				//	|| ad.getUser().equals(alert.getUser()) || rentSaleMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
+					|| ad.getUser().equals(alert.getUser()) || sizeMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
 				alertIterator.remove();
 		}
 
@@ -153,17 +154,17 @@ public class AlertService {
 				+ ad.getTitle()
 				+ "</a><br><br>"
 				+ "Good luck and enjoy,<br>"
-				+ "Your EstateArranger crew";
+				+ "Your HomeLender crew";
 	}
 
-	/** Checks if an ad is conforming to the criteria in an alert. */
-	private boolean typeMismatchWith(Ad ad, Alert alert) {
+	/** Checks if an ad is conforming to the criteria in an alert for Room and Studio. */
+	/*private boolean typeMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
 		if (!alert.getBothRoomAndStudio()
 				&& ad.getStudio() != alert.getStudio())
 			mismatch = true;
 		return mismatch;
-	}
+	} */
 	
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean rentSaleMismatchWith(Ad ad, Alert alert) {
@@ -218,10 +219,5 @@ public class AlertService {
 	//for testing
 	public boolean radiusMismatch(Ad ad, Alert alert) {
 		return radiusMismatchWith(ad, alert);
-	}
-	
-	//for testing
-	public boolean typeMismatch(Ad ad, Alert alert) {
-		return typeMismatchWith(ad, alert);
 	}
 }

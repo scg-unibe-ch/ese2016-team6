@@ -3,6 +3,7 @@ package ch.unibe.ese.team6.controller.pojos.forms;
 import java.util.List;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,8 +23,8 @@ public class PlaceAdForm {
 	@NotBlank(message = "Required")
 	private String street;
 	
-	//@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;]*", message = "Please pick a city from the list")
 	@Pattern(regexp = "^[0-9]{4} - [\\S]*", message = "Please pick a city from the list")
+	@NotBlank(message = "Required")
 	private String city;
 	
 	@NotBlank(message = "Required")
@@ -43,9 +44,15 @@ public class PlaceAdForm {
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int numberOfRooms;
 	
+	@NotBlank(message = "Required")
 	private KindOfDeal deal;
+	@NotBlank(message = "Required")
 	private KindOfSale sale;
+	
+	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int priceRent;
+	
+	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int priceSale;
 	private int increment;
 	private int currentBid;
@@ -53,37 +60,11 @@ public class PlaceAdForm {
 	private String deadlineHour;
 	private String deadlineMinute;
 	
-	//what type of property this property is
-	//taken out for now
-	/*
-	@NotBlank(message = "Required")
-	private KindOfProperty propertyType;
-	*/
-	
-	private String preferences;
-
-	// optional free text description
-	//private String roommates;
-	
-	// First user are added as strings, then transformed
-	// to Users and added to the DB in through adService
-	private List<String> registeredRoommateEmails;
-	
-	// optional for input
-	private String roomFriends;
-	
-	//true if studio, false if room
-	private boolean studio;
-	
 	//true if rent, false if sale
 	private boolean rent;
 	//private boolean sale;
 	private boolean auction;
-
-	/*private boolean rent = false;
-	private boolean sale = false;
-	private boolean auction = false;*/
-
+	private String preferences;
 	
 	private boolean smokers;
 	private boolean animals;
@@ -103,7 +84,30 @@ public class PlaceAdForm {
 	private List<String> visits;
 
 	private KindOfMembership kind;
-
+	
+	//what type of property this property is
+	//taken out for now
+	/*
+	@NotBlank(message = "Required")
+	private KindOfProperty propertyType;
+	*/
+	
+	// optional free text description
+	//private String roommates;
+	
+	// First user are added as strings, then transformed
+	// to Users and added to the DB in through adService
+	//private List<String> registeredRoommateEmails;
+	
+	// optional for input
+	//private String roomFriends;
+	
+	//true if studio, false if room
+	//private boolean studio;
+	
+	/*private boolean rent = false;
+	private boolean sale = false;
+	private boolean auction = false;*/
 	
 	//gets and sets the property Type
 	//taken out for now
@@ -438,7 +442,7 @@ public class PlaceAdForm {
 	}
 	
 
-	public String getRoomFriends() {
+/*	public String getRoomFriends() {
 		return roomFriends;
 	}
 
@@ -460,7 +464,7 @@ public class PlaceAdForm {
 
 	public void setRegisteredRoommateEmails(List<String> registeredRoommateEmails) {
 		this.registeredRoommateEmails = registeredRoommateEmails;
-	}
+	}*/
 
 	public List<String> getVisits() {
 		return visits;

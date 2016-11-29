@@ -14,7 +14,6 @@
 <meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
 
 
-
 <c:import url="template/header.jsp" />
 
 <pre>
@@ -47,13 +46,18 @@
 				name="j_password" id="field-password" type="password" />
 			<button type="submit">Login</button>
 		</form>
-		Or <a class="button"  href="<c:url value="/signup" />">sign up</a> as a new user.
+		Or <a class="button"  href="<c:url value="/signup" />">Sign up</a> as a new user.
 		<br>
 		
 		<p>
-			Or login with your Google account: <div class="g-signin2" data-onsuccess="onSignIn"></div>
-						</c:otherwise>
-					</c:choose>
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			
+
+
+		<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
+		</c:otherwise>
+		</c:choose>
+
 		
 		
 		<br />
@@ -66,6 +70,7 @@
 			<li>Email: <i>oprah@winfrey.com</i>, password: <i>password</i></li>
 		</ul>
 		<br />	
+
 <div>
 	<form:form id="googleForm" type="hidden" class="form-horizontal" method="post"
 		modelAttribute="googleForm" action="./googlelogin">
@@ -84,13 +89,18 @@
 						<form:input type="hidden" path="email" id="field-mail"
 							cssClass="form-control" />
 			</spring:bind>
+			
+			<spring:bind path="googlePicture">	
+						<form:input type="hidden" path="googlePicture" id="field-googlePicture"
+							cssClass="form-control" />					
+			</spring:bind>
+			
 		<button type="submit" style="visibility:hidden;" class="btn btn-primary" value="signup" id="googleButton"
 				>Sign up</button>
 				
 		</form:form>
-	</div>	
+</div>	
 	
-	<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
 	
 	<script>
 	function onSignIn(googleUser) {

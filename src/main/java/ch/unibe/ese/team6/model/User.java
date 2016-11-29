@@ -63,11 +63,16 @@ public class User {
 	@Lob
 	private String aboutMe;
 	
+	@Column(nullable = true)
+	private String googlePicture;
+	
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Ad> bookmarkedAds;
 
 	private boolean isGoogleUser;
+
+	private boolean isFbUser;
 
 	public long getId() {
 		return id;
@@ -164,7 +169,7 @@ public class User {
 	public void setBookmarkedAds(List<Ad> bookmarkedAds) {
 		this.bookmarkedAds = bookmarkedAds;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -219,8 +224,20 @@ public class User {
 		this.isGoogleUser = googleUser;
 	}
 	
-	public void setGooglePicture(String googlePicture) {
-		// TODO Auto-generated method stub
+	public String getGooglePicture(){
+		return googlePicture;
+	}
+	
+	public void setGooglePicture(String url){
+		this.googlePicture = url;
+	}
+
+	public void setIsFacebookUser(boolean b) {
+		this.isFbUser = b;
 		
+	}
+	
+	public boolean getisFacebookUser() {
+		return this.isFbUser;
 	}
 }

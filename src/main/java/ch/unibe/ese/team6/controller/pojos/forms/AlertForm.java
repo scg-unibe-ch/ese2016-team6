@@ -14,10 +14,7 @@ import ch.unibe.ese.team6.model.User;
 public class AlertForm {
 	
 	private User user;
-
-//	private boolean studio;
-//	private boolean room;
-
+	
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
 	private String city;
@@ -31,17 +28,11 @@ public class AlertForm {
 	private Integer price;
 	
 	private int zipCode;
-
-/*	@AssertFalse(message = "Please select either or both types")
-	private boolean noRoomNoStudio;*/
-
-	private boolean bothRoomAndStudio;
 	
 	private boolean forRent;
 	private boolean forSale;
-	private boolean bothRentAndSale;
 	
-	@AssertFalse(message = "Please select either or both types")
+	@AssertFalse(message = "Please select either of both Types")
 	private boolean noRentNoSale;
 	
 	@Min(value = 0, message = "Please enter a positive minimal Size")
@@ -88,15 +79,6 @@ public class AlertForm {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-
-
-	public boolean getBothRoomAndStudio() {
-		return bothRoomAndStudio;
-	}
-
-	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
-		this.bothRoomAndStudio = bothRoomAndStudio;
-	}
 	
 	public User getUser() {
 		return user;
@@ -120,22 +102,6 @@ public class AlertForm {
 
 	public void setForSale(boolean forSale) {
 		this.forSale = forSale;
-	}
-
-	public boolean getNoRentNoSale() {
-		return noRentNoSale;
-	}
-
-	public void setNoRentNoSale(boolean noRentNoSale) {
-		this.noRentNoSale = noRentNoSale;
-	}
-
-	public boolean getBothRentAndSale() {
-		return bothRentAndSale;
-	}
-
-	public void setBothRentAndSale(boolean bothRentAndSale) {
-		this.bothRentAndSale = bothRentAndSale;
 	}
 	
 	public int getMinSize() {

@@ -28,9 +28,8 @@ public class FacebookLoginService {
 
 	/** Handles login of facebook user. */
 	@Transactional
-	public void loginFrom(FacebookLoginForm facebookForm) {
-		User user = userDao.findByUsername(facebookForm.getEmail());
-		Authentication request = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+	public void loginFrom(FacebookLoginForm facebookForm, String email, String Password) {
+		Authentication request = new UsernamePasswordAuthenticationToken(email, Password);
 		Authentication result = authenticationManager.authenticate(request);
 		SecurityContextHolder.getContext().setAuthentication(result);
 	}

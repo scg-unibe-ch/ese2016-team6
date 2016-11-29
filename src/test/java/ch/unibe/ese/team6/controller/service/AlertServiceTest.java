@@ -157,9 +157,7 @@ public class AlertServiceTest {
 		
 		assertFalse(alertService.radiusMismatch(oltenResidence, alertList.get(0)));
 		assertTrue(alertService.radiusMismatch(oltenResidence, alertList.get(1)));
-		assertTrue(alertService.typeMismatch(oltenResidence, alertList.get(0)));
-		assertFalse(alertService.typeMismatch(oltenResidence, alertList.get(1)));
-	}
+		}
 	
 	//Lean user creating method
 	User createUser(String email, String password, String firstName,

@@ -94,7 +94,7 @@ public class AdService {
 		
 		ad.setTitle(placeAdForm.getTitle());
 		ad.setStreet(placeAdForm.getStreet());
-		ad.setStudio(placeAdForm.getStudio());
+	//	ad.setStudio(placeAdForm.getStudio());
 		
 		//transports rent variable
 		ad.setRent(placeAdForm.getRent());

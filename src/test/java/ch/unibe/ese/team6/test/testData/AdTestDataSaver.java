@@ -289,7 +289,7 @@ public class AdTestDataSaver {
 		Ad adBiel = new Ad();
 		adBiel.setZipcode(2503);
 		adBiel.setDeal(KindOfDeal.forSale);
-		adBiel.setSale(KindOfSale.auction);
+		adBiel.setSale(KindOfSale.bothAuctionAndDirect);
 		adBiel.setPriceSale(150000);
 		adBiel.setCurrentBid(20000);
 		adBiel.setIncrement(3500);
@@ -309,7 +309,7 @@ public class AdTestDataSaver {
 		adBiel.setUser(ese);
 		adBiel.setTitle("Direkt am Quai: hübsches Studio");
 		adBiel.setStreet("Oberer Quai 12");
-		adBiel.setCity("Biel/Bienne");
+		adBiel.setCity("Biel;Bienne");
 		adBiel.setGarden(false);
 		adBiel.setBalcony(false);
 		adBiel.setCellar(false);

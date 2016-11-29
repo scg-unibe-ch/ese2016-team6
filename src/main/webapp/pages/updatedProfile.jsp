@@ -15,4 +15,6 @@
 <h1>${message}</h1>
 <hr />
 
+<a class="button" href="/user?id=${currentUser.id}">Profile</a>
+
 <c:import url="template/footer.jsp" />

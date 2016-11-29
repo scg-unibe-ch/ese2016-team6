@@ -12,6 +12,14 @@
 		$("#about-me").val("${currentUser.aboutMe}")
 		});		
 </script>
+<script>
+function testForKind(kindOfUser, kind) {
+	if(kindOfUser.equals(kind)) {
+		return true;
+	}
+	return false;
+}
+</script>
 
 <pre><a href="/">Home</a>   &gt;   <a href="/user?id=${currentUser.id}">Public Profile</a>   &gt;   Edit profile</pre>
 
@@ -57,10 +65,18 @@
 	</tr>
 	<tr>
 		<td class="spacingTable"><label for="kindOfMembership">Kind of Membership:</label><a>&emsp;&thinsp;</a>
-		<form:select path="kindOfMembership">
-						<form:option value="NORMAL" label="Normal" />
-						<form:option value="PREMIUM" label="Premium" />
-					</form:select>
+		<form:select path="kindOfMembership">	
+			<c:choose>
+			<c:when test="${currentUser.getKindOfMembershipBo()}">
+				<form:option value="NORMAL" label="Normal" />
+				<form:option value="PREMIUM" label="Premium" selected="selected" />				
+			</c:when>
+			<c:otherwise>
+				<form:option value="NORMAL" label="Normal" selected="selected" />
+				<form:option value="PREMIUM" label="Premium" />				
+			</c:otherwise>
+			</c:choose>
+		</form:select>
 	</tr>
 
 	<tr>
