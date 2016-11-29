@@ -132,7 +132,11 @@
 										<!--
 							<form id="login-form" method="post" action="/j_spring_security_check">
 									
+<<<<<<< HEAD
 									<li></li>
+=======
+									<li><a class="link" id="submitButton" href="<c:url value="/signup" />">Sign up</a></li>
+>>>>>>> origin/master
 									
 									<li style=" width:auto;" >
 										<button type="submit" id="submitButton" class="button">Login</button>

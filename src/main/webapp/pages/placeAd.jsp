@@ -21,8 +21,8 @@
 
 		
 		
-		//document.getElementById('type-sale').checked="";
-		//document.getElementById('type-auction').checked="";
+		document.getElementById('type-sale').checked="";
+		document.getElementById('type-auction').checked="";
 		
 		document.getElementById('field-priceRent').style.visibility = "visible";
 		document.getElementById('field-priceSale').style.visibility = "hidden";
@@ -37,10 +37,6 @@
 		document.getElementById('bidLabel').style.visibility = "hidden";
 		document.getElementById('incLabel').style.visibility = "hidden";
 		document.getElementById('deadLabel').style.visibility = "hidden";
-		
-		
-		document.getElementById('ActualDeal').value = "forRent";
-		
 		
 
     	$("#type-rent").on("click", function(){
@@ -63,6 +59,7 @@
 			
 			document.getElementById('ActualDeal').value = "forRent";
 			
+			
 			document.getElementById('preference').style.visibility = "visible";
 			
     	});
@@ -77,7 +74,7 @@
 			document.getElementById('field-deadlineDate').style.visibility = "hidden";
 			document.getElementById('field-deadlineHour').style.visibility = "hidden";
 			document.getElementById('field-deadlineMinute').style.visibility = "hidden";
-			
+			document.getElementbyId('preferences').style.visibility = "hidden";
 			
 			document.getElementById('rentLabel').style.visibility = "hidden";
 			document.getElementById('saleLabel').style.visibility = "visible";
@@ -87,8 +84,7 @@
 			
 			document.getElementById('ActualSale').value = "direct";
 			document.getElementById('ActualDeal').value = "forSale";
-			
-				document.getElementById('preference').style.visibility = "hidden";
+
    		});
 
     	$("#type-auction").on("click", function(){
@@ -101,6 +97,7 @@
 			document.getElementById('field-deadlineDate').style.visibility = "visible";
 			document.getElementById('field-deadlineHour').style.visibility = "visible";
 			document.getElementById('field-deadlineMinute').style.visibility = "visible";
+			document.getElementbyId('preferences').style.visibility = "hidden";
 			
 			
 			document.getElementById('rentLabel').style.visibility = "hidden";
@@ -111,8 +108,6 @@
 			
 			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
 			document.getElementById('ActualDeal').value = "forSale";
-			
-				document.getElementById('preference').style.visibility = "hidden";
     	});
 
 		$("#field-city").autocomplete({
@@ -144,7 +139,7 @@
 			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
-		$("#addbutton").click(function() {
+	<%--	$("#addbutton").click(function() {
 			
 			var text = $("#roomFriends").val();
 			var alreadyAdded = $("#addedRoommates").html();
@@ -175,7 +170,7 @@
 			    	return true;
 			    }
 			}
-		});
+		});--%>
 		
 		
 		
@@ -219,7 +214,7 @@
 <pre><a href="/">Home</a>   &gt;   Place ad</pre>
 -->
 
-<h1>Place an ad</h1>
+<h1>Place an ad </h1><p> Every Field with a * needs to be filled out </p>
 <hr />
 
 
@@ -239,8 +234,8 @@
 			
 			
 			<tr>
-			<td style="background-color:#fff9f9"><label for="field-type">Type of deal:</label>
-				
+			<td style="background-color:#fff9f9"><label for="field-type">Type of deal*:</label>
+
 				<!-- uses the scripts above to put the values of the radio buttons in these two invisible fields
 				these two invisible fields are then written into the form
 				-->
@@ -249,55 +244,49 @@
 				
 				<input id="type-rent" type="radio" name="sale" value="forRent" checked="checked"> Rent
 				<input id="type-sale"  type="radio" name="sale" value="forSale"> Sale
-				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction
-				
-				
-				
-				
+				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction		
 				</td>
-
 			</tr>	
-
 			<tr>
-				<td style="background-color:#fff9f9"><label for="field-title">Title of your ad :</label> 
-				<form:input id="field-title" path="title" placeholder="ad title" /></td>
+				<td style="background-color:#fff9f9"><label for="field-title">Title of your ad *:</label> 
+				<form:input id="field-title" path="title" placeholder="ad title" />
+				<form:errors path="title" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-			<td style="background-color:#fff9f9"><label for="field-street">Address :</label>
+			<td style="background-color:#fff9f9"><label for="field-street">Address *:</label>
 				<form:input id="field-street" path="street" placeholder="street" /></td>
+				<form:errors path="street" cssClass="validationErrorText" />
 			</tr>
 			
 			<tr>
-			<td style="background-color:#fff9f9"><label for="field-city">City :</label>
+			<td style="background-color:#fff9f9"><label for="field-city">City *:</label>
 				<form:input id="field-city" path="city" placeholder="city" />
 				<form:errors path="city" cssClass="validationErrorText" /></td>
 			</tr>
 
 			<tr>
-				<td style="background-color:#fff9f9"><label for="field-squareFootage">Square Meters (m²) :</label>
+				<td style="background-color:#fff9f9"><label for="field-squareFootage">Square Meters (m²) *:</label>
 					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters"  min="0" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td style="background-color:#fff9f9"><label for="field-numberRooms">Number of Rooms :</label>
+				<td style="background-color:#fff9f9"><label for="field-numberRooms">Number of Rooms *:</label>
 					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" min="0" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td style="background-color:#fff9f9"><label for="moveInDate">Move-in date :</label>
-				<form:input type="text" id="field-moveInDate" path="moveInDate" /></td>
+				<td style="background-color:#fff9f9"><label for="moveInDate">Move-in date *:</label>
+				<form:input type="text" id="field-moveInDate" path="moveInDate" />
+				<form:errors path="moveInDate" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td><label for="moveOutDate">Move-out date (optional) :</label>
+				<td><label for="moveOutDate">Move-out date :</label>
 				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
 			</tr>
-
-
-
 		</table>
 	</fieldset>
 	
@@ -310,25 +299,25 @@
 		<table class="placeAdTable">
 			
 			<tr>
-				<td style="background-color:#fff9f9"><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) :</label>
+				<td style="background-color:#fff9f9"><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) *:</label>
 				<form:input id="field-priceRent" type="number" path="prize"  min="0"/>
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
-				<td style="background-color:#fff9f9"><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) :</label>
+				<td style="background-color:#fff9f9"><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) *:</label>
 				<form:input id="field-priceSale" type="number" path="prize" min="0" />
 				<form:errors path="prize" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
-				<td style="background-color:#fff9f9"><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) :</label>
+				<td style="background-color:#fff9f9"><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) *:</label>
 				<form:input id="field-currentBid" type="number" path="currentBid" min="0"/>
 				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
-				<td style="background-color:#fff9f9"><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) :</label>
+				<td style="background-color:#fff9f9"><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) *:</label>
 				<form:input id="field-increment" type="number" path="increment" min="0"/>
 				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
@@ -400,11 +389,12 @@
 			
 			<tr>
 				<td colspan="2" >
-					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="80" placeholder="room Description" />
+					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="80" placeholder="Room Description*" />
 					<form:errors path="roomDescription" cssClass="validationErrorText" />
 				</td>
 			</tr>
 		</table>
+		<br/>
 	</fieldset>
 	</td>
 	

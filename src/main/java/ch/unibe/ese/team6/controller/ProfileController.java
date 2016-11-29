@@ -3,6 +3,9 @@ package ch.unibe.ese.team6.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -102,40 +105,66 @@ public class ProfileController {
 	
 	/** Handles facebook sign in. */
 	@RequestMapping(value = "/facebooklogin", method = RequestMethod.GET)
-	public ModelAndView facebookLogin(@RequestParam("code") String code, FacebookLoginForm facebookLoginForm) {
+	public ModelAndView facebookLogin(@RequestParam("code") String code) {
 		String url = "https://graph.facebook.com/oauth/access_token?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&client_secret=140bd59332d4e2f8fcc61aa3f3706bc8&code=" + code;
 		try {
 			Document doc = Jsoup.connect(url).get();
 			String docS = doc.toString();
-			String[] out = docS.split("=");
-			String[] out2 = out[1].split("&");
-			String url2 = "https://graph.facebook.com/me?access_token="	+ out2[0] + "&fields=email";
+			String access_token = extractAccessToken(docS.replaceAll("\\s+",""));
+
+			String url2 = "https://graph.facebook.com/me?access_token="	+ access_token + "&fields=email";
 			
 			Document doc2 = Jsoup.connect(url2).ignoreContentType(true).get();
-			String docS2 = doc2.toString();
+			String docS2 = doc2.toString().replaceAll("\\s+","");
+			String email = extractUserEMailInfo(docS2).replaceAll(Pattern.quote("\\u0040"), Matcher.quoteReplacement("@"));
+			//String id = extractUserIdInfo(docS2);
 			
-			System.out.println("\n\n");
-			System.out.println(docS2);
-			System.out.println("\n\n");
-			
+			if(!facebookSignupService.doesUserWithUsernameExist(email)) {
+				FacebookLoginForm fbLoginForm = new FacebookLoginForm();
+				fbLoginForm.setEmail(email);
+				fbLoginForm.setFirstName(email);
+				fbLoginForm.setLastName(email);
+				String password = facebookSignupService.saveFrom(fbLoginForm);
+				
+				Authentication request = new UsernamePasswordAuthenticationToken(email, password);
+				Authentication result = authenticationManager.authenticate(request);
+				SecurityContextHolder.getContext().setAuthentication(result);
+				
+				ModelAndView model = new ModelAndView("index");		
+				model.addObject("confirmationMessage", "Signup complete and we have sent you an Email!");
+			}
 		} catch (IOException e) {
 			ModelAndView model = new ModelAndView("index");
 			model.addObject("message",
 					"Something went wrong, please contact the WebAdmin if the problem persists!");
 			e.printStackTrace();
 		}
-		
-		ModelAndView model = new ModelAndView("index");		
-	//	"https://graph.facebook.com/me?access_token=" . $_SESSION["fb_access_code"] . "&fields=email,user_birthday");
-    //    $user_information_array = json_decode($user_information, true);
-		
-		if(!facebookSignupService.doesUserWithUsernameExist(facebookLoginForm.getEmail())){
-			facebookSignupService.saveFrom(facebookLoginForm);
-		}
-		facebookLoginService.loginFrom(facebookLoginForm);
+		ModelAndView model = new ModelAndView("index");
 		model.addObject("searchForm", new SearchForm());
 		return model;
 	}
+	
+	private static String extractAccessToken(String test) {
+        Pattern p = Pattern.compile(".+access_token=(.+?)&amp(.*)");
+		Matcher m = p.matcher(test);
+        
+        if (m.matches()) {
+            return m.group(1);
+        }
+        
+        return null;
+	}
+    
+    private static String extractUserEMailInfo(String test) {
+        Pattern p = Pattern.compile(".+\"email\":\"(.+?)\".*");
+		Matcher m = p.matcher(test);
+        
+        if (m.matches()) {
+            return m.group(1);
+        }
+        
+        return null;
+    }
 
 
 	/** Returns the signup page. */
@@ -155,6 +184,7 @@ public class ProfileController {
 			signupService.saveFrom(signupForm);
 			model = new ModelAndView("login");
 			model.addObject("googleForm", new GoogleSignupForm());
+			model.addObject("facebookSignupForm", new FacebookLoginForm());
 			model.addObject("confirmationMessage", "Signup complete!");
 		} else {
 			model = new ModelAndView("signup");

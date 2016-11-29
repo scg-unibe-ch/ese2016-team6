@@ -14,7 +14,6 @@
 <meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
 
 
-
 <c:import url="template/header.jsp" />
 
 <pre>
@@ -47,16 +46,18 @@
 				name="j_password" id="field-password" type="password" />
 			<button type="submit">Login</button>
 		</form>
-		Or <a class="button"  href="<c:url value="/signup" />">sign up</a> as a new user.
+		Or <a class="button"  href="<c:url value="/signup" />">Sign up</a> as a new user.
 		<br>
 		
 		<p>
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
-					
-		<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
 			
-	</c:otherwise>
-	</c:choose>
+
+
+		<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
+		</c:otherwise>
+		</c:choose>
+
 		
 		
 		<br />
