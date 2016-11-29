@@ -81,11 +81,11 @@ public class AuctionService {
         messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
         messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+" will contact you with the details.</br>");
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
-        messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
+        messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-        messageBuilder.append("Your EstateArranger team");
+        messageBuilder.append("Your HomeLender team");
 
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),winner,"Purchase confirmation",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("HomeLender"),winner,"Purchase confirmation",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
         messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
@@ -94,11 +94,11 @@ public class AuctionService {
         messageBuilder.append(" to " + winner.getFirstName()+ " " + winner.getLastName() + " for "+ ad.getPriceSale() + " CHF.</br>");
         messageBuilder.append("Please contact him as soon as possible.</br>");
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
-        messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
+        messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-        messageBuilder.append("Your EstateArranger team");
+        messageBuilder.append("Your HomeLender team");
 
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),owner,"You sold a property",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("HomeLender"),owner,"You sold a property",messageBuilder.toString());
 
         // update balance
         long amount = ad.getPriceSale();
@@ -126,9 +126,9 @@ public class AuctionService {
         messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
         messageBuilder.append("To place a new ad with the same information <a href= ../profile/placeAd?id="+ad.getId()+" style=\"color: #0000ff\">click here</a>.</br></br>"); // TODO add link to reinstate the ad
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
-        messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
+        messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-        messageBuilder.append("Your EstateArranger team");
+        messageBuilder.append("Your HomeLender team");
         messageService.sendMessage(user,user,"Auction Expired",messageBuilder.toString());
 
     }
@@ -151,10 +151,10 @@ public class AuctionService {
         messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
         messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+" will contact you with the details.</br>");
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
-        messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
+        messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-        messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),winner,"Purchase confirmation",messageBuilder.toString());
+        messageBuilder.append("Your HomeLender team");
+        messageService.sendMessage(userDao.findByUsername("HomeLender"),winner,"Purchase confirmation",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
         messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
@@ -163,10 +163,10 @@ public class AuctionService {
         messageBuilder.append(" to " + winner.getFirstName()+ " " + winner.getLastName() + " for "+ ad.getCurrentBid() + " CHF.</br>");
         messageBuilder.append("Please contact him/her as soon as possible.</br>");
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
-        messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
+        messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-        messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),owner,"You sold a property",messageBuilder.toString());
+        messageBuilder.append("Your HomeLender team");
+        messageService.sendMessage(userDao.findByUsername("HomeLender"),owner,"You sold a property",messageBuilder.toString());
     }
 
     /**
@@ -202,7 +202,7 @@ public class AuctionService {
 
         if(bid != null) {
             User receiver = bid.getUser();
-            messageService.sendMessage(userDao.findByUsername("EstateArranger"), receiver, "Overbid",
+            messageService.sendMessage(userDao.findByUsername("HomeLender"), receiver, "Overbid",
                     "You have been overbid by "+user.getFirstName()+
                     " on the property" + "<a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle() +"</a>.</br>"+
                     "The new highest bid is "+ad.getCurrentBid());

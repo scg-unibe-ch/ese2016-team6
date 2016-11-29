@@ -154,7 +154,7 @@ public class AlertService {
 				+ ad.getTitle()
 				+ "</a><br><br>"
 				+ "Good luck and enjoy,<br>"
-				+ "Your EstateArranger crew";
+				+ "Your HomeLender crew";
 	}
 
 	/** Checks if an ad is conforming to the criteria in an alert for Room and Studio. */

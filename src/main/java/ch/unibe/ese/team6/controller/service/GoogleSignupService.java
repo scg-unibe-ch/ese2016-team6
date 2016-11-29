@@ -47,6 +47,7 @@ public class GoogleSignupService {
 		user.setEnabled(true);
 		user.setGender(Gender.OTHER);
 		user.setIsGoogleUser(true);
+		user.setIsFacebookUser(false);
 		user.setGooglePicture(googleForm.getGooglePicture());
 
 		

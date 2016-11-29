@@ -1,16 +1,17 @@
 package ch.unibe.ese.team6.controller.service;
 
 import java.security.SecureRandom;
+import java.util.HashSet;
+import java.util.Set;
 import java.math.BigInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ch.unibe.ese.team6.controller.pojos.forms.FacebookLoginForm;
-import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.model.User;
+import ch.unibe.ese.team6.model.UserRole;
 import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.Gender;
 import ch.unibe.ese.team6.model.dao.UserDao;
@@ -24,10 +25,15 @@ public class FacebookSignupService {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private SignupService signupService;
 
+	private static final String DEFAULT_ROLE = "ROLE_USER";
+	
 	/** Handles persisting a new user to the database. */
 	@Transactional
-	public void saveFrom(FacebookLoginForm facebookForm) {
+	public String saveFrom(FacebookLoginForm facebookForm) {
 		User user = new User();
 		user.setUsername(facebookForm.getEmail());
 		user.setEmail(facebookForm.getEmail());
@@ -40,15 +46,28 @@ public class FacebookSignupService {
 		
 		user.setEnabled(true);
 		user.setGender(Gender.OTHER);
-		user.setIsGoogleUser(true);
+		user.setIsGoogleUser(false);
+		user.setIsFacebookUser(true);
 		
 		user.setKindOfMembership(KindOfMembership.NORMAL);
 		
+		Set<UserRole> userRoles = new HashSet<>();
+		UserRole role = new UserRole();
+		role.setRole(DEFAULT_ROLE);
+		role.setUser(user);
+		userRoles.add(role);
+		
+		user.setUserRoles(userRoles);
+		
 		userDao.save(user);
 		
-		String tex = "Thanks for signing up at EstateArranger. Here is your new Password: " + randomPassword;
-		String sub = "EstateArranger!";
+		String tex = "Thanks for signing up at HomeLender. Here is your new Password: " + randomPassword + "\n This is your email: " + facebookForm.getEmail();
+		String sub = "HomeLender!";
 		messageService.sendEmail(user, sub, tex);
+		
+		signupService.sendsMessageAndEmailForNormalUserWeekly(user);
+		
+		return randomPassword;
 	}
 	
 	/**

@@ -47,14 +47,13 @@
 				name="j_password" id="field-password" type="password" />
 			<button type="submit">Login</button>
 		</form>
-		Or <a class="button"  href="<c:url value="/signup" />">sign up</a> as a new user.
+		Or <a class="button"  href="<c:url value="/signup" />">Sign up</a> as a new user.
 		<br>
 		
 		<p>
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
 					
-		<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
-			
+					<a class="button" href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="ese2016-team6/documentation/images/FB-Logo.png" /></a>
 						</c:otherwise>
 					</c:choose>
 		

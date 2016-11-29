@@ -681,11 +681,7 @@ public class Ad {
 		this.studio = studio;
 	}
 	
-	
-	
-	
-	
-	
+
 	/*roommates & registered roommates*/
 /*	
 	
