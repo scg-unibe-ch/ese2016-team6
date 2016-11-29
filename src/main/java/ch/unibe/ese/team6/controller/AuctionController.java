@@ -59,9 +59,7 @@ public class AuctionController {
     public @ResponseBody
     void getBid(@RequestParam Integer amount, @RequestParam("id") long id,
                  Principal principal) {
-      
        
-        
     }
     
     /**
@@ -81,7 +79,6 @@ public class AuctionController {
         bidService.makeBid(amount,user,ad);
 
         // triggers all alerts that match the placed ad.
-        
         //commented out till bugs are fixed
         //alertService.triggerAlerts(ad);
         
@@ -92,14 +89,30 @@ public class AuctionController {
 		return model;
     }
 
+    
+    
+    @RequestMapping(value = "/ad/instantBuy", method = RequestMethod.GET)
+    public @ResponseBody
+    void instantBuy(@RequestParam Integer amount, @RequestParam("id") long id,
+                 Principal principal) {
+       
+    }
+    
+    
     /**
      * Ends auction
      * Sends messages to the guy who bought the estate
      */
-    @RequestMapping(value = "/instantBuy", method = RequestMethod.POST)
-    public @ResponseBody void instantBuy(@RequestParam("id") long id, Principal principal){
+    @RequestMapping(value = "/ad/instantBuy", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView instantBuy(@RequestParam("id") long id, Principal principal){
         User user = userService.findUserByUsername(principal.getName());
         auctionService.instantBuy(id, user);
+        
+       
+        
+        ModelAndView model = new ModelAndView("redirect:/ad?id=" + id);
+        
+        return model;
     }
     
     
