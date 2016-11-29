@@ -132,13 +132,10 @@ public class AuctionService {
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
         messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-<<<<<<< HEAD
-        messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(userDao.findByUsername("System"),user,"Auction Expired",messageBuilder.toString());
-=======
+
         messageBuilder.append("Your HomeLender team");
         messageService.sendMessage(user,user,"Auction Expired",messageBuilder.toString());
->>>>>>> origin/master
+
 
     }
 
@@ -162,13 +159,10 @@ public class AuctionService {
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
         messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-<<<<<<< HEAD
-        messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(userDao.findByUsername("System"),winner,"Purchase confirmation",messageBuilder.toString());
-=======
+
         messageBuilder.append("Your HomeLender team");
         messageService.sendMessage(userDao.findByUsername("HomeLender"),winner,"Purchase confirmation",messageBuilder.toString());
->>>>>>> origin/master
+
 
         messageBuilder = new StringBuilder();
         messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
@@ -179,13 +173,10 @@ public class AuctionService {
         messageBuilder.append(" If you have any questions please contact us by email at " + "eseserver@gmail.com" + ".");
         messageBuilder.append(" We hope you will continue to enjoy using HomeLender.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-<<<<<<< HEAD
-        messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(userDao.findByUsername("System"),owner,"You sold a property",messageBuilder.toString());
-=======
+
         messageBuilder.append("Your HomeLender team");
         messageService.sendMessage(userDao.findByUsername("HomeLender"),owner,"You sold a property",messageBuilder.toString());
->>>>>>> origin/master
+
     }
 
     /**
