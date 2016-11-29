@@ -13,34 +13,28 @@
 
 </script>
 
-<!--
-<pre><a href="/">Home</a>   &gt;   My advertisements</pre>
--->
-
 		<table id="indexTable">
 			<tr>
 
 			<tr>
 				<th>
-					<h2 style="width:100%;text-align:center;">My Advertisements</h2>
+					<h2 style="width:100%;text-align:center;">My Bookmarks</h2>
 				</th>
 			</tr>
-			
-			<td valign="top">
-			<c:choose>
-			<c:when test="${empty ownAdvertisements}">
+		
+		<td valign="top">
+		<c:choose>
+			<c:when test="${empty bookmarkedAdvertisements}">
 				
-				<p style="color:black;text-align:center;">You have not advertised anything yet.</p>
 				
+				<p style="color:black;text-align:center;">You have not bookmarked anything yet.</p><br /><br />
 			</c:when>
-			
 			<c:otherwise>
 				
-				<div id="resultsDiv"  class="resultsDiv" style="width: 100%;">
+				<div id="resultsDiv" style="width: 100%;" class="resultsDiv">
 				
-				
-						
-					<c:forEach var="ad" items="${ownAdvertisements}">
+							
+					<c:forEach var="ad" items="${bookmarkedAdvertisements}">
 						<div class="resultAd" data-price="${ad.prizePerMonth}" 
 										data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
 							
@@ -110,13 +104,11 @@
 							
 						</div>
 					</c:forEach>
-					<br /> <br />
-					</div>
+				</div>		
 			</c:otherwise>
 		</c:choose>
-		</td>
-		
 
+		</td>
 		</tr>
 		</table>
 		

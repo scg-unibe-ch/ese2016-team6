@@ -110,10 +110,11 @@
 					
 						<ul  id="ProfileDropList">
 								<li class="ProfileListItem" style="top:65px;"><a href="/profile/placeAd">Place an ad</a></li>
-								<li class="ProfileListItem" style="top:90px;height:90px;"><a href="/profile/myRooms">My properties and Bookmarks</a></li>
-								<li class="ProfileListItem" style="top:140px;"><a id="messageLink" href="/profile/messages"></a></li>
-								<li class="ProfileListItem" style="top:165px;"><a href="/profile/enquiries">Enquiries</a></li>
-								<li class="ProfileListItem" style="top:190px;"><a href="/profile/schedule">Schedule</a></li>
+								<li class="ProfileListItem" style="top:90px;"><a href="/profile/myRooms">My advertisements</a></li>
+								<li class="ProfileListItem" style="top:115px;"><a href="/profile/myBookmarks">My bookmarks</a></li>
+								<li class="ProfileListItem" style="top:140px;"><a href="/profile/schedule">Schedule</a></li>
+								<li class="ProfileListItem" style="top:165px;"><a id="messageLink" href="/profile/messages"></a></li>
+								<li class="ProfileListItem" style="top:190px;"><a href="/profile/enquiries">Enquiries</a></li>
 								<li class="ProfileListItem" style="top:215px;"><a href="/profile/alerts">Alerts</a></li>
 								<li class="ProfileListItem" style="top:240px;">
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
@@ -164,7 +165,7 @@
 								</form>
 							-->
 							<a style="float:right;margin: 20px 20px;" class="link" id="submitButton" href="/login" class="link">Login</a>
-							<a style="float:right;margin: 20px 20px;" class="link" id="submitButton" href="<c:url value="/signup" />">sign up</a>
+							<a style="float:right;margin: 20px 20px;" class="link" id="submitButton" href="<c:url value="/signup" />">Sign up</a>
 							<a style="float:right;margin: 20px 0px;" class="link" id="submitButton" href="<c:url value='/searchAd' />">Search</a>
 							<button style="float:right" type="submit" id="modalButton">LoginNew</button>
 						

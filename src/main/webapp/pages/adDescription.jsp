@@ -15,16 +15,6 @@
 <!--
 <pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>
 -->
-<c:choose>
-		<c:when test="${loggedIn}">
-			<c:if test="${loggedInUserEmail == shownAd.user.username }">
-				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
-					<button type="button">Edit Ad</button>
-				</a>
-			</c:if>
-		</c:when>
-</c:choose>
-
 
 <script src="/js/image_slider.js"></script>
 <script src="/js/adDescription.js"></script>
@@ -212,31 +202,35 @@
 	</c:otherwise>
 </c:choose>
 
-<!--
-New Ad news
--->
 
 <c:choose>
-	<c:when test="${Redir!=null}">
-	<h1> ${Redir.content} </h1>
-	</c:when>
-
+		<c:when test="${loggedIn}">
+			<c:if test="${loggedInUserEmail == shownAd.user.username }">
+				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
+					<button type="button">Edit Ad</button>
+				</a>
+			</c:if>
+		</c:when>
 </c:choose>
 
+
+</br>
 
 
 	<c:choose>
 		<c:when test="${loggedIn}">
+			<c:if test="${loggedInUserEmail != shownAd.user.username }">
 			<h1><a class="right" id="bookmarkButton">Bookmark Ad</a></h1>
+			</c:if>	
 		</c:when>
-	</c:choose>
+	</c:choose>		
 
-<h1 id="shownAdTitle" style="font-size: 1em;"><b>${shownAd.title}</b>
-	
-	
+</br>
 
-	<label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
-</h1>
+<h1 id="shownAdTitle"><b>${shownAd.title}</b></h1>
+
+<label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
+
 
 
 
