@@ -4,6 +4,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team6.controller.service.*;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Bid;
+import ch.unibe.ese.team6.model.RedirectInfo;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.dao.BidDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
@@ -70,7 +71,7 @@ public class AuctionController {
     @RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
     public @ResponseBody
     ModelAndView makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
-                 Principal principal ) {
+    		 RedirectAttributes redirectAttributes, Principal principal ) {
        
     	
     	User user = userService.findUserByUsername(principal.getName());
@@ -85,8 +86,13 @@ public class AuctionController {
        
         
         ModelAndView model = new ModelAndView("redirect:/ad?id=" + ad.getId());
-		
-		return model;
+        
+        redirectAttributes.addFlashAttribute("confirmationMessage",
+				"Your bid was made successfully");
+        
+        
+       
+        return model;
     }
 
     
@@ -104,13 +110,19 @@ public class AuctionController {
      * Sends messages to the guy who bought the estate
      */
     @RequestMapping(value = "/ad/instantBuy", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView instantBuy(@RequestParam("id") long id, Principal principal){
-        User user = userService.findUserByUsername(principal.getName());
+    public @ResponseBody ModelAndView instantBuy(@RequestParam("id") long id, RedirectAttributes redirectAttributes,
+    		Principal principal){
+        
+    	
+    	User user = userService.findUserByUsername(principal.getName());
         auctionService.instantBuy(id, user);
         
        
         
         ModelAndView model = new ModelAndView("redirect:/ad?id=" + id);
+        
+        redirectAttributes.addFlashAttribute("confirmationMessage",
+				"You successfully bough the flat. congratulations!");
         
         return model;
     }

@@ -132,8 +132,9 @@ function rentSaleOfAlert(alert) {
 		
 		<br />
 		
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
-		<button type="reset" tabindex="8">Cancel</button>
+		<button style="background-color:#991f00;color:white" type="reset" tabindex="8">Cancel</button>
+		<button style="background-color:#ffffcc" type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
+		
 	</fieldset>
 
 </form:form> <br />

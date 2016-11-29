@@ -212,6 +212,19 @@
 	</c:otherwise>
 </c:choose>
 
+<!--
+New Ad news
+-->
+
+<c:choose>
+	<c:when test="${Redir!=null}">
+	<h1> ${Redir.content} </h1>
+	</c:when>
+
+</c:choose>
+
+
+
 	<c:choose>
 		<c:when test="${loggedIn}">
 			<h1><a class="right" id="bookmarkButton">Bookmark Ad</a></h1>
@@ -398,7 +411,10 @@
 								<form action="/ad/instantBuy" method="post">
 								<form>
 									<input type="hidden" name="id" value="${shownAd.id}">
+									
+									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
+									</c:if>
 								</form>
 								</form>
 								
@@ -484,7 +500,7 @@
 											</c:otherwise>
 									</c:choose>
 								</c:when>
-								<c:when test="${shownAd.expired=='false'}">
+								<c:when test="${shownAd.expired=='true'}">
 									<h3>
 									This ads auction expired on ${shownAd.expireDate}
 									</h3>

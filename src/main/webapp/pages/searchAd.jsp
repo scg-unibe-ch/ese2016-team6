@@ -132,8 +132,8 @@ function validateType(form)
 		
 		<br />
 		
-		<button type="reset" class="btn btn-default" tabindex="8">Cancel</button>
-		<button type="submit" class="btn btn-default" tabindex="7" >Search</button>
+		<button style="background-color:#991f00;color:white" type="reset" class="btn btn-default" tabindex="8">Cancel</button>
+		<button style="background-color:#ffffcc" type="submit" class="btn btn-default" tabindex="7" >Search</button>
 		
 	</fieldset>
 

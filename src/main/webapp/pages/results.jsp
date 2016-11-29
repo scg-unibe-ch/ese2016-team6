@@ -236,9 +236,9 @@ function sort_div_attribute() {
 			</tr>
 		</table>
 			
+		<button style="background-color:#991f00;color:white" type="reset">Cancel</button>
+		<button style="background-color:#ffffcc" type="submit" onClick="validateType(this.form)">Filter</button>	
 		
-		<button type="submit" onClick="validateType(this.form)">Filter</button>	
-		<button type="reset">Cancel</button>
 	</div>
 </form:form>
 

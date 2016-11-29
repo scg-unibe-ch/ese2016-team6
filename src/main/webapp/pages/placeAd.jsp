@@ -214,8 +214,9 @@
 <pre><a href="/">Home</a>   &gt;   Place ad</pre>
 -->
 
-<h1>Place an ad </h1><p> Every Field with a * needs to be filled out </p>
-<hr />
+<h1 style="margin:0px;text-align:center">Place an ad </h1>
+<p style="margin:0px;text-align:center"> Every Field with a * needs to be filled out </p>
+<hr style="margin:0px" />
 
 
 
@@ -226,7 +227,7 @@
 	<tr>
 	
 	
-	<td style="width:50%;height:320px;">
+	<td style="width:50%;height:250px;">
 	
 	<fieldset style="height:100%;" >
 		<legend>General description</legend>
@@ -292,7 +293,7 @@
 	
 	</td>
 	
-	<td style="width:50%;height:320px;">
+	<td style="width:50%;height:250px;">
 	<fieldset style="height:100%;" >
 		<legend>Deal</legend>
 		
@@ -455,6 +456,10 @@
 
 	</td>
 	
+	</tr>
+	
+	<tr>
+	
 	<td>
 	
 	<fieldset style="height:100%;">
@@ -507,6 +512,14 @@
 		<br>
 	</fieldset>
 	
+	</td>
+	
+	
+	<td>
+		<div>
+			<a  href="/"><button style="background-color:#991f00;color:white" type="button">Cancel</button></a>
+			<button style="background-color:#ffffcc" type="submit">Submit</button>
+		</div>
 	
 	</td>
 	
@@ -516,10 +529,7 @@
 
 	<br />
 	
-	<div>
-		<a href="/"><button type="button">Cancel</button></a>
-		<button type="submit">Submit</button>
-	</div>
+	
 
 
 </form:form>

@@ -185,12 +185,11 @@
 	type="date" pattern="dd-MM-yyyy" />
 <fmt:formatDate value="${ad.moveOutDate}" var="formattedMoveOutDate"
 	type="date" pattern="dd-MM-yyyy" />
-	
-<pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   <a href="/ad?id=${ad.id}">Ad Description</a>   &gt;   Edit Ad</pre>
-
 
 <h1>Edit Ad</h1>
-<hr />
+<hr style="margin:0px;" />
+
+<table style="width:100%;height:100%;table-layout: fixed;">
 
 <form:form method="post" modelAttribute="placeAdForm"
 	action="/profile/editAd" id="placeAdForm" autocomplete="off"
@@ -198,7 +197,10 @@
 
 <input type="hidden" name="adId" value="${ad.id }" />
 
-	<fieldset>
+
+	<tr>
+	<td style="width:400px;height:250px;">
+	<fieldset style="height:100%;" >
 		<legend>Change General description</legend>
 		<table class="placeAdTable">
 
@@ -282,7 +284,11 @@
 		</table>
 	</fieldset>
 
-	<fieldset>
+	</td>
+	
+	<td style="width:400px;height:250px;">
+	
+	<fieldset style="height:100%;" >
 		<legend>Deal</legend>
 		
 		<table class="placeAdTable">
@@ -338,9 +344,44 @@
 		</table>
 	</fieldset>
 
-	<fieldset>
-		<legend>Room content</legend>
+	</td>
+	
+	<td style="width:400px;height:250px;">
+	
+	<fieldset style="height:100%;" >
+		<legend>Change Location details</legend>
 		<table class="placeAdTable">
+			<tr>
+				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
+				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" value="${ad.proximityToPublicTransport}" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
+				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" value="${ad.proximityToSchool}" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
+				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" value="${ad.proximityToSupermarket}" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
+				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" value="${ad.proximityToNightlife}" /></td>
+			</tr>
+		</table>
+	</fieldset>
+	
+	</td>
+	</tr>
+	</table>
+	
+	<table style="width:100%;height:100%;table-layout: fixed;">
+	
+	<tr>
+	<td style="width:600px;height:250px;">
+	
+	<fieldset style="height:100%;" >
+		<legend>Room content</legend>
+		<table class="placeAdTable" style="width:600px;">
 			<tr>
 				<td>
 					<c:choose>
@@ -462,91 +503,68 @@
 		</table>
 
 		<br />
-		<form:textarea path="roomDescription" rows="10" cols="100" value="${ad.roomDescription}" />
+		<form:textarea path="roomDescription" rows="10" cols="80" value="${ad.roomDescription}" />
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
 	</fieldset>
 
-	<%-- removed due to customer wishes
+	</td>
 	
-	<br />
-	<fieldset>
-		<legend>Change roommates</legend>
-		
-		<h3>Add new roommates</h3>
-		<br />
-		<p>If your roommates have an account, simply add them by email.</p>
-
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="roomFriends">Add by email</label></td>
-			</tr>
-
-			<tr>
-				<td id="roommateCell"><form:input type="text" id="roomFriends"
-						path="roomFriends" placeholder="email" /> 
-
-				<div id="addbutton" class="smallPlusButton">+</div></td>
-			</tr>
-			
-			<tr>
-				<td><p id="addedRoommates" path="addedRoommates">Newly added roommates: </p></td>
-			</tr>
-		</table>
-
-
-		<p>Edit the description of the roommates:</p>
-		<br />
-		<form:textarea path="roommates" rows="10" cols="100"
-			placeholder="Roommates" />
-		<form:errors path="roommates" cssClass="validationErrorText" />
-		<hr />
-		<h3>Delete existing roommates</h3>
-		<br />
-		<table class="styledTable">
-					<tr>
-						<th>Username</th>
-						<th>Delete</th>
-					</tr>
-					
-					<c:forEach var="user" items="${ad.registeredRoommates}">
-							<tr>
-								<td>${user.username}</td>
-								<td><button type="button" data-user-id="${user.id}" data-ad-id="${ad.id}" class="deleteRoommateButton">Delete</button></td>
-							</tr>
-							<tr>
-					</c:forEach>
-		</table>
-	</fieldset>
-	--%>
 	
-	<fieldset>
-		<legend>Change Location details</legend>
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
-				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" value="${ad.proximityToPublicTransport}" /></td>
-			</tr>
-			<tr>
-				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
-				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" value="${ad.proximityToSchool}" /></td>
-			</tr>
-			<tr>
-				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
-				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" value="${ad.proximityToSupermarket}" /></td>
-			</tr>
-			<tr>
-				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
-				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" value="${ad.proximityToNightlife}" /></td>
-			</tr>
-		</table>
-	</fieldset>
-
-	<fieldset>
+	
+	<td style="width:600px;height:250px;">
+	
+	<fieldset style="height:100%;" >
 		<legend>Change preferences</legend>
-		<form:textarea path="preferences" rows="5" cols="100" value="${ad.preferences}" ></form:textarea>
+		<form:textarea path="preferences" rows="20" cols="80" value="${ad.preferences}" ></form:textarea>
+	</fieldset>
+	</td>
+	
+	</tr>
+	
+	
+	</table>
+	
+	<table style="width:100%;height:100%;table-layout: fixed;">
+	
+	<tr>
+	
+	
+	<td style="width:600px;height:250px;">
+	<fieldset style="height:100%;" >
+		<legend>Change pictures</legend>
+		<h3>Delete existing pictures</h3>
+		<br />
+		<div>
+			<c:forEach items="${ad.pictures }" var="picture">
+				<div class="pictureThumbnail">
+					<div>
+					<img src="${picture.filePath}" />
+					</div>
+					<button type="button" data-ad-id="${ad.id }" data-picture-id="${picture.id }">Delete</button>
+				</div>
+			</c:forEach>
+		</div>
+		<p class="clearBoth"></p>
+		<br /><br />
+		<hr />
+		<h3>Add new pictures</h3>
+		<br />
+		<label for="field-pictures">Pictures</label> <input
+			type="file" id="field-pictures" accept="image/*" multiple="multiple" />
+		<table id="uploaded-pictures" class="styledTable">
+			<tr>
+				<th id="name-column">Uploaded picture</th>
+				<th>Size</th>
+				<th>Delete</th>
+			</tr>
+		</table>
+		<br>
 	</fieldset>
 
-	<fieldset>
+	</td>
+	
+	<td style="width:600px;height:250px;">
+	<fieldset style="height:height:200px;">
 		<legend>Add visiting times</legend>
 		
 		<table>
@@ -604,45 +622,17 @@
 		<br>
 	</fieldset>
 
-	<fieldset>
-		<legend>Change pictures</legend>
-		<h3>Delete existing pictures</h3>
-		<br />
-		<div>
-			<c:forEach items="${ad.pictures }" var="picture">
-				<div class="pictureThumbnail">
-					<div>
-					<img src="${picture.filePath}" />
-					</div>
-					<button type="button" data-ad-id="${ad.id }" data-picture-id="${picture.id }">Delete</button>
-				</div>
-			</c:forEach>
-		</div>
-		<p class="clearBoth"></p>
-		<br /><br />
-		<hr />
-		<h3>Add new pictures</h3>
-		<br />
-		<label for="field-pictures">Pictures</label> <input
-			type="file" id="field-pictures" accept="image/*" multiple="multiple" />
-		<table id="uploaded-pictures" class="styledTable">
-			<tr>
-				<th id="name-column">Uploaded picture</th>
-				<th>Size</th>
-				<th>Delete</th>
-			</tr>
-		</table>
-		<br>
-	</fieldset>
-
-	<br />
-
-	<div>
+	<br>
+	<div style="padding-left:30px">
 		<a href="<c:url value='/ad?id=${ad.id}' />"> 
-			<button type="button">Cancel</button>
+			<button style="background-color:#991f00;color:white" type="button">Cancel</button>
 		</a>
-		<button type="submit">Submit</button>
+		<button style="background-color:#ffffcc" type="submit">Submit</button>
 	</div>
+	
+	</td>
+	</tr>
+	</table>
 
 </form:form>
 
