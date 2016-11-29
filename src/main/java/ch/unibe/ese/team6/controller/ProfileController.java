@@ -100,7 +100,7 @@ public class ProfileController {
 		return model;
 	}
 	
-	/** Handles Google sign in. */
+	/** Handles facebook sign in. */
 	@RequestMapping(value = "/facebooklogin", method = RequestMethod.GET)
 	public ModelAndView facebookLogin(@RequestParam("code") String code, FacebookLoginForm facebookLoginForm) {
 		String url = "https://graph.facebook.com/oauth/access_token?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&client_secret=140bd59332d4e2f8fcc61aa3f3706bc8&code=" + code;

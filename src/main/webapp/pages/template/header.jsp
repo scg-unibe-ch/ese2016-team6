@@ -36,10 +36,20 @@
 }
 </style>
 
+
+
 </head>
+
+
+
 
 <!-- check if user is logged in -->
 <security:authorize var="loggedIn" url="/profile" />
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
+
 
 <!-- check if user has a profile picture -->
 
@@ -100,12 +110,12 @@
 					
 						<ul  id="ProfileDropList">
 								<li class="ProfileListItem" style="top:65px;"><a href="/profile/placeAd">Place an ad</a></li>
-								<li class="ProfileListItem" style="top:90px;"><a href="/profile/myRooms">My properties</a></li>
-								<li class="ProfileListItem" style="top:115px;"><a id="messageLink" href="/profile/messages"></a></li>
-								<li class="ProfileListItem" style="top:140px;"><a href="/profile/enquiries">Enquiries</a></li>
-								<li class="ProfileListItem" style="top:165px;"><a href="/profile/schedule">Schedule</a></li>
-								<li class="ProfileListItem" style="top:190px;"><a href="/profile/alerts">Alerts</a></li>
-								<li class="ProfileListItem" style="top:215px;">
+								<li class="ProfileListItem" style="top:90px;height:90px;"><a href="/profile/myRooms">My properties and Bookmarks</a></li>
+								<li class="ProfileListItem" style="top:140px;"><a id="messageLink" href="/profile/messages"></a></li>
+								<li class="ProfileListItem" style="top:165px;"><a href="/profile/enquiries">Enquiries</a></li>
+								<li class="ProfileListItem" style="top:190px;"><a href="/profile/schedule">Schedule</a></li>
+								<li class="ProfileListItem" style="top:215px;"><a href="/profile/alerts">Alerts</a></li>
+								<li class="ProfileListItem" style="top:240px;">
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
 								</li>
 								<li class="ProfileListItem" style="top:240px;"><a href="/logout">Logout</a></li>
@@ -118,11 +128,11 @@
 					
 					
 					<c:otherwise>
-						
-						
+												
+										<!--
 							<form id="login-form" method="post" action="/j_spring_security_check">
 									
-									<li><a class="link" id="submitButton" href="<c:url value="/signup" />">sign up</a></li>
+									<li></li>
 									
 									<li style=" width:auto;" >
 										<button type="submit" id="submitButton" class="button">Login</button>
@@ -141,14 +151,18 @@
 										
 										
 										
-										<%-- <li><a href="/login" class="link">Login</a></li>--%>
+										<%-- <li></li>--%>
 										
-										<li><a href="<c:url value='/searchAd' />">Search</a></li>
+										<li></li>
+										
 										
 										
 								</form>
-						
-					
+							-->
+							<a style="float:right;margin: 20px 20px;" class="link" id="submitButton" href="/login" class="link">Login</a>
+							<a style="float:right;margin: 20px 20px;" class="link" id="submitButton" href="<c:url value="/signup" />">sign up</a>
+							<a style="float:right;margin: 20px 0px;" class="link" id="submitButton" href="<c:url value='/searchAd' />">Search</a>
+							<button style="float:right" type="submit" id="modalButton">LoginNew</button>
 						
 					
 					</c:otherwise>
@@ -163,17 +177,27 @@
 			
 			
 
+
+
 		</nav>
 	</div>
+	
+	
+	
+	
 </header>
 
 <body>
+	
 	<!-- will be closed in footer-->
 	<div id="content">
 
+		
 		<c:if test="${not empty confirmationMessage }">
 			<div class="confirmation-message">
 				<img src="/img/check-mark.png" />
 				<p>${confirmationMessage }</p>
 			</div>
 		</c:if>
+		
+		

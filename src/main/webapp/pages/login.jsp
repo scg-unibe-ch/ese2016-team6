@@ -55,8 +55,8 @@
 					
 		<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
 			
-						</c:otherwise>
-					</c:choose>
+	</c:otherwise>
+	</c:choose>
 		
 		
 		<br />
@@ -98,7 +98,7 @@
 				>Sign up</button>
 				
 		</form:form>
-	</div>	
+</div>	
 	
 	
 	<script>

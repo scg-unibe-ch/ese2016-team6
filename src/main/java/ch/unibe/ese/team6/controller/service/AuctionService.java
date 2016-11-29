@@ -85,7 +85,7 @@ public class AuctionService {
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your EstateArranger team");
 
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),winner,"Purchase confirmation",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("System"),winner,"Purchase confirmation",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
         messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
@@ -98,7 +98,7 @@ public class AuctionService {
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your EstateArranger team");
 
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),owner,"You sold a property",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("System"),owner,"You sold a property",messageBuilder.toString());
 
         // update balance
         long amount = ad.getPriceSale();
@@ -129,7 +129,7 @@ public class AuctionService {
         messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(user,user,"Auction Expired",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("System"),user,"Auction Expired",messageBuilder.toString());
 
     }
 
@@ -154,7 +154,7 @@ public class AuctionService {
         messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),winner,"Purchase confirmation",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("System"),winner,"Purchase confirmation",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
         messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
@@ -166,7 +166,7 @@ public class AuctionService {
         messageBuilder.append(" We hope you will continue to enjoy using EstateArranger.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your EstateArranger team");
-        messageService.sendMessage(userDao.findByUsername("EstateArranger"),owner,"You sold a property",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("System"),owner,"You sold a property",messageBuilder.toString());
     }
 
     /**
