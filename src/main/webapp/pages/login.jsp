@@ -14,7 +14,6 @@
 <meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
 
 
-
 <c:import url="template/header.jsp" />
 
 <pre>
@@ -52,8 +51,8 @@
 		
 		<p>
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
-					
-					<a class="button" href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="ese2016-team6/documentation/images/FB-Logo.png" /></a>
+			
+					<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
 						</c:otherwise>
 					</c:choose>
 		
