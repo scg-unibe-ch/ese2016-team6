@@ -80,11 +80,13 @@
 		</c:otherwise>
 	</c:choose>
 	<br>
-			<br>
+	<br>
+	<br />
+		
 	
 	<br />
 		<h2>Test users</h2>
-
+		<br />
 		<ul class="test-users">
 			<li>Email: <i>ese@unibe.ch</i>, password: <i>ese</i></li>
 			<li>Email: <i>jane@doe.com</i>, password: <i>password</i></li>

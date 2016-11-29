@@ -186,6 +186,10 @@
     </script>
 
 
+<!-- imports the new login window found in template/NewLoginPop.jsp -->
+<!-- This must be in the body of each page in order for the login screen to work -->
+<c:import url="template/NewLoginPop.jsp" />
+	
 <!-- format the dates -->
 <fmt:formatDate value="${shownAd.moveInDate}" var="formattedMoveInDate"
 	type="date" pattern="dd.MM.yyyy" />

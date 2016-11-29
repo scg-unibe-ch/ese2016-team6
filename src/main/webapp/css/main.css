@@ -778,6 +778,11 @@ footer nav ul li {
 	line-height: 1.5;
 }
 
+.test-users li{
+	
+	list-style-type: none;
+}
+
 /* about.jsp*/
 #about {
   position: fixed;

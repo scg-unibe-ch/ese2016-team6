@@ -16,10 +16,8 @@
 
 <c:import url="template/header.jsp" />
 
-<pre>
-	<a href="/">Home</a>   &gt;   Login</pre>
 
-<h1>Login</h1>
+<h1 style="text-align:center">Login</h1>
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -40,29 +38,37 @@
 				and password.</p>
 			<br />
 		</c:if>
-		<form id="login-form" method="post" action="/j_spring_security_check">
+		 <div class="modal-body" style="text-align:center">
+		
+		<form style="margin:auto" id="login-form" method="post" action="/j_spring_security_check">
 			<label for="field-email">Email:</label> <input name="j_username"
 				id="field-email" /> <label for="field-password">Password:</label> <input
 				name="j_password" id="field-password" type="password" />
 			<button type="submit">Login</button>
 		</form>
+		<br>
+		<br>
 		Or <a class="button"  href="<c:url value="/signup" />">Sign up</a> as a new user.
 		<br>
+		<br>
 		
-		<p>
-			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+		or use Google to login 
+			<div style="display:inline-block; vertical-align: middle;" class="g-signin2" data-onsuccess="onSignIn"></div>
 			
 
-
-		<a href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
+		<br>
+		<br>
+		or use Facebook to login 
+		<a style="display:inline-block; vertical-align: middle;" href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
 		</c:otherwise>
 		</c:choose>
 
 		
-		
+		<br />
+		<br />
 		<br />
 		<h2>Test users</h2>
-
+		<br />
 		<ul class="test-users">
 			<li>Email: <i>ese@unibe.ch</i>, password: <i>ese</i></li>
 			<li>Email: <i>jane@doe.com</i>, password: <i>password</i></li>
@@ -71,35 +77,37 @@
 		</ul>
 		<br />	
 
-<div>
-	<form:form id="googleForm" type="hidden" class="form-horizontal" method="post"
-		modelAttribute="googleForm" action="./googlelogin">
+	<div>
+		<form:form id="googleForm" type="hidden" class="form-horizontal" method="post"
+			modelAttribute="googleForm" action="./googlelogin">
 
-			<spring:bind path="firstName">
-						<form:input type="hidden" path="firstName" cssClass="form-control"
-							id="field-firstName" />
-			</spring:bind>
+				<spring:bind path="firstName">
+							<form:input type="hidden" path="firstName" cssClass="form-control"
+								id="field-firstName" />
+				</spring:bind>
 
-			<spring:bind path="lastName">
-						<form:input type="hidden" path="lastName" id="field-lastName"
-							cssClass="form-control" />
-			</spring:bind>
+				<spring:bind path="lastName">
+							<form:input type="hidden" path="lastName" id="field-lastName"
+								cssClass="form-control" />
+				</spring:bind>
 
-			<spring:bind path="email">	
-						<form:input type="hidden" path="email" id="field-mail"
-							cssClass="form-control" />
-			</spring:bind>
-			
-			<spring:bind path="googlePicture">	
-						<form:input type="hidden" path="googlePicture" id="field-googlePicture"
-							cssClass="form-control" />					
-			</spring:bind>
-			
-		<button type="submit" style="visibility:hidden;" class="btn btn-primary" value="signup" id="googleButton"
-				>Sign up</button>
+				<spring:bind path="email">	
+							<form:input type="hidden" path="email" id="field-mail"
+								cssClass="form-control" />
+				</spring:bind>
 				
-		</form:form>
-</div>	
+				<spring:bind path="googlePicture">	
+							<form:input type="hidden" path="googlePicture" id="field-googlePicture"
+								cssClass="form-control" />					
+				</spring:bind>
+				
+			<button type="submit" style="visibility:hidden;" class="btn btn-primary" value="signup" id="googleButton"
+					>Sign up</button>
+					
+			</form:form>
+	</div>	
+	
+	</div>
 	
 	
 	<script>
