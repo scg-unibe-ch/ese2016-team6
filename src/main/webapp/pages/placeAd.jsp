@@ -21,8 +21,8 @@
 
 		
 		
-		//document.getElementById('type-sale').checked="";
-		//document.getElementById('type-auction').checked="";
+		document.getElementById('type-sale').checked="";
+		document.getElementById('type-auction').checked="";
 		
 		document.getElementById('field-priceRent').style.visibility = "visible";
 		document.getElementById('field-priceSale').style.visibility = "hidden";
@@ -37,10 +37,6 @@
 		document.getElementById('bidLabel').style.visibility = "hidden";
 		document.getElementById('incLabel').style.visibility = "hidden";
 		document.getElementById('deadLabel').style.visibility = "hidden";
-		
-		
-		document.getElementById('ActualDeal').value = "forRent";
-		
 		
 
     	$("#type-rent").on("click", function(){
@@ -62,7 +58,7 @@
 			
 			
 			document.getElementById('ActualDeal').value = "forRent";
-			document.getElementyById('field-priceSale').value = "100000000";
+			
 			
 			document.getElementById('preference').style.visibility = "visible";
 			
@@ -89,9 +85,6 @@
 			document.getElementById('ActualSale').value = "direct";
 			document.getElementById('ActualDeal').value = "forSale";
 
-			document.getElementyById('field-priceRent').value = "100000000";
-			document.getElementById('preference').style.visibility = "hidden";
-
    		});
 
     	$("#type-auction").on("click", function(){
@@ -115,9 +108,6 @@
 			
 			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
 			document.getElementById('ActualDeal').value = "forSale";
-
-			document.getElementyById('field-priceRent').value = "100000000";
-			document.getElementById('preference').style.visibility = "hidden";
     	});
 
 		$("#field-city").autocomplete({
@@ -149,7 +139,7 @@
 			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
-		$("#addbutton").click(function() {
+	<%--	$("#addbutton").click(function() {
 			
 			var text = $("#roomFriends").val();
 			var alreadyAdded = $("#addedRoommates").html();
@@ -180,7 +170,7 @@
 			    	return true;
 			    }
 			}
-		});
+		});--%>
 		
 		
 		
@@ -399,15 +389,12 @@
 			
 			<tr>
 				<td colspan="2" >
-					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="80" placeholder="room Description" />
+					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="80" placeholder="Room Description*" />
 					<form:errors path="roomDescription" cssClass="validationErrorText" />
 				</td>
 			</tr>
 		</table>
 		<br/>
-	
-		<form:textarea path="roomDescription" rows="10" cols="100" placeholder="room Description*" />
-		<form:errors path="roomDescription" cssClass="validationErrorText" />
 	</fieldset>
 	</td>
 	
