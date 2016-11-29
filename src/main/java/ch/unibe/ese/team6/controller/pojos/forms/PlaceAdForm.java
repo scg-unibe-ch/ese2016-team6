@@ -44,9 +44,10 @@ public class PlaceAdForm {
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int numberOfRooms;
 	
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private KindOfDeal deal;
-	@NotBlank(message = "Required")
+	
+	@NotNull(message = "Required")
 	private KindOfSale sale;
 	
 	@Min(value = 1, message = "Has to be equal to 1 or more")

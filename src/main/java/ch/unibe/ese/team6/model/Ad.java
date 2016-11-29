@@ -127,6 +127,26 @@ public class Ad {
 	
 	
 	@Column(nullable = false)
+	private boolean instantBought = false;
+	
+	
+	public boolean getinstantBought() {
+		return instantBought;
+	}
+
+	public void setinstantBought(boolean instantBought) {
+		this.instantBought = instantBought;
+	}
+	
+	/*___________________________________*/
+	
+	
+	
+	
+	/*___________________________________*/
+	
+	
+	@Column(nullable = false)
 	private boolean expired = false;
 
 	public boolean getExpired() {
