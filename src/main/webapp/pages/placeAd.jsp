@@ -303,14 +303,14 @@
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) *:</label>
-				<form:input id="field-priceRent" type="number" path="prize"  min="0"/>
-				<form:errors path="prize" cssClass="validationErrorText" /></td>
+				<form:input id="field-priceRent" type="number" path="priceRent"  min="0"/>
+				<form:errors path="priceRent" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
 				<td style="background-color:#fff9f9"><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) *:</label>
-				<form:input id="field-priceSale" type="number" path="prize" min="0" />
-				<form:errors path="prize" cssClass="validationErrorText" /></td>
+				<form:input id="field-priceSale" type="number" path="priceSale" min="0" />
+				<form:errors path="priceSale" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>

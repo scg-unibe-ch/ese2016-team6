@@ -1,5 +1,6 @@
 package ch.unibe.ese.team6.controller;
 
+import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team6.controller.service.*;
 import ch.unibe.ese.team6.model.Ad;
@@ -12,6 +13,7 @@ import ch.unibe.ese.team6.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,6 +45,16 @@ public class AuctionController {
 
     @Autowired
     private AuctionService auctionService;
+    
+    protected GoogleSignupForm googleSignupForm;
+	
+	@ModelAttribute("googleSignupForm")
+	public GoogleSignupForm googleSignupForm() {
+		if (googleSignupForm == null) {
+			googleSignupForm = new GoogleSignupForm();
+		}
+		return googleSignupForm;
+	}
     
   
     

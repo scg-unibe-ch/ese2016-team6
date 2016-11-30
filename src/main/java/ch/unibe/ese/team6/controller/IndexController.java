@@ -2,9 +2,11 @@ package ch.unibe.ese.team6.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.service.AdService;
 
 /**
@@ -17,6 +19,16 @@ public class IndexController {
 	@Autowired
 	private AdService adService;
 
+	protected GoogleSignupForm googleSignupForm;
+	
+	@ModelAttribute("googleSignupForm")
+	public GoogleSignupForm googleSignupForm() {
+		if (googleSignupForm == null) {
+			googleSignupForm = new GoogleSignupForm();
+		}
+		return googleSignupForm;
+	}
+	
 	/** Displays the home page. */
 	@RequestMapping(value = "/")
 	public ModelAndView index() {

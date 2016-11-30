@@ -1,20 +1,27 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+
+<meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
+
+<security:authorize var="loggedIn" url="/profile" />
+	
 <div style="display:none">
-
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-	<meta name="google-signin-client_id" content="181693442640-gbt2eh1lkdqkeekjura4f0oha91dndmb.apps.googleusercontent.com">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script
 	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-	<link rel="stylesheet"
-	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-
+	
 	<script src="/js/unreadMessages.js"></script>
 </div>
 	
-<security:authorize var="loggedIn" url="/profile" />
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -23,7 +30,7 @@
   
   <div class="modal-content">
     <div class="modal-header">
-      <span class="close">×</span>
+      <span class="close">Ã—</span>
       <h2>Login Form</h2>
     </div>
     <div class="modal-body">
@@ -58,22 +65,19 @@
 			</form>
 			<br>
 			<br>
-			Or <a class="button"  href="<c:url value="/signup" />" />sign up</a> as a new user.
+			Or <a class="button"  href="<c:url value="/signup" />" >sign up</a> as a new user.
 			<br>
 			
 			<br>
 			<br>
 			
 			or use google to sign in
-				<div style="display:inline-block; vertical-align: middle;" class="g-signin2" data-onsuccess="onSignIn">
-				
-				</div>
+				<div style="display:inline-block; vertical-align: middle;" class="g-signin2" data-onsuccess="onSignIn">	</div>
 				
 
 			<br>
 			<br>
 			or use facebook to sign in
-			<br>
 			<a style="display:inline-block; vertical-align: middle;" href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
 			
 		</c:otherwise>
@@ -92,12 +96,19 @@
 			<li>Email: <i>user@bern.com</i>, password: <i>password</i></li>
 			<li>Email: <i>oprah@winfrey.com</i>, password: <i>password</i></li>
 		</ul>
-	<br />	
+	<br />		
 		
-		
-		<div>
+    </div>
+    <div class="modal-footer">
+     
+    </div>
+  </div>
+
+</div>
+
+<div>
 			<form:form id="googleForm" type="hidden" class="form-horizontal" method="post"
-				modelAttribute="googleForm" action="./googlelogin">
+				modelAttribute="googleSignupForm" action="./googlelogin">
 
 					<spring:bind path="firstName">
 								<form:input type="hidden" path="firstName" cssClass="form-control"
@@ -123,7 +134,7 @@
 						>Sign up</button>
 						
 				</form:form>
-		</div>	
+		</div>
 	 
 	
 	<script>
@@ -139,19 +150,8 @@
 		
 	}
 	</script>
-	
-	
-	
-	
-	
-		
-    </div>
-    <div class="modal-footer">
-     
-    </div>
-  </div>
 
-</div>
+		
 
 <script>
 window.onload = function(){
@@ -268,6 +268,7 @@ window.onload = function(){
 	}
 </script>
 </c:if>
+
 
 
 

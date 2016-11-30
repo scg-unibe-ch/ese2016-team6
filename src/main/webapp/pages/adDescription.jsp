@@ -367,7 +367,7 @@
 				<!-- note: to disable the ifs just add ||true inside brackets after the ' and before the } -->
 				<!-- only shows this part if property for rent -->
 				<c:if test="${shownAd.deal=='forRent'}">
-					<h3><label>This property is for rent for : </label>${shownAd.prizePerMonth} CHF/month</h3>
+					<h3><label>This property is for rent for : </label>${shownAd.priceRent} CHF/month</h3>
 					<h3>Send the owner an enquiry or a message if you are interested </h3>
 				</c:if>
 				

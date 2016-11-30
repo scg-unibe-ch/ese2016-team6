@@ -32,7 +32,7 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
-	@Min(value = 0, message = "Has to be equal to 0 or more")
+	//@Min(value = 0, message = "Has to be equal to 0 or more")
 	private int prize;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
@@ -47,14 +47,15 @@ public class PlaceAdForm {
 	@NotNull(message = "Required")
 	private KindOfDeal deal;
 	
-	@NotNull(message = "Required")
+	//@NotNull(message = "Required")
 	private KindOfSale sale;
 	
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int priceRent;
 	
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int priceSale;
+	
 	private int increment;
 	private int currentBid;
 	private String deadlineDate;

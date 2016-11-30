@@ -19,6 +19,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +30,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.EditProfileForm;
 import ch.unibe.ese.team6.controller.pojos.forms.FacebookLoginForm;
 import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
+import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SignupForm;
 import ch.unibe.ese.team6.controller.service.AdService;
@@ -81,7 +83,17 @@ public class ProfileController {
 	@Autowired
 	@Qualifier("authenticationManager")
 	protected AuthenticationManager authenticationManager;
-
+	
+	protected GoogleSignupForm googleSignupForm;
+	
+	@ModelAttribute("googleSignupForm")
+	public GoogleSignupForm googleSignupForm() {
+		if (googleSignupForm == null) {
+			googleSignupForm = new GoogleSignupForm();
+		}
+		return googleSignupForm;
+	}
+	
 	/** Returns the login page. */
 	@RequestMapping(value = "/login")
 	public ModelAndView loginPage() {
@@ -89,7 +101,6 @@ public class ProfileController {
 		model.addObject("googleForm", new GoogleSignupForm());
 		return model;
 	}
-	
 
 	/** Handles Google sign in. */
 	@RequestMapping(value = "/googlelogin", method = RequestMethod.POST)
@@ -224,7 +235,9 @@ public class ProfileController {
 			Authentication result = authenticationManager.authenticate(request);
 			SecurityContextHolder.getContext().setAuthentication(result);			
 			model = new ModelAndView("updatedProfile");
-			model.addObject("message", "Your Profile has been updated!");
+			model = new ModelAndView("redirect:/ad?id=" + user.getId());
+			model.addObject("confirmationMessage",
+					"Your Profile has been updated!");
 			model.addObject("currentUser", user);
 			return model;
 		} else {
