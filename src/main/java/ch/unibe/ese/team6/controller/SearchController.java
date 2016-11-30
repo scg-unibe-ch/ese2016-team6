@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.controller.service.AdService;
 
@@ -19,6 +20,16 @@ public class SearchController {
 
 	@Autowired
 	private AdService adService;
+	
+	protected GoogleSignupForm googleSignupForm;
+	
+	@ModelAttribute("googleSignupForm")
+	public GoogleSignupForm googleSignupForm() {
+		if (googleSignupForm == null) {
+			googleSignupForm = new GoogleSignupForm();
+		}
+		return googleSignupForm;
+	}
 
 
 	/**

@@ -161,10 +161,10 @@
 										
 								</form>
 							-->
-							<button style="float:right" type="submit" id="modalButton">direct Login</button>
+							<button style="float:right; vertical-align: middle;" type="submit" id="modalButton">Direct Login</button>
 						<%-- <a style="float:right;margin: 20px 20px;" class="link" id="submitButton" href="/login" class="link">Login</a>
 							<a style="float:right;margin: 20px 20px;" class="link" id="submitButton" href="<c:url value="/signup" />">Sign up</a>--%>
-							<a style="float:right;margin: 20px 0px;" class="link" id="submitButton" href="<c:url value='/searchAd' />">Search</a>
+							<a style="float:right;margin: 20px 0px; vertical-align: middle;" class="link" id="submitButton" href="<c:url value='/searchAd' />">Search</a>
 							
 							
 					

@@ -84,6 +84,16 @@ public class ProfileController {
 	@Qualifier("authenticationManager")
 	protected AuthenticationManager authenticationManager;
 	
+	protected GoogleSignupForm googleSignupForm;
+	
+	@ModelAttribute("googleSignupForm")
+	public GoogleSignupForm googleSignupForm() {
+		if (googleSignupForm == null) {
+			googleSignupForm = new GoogleSignupForm();
+		}
+		return googleSignupForm;
+	}
+	
 	/** Returns the login page. */
 	@RequestMapping(value = "/login")
 	public ModelAndView loginPage() {

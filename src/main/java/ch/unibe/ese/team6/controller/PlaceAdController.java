@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.ese.team6.controller.service.*;
 import ch.unibe.ese.team6.controller.pojos.PictureUploader;
+import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 
 import ch.unibe.ese.team6.model.Ad;
@@ -41,6 +42,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PlaceAdController {
 
 	public static final String IMAGE_DIRECTORY = "/img/ads";
+	
+	protected GoogleSignupForm googleSignupForm;
+	
+	@ModelAttribute("googleSignupForm")
+	public GoogleSignupForm googleSignupForm() {
+		if (googleSignupForm == null) {
+			googleSignupForm = new GoogleSignupForm();
+		}
+		return googleSignupForm;
+	}
 
 	/** Used for generating a JSON representation of a given object. */
 	private ObjectMapper objectMapper;
