@@ -112,12 +112,12 @@ function sort_div_attribute() {
 		$("#field-latestMoveInDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
-	<!--	$("#field-earliestMoveOutDate").datepicker({
+	<%--	$("#field-earliestMoveOutDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
 		$("#field-latestMoveOutDate").datepicker({
 			dateFormat : 'dd-mm-yy'
-		});-->
+		});--%>
 	});
 </script>
 
@@ -164,14 +164,12 @@ function sort_div_attribute() {
 	
 	
 		<br /> <label for="prize">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize"
-			placeholder="e.g. 5" step="50" />
+		<form:input id="prizeInput" type="number" path="prize" step="50" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" /><br />
 		
 		<label for="radius">Within radius of (max.):</label>
-		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="5" />
+		<form:input id="radiusInput" type="number" path="radius" step="5" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
 		<br />
@@ -236,9 +234,9 @@ function sort_div_attribute() {
 			</tr>
 		</table>
 			
+		<button style="background-color:#991f00;color:white" type="reset">Cancel</button>
+		<button style="background-color:#ffffcc" type="submit">Filter</button>	
 		
-		<button type="submit" onClick="validateType(this.form)">Filter</button>	
-		<button type="reset">Cancel</button>
 	</div>
 </form:form>
 

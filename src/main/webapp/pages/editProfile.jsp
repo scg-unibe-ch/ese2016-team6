@@ -87,7 +87,7 @@ function testForKind(kindOfUser, kind) {
 </table>
 
 <div>
-		<button type="submit">Update</button>
+		<button style="background-color:#ffffcc" type="submit">Update</button>
 </div>
 
 </form:form>

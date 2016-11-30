@@ -14,6 +14,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.validation.constraints.AssertTrue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,8 +62,7 @@ public class SignupService {
 
 		user.setUsername(signupForm.getEmail());
 		user.setEmail(signupForm.getEmail());
-		boolean isValid = signupForm.getIsValid();
-		assert(isValid);
+		
 		user.setPassword(signupForm.getPassword());
 		user.setEnabled(true);
 		user.setIsGoogleUser(false);

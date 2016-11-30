@@ -186,6 +186,10 @@
     </script>
 
 
+<!-- imports the new login window found in template/NewLoginPop.jsp -->
+<!-- This must be in the body of each page in order for the login screen to work -->
+<c:import url="template/NewLoginPop.jsp" />
+	
 <!-- format the dates -->
 <fmt:formatDate value="${shownAd.moveInDate}" var="formattedMoveInDate"
 	type="date" pattern="dd.MM.yyyy" />
@@ -202,6 +206,7 @@
 	</c:otherwise>
 </c:choose>
 
+
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">
@@ -214,6 +219,7 @@
 
 
 </br>
+
 
 	<c:choose>
 		<c:when test="${loggedIn}">
@@ -399,7 +405,10 @@
 								<form action="/ad/instantBuy" method="post">
 								<form>
 									<input type="hidden" name="id" value="${shownAd.id}">
+									
+									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
+									</c:if>
 								</form>
 								</form>
 								
@@ -485,7 +494,7 @@
 											</c:otherwise>
 									</c:choose>
 								</c:when>
-								<c:when test="${shownAd.expired=='false'}">
+								<c:when test="${shownAd.expired=='true'}">
 									<h3>
 									This ads auction expired on ${shownAd.expireDate}
 									</h3>

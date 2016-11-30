@@ -109,15 +109,13 @@ function validateType(form)
 		
 
 		<label for="radiusInput">Within radius of (max.):</label>
-		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" min="0" />
+		<form:input id="radiusInput" type="number" path="radius" min="0" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
 		
 		
 		<br /> <label for="prizeInput">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize"
-			placeholder="e.g. 5" min="0" />
+		<form:input id="prizeInput" type="number" path="prize" min="0" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" />
 		<br />
@@ -132,8 +130,8 @@ function validateType(form)
 		
 		<br />
 		
-		<button type="reset" class="btn btn-default" tabindex="8">Cancel</button>
-		<button type="submit" class="btn btn-default" tabindex="7" >Search</button>
+		<button style="background-color:#991f00;color:white" type="reset" class="btn btn-default" tabindex="8">Cancel</button>
+		<button style="background-color:#ffffcc" type="submit" class="btn btn-default" tabindex="7" >Search</button>
 		
 	</fieldset>
 

@@ -9,26 +9,15 @@
 <script>
 	// Validate the email field
 	$(document).ready(function() {
-		$("#field-email").focusout(function() {
+		$("#field-email").keyup(function() {
 			var text = $(this).val();
 			$.post("/signup/doesEmailExist", {email: text}, function(data){
 				if(data){
 					alert("This username is taken. Please choose another one!");
-					$("#field-email").val("");
-				}
+					$("#field-email").val("");}
 			});
 		});
 	});
-</script>
-<script>
-function validateType(form) {
-	$("#field-email").focusout(function() {
-		var text = $(this).val();
-		$.post("/signup/doesEmailExist", {email: text}, function(data){
-			isValid = data;
-		});
-	});
-});
 </script>
 <!--
 <pre>
@@ -66,11 +55,10 @@ function validateType(form) {
 			<tr>
 				<td class="signupDescription"><label for="field-email">Email:</label></td>
 				<td><form:input path="email" cssClass="form-control" id="field-email"/> 
-				<form:errors path="email" cssClass="validationErrorText" /></td>
+				<form:errors path="email" cssClass="validationErrorText" />			
+				</td>
 				
-				<form:checkbox id="isValid" style="display:none" name="isValid" path="isValid" readonly="readonly"/>
-				<form:errors path="isValid" cssClass="validationErrorText" />
-			</tr>
+		</tr>
 
 			<tr>
 				<td class="signupDescription"><label for="field-gender">Gender:</label></td>
@@ -91,7 +79,7 @@ function validateType(form) {
 		<b>For a premium Membership you have to pay!</b>
 		<br />
 		<br />
-		<button type="submit" onClick="validateType(this.form)">Sign up</button>
+		<button type="submit" class="btn btn-default">Sign up</button>
 	</fieldset>
 </form:form>
 

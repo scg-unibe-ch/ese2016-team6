@@ -118,8 +118,8 @@
 							<p>Declined</p>
 						</c:when>
 						<c:otherwise>
-							<button class="acceptButton" data-id="${enquiry.id}">Accept</button>
-							<button class="declineButton" data-id="${enquiry.id}">Decline</button>
+							<button style="background-color:#ffffcc" class="acceptButton" data-id="${enquiry.id}">Accept</button>
+							<button style="background-color:#991f00;color:white" class="declineButton" data-id="${enquiry.id}">Decline</button>
 						</c:otherwise>
 					</c:choose></td>
 			</tr>
