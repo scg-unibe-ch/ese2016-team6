@@ -31,7 +31,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">×</span>
-      <h2>Login Form</h2>
+      <h2>Login</h2>
     </div>
     <div class="modal-body">
 		<!-- Modal content -->
@@ -65,19 +65,19 @@
 			</form>
 			<br>
 			<br>
-			Or <a class="button"  href="<c:url value="/signup" />" >sign up</a> as a new user.
+			Or <a class="button"  href="<c:url value="/signup" />" >Sign up</a> as a new user.
 			<br>
 			
 			<br>
 			<br>
 			
-			or use google to sign in
+			or use Google to sign in
 				<div style="display:inline-block; vertical-align: middle;" class="g-signin2" data-onsuccess="onSignIn">	</div>
 				
 
 			<br>
 			<br>
-			or use facebook to sign in
+			or use Facebook to sign in
 			<a style="display:inline-block; vertical-align: middle;" href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
 			
 		</c:otherwise>

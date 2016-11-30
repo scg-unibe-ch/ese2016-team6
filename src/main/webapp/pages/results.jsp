@@ -155,33 +155,45 @@ function sort_div_attribute() {
 		<h2>Filter results:</h2>
 		
 		<form>
-    		<input type="radio" id="forRent" name="RentSale" value="forRent" checked="checked">
-    		<label for="forRent"> For Rent</label> 
-   			<input type="radio" id="forSale" name="RentSale" value="forSale">
-   			<label for="forSale"> For Sale</label>
-  		</form>
-		<br />
-	
-	
-		<br /> <label for="prize">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize" step="50" />
-		CHF
-		<form:errors path="prize" cssClass="validationErrorText" /><br />
-		
-		<label for="radius">Within radius of (max.):</label>
-		<form:input id="radiusInput" type="number" path="radius" step="5" />
-		km
-		<form:errors path="radius" cssClass="validationErrorText" />
-		<br />
-	
+			<c:choose>
+			<c:when test="${currentSearch.getValueOfSearch()}">
+				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
+				<input type="radio" id="type-sale" name="RentSale"> For Sale				
+			</c:when>
+			<c:otherwise>
+				<input type="radio" id="type-rent" name="RentSale"> For Rent
+				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale			
+			</c:otherwise>
+			</c:choose>
+	 		</form>
+  		
+  		<br />
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />
 		<form:errors path="city" cssClass="validationErrorText" />
 		
+		<br />	
+		<label for="radius">Within radius of (max.):</label>
+		<form:input id="radiusInput" type="number" path="radius" step="5" />
+		km
+		<form:errors path="radius" cssClass="validationErrorText" />
+	
+		<br /> 
+		<label for="prize">Price (max.):</label>
+		<form:input id="prizeInput" type="number" path="prize" step="50" />
+		CHF
+		<form:errors path="prize" cssClass="validationErrorText" />
+		
+		<br />
+		<label for="numberOfRooms">Rooms(min.):</label>
+		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
+			placeholder="e.g. 5" default="0" min="0"/>
+		Rooms
+		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
+		
 		<br />
 	
-		
 		<hr class="slim">		
 		
 		<table style="width: 80%">
