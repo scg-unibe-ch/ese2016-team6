@@ -48,7 +48,7 @@ public class FacebookSignupService {
 		user.setGender(Gender.OTHER);
 		user.setIsGoogleUser(false);
 		user.setIsFacebookUser(true);
-		
+
 		user.setKindOfMembership(KindOfMembership.NORMAL);
 		
 		Set<UserRole> userRoles = new HashSet<>();

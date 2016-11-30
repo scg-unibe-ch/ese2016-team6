@@ -89,7 +89,7 @@
 					
 					<!-- include user details -->
 					<%@include file='/pages/getUserPicture.jsp' %>
-						<li class="headerButton" id="profile_picture" >
+						<li class="HeaderButton" href="/user?id=${currentUser.id}" id="profile_picture" >
 						
 						
 						
@@ -130,14 +130,11 @@
 					
 					<c:otherwise>
 												
-										<!--
+										<!-- 
 							<form id="login-form" method="post" action="/j_spring_security_check">
 									
-<<<<<<< HEAD
-									<li></li>
-=======
 									<li><a class="link" id="submitButton" href="<c:url value="/signup" />">Sign up</a></li>
->>>>>>> origin/master
+
 									
 									<li style=" width:auto;" >
 										<button type="submit" id="submitButton" class="button">Login</button>
