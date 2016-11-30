@@ -95,11 +95,18 @@ function validateType(form)
 	<fieldset>
 		<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
 			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
-			
-		<form>
-    		<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
-   			<input type="radio" id="type-sale" name="RentSale"> For Sale
-  		</form>
+			<form>
+			<c:choose>
+			<c:when test="${currentSearch.getValueOfSearch()}">
+				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
+				<input type="radio" id="type-sale" name="RentSale"> For Sale				
+			</c:when>
+			<c:otherwise>
+				<input type="radio" id="type-rent" name="RentSale"> For Rent
+				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale			
+			</c:otherwise>
+			</c:choose>
+	 		</form>
 		<br />
 		
 		<label for="city">City / zip code:</label>

@@ -40,6 +40,8 @@
 		
 
     	$("#type-rent").on("click", function(){
+    		
+    		
 			document.getElementById('type-sale').checked="";
 			document.getElementById('type-auction').checked="";
         	document.getElementById('field-priceRent').style.visibility = "visible";
@@ -61,6 +63,9 @@
 			
 			
 			document.getElementById('preference').style.visibility = "visible";
+			
+			$("#field-priceRent").parent().show();
+			
 			
     	});
 
@@ -91,6 +96,8 @@
     	$("#type-auction").on("click", function(){
     		document.getElementById('type-rent').checked="";
 			document.getElementById('type-sale').checked="";
+			
+			$("#field-priceRent").parent().hide();
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "visible";
@@ -359,7 +366,7 @@
 	
 	<td style="width:100%;height:400px;">
 	<fieldset style="height:100%;" >
-		<legend>Room content</legend>
+		<legend>Flat content</legend>
 		<table class="placeAdTable">
 		
 			<tr>
