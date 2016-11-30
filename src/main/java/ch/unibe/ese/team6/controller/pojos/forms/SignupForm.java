@@ -1,5 +1,6 @@
 package ch.unibe.ese.team6.controller.pojos.forms;
 
+import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -18,9 +19,6 @@ public class SignupForm {
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
 	@NotNull
 	private String email;
-	
-	@AssertTrue(message = "EmailAddress already exists!")
-	private boolean isValid;
 
 	@Pattern(regexp = "[a-zA-Z]+", message = "First name must be a valid name")
 	@NotNull
@@ -83,12 +81,5 @@ public class SignupForm {
 	public KindOfMembership getKindOfMembership() {
 		return kind;
 	}
-	public boolean getIsValid() {
-		return isValid;
-	}
-	
-	public void setIsValid(boolean valid){
-		this.isValid = valid;
-	}
-	
+
 }

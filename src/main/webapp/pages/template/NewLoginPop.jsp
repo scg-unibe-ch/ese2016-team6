@@ -1,4 +1,3 @@
-
 <div style="display:none">
 
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -75,8 +74,8 @@
 			<br>
 			or use facebook to sign in
 			<br>
-			<a style="color:blue;"href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email">Click Here To Login Using Facebook</a>
-				
+			<a style="display:inline-block; vertical-align: middle;" href="https://www.facebook.com/dialog/oauth?client_id=983560241788003&redirect_uri=http://localhost:8080/facebooklogin&scope=email"><img src="img/FB-Logo.png" /></a>
+			
 		</c:otherwise>
 	</c:choose>
 	<br>
@@ -155,17 +154,13 @@
 </div>
 
 <script>
-
 window.onload = function(){
 	// Get the modal
 	var modal = document.getElementById('myModal');
-
 	// Get the button that opens the modal
 	var btn = document.getElementById("modalButton");
-
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
-
 	// When the user clicks the button, open the modal 
 	btn.onclick = function() {
 		modal.style.display = "block";
@@ -175,7 +170,6 @@ window.onload = function(){
 		modal.style.top="0px";
 		
 	}
-
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 		
@@ -190,7 +184,6 @@ window.onload = function(){
 			,300
 			);
 	}
-
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 		if (event.target == modal) {
@@ -207,7 +200,6 @@ window.onload = function(){
 		}
 	}
 }
-
 </script>
 
 
@@ -229,13 +221,10 @@ window.onload = function(){
 		
 		// Get the modal
 		var modal = document.getElementById('myModal');
-
 		// Get the button that opens the modal
 		var btn = document.getElementById("modalButton");
-
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
-
 		// When the user clicks the button, open the modal 
 		btn.onclick = function() {
 			modal.style.display = "block";
@@ -245,7 +234,6 @@ window.onload = function(){
 			modal.style.top="0px";
 			
 		}
-
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
 			
@@ -260,7 +248,6 @@ window.onload = function(){
 				,300
 				);
 		}
-
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
 			if (event.target == modal) {
@@ -281,9 +268,6 @@ window.onload = function(){
 	}
 </script>
 </c:if>
-
-
-
 
 
 

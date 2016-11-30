@@ -74,7 +74,8 @@
 			document.getElementById('field-deadlineDate').style.visibility = "hidden";
 			document.getElementById('field-deadlineHour').style.visibility = "hidden";
 			document.getElementById('field-deadlineMinute').style.visibility = "hidden";
-			document.getElementbyId('preferences').style.visibility = "hidden";
+			document.getElementById('preferences').style.visibility = "hidden";
+			document.getElementById('preference').style.visibility = "hidden";
 			
 			document.getElementById('rentLabel').style.visibility = "hidden";
 			document.getElementById('saleLabel').style.visibility = "visible";
@@ -97,7 +98,8 @@
 			document.getElementById('field-deadlineDate').style.visibility = "visible";
 			document.getElementById('field-deadlineHour').style.visibility = "visible";
 			document.getElementById('field-deadlineMinute').style.visibility = "visible";
-			document.getElementbyId('preferences').style.visibility = "hidden";
+			document.getElementById('preferences').style.visibility = "hidden";
+			document.getElementById('preference').style.visibility = "hidden";
 			
 			
 			document.getElementById('rentLabel').style.visibility = "hidden";
