@@ -213,9 +213,12 @@ public class AdTestDataSaver {
 		
 		Ad adOlten = new Ad();
 		adOlten.setZipcode(4600);
+		adOlten.setDeal(KindOfDeal.forRent);
+		adOlten.setPriceRent(430);
+		adOlten.setNumberOfRooms(2);
 		adOlten.setMoveInDate(moveInDate4);
 		adOlten.setCreationDate(creationDate4);
-		adOlten.setPrizePerMonth(430);
+		//adOlten.setPrizePerMonth(430);
 		adOlten.setSquareFootage(60);
 		adOlten.setStudio(false);
 		adOlten.setSmokers(true);
@@ -297,9 +300,9 @@ public class AdTestDataSaver {
 		adBiel.setMoveInDate(moveInDate6);
 		adBiel.setMoveOutDate(moveOutDate5);
 		adBiel.setCreationDate(creationDate6);
-		adBiel.setPrizePerMonth(480);
+		//adBiel.setPrizePerMonth(480);
 		adBiel.setNumberOfRooms(4);
-		adBiel.setSquareFootage(10);
+		adBiel.setSquareFootage(20);
 		adBiel.setStudio(true);
 		adBiel.setSmokers(true);
 		adBiel.setAnimals(false);
@@ -309,7 +312,7 @@ public class AdTestDataSaver {
 		adBiel.setUser(ese);
 		adBiel.setTitle("Direkt am Quai: hübsches Studio");
 		adBiel.setStreet("Oberer Quai 12");
-		adBiel.setCity("Biel;Bienne");
+		adBiel.setCity("Biel\\Bienne");
 		adBiel.setGarden(false);
 		adBiel.setBalcony(false);
 		adBiel.setCellar(false);
@@ -339,10 +342,13 @@ public class AdTestDataSaver {
 
 		Ad adZurich = new Ad();
 		adZurich.setZipcode(8000);
+		adZurich.setDeal(KindOfDeal.forRent);
+		adZurich.setPriceRent(480);
 		adZurich.setMoveInDate(moveInDate7);
 		adZurich.setCreationDate(creationDate7);
 		adZurich.setMoveOutDate(moveOutDate5);
-		adZurich.setPrizePerMonth(480);
+		//adZurich.setPrizePerMonth(480);
+		adZurich.setNumberOfRooms(1);
 		adZurich.setSquareFootage(32);
 		adZurich.setStudio(false);
 		adZurich.setSmokers(false);
@@ -429,10 +435,13 @@ public class AdTestDataSaver {
 		
 		Ad adAarau = new Ad();
 		adAarau.setZipcode(5000);
+		adAarau.setDeal(KindOfDeal.forRent);
+		adAarau.setPriceRent(800);
+		adAarau.setNumberOfRooms(2);
 		adAarau.setMoveInDate(moveInDate3);
 		adAarau.setMoveOutDate(moveOutDate4);
 		adAarau.setCreationDate(creationDate8);
-		adAarau.setPrizePerMonth(800);
+		//adAarau.setPrizePerMonth(800);
 		adAarau.setSquareFootage(26);
 		adAarau.setStudio(true);
 		adAarau.setSmokers(true);
@@ -548,12 +557,13 @@ public class AdTestDataSaver {
 		
 		Ad adLocarno = new Ad();
 		adLocarno.setZipcode(6600);
+		adLocarno.setDeal(KindOfDeal.forRent);
+		adLocarno.setPriceRent(960);
+		adLocarno.setNumberOfRooms(4);
 		adLocarno.setMoveInDate(moveInDate6);
 		adLocarno.setMoveOutDate(moveOutDate5);
 		adLocarno.setCreationDate(creationDate6);
-		adLocarno.setDeal(KindOfDeal.forRent);
-		adLocarno.setRent(true);
-		adLocarno.setPrizePerMonth(960);
+		//adLocarno.setPrizePerMonth(960);
 		adLocarno.setSquareFootage(42);
 		adLocarno.setStudio(false);
 		adLocarno.setSmokers(true);

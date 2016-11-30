@@ -90,7 +90,6 @@ public class Ad {
 	public void setRent(boolean rent) {
 		this.rent = rent;
 	}
-	/* ___________________________________ */
 	
 	
 

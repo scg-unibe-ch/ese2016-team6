@@ -17,9 +17,23 @@
 <script>
 	$(document).ready(function() {	
 
+		setTimeout(function() {
+			if ($("#ActualDeal").val() == "forRent") {
+				$("#type-rent").trigger('click');
+			} else {
+				if ($("#ActualSale").val() == "direct") {
+					$("#type-sale").trigger('click');
+				}
+				if ($("#ActualSale").val() == "bothAuctionAndDirect") {
+					$("#type-auction").trigger('click');
+				}
+			}
+		},10);
+
     	$("#type-rent").on("click", function(){
-			document.getElementById('type-sale').checked="";
-			document.getElementById('type-auction').checked="";
+    		document.getElementById('type-rent').checked= true;
+			document.getElementById('type-sale').checked= false;
+			document.getElementById('type-auction').checked= false;
         	document.getElementById('field-priceRent').style.visibility = "visible";
         	document.getElementById('field-priceSale').style.visibility = "hidden";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -39,8 +53,9 @@
     	});
 
 		$("#type-sale").on("click", function(){
-			document.getElementById('type-rent').checked="";
-			document.getElementById('type-auction').checked="";
+			document.getElementById('type-rent').checked= false;
+			document.getElementById('type-sale').checked= true;
+			document.getElementById('type-auction').checked= false;
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -61,8 +76,9 @@
    		});
 
     	$("#type-auction").on("click", function(){
-    		document.getElementById('type-rent').checked="";
-			document.getElementById('type-sale').checked="";
+    		document.getElementById('type-rent').checked= false;
+			document.getElementById('type-sale').checked= false;
+			document.getElementById('type-auction').checked= true;
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "visible";
@@ -206,11 +222,9 @@
 
 			<tr>
 				<td><label for="field-type">Type of deal:</label>
-				
 					
-					
-					<form:input type="hidden" id="ActualDeal" path="deal"  value="forSale" readonly="readonly" />	
-					<form:input type="hidden" id="ActualDeal" path="deal"  value="bothAuctionAndDirect" readonly="readonly" />
+					<form:input type="hidden" id="ActualDeal" path="deal"  value="${ad.deal}" readonly="readonly" />	
+					<form:input type="hidden" id="ActualSale" path="sale"  value="${ad.sale}" readonly="readonly" />
 					
 					<c:choose>
 						<c:when test="${ad.deal eq 'forRent'}">
@@ -236,9 +250,6 @@
 							<input id="type-auction" type="radio" name="sale" value="forAuction" />Auction
 						</c:otherwise>
 					</c:choose>
-					
-					${ad.deal}
-					${ad.sale}
 				</td>
 
 			</tr>
@@ -295,14 +306,14 @@
 
 			<tr>
 				<td><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) :</label>
-				<form:input id="field-priceRent" type="number" path="prize" value="${ad.priceRent}" min="0"/>
-				<form:errors path="prize" cssClass="validationErrorText" /></td>
+				<form:input id="field-priceRent" type="number" path="priceRent" value="${ad.priceRent}" min="0"/>
+				<form:errors path="priceRent" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
 				<td><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) :</label>
-				<form:input id="field-priceSale" type="number" path="prize" value="${ad.priceSale}" min="0" />
-				<form:errors path="prize" cssClass="validationErrorText" /></td>
+				<form:input id="field-priceSale" type="number" path="priceSale" value="${ad.priceSale}" min="0" />
+				<form:errors path="priceSale" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
