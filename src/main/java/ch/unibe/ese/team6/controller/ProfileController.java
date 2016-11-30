@@ -225,7 +225,9 @@ public class ProfileController {
 			Authentication result = authenticationManager.authenticate(request);
 			SecurityContextHolder.getContext().setAuthentication(result);			
 			model = new ModelAndView("updatedProfile");
-			model.addObject("message", "Your Profile has been updated!");
+			model = new ModelAndView("redirect:/ad?id=" + user.getId());
+			model.addObject("confirmationMessage",
+					"Your Profile has been updated!");
 			model.addObject("currentUser", user);
 			return model;
 		} else {
