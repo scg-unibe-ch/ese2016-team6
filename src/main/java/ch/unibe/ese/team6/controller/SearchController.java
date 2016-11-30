@@ -59,8 +59,9 @@ public class SearchController {
 			model.addObject("results", adService.queryResults(searchForm));
 			return model;
 		} else {
-			// go back
-			return searchAd();
+			ModelAndView model = new ModelAndView("searchAd");
+			model.addObject(searchForm);
+			return model;
 		}
 	}
 
