@@ -63,10 +63,17 @@
 			
 			
 			document.getElementById('preference').style.visibility = "visible";
+			document.getElementById('preferences').style.visibility = "visible";
 			
 			$("#field-priceRent").parent().show();
-			
-			
+			$("#field-priceSale").parent().hide();
+			$("#field-currentBid").parent().hide();
+			$("#field-increment").parent().hide();
+			$("#field-deadlineDate").parent().hide();
+			$("#field-deadlineHour").parent().hide();
+			$("#field-deadlineMinute").parent().hide();
+			$("#preferences").parent().show();
+			$("#preference").parent().show();
     	});
 
 		$("#type-sale").on("click", function(){
@@ -90,6 +97,16 @@
 			
 			document.getElementById('ActualSale').value = "direct";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+			$("#field-priceSale").parent().show();
+			$("#field-priceRent").parent().hide();
+			$("#field-currentBid").parent().hide();
+			$("#field-increment").parent().hide();
+			$("#field-deadlineDate").parent().hide();
+			$("#field-deadlineHour").parent().hide();
+			$("#field-deadlineMinute").parent().hide();
+			$("#preferences").parent().hide();
+			$("#preference").parent().hide();
 
    		});
 
@@ -97,7 +114,6 @@
     		document.getElementById('type-rent').checked="";
 			document.getElementById('type-sale').checked="";
 			
-			$("#field-priceRent").parent().hide();
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "visible";
@@ -117,6 +133,16 @@
 			
 			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+			$("#field-priceRent").parent().hide();
+			$("#field-priceSale").parent().show();
+			$("#field-currentBid").parent().show();
+			$("#field-increment").parent().show();
+			$("#field-deadlineDate").parent().show();
+			$("#field-deadlineHour").parent().show();
+			$("#field-deadlineMinute").parent().show();
+			$("#preferences").parent().hide();
+			$("#preference").parent().hide();
     	});
 
 		$("#field-city").autocomplete({
@@ -364,7 +390,7 @@
 	
 	<tr>
 	
-	<td style="width:100%;height:400px;">
+	<td style="width:100%;height:300px;">
 	<fieldset style="height:100%;" >
 		<legend>Flat content</legend>
 		<table class="placeAdTable">
@@ -410,7 +436,7 @@
 	
 	
 	
-	<td style="width:50%;height:400px;">
+	<td style="width:50%;height:300px;">
 	<fieldset style="height:100%;" >
 		<legend>Location details (optional)</legend>
 		<table class="placeAdTable">
@@ -440,15 +466,6 @@
 	
 	<td style="width:50%;height:210px;">
 	
-	<fieldset id="preference" style="height:100%;">
-		<legend>Preferences (optional)</legend>
-		<form:textarea path="preferences" rows="5" cols="80" placeholder="preferences concerning the tenant"></form:textarea>
-	</fieldset>
-	
-	</td>
-	
-	<td style="width:50%;height:210px;">
-	
 	<fieldset style="height:100%;">
 		<legend>Pictures (optional)</legend>
 		<br /> 
@@ -462,16 +479,11 @@
 		</table>
 		<br>
 	</fieldset>
-
-	</td>
 	
-	</tr>
+		</td>
+		<td>
 	
-	<tr>
-	
-	<td>
-	
-	<fieldset style="height:100%;">
+		<fieldset style="height:100%;">
 		<legend>Visits timetable (optional)</legend>
 		<table>
 			<tr>
@@ -520,7 +532,19 @@
 		</table>
 		<br>
 	</fieldset>
+
+	</td>
 	
+	<tr>
+	
+
+	
+		<td style="width:50%;height:100px;">
+	
+	<fieldset id="preference" style="height:100%;">
+		<legend>Preferences (optional)</legend>
+		<form:textarea path="preferences" rows="5" cols="80" placeholder="preferences concerning the tenant"></form:textarea>
+	</fieldset>	
 	</td>
 	
 	
