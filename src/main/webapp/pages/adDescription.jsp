@@ -621,6 +621,8 @@
 										</c:if>
 									</c:when>
 									<c:otherwise>
+									
+									
 										<a href="/login"><button class="thinInactiveButton" type="button"
 											data-id="${visit.id}">Login to send enquiries</button></a>
 									</c:otherwise>
@@ -750,8 +752,10 @@
 <div id="confirmationDialog">
 	<form>
 	<p>Send enquiry to advertiser?</p>
-	<button type="button" id="confirmationDialogSend">Send</button>
-	<button type="button" id="confirmationDialogCancel">Cancel</button>
+	
+	<button style="background-color:#991f00;color:white" type="button" id="confirmationDialogCancel">Cancel</button>
+	<button style="background-color:#ffffcc" type="button" id="confirmationDialogSend">Send</button>
+	
 	</form>
 </div>
 

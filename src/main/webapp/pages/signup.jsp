@@ -24,6 +24,9 @@
 	<a href="/">Home</a>   &gt;   Sign up</pre>
 	-->
 	
+<!-- imports the new login window found in template/NewLoginPop.jsp -->
+<!-- This must be in the body of each page in order for the login screen to work -->
+<c:import url="template/NewLoginPop.jsp" />
 	
 <h1 style="text-align:center;">Sign up</h1>
 <form:form style="margin:auto;" id="signupForm" method="post" modelAttribute="signupForm"
