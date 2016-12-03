@@ -400,10 +400,6 @@
 							<c:choose>
 								<c:when test="${shownAd.expired=='false' && shownAd.instantBought=='false'}">
 								
-								<c:if test="${shownAd.instantBought=='false'}">
-									<h1>bae</h1>
-								</c:if>
-								
 								This property is for sale through auction ! 
 								
 								<form action="/ad/instantBuy" method="post">
@@ -744,8 +740,10 @@
 	<label>Message: </label>
 	<textarea id="msgTextarea" placeholder="Message" ></textarea>
 	<br/>
-	<button type="button" id="messageSend">Send</button>
-	<button type="button" id="messageCancel">Cancel</button>
+	
+	<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
+	<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
+	
 	</form>
 </div>
 
