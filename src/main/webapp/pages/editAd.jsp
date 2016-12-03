@@ -205,7 +205,10 @@
 <h1>Edit Ad</h1>
 <hr style="margin:0px;" />
 
-<table style="width:100%;height:100%;table-layout: fixed;">
+
+<!-- first row -->
+
+<table class="editTableOne">
 
 <form:form method="post" modelAttribute="placeAdForm"
 	action="/profile/editAd" id="placeAdForm" autocomplete="off"
@@ -215,184 +218,196 @@
 
 
 	<tr>
-	<td style="width:400px;height:250px;">
-	<fieldset style="height:100%;" >
+	<td>
+	<fieldset class="editFieldsetOne" >
+		
 		<legend>Change General description</legend>
-		<table class="placeAdTable">
+		<div>
+			<table class="placeAdTable">
 
-			<tr>
-				<td><label for="field-type">Type of deal:</label>
-					
-					<form:input type="hidden" id="ActualDeal" path="deal"  value="${ad.deal}" readonly="readonly" />	
-					<form:input type="hidden" id="ActualSale" path="sale"  value="${ad.sale}" readonly="readonly" />
-					
-					<c:choose>
-						<c:when test="${ad.deal eq 'forRent'}">
-							<input id="type-rent" type="radio" name="sale" value="forRent" checked="checked" />Rent
-						</c:when>
-						<c:otherwise>
-							<input id="type-rent" type="radio" name="sale" value="forRent" />Rent
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${ad.deal eq 'forSale' && ad.sale eq 'direct'}">
-							<input id="type-sale" type="radio" name="sale" value="forSale" checked="checked" />Sale
-						</c:when>
-						<c:otherwise>
-							<input id="type-sale" type="radio" name="sale" value="forSale" />Sale
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${ad.sale eq 'bothAuctionAndDirect' && ad.deal eq 'forSale'}">
-							<input id="type-auction" type="radio" name="sale" value="forAuction" checked="checked" />Auction
-						</c:when>
-						<c:otherwise>
-							<input id="type-auction" type="radio" name="sale" value="forAuction" />Auction
-						</c:otherwise>
-					</c:choose>
-				</td>
+				<tr>
+					<td><label for="field-type">Type of deal:</label>
+						
+						<form:input type="hidden" id="ActualDeal" path="deal"  value="${ad.deal}" readonly="readonly" />	
+						<form:input type="hidden" id="ActualSale" path="sale"  value="${ad.sale}" readonly="readonly" />
+						
+						<c:choose>
+							<c:when test="${ad.deal eq 'forRent'}">
+								<input id="type-rent" type="radio" name="sale" value="forRent" checked="checked" />Rent
+							</c:when>
+							<c:otherwise>
+								<input id="type-rent" type="radio" name="sale" value="forRent" />Rent
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${ad.deal eq 'forSale' && ad.sale eq 'direct'}">
+								<input id="type-sale" type="radio" name="sale" value="forSale" checked="checked" />Sale
+							</c:when>
+							<c:otherwise>
+								<input id="type-sale" type="radio" name="sale" value="forSale" />Sale
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${ad.sale eq 'bothAuctionAndDirect' && ad.deal eq 'forSale'}">
+								<input id="type-auction" type="radio" name="sale" value="forAuction" checked="checked" />Auction
+							</c:when>
+							<c:otherwise>
+								<input id="type-auction" type="radio" name="sale" value="forAuction" />Auction
+							</c:otherwise>
+						</c:choose>
+					</td>
 
-			</tr>
+				</tr>
 
-			<tr>
-				<td><label for="field-title">Title of your ad :</label> 
-				<form:input id="field-title" path="title" value="${ad.title}" /></td>
-			</tr>
+				<tr>
+					<td><label for="field-title">Title of your ad :</label> 
+					<form:input id="field-title" path="title" value="${ad.title}" /></td>
+				</tr>
 
-			<tr>
-			<td><label for="field-street">Address :</label>
-				<form:input id="field-street" path="street" value="${ad.street}" /></td>
-			</tr>
-			
-			<tr>
-			<td><label for="field-city">City :</label>
-				<form:input id="field-city" path="city" value="${ad.zipcode} - ${ad.city}" />
-				<form:errors path="city" cssClass="validationErrorText" /></td>
-			</tr>
+				<tr>
+				<td><label for="field-street">Address :</label>
+					<form:input id="field-street" path="street" value="${ad.street}" /></td>
+				</tr>
+				
+				<tr>
+				<td><label for="field-city">City :</label>
+					<form:input id="field-city" path="city" value="${ad.zipcode} - ${ad.city}" />
+					<form:errors path="city" cssClass="validationErrorText" /></td>
+				</tr>
 
-			<tr>
-				<td><label for="field-squareFootage">Square Meters (m²) :</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" value="${ad.squareFootage}" min="0" />
-					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
-			</tr>
-			
-			<tr>
-				<td><label for="field-numberRooms">Number of Rooms :</label>
-					<form:input id="field-numberRooms" type="number" path="numberOfRooms" value="${ad.numberOfRooms}" min="0" />
-					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
-			</tr>
-			
-			<tr>
-				<td><label for="moveInDate">Move-in date :</label>
-				<form:input type="text" id="field-moveInDate" path="moveInDate" value="${formattedMoveInDate}" /></td>
-			</tr>
-			
-			<tr>
-				<td><label for="moveOutDate">Move-out date (optional) :</label>
-				<form:input type="text" id="field-moveOutDate" path="moveOutDate" value="${formattedMoveOutDate}" /></td>
-			</tr>
-			
-		</table>
+				<tr>
+					<td><label for="field-squareFootage">Square Meters (m²) :</label>
+						<form:input id="field-squareFootage" type="number" path="squareFootage" value="${ad.squareFootage}" min="0" />
+						<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
+				</tr>
+				
+				<tr>
+					<td><label for="field-numberRooms">Number of Rooms :</label>
+						<form:input id="field-numberRooms" type="number" path="numberOfRooms" value="${ad.numberOfRooms}" min="0" />
+						<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
+				</tr>
+				
+				<tr>
+					<td><label for="moveInDate">Move-in date :</label>
+					<form:input type="text" id="field-moveInDate" path="moveInDate" value="${formattedMoveInDate}" /></td>
+				</tr>
+				
+				<tr>
+					<td><label for="moveOutDate">Move-out date (optional) :</label>
+					<form:input type="text" id="field-moveOutDate" path="moveOutDate" value="${formattedMoveOutDate}" /></td>
+				</tr>
+				
+			</table>
+		</div>
 	</fieldset>
 
 	</td>
 	
-	<td style="width:400px;height:250px;">
+	<td>
 	
-	<fieldset style="height:100%;" >
+	<fieldset class="editFieldsetOne" >
 		<legend>Deal</legend>
 		
-		<table class="placeAdTable">
+		<div>
+			<table class="placeAdTable">
 
-			<tr>
-				<td><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) :</label>
-				<form:input id="field-priceRent" type="number" path="priceRent" value="${ad.priceRent}" min="0"/>
-				<form:errors path="priceRent" cssClass="validationErrorText" /></td>
-			</tr>
-		
-			<tr>
-				<td><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) :</label>
-				<form:input id="field-priceSale" type="number" path="priceSale" value="${ad.priceSale}" min="0" />
-				<form:errors path="priceSale" cssClass="validationErrorText" /></td>
-			</tr>
+				<tr>
+					<td><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) :</label>
+					<form:input id="field-priceRent" type="number" path="priceRent" value="${ad.priceRent}" min="0"/>
+					<form:errors path="priceRent" cssClass="validationErrorText" /></td>
+				</tr>
 			
-			<tr>
-				<td><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) :</label>
-				<form:input id="field-currentBid" type="number" path="currentBid" value="${ad.currentBid}" min="0"/>
-				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
-			</tr>
-			
-			<tr>				
-				<td><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) :</label>
-				<form:input id="field-increment" type="number" path="increment" value="${ad.increment}" min="0"/>
-				<form:errors path="increment" cssClass="validationErrorText" /></td>			
-			</tr>
-			
-			<!-- add to formatDate and add proper values -->
-			<tr>
-				<td><label id="deadLabel" for="field-deadlineDate">Deadline</label>
-					<input id="field-deadlineDate" />
-					
-					<select id="field-deadlineHour">
-						<%
-							for (int i = 0; i < 24; i++) {
-									String hour = String.format("%02d", i);
-									out.print("<option value=\"" + hour + "\">" + hour + "</option>");
-								}
-						%>
-					</select> 
+				<tr>
+					<td><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) :</label>
+					<form:input id="field-priceSale" type="number" path="priceSale" value="${ad.priceSale}" min="0" />
+					<form:errors path="priceSale" cssClass="validationErrorText" /></td>
+				</tr>
+				
+				<tr>
+					<td><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) :</label>
+					<form:input id="field-currentBid" type="number" path="currentBid" value="${ad.currentBid}" min="0"/>
+					<form:errors path="currentBid" cssClass="validationErrorText" /></td>
+				</tr>
+				
+				<tr>				
+					<td><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) :</label>
+					<form:input id="field-increment" type="number" path="increment" value="${ad.increment}" min="0"/>
+					<form:errors path="increment" cssClass="validationErrorText" /></td>			
+				</tr>
+				
+				<!-- add to formatDate and add proper values -->
+				<tr>
+					<td><label id="deadLabel" for="field-deadlineDate">Deadline</label>
+						<input id="field-deadlineDate" />
 						
-					<select id="field-deadlineMinute">
-						<%
-							for (int i = 0; i < 60; i++) {
-									String minute = String.format("%02d", i);
-									out.print("<option value=\"" + minute + "\">" + minute + "</option>");
-								}
-						%>
-					</select>
-				</td>
-			</tr>
-		</table>
+						<select id="field-deadlineHour">
+							<%
+								for (int i = 0; i < 24; i++) {
+										String hour = String.format("%02d", i);
+										out.print("<option value=\"" + hour + "\">" + hour + "</option>");
+									}
+							%>
+						</select> 
+							
+						<select id="field-deadlineMinute">
+							<%
+								for (int i = 0; i < 60; i++) {
+										String minute = String.format("%02d", i);
+										out.print("<option value=\"" + minute + "\">" + minute + "</option>");
+									}
+							%>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</fieldset>
 
 	</td>
 	
-	<td style="width:400px;height:250px;">
+	<td>
 	
-	<fieldset style="height:100%;" >
+	<fieldset class="editFieldsetOne" >
 		<legend>Change Location details</legend>
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
-				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" value="${ad.proximityToPublicTransport}" /></td>
-			</tr>
-			<tr>
-				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
-				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" value="${ad.proximityToSchool}" /></td>
-			</tr>
-			<tr>
-				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
-				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" value="${ad.proximityToSupermarket}" /></td>
-			</tr>
-			<tr>
-				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
-				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" value="${ad.proximityToNightlife}" /></td>
-			</tr>
-		</table>
+		
+		<div>
+			<table class="placeAdTable">
+				<tr>
+					<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
+					<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" value="${ad.proximityToPublicTransport}" /></td>
+				</tr>
+				<tr>
+					<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
+					<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" value="${ad.proximityToSchool}" /></td>
+				</tr>
+				<tr>
+					<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
+					<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" value="${ad.proximityToSupermarket}" /></td>
+				</tr>
+				<tr>
+					<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
+					<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" value="${ad.proximityToNightlife}" /></td>
+				</tr>
+			</table>
+		</div>
 	</fieldset>
 	
 	</td>
 	</tr>
 	</table>
 	
-	<table style="width:100%;height:100%;table-layout: fixed;">
+	
+	<!-- second row -->
+	
+	<table class="editTableTwo">
 	
 	<tr>
-	<td style="width:600px;height:250px;">
+	<td>
 	
-	<fieldset style="height:100%;" >
+	<fieldset class="editFieldsetTwo">
 		<legend>Room content</legend>
-		<table class="placeAdTable" style="width:600px;">
+		<div>
+		<table class="placeAdTable">
 			<tr>
 				<td>
 					<c:choose>
@@ -511,22 +526,28 @@
 				</td>
 			</tr>
 
+			
 		</table>
 
 		<br />
-		<form:textarea path="roomDescription" rows="10" cols="80" value="${ad.roomDescription}" />
+		<form:textarea path="roomDescription" rows="10" cols="70" value="${ad.roomDescription}" />
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
+		
+		</div>
 	</fieldset>
 
 	</td>
 	
 	
 	
-	<td style="width:600px;height:250px;">
+	<td>
 	
-	<fieldset style="height:100%;" >
-		<legend>Change preferences</legend>
-		<form:textarea path="preferences" rows="20" cols="80" value="${ad.preferences}" ></form:textarea>
+	<fieldset class="editFieldsetTwo" >
+			<legend>Change preferences</legend>
+		<div>
+		<form:textarea path="preferences" rows="20" cols="70" value="${ad.preferences}" ></form:textarea>
+		
+		</div>
 	</fieldset>
 	</td>
 	
@@ -535,14 +556,20 @@
 	
 	</table>
 	
-	<table style="width:100%;height:100%;table-layout: fixed;">
+	<!-- third row -->
+	
+	
+	<table class="editTableThree">
 	
 	<tr>
 	
 	
-	<td style="width:600px;height:250px;">
-	<fieldset style="height:100%;" >
+	<td>
+	<fieldset class="editFieldsetThree" >
+	
 		<legend>Change pictures</legend>
+		
+		<div>
 		<h3>Delete existing pictures</h3>
 		<br />
 		<div>
@@ -551,7 +578,7 @@
 					<div>
 					<img src="${picture.filePath}" />
 					</div>
-					<button type="button" data-ad-id="${ad.id }" data-picture-id="${picture.id }">Delete</button>
+					<button type="button" style="border-radius: 5px; background-color:#991f00;color:white" data-ad-id="${ad.id }" data-picture-id="${picture.id }">Delete</button>
 				</div>
 			</c:forEach>
 		</div>
@@ -570,13 +597,15 @@
 			</tr>
 		</table>
 		<br>
+		</div>
 	</fieldset>
 
 	</td>
 	
-	<td style="width:600px;height:250px;">
-	<fieldset style="height:height:200px;">
+	<td>
+	<fieldset class="editFieldsetThree"  >
 		<legend>Add visiting times</legend>
+		<div>
 		
 		<table>
 			<tr>
@@ -631,20 +660,25 @@
 			
 		</table>
 		<br>
+		
+		</div>
 	</fieldset>
 
+	
+	
+	</td>
+	</tr>
+	</table>
+
 	<br>
-	<div style="padding-left:30px">
+	<div style="padding-left:30px; margin-left:auto; margin-right:auto; ">
 		<a href="<c:url value='/ad?id=${ad.id}' />"> 
 			<button style="background-color:#991f00;color:white" type="button">Cancel</button>
 		</a>
 		<button style="background-color:#ffffcc" type="submit">Submit</button>
 	</div>
 	
-	</td>
-	</tr>
-	</table>
-
+	
 </form:form>
 
 
