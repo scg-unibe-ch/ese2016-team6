@@ -258,14 +258,17 @@
 <form:form method="post" modelAttribute="placeAdForm"
 	action="/profile/placeAd" id="placeAdForm" autocomplete="off"
 	enctype="multipart/form-data" style="width:100%">
-	<table style="width:100%;height:100%;table-layout: fixed;">
+	
+	<table class="placeAdTableOne">
 	<tr>
 	
 	
-	<td style="width:50%;height:250px;">
+	<td >
 	
-	<fieldset style="height:100%;" >
+	<fieldset class="placeAdFieldsetOne">
 		<legend>General description</legend>
+		<div>
+		
 		<table class="placeAdTable">
 			
 			
@@ -324,14 +327,16 @@
 				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
 			</tr>
 		</table>
+		
+		</div>
 	</fieldset>
 	
 	</td>
 	
-	<td style="width:50%;height:250px;">
-	<fieldset style="height:100%;" >
+	<td >
+	<fieldset class="placeAdFieldsetOne">
 		<legend>Deal</legend>
-		
+		<div>
 		<table class="placeAdTable">
 			
 			<tr>
@@ -383,6 +388,7 @@
 			</tr>
 			
 		</table>
+		</div>
 	</fieldset>
 	</td>
 	
@@ -390,9 +396,11 @@
 	
 	<tr>
 	
-	<td style="width:100%;height:300px;">
-	<fieldset style="height:100%;" >
+	<td >
+	<fieldset class="placeAdFieldsetOne" >
 		<legend>Flat content</legend>
+		
+		<div>
 		<table class="placeAdTable">
 		
 			<tr>
@@ -425,20 +433,23 @@
 			
 			<tr>
 				<td colspan="2" >
-					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="80" placeholder="Room Description*" />
+					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="70" placeholder="Room Description*" />
 					<form:errors path="roomDescription" cssClass="validationErrorText" />
 				</td>
 			</tr>
 		</table>
 		<br/>
+		</div>
 	</fieldset>
 	</td>
 	
 	
 	
-	<td style="width:50%;height:300px;">
-	<fieldset style="height:100%;" >
+	<td >
+	<fieldset class="placeAdFieldsetOne">
+	
 		<legend>Location details (optional)</legend>
+		<div>
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
@@ -457,6 +468,7 @@
 				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500"   /></td>
 			</tr>
 		</table>
+		</div>
 	</fieldset>
 	</td>
 	
@@ -464,10 +476,11 @@
 	
 	<tr>
 	
-	<td style="width:50%;height:210px;">
+	<td >
 	
-	<fieldset style="height:100%;">
+	<fieldset class="placeAdFieldsetOne">
 		<legend>Pictures (optional)</legend>
+		<div>
 		<br /> 
 		<label for="field-pictures">Pictures</label> <input type="file" id="field-pictures" accept="image/*" multiple="multiple" />
 		<table id="uploaded-pictures" class="styledTable">
@@ -478,13 +491,15 @@
 			</tr>
 		</table>
 		<br>
+		</div>
 	</fieldset>
 	
 		</td>
 		<td>
 	
-		<fieldset style="height:100%;">
+		<fieldset class="placeAdFieldsetOne" >
 		<legend>Visits timetable (optional)</legend>
+		<div>
 		<table>
 			<tr>
 				<td><input type="text" id="field-visitDay" readonly="readonly" /> <select
@@ -531,6 +546,7 @@
 			</tr>
 		</table>
 		<br>
+		</div>
 	</fieldset>
 
 	</td>
@@ -539,11 +555,13 @@
 	
 
 	
-		<td style="width:50%;height:100px;">
+	<td >
 	
-	<fieldset id="preference" style="height:100%;">
+	<fieldset id="preference" class="placeAdFieldsetOne">
 		<legend>Preferences (optional)</legend>
-		<form:textarea path="preferences" rows="5" cols="80" placeholder="preferences concerning the tenant"></form:textarea>
+		<div>
+		<form:textarea path="preferences" rows="5" cols="70" placeholder="preferences concerning the tenant"></form:textarea>
+		</div>
 	</fieldset>	
 	</td>
 	

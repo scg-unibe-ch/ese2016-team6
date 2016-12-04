@@ -205,7 +205,7 @@ function rentSaleOfAlert(alert) {
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td><button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button></td>
+				<td><button style="background-color:#991f00;color:white" class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button></td>
 			</tr>
 		</c:forEach>
 		</table>
