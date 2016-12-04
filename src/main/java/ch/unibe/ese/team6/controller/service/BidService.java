@@ -47,7 +47,7 @@ public class BidService {
         // Only allow making bids when auction is not over yet.
         //(So that people can't use a direct link)
         //if(!ad.getExpired() && user.getHasCreditCard()) {
-        if(!ad.getExpired()) {
+        if(!ad.getExpired()&& !ad.getinstantBought()) {
             Bid bid = new Bid();
             bid.setAd(ad);
             bid.setTimestamp(new Date());

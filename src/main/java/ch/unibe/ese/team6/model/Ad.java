@@ -67,6 +67,7 @@ public class Ad {
 	
 	//to remove asap
 	//cannot be removed yet, there seems to be some dependencies on it
+	
 	private int price;
 	
 	public int getPrice() {
@@ -78,7 +79,7 @@ public class Ad {
 	}
 	
 	
-
+	
 	// to be deleted
 	@Column(nullable = false)
 	private boolean rent;

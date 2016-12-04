@@ -1,5 +1,6 @@
 package ch.unibe.ese.team6.controller.pojos.forms;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.validation.constraints.Min;
@@ -124,7 +125,18 @@ public class PlaceAdForm {
 	*/
 
 	public String getTitle() {
-		return title;
+		
+		if(title!=null){
+			try {
+				return new String(title.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return title;	
+			}
+		}
+		else
+			return new String("");
+		
+		
 	}
 
 	public void setTitle(String title) {
@@ -140,7 +152,18 @@ public class PlaceAdForm {
 	}
 	
 	public String getCity() {
-		return city;
+		
+		
+		if(city!=null){
+			try {
+				return new String(city.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return city;	
+			}
+		}
+		else
+			return new String("");
+		
 	}
 
 	public void setCity(String city) {

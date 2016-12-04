@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.unibe.ese.team6.controller.pojos.forms.AlertForm;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Alert;
+import ch.unibe.ese.team6.model.KindOfDeal;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.User;
@@ -170,7 +171,7 @@ public class AlertService {
 	private boolean rentSaleMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
 		if (!alert.getBothRentAndSale()
-				&& ad.getRent() == alert.getForRent())
+				&& (ad.getDeal() == KindOfDeal.forRent ) == alert.getForRent())
 			mismatch = true;
 		return mismatch;
 	}

@@ -126,10 +126,10 @@ function sort_div_attribute() {
 <hr />
 
 
-<table style="width:100%;border-collapse: separate;
-	border-spacing: 50px 0;table-layout: fixed;">
+<table style="width:100%;
+	table-layout: fixed;">
 <tr>
-<td valign="top">
+<td valign="top" style="width:400px; min-width:400px;">
 
 <div>
 <select id="modus">
@@ -150,7 +150,7 @@ function sort_div_attribute() {
 
 <form:form method="post" modelAttribute="searchForm" action="/results"
 	id="filterForm" autocomplete="off">
-
+	
 	<div id="filterDiv">
 		<h2>Filter results:</h2>
 		
@@ -175,20 +175,20 @@ function sort_div_attribute() {
 		
 		<br />	
 		<label for="radius">Within radius of (max.):</label>
-		<form:input id="radiusInput" type="number" path="radius" step="5" />
+		<form:input id="radiusInput" type="number" path="radius" min="0" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
 	
 		<br /> 
 		<label for="prize">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize" step="50" />
+		<form:input id="prizeInput" type="number" path="prize" min="0" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" />
 		
 		<br />
 		<label for="numberOfRooms">Rooms(min.):</label>
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 5" default="0" min="0"/>
+			placeholder="e.g. 5" default="1" min="1"/>
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		
@@ -255,6 +255,16 @@ function sort_div_attribute() {
 
 
 </td>
+
+<!-- seperates the two columns -->
+
+<td style="width:15px;">
+<div style="width:15px;">
+
+
+</div>
+</td>
+
 <td>
 
 <c:choose>

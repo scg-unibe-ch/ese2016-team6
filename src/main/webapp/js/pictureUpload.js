@@ -12,8 +12,8 @@ function appendPictureRow(name, size, url) {
 	$("#uploaded-pictures")
 			.append(
 					'<tr><td>' + name + '</td><td>' + size
-							+ '</td><td data-delete-url="' + url
-							+ '">Delete</td></tr>');
+							+ '</td><td style="border-radius: 5px; background-color:#991f00;color:white; text-decoration:underline" data-delete-url="' + url
+							+ '">  Delete </td></tr>');
 }
 
 $(function() {

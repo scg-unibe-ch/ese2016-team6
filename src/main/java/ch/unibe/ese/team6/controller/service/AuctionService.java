@@ -65,14 +65,12 @@ public class AuctionService {
      * Sends message to winner
      * @param id of ad
      */
+
     @Transactional
-    public void instantBuy(long id, User winner){
+    public void sendInstantBuyMessage(long id, User winner){
         // Mark as expired
         Ad ad = adService.getAdById(id);
-        //ad.setExpired(true);
-        ad.setinstantBought(true);
-        adDao.save(ad);
-
+        
         // Send messages
         User owner = ad.getUser();
 

@@ -380,12 +380,15 @@
 							<h3><label>This property is for sale ! Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
 							
 							
-							<form action="/ad/instantBuy" method="post">
-								<form>
+							<form:form action="/ad/makeBid" method="post">
+								
 									<input type="hidden" name="id" value="${shownAd.id}">
+									<input type="hidden" name="amount" value="${shownAd.priceSale}">
+									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
-								</form>
-							</form>
+									</c:if>
+								
+							</form:form>
 						</c:if>
 						
 						<!-- only shows this part if property for auction -->
@@ -396,21 +399,17 @@
 							<c:choose>
 								<c:when test="${shownAd.expired=='false' && shownAd.instantBought=='false'}">
 								
-								<c:if test="${shownAd.instantBought=='false'}">
-									<h1>bae</h1>
-								</c:if>
-								
 								This property is for sale through auction ! 
 								
-								<form action="/ad/instantBuy" method="post">
-								<form>
+								<form:form action="/ad/makeBid" method="post">
+								
 									<input type="hidden" name="id" value="${shownAd.id}">
-									
+									<input type="hidden" name="amount" value="${shownAd.priceSale}">
 									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
 									</c:if>
-								</form>
-								</form>
+								
+								</form:form>
 								
 								
 								</br> 
@@ -428,15 +427,15 @@
 									
 									
 										<c:if test="${loggedInUserEmail != shownAd.user.username }">
-											<form action="/ad/makeBid" method="post">
+											<form:form action="/ad/makeBid" method="post">
 								
-												<form><label for="field-currentBid">Make a higher bid :</label>
+												<label for="field-currentBid">Make a higher bid :</label>
 												<input type="hidden" name="id" value="${shownAd.id}">
 												<input class="bidInput" type="number" name ="amount" id="bidAmount"/>
 												<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
 												</form>
 								
-											</form>
+											</form:form>
 										</c:if>
 										
 									
@@ -444,12 +443,12 @@
 									
 											<c:if test="${latestBid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												
+												<h3>
 												
 												<table>
 													<tr>
 														<td>
-															current highest bidder : ${latestBid.user.username}
+															Current highest bidder : ${latestBid.user.username}
 														</td>
 														
 														<td>
@@ -467,7 +466,7 @@
 													</tr>	
 													<tr>
 														<td>
-															with a bid of : ${latestBid.amount} CHF
+															With a bid of : ${latestBid.amount} CHF
 														</td>
 														<td>
 														This offer was made: 
@@ -475,13 +474,14 @@
 														</td>
 													</tr>
 												</table>
+												</h3>
 											</div>
 											
 											</c:if>
 											
 											<c:if test="${latestBid.user == null}">
 											<h3>
-												noone has made a bid yet.
+												Noone has made a bid yet.
 											</h3>
 											</c:if>
 										</div>
@@ -494,7 +494,7 @@
 											</c:otherwise>
 									</c:choose>
 								</c:when>
-								<c:when test="${shownAd.expired=='true'}">
+								<c:when test="${shownAd.expired=='true'&&shownAd.instantBought=='false'}">
 									<h3>
 									This ads auction expired on ${shownAd.expireDate}
 									</h3>
@@ -502,7 +502,49 @@
 								
 								<c:when test="${shownAd.instantBought=='true'}">
 									<h3>
-									This flat was instant bought
+									This flat has been instant bought...
+									<br>
+									<br>
+									<c:if test="${latestBid.user != null}">
+											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
+												
+												
+												<table>
+													<tr>
+														<td>
+															...by the user : ${latestBid.user.username}
+														</td>
+														
+														<td>
+															<c:choose>
+																<c:when test="${latestBid.user.picture.filePath != null}">
+																	<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
+																</c:when>
+																<c:otherwise>
+																	<img src="/img/avatar.png">
+																</c:otherwise>
+															</c:choose>
+														</td>					
+														
+														
+													</tr>	
+													<tr>
+														<td>
+															For a sum of : ${latestBid.amount} CHF
+														</td>
+														<td>
+														This offer was made: 
+														<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
+														</td>
+													</tr>
+												</table>
+											</div>
+											
+										</c:if>
+									
+									
+									
+									
 									</h3>
 								</c:when>
 					
@@ -516,6 +558,84 @@
 
 
 		<td style="width:50%;">
+		
+		<div id="visitList" class="adDescDiv">
+				<h2>Visiting times</h2>
+				<table>
+					<c:forEach items="${visits }" var="visit">
+						<tr>
+							<td>
+								<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
+								&nbsp; from
+								<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
+								until
+								<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
+							</td>
+							<td><c:choose>
+									<c:when test="${loggedIn}">
+										<c:if test="${loggedInUserEmail != shownAd.user.username}">
+										
+											<button class="thinButton" type="button" data-id="${visit.id}">Send enquiry to advertiser</button>
+							
+										</c:if>
+									</c:when>
+									<c:otherwise>
+									
+									
+										<a href="/login"><button class="thinInactiveButton" type="button"
+											data-id="${visit.id}">Login to send enquiries</button></a>
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<div class="adDescDiv">
+				<h2>Room Description</h2>
+				<p>${shownAd.roomDescription}</p>
+			</div>
+		</td>
+
+		<td>
+		
+			<div class="adDescDiv">
+				<h2>Location details</h2>
+				<table>
+					<tr>
+						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
+					</tr>
+				</table>
+			</div>
+			
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<div class="adDescDiv">
+				<h2>Preferences</h2>
+				<p>${shownAd.preferences}</p>
+			</div>
+		</td>
+
+		<td>
+		
 			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
 				<tr>
 					<td><h2>Advertiser</h2><br /></td>
@@ -542,7 +662,7 @@
 							<a href="/login"><button class="thinInactiveButton" type="button">Login to visit profile</button></a>
 						</c:otherwise>
 					</c:choose>
-
+					</td>
 					<td>
 						<form>
 							<c:choose>
@@ -559,76 +679,11 @@
 					</td>
 				</tr>
 			</table>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<div class="adDescDiv">
-				<h2>Room Description</h2>
-				<p>${shownAd.roomDescription}</p>
-			</div>
-		</td>
-
-		<td>
-			<div class="adDescDiv">
-				<h2>Location details</h2>
-				<table>
-					<tr>
-						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
-					</tr>
-					<tr>
-						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
-					</tr>
-					<tr>
-						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
-					</tr>
-					<tr>
-						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
-					</tr>
-				</table>
-			</div>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<div class="adDescDiv">
-				<h2>Preferences</h2>
-				<p>${shownAd.preferences}</p>
-			</div>
-		</td>
-
-		<td>
-			<div id="visitList" class="adDescDiv">
-				<h2>Visiting times</h2>
-				<table>
-					<c:forEach items="${visits }" var="visit">
-						<tr>
-							<td>
-								<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
-								&nbsp; from
-								<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
-								until
-								<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
-							</td>
-							<td><c:choose>
-									<c:when test="${loggedIn}">
-										<c:if test="${loggedInUserEmail != shownAd.user.username}">
-											<button class="thinButton" type="button" data-id="${visit.id}">Send
-												enquiry to advertiser</button>
-										</c:if>
-									</c:when>
-									<c:otherwise>
-										<a href="/login"><button class="thinInactiveButton" type="button"
-											data-id="${visit.id}">Login to send enquiries</button></a>
-									</c:otherwise>
-								</c:choose>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
+		
+		
+		
+			
+			
 		</td>
 	</tr>
 
@@ -739,16 +794,20 @@
 	<label>Message: </label>
 	<textarea id="msgTextarea" placeholder="Message" ></textarea>
 	<br/>
-	<button type="button" id="messageSend">Send</button>
-	<button type="button" id="messageCancel">Cancel</button>
+	
+	<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
+	<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
+	
 	</form>
 </div>
 
 <div id="confirmationDialog">
 	<form>
 	<p>Send enquiry to advertiser?</p>
-	<button type="button" id="confirmationDialogSend">Send</button>
-	<button type="button" id="confirmationDialogCancel">Cancel</button>
+	
+	<button style="background-color:#991f00;color:white" type="button" id="confirmationDialogCancel">Cancel</button>
+	<button style="background-color:#ffffcc" type="button" id="confirmationDialogSend">Send</button>
+	
 	</form>
 </div>
 

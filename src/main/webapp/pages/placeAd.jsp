@@ -63,10 +63,17 @@
 			
 			
 			document.getElementById('preference').style.visibility = "visible";
+			document.getElementById('preferences').style.visibility = "visible";
 			
 			$("#field-priceRent").parent().show();
-			
-			
+			$("#field-priceSale").parent().hide();
+			$("#field-currentBid").parent().hide();
+			$("#field-increment").parent().hide();
+			$("#field-deadlineDate").parent().hide();
+			$("#field-deadlineHour").parent().hide();
+			$("#field-deadlineMinute").parent().hide();
+			$("#preferences").parent().show();
+			$("#preference").parent().show();
     	});
 
 		$("#type-sale").on("click", function(){
@@ -90,6 +97,16 @@
 			
 			document.getElementById('ActualSale').value = "direct";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+			$("#field-priceSale").parent().show();
+			$("#field-priceRent").parent().hide();
+			$("#field-currentBid").parent().hide();
+			$("#field-increment").parent().hide();
+			$("#field-deadlineDate").parent().hide();
+			$("#field-deadlineHour").parent().hide();
+			$("#field-deadlineMinute").parent().hide();
+			$("#preferences").parent().hide();
+			$("#preference").parent().hide();
 
    		});
 
@@ -97,7 +114,6 @@
     		document.getElementById('type-rent').checked="";
 			document.getElementById('type-sale').checked="";
 			
-			$("#field-priceRent").parent().hide();
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "visible";
@@ -117,6 +133,16 @@
 			
 			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+			$("#field-priceRent").parent().hide();
+			$("#field-priceSale").parent().show();
+			$("#field-currentBid").parent().show();
+			$("#field-increment").parent().show();
+			$("#field-deadlineDate").parent().show();
+			$("#field-deadlineHour").parent().show();
+			$("#field-deadlineMinute").parent().show();
+			$("#preferences").parent().hide();
+			$("#preference").parent().hide();
     	});
 
 		$("#field-city").autocomplete({
@@ -232,14 +258,17 @@
 <form:form method="post" modelAttribute="placeAdForm"
 	action="/profile/placeAd" id="placeAdForm" autocomplete="off"
 	enctype="multipart/form-data" style="width:100%">
-	<table style="width:100%;height:100%;table-layout: fixed;">
+	
+	<table class="placeAdTableOne">
 	<tr>
 	
 	
-	<td style="width:50%;height:250px;">
+	<td >
 	
-	<fieldset style="height:100%;" >
+	<fieldset class="placeAdFieldsetOne">
 		<legend>General description</legend>
+		<div>
+		
 		<table class="placeAdTable">
 			
 			
@@ -277,13 +306,13 @@
 
 			<tr>
 				<td style="background-color:#fff9f9"><label for="field-squareFootage">Square Meters (m²) *:</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters"  min="0" />
+					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters"  min="1" value="1" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label for="field-numberRooms">Number of Rooms *:</label>
-					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" min="0" />
+					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" min="1" value="1" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
@@ -298,37 +327,39 @@
 				<form:input type="text" id="field-moveOutDate" path="moveOutDate" /></td>
 			</tr>
 		</table>
+		
+		</div>
 	</fieldset>
 	
 	</td>
 	
-	<td style="width:50%;height:250px;">
-	<fieldset style="height:100%;" >
+	<td >
+	<fieldset class="placeAdFieldsetOne">
 		<legend>Deal</legend>
-		
+		<div>
 		<table class="placeAdTable">
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) *:</label>
-				<form:input id="field-priceRent" type="number" path="priceRent"  min="0"/>
+				<form:input id="field-priceRent" type="number" path="priceRent"  min="1" value="1"/>
 				<form:errors path="priceRent" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
 				<td style="background-color:#fff9f9"><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) *:</label>
-				<form:input id="field-priceSale" type="number" path="priceSale" min="0" />
+				<form:input id="field-priceSale" type="number" path="priceSale" min="1" value="1"/>
 				<form:errors path="priceSale" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) *:</label>
-				<form:input id="field-currentBid" type="number" path="currentBid" min="0"/>
+				<form:input id="field-currentBid" type="number" path="currentBid" min="1" value="1"/>
 				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
 				<td style="background-color:#fff9f9"><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) *:</label>
-				<form:input id="field-increment" type="number" path="increment" min="0"/>
+				<form:input id="field-increment" type="number" path="increment" min="1" value="1"/>
 				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
 			
@@ -357,6 +388,7 @@
 			</tr>
 			
 		</table>
+		</div>
 	</fieldset>
 	</td>
 	
@@ -364,9 +396,11 @@
 	
 	<tr>
 	
-	<td style="width:100%;height:400px;">
-	<fieldset style="height:100%;" >
+	<td >
+	<fieldset class="placeAdFieldsetOne" >
 		<legend>Flat content</legend>
+		
+		<div>
 		<table class="placeAdTable">
 		
 			<tr>
@@ -399,20 +433,23 @@
 			
 			<tr>
 				<td colspan="2" >
-					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="80" placeholder="Room Description*" />
+					<form:textarea style="background-color:#fff9f9;color:black;" path="roomDescription" rows="10" cols="70" placeholder="Room Description*" />
 					<form:errors path="roomDescription" cssClass="validationErrorText" />
 				</td>
 			</tr>
 		</table>
 		<br/>
+		</div>
 	</fieldset>
 	</td>
 	
 	
 	
-	<td style="width:50%;height:400px;">
-	<fieldset style="height:100%;" >
+	<td >
+	<fieldset class="placeAdFieldsetOne">
+	
 		<legend>Location details (optional)</legend>
+		<div>
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
@@ -431,6 +468,7 @@
 				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500"   /></td>
 			</tr>
 		</table>
+		</div>
 	</fieldset>
 	</td>
 	
@@ -438,19 +476,11 @@
 	
 	<tr>
 	
-	<td style="width:50%;height:210px;">
+	<td >
 	
-	<fieldset id="preference" style="height:100%;">
-		<legend>Preferences (optional)</legend>
-		<form:textarea path="preferences" rows="5" cols="80" placeholder="preferences concerning the tenant"></form:textarea>
-	</fieldset>
-	
-	</td>
-	
-	<td style="width:50%;height:210px;">
-	
-	<fieldset style="height:100%;">
+	<fieldset class="placeAdFieldsetOne">
 		<legend>Pictures (optional)</legend>
+		<div>
 		<br /> 
 		<label for="field-pictures">Pictures</label> <input type="file" id="field-pictures" accept="image/*" multiple="multiple" />
 		<table id="uploaded-pictures" class="styledTable">
@@ -461,18 +491,15 @@
 			</tr>
 		</table>
 		<br>
+		</div>
 	</fieldset>
-
-	</td>
 	
-	</tr>
+		</td>
+		<td>
 	
-	<tr>
-	
-	<td>
-	
-	<fieldset style="height:100%;">
+		<fieldset class="placeAdFieldsetOne" >
 		<legend>Visits timetable (optional)</legend>
+		<div>
 		<table>
 			<tr>
 				<td><input type="text" id="field-visitDay" readonly="readonly" /> <select
@@ -519,8 +546,23 @@
 			</tr>
 		</table>
 		<br>
+		</div>
 	</fieldset>
+
+	</td>
 	
+	<tr>
+	
+
+	
+	<td >
+	
+	<fieldset id="preference" class="placeAdFieldsetOne">
+		<legend>Preferences (optional)</legend>
+		<div>
+		<form:textarea path="preferences" rows="5" cols="70" placeholder="preferences concerning the tenant"></form:textarea>
+		</div>
+	</fieldset>	
 	</td>
 	
 	

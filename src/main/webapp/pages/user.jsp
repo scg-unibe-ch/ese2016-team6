@@ -101,8 +101,10 @@
 		<br> <br> <label>Message: </label>
 		<textarea id="msgTextarea" placeholder="Message"></textarea>
 		<br />
-		<button type="button" id="messageSend">Send</button>
-		<button type="button" id="messageCancel">Cancel</button>
+		
+		<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
+		<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
+		
 	</form>
 </div>
 <c:import url="template/footer.jsp" />

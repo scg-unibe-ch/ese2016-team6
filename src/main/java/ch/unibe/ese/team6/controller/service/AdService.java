@@ -94,10 +94,10 @@ public class AdService {
 		
 		ad.setTitle(placeAdForm.getTitle());
 		ad.setStreet(placeAdForm.getStreet());
-	//	ad.setStudio(placeAdForm.getStudio());
+		//ad.setStudio(placeAdForm.getStudio());
 		
 		//transports rent variable
-		ad.setRent(placeAdForm.getRent());
+		//ad.setRent(placeAdForm.getRent());
 
 		//transports for deal variable
 		if(placeAdForm.getRent()==true)ad.setDeal(KindOfDeal.forRent);
@@ -310,6 +310,14 @@ public class AdService {
         ad.setCurrentBid(amount);
         adDao.save(ad);
     }
+    
+    
+    @Transactional
+    public void setAdInstantBought(Ad ad, boolean bought){
+    	ad.setinstantBought(bought);
+    	ad.setExpired(bought);
+    	adDao.save(ad);
+    }
 	
 	
 	/**
@@ -424,10 +432,6 @@ public class AdService {
 					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
 			
 		}
-		
-		
-			//checks for not expired ads
-	       //results = adDao.findByPriceLessThanAndExpired(searchForm.getPrice() + 1, false);
 		
 		
 		//for the premium user ads list

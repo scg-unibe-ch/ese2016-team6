@@ -40,10 +40,10 @@
 			<table id="indexTable">
 				<tr>
 					<th>
-						<h2 style="width:100%;text-align:center;">flats for rent</h2>
+						<h2 style="width:100%;text-align:center;">Flats for rent</h2>
 					</th>
 					<th>
-						<h2 style="width:100%;text-align:center;">flats for sale and/or auction</h2>
+						<h2 style="width:100%;text-align:center;">Flats for sale and/or auction</h2>
 					</th>
 				</tr>
 				
@@ -73,7 +73,7 @@
 													<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 													<p>
 														<i>
-														flat with
+														Flat with
 															<c:if test="${ad.numberOfRooms==0}">  unspecified amount of  </c:if>
 															<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
 														rooms
@@ -125,7 +125,7 @@
 													<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 													<p>
 														<i>
-														flat with
+														Flat with
 															<c:if test="${ad.numberOfRooms==0}">  unspecified amount of  </c:if>
 															<c:if test="${ad.numberOfRooms>0}"> ${ad.numberOfRooms}  </c:if>
 														rooms
