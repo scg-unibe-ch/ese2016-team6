@@ -188,7 +188,7 @@ function sort_div_attribute() {
 		<br />
 		<label for="numberOfRooms">Rooms(min.):</label>
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 5" default="0" min="0"/>
+			placeholder="e.g. 5" default="1" min="1"/>
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		

@@ -34,7 +34,7 @@
 		
 		
 		if(roomNumbers.value == null || roomNumbers.value == "" || roomNumbers.value == "0")
-			roomNumbers.value = "0";	
+			roomNumbers.value = "1";	
 	});
 </script>
 <script>
@@ -122,7 +122,7 @@ function validateType(form)
 		
 		
 		<br /> <label for="prizeInput">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize" min="0" />
+		<form:input id="prizeInput" type="number" path="prize" min="1" />
 		CHF
 		<form:errors path="prize" cssClass="validationErrorText" />
 		<br />
@@ -131,7 +131,7 @@ function validateType(form)
 		<label for="numberRoomsInput">Rooms (min.):</label>
 		
 		<form:input id="numberRoomsInput" type="number" path="numberOfRooms"
-			placeholder="e.g. 5" default="0" min="0"/>
+			placeholder="e.g. 5" min="1"/>
 		Rooms
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		

@@ -25,29 +25,29 @@ import java.security.Principal;
 import java.util.Date;
 
 /**
- * This controller is responsible for
- * Bids and the instant-buy option for auctions
+ * This controller is responsible for Bids and the instant-buy option for
+ * auctions
  */
 @Controller
 public class AuctionController {
 
-    @Autowired
-    private AdService adService;
+	@Autowired
+	private AdService adService;
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private BidService bidService;
+	@Autowired
+	private BidService bidService;
 
-    @Autowired
-    private AlertService alertService;
+	@Autowired
+	private AlertService alertService;
 
-    @Autowired
-    private AuctionService auctionService;
-    
-    protected GoogleSignupForm googleSignupForm;
-	
+	@Autowired
+	private AuctionService auctionService;
+
+	protected GoogleSignupForm googleSignupForm;
+
 	@ModelAttribute("googleSignupForm")
 	public GoogleSignupForm googleSignupForm() {
 		if (googleSignupForm == null) {
@@ -55,89 +55,95 @@ public class AuctionController {
 		}
 		return googleSignupForm;
 	}
-    
-  
-    
- // TODO must be removed
-    @Autowired
+
+	// TODO must be removed
+	@Autowired
 	private AdController adController;
-    
-    
-    /**
-     * handles the getting of mapping request
-     * 
-     * 
-     */
-    @RequestMapping(value = "/ad/makeBid", method = RequestMethod.GET)
-    public @ResponseBody
-    void getBid(@RequestParam Integer amount, @RequestParam("id") long id,
-                 Principal principal) {
-       
-    }
-    
-    /**
-     * handles a user making a bid
-     * 
-     * 
-     */
-    @RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
-    public @ResponseBody
-    ModelAndView makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
-    		 RedirectAttributes redirectAttributes, Principal principal ) {
-       
-    	
-    	User user = userService.findUserByUsername(principal.getName());
-        Ad ad = adService.getAdById(id);
-        auctionService.sendOverbiddenMessage(ad,user); // do this first to get the latest bid and user before
-        bidService.makeBid(amount,user,ad);
 
-        // triggers all alerts that match the placed ad.
-        //commented out till bugs are fixed
-        //alertService.triggerAlerts(ad);
-        
-       
-        
-        ModelAndView model = new ModelAndView("redirect:/ad?id=" + ad.getId());
-        
-        redirectAttributes.addFlashAttribute("confirmationMessage",
-				"Your bid was made successfully");
-        
-        
-       
-        return model;
-    }
+	/**
+	 * handles the getting of mapping request
+	 * 
+	 * 
+	 */
+	@RequestMapping(value = "/ad/makeBid", method = RequestMethod.GET)
+	public @ResponseBody void getBid(@RequestParam Integer amount, @RequestParam("id") long id, Principal principal) {
 
-    
-    
-    @RequestMapping(value = "/ad/instantBuy", method = RequestMethod.GET)
-    public @ResponseBody
-    void instantBuy(@RequestParam Integer amount, @RequestParam("id") long id,
-                 Principal principal) {
-       
-    }
-    
-    
-    /**
-     * Ends auction
-     * Sends messages to the guy who bought the estate
-     */
-    @RequestMapping(value = "/ad/instantBuy", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView instantBuy(@RequestParam("id") long id, RedirectAttributes redirectAttributes,
-    		Principal principal){
-        
-    	
-    	User user = userService.findUserByUsername(principal.getName());
-        auctionService.instantBuy(id, user);
-        
-       
-        
-        ModelAndView model = new ModelAndView("redirect:/ad?id=" + id);
-        
-        redirectAttributes.addFlashAttribute("confirmationMessage",
-				"You successfully bough the flat. congratulations!");
-        
-        return model;
-    }
-    
-    
+	}
+
+	/**
+	 * handles a user making a bid
+	 * 
+	 * 
+	 */
+	@RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
+	public @ResponseBody ModelAndView makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
+			RedirectAttributes redirectAttributes, Principal principal) {
+
+		User user = userService.findUserByUsername(principal.getName());
+		Ad ad = adService.getAdById(id);
+
+		ModelAndView model = new ModelAndView("redirect:/ad?id=" + ad.getId());
+		if(!ad.getExpired()&&!ad.getinstantBought()){
+			if (ad.getPriceSale() <= amount) {
+	
+				auctionService.sendInstantBuyMessage(id,user);
+				
+				bidService.makeBid(amount, user, ad);
+				adService.setAdInstantBought(ad, true);
+	
+				redirectAttributes.addFlashAttribute("confirmationMessage", "You successfully bough the flat. congratulations");
+	
+			} else {
+	
+				auctionService.sendOverbiddenMessage(ad, user); // do this first to
+																// get the latest
+																// bid and user
+																// before
+				bidService.makeBid(amount, user, ad);
+	
+				redirectAttributes.addFlashAttribute("confirmationMessage", "Your bid was made successfully");
+	
+				// triggers all alerts that match the placed ad.
+				// commented out till bugs are fixed
+				// alertService.triggerAlerts(ad);
+	
+			}
+		}
+		else{
+			
+		}
+
+		return model;
+	}
+
+	/*
+	 * 
+	 * //deprecated
+	 * 
+	 * @RequestMapping(value = "/ad/instantBuy", method = RequestMethod.GET)
+	 * public @ResponseBody void instantBuy(@RequestParam Integer
+	 * amount, @RequestParam("id") long id, Principal principal) {
+	 * 
+	 * }
+	 * 
+	 * //deprecated
+	 * 
+	 * @RequestMapping(value = "/ad/instantBuy", method = RequestMethod.POST)
+	 * public @ResponseBody ModelAndView instantBuy(@RequestParam("id") long id,
+	 * RedirectAttributes redirectAttributes, Principal principal){
+	 * 
+	 * 
+	 * User user = userService.findUserByUsername(principal.getName());
+	 * auctionService.instantBuy(id, user);
+	 * 
+	 * 
+	 * 
+	 * ModelAndView model = new ModelAndView("redirect:/ad?id=" + id);
+	 * 
+	 * redirectAttributes.addFlashAttribute("confirmationMessage",
+	 * "You successfully bough the flat. congratulations!");
+	 * 
+	 * return model; }
+	 */
+
 }

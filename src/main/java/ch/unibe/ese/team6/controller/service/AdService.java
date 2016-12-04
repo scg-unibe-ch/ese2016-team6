@@ -310,6 +310,14 @@ public class AdService {
         ad.setCurrentBid(amount);
         adDao.save(ad);
     }
+    
+    
+    @Transactional
+    public void setAdInstantBought(Ad ad, boolean bought){
+    	ad.setinstantBought(bought);
+    	ad.setExpired(bought);
+    	adDao.save(ad);
+    }
 	
 	
 	/**

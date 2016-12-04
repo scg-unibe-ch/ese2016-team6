@@ -384,12 +384,15 @@
 							<h3><label>This property is for sale ! Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
 							
 							
-							<form action="/ad/instantBuy" method="post">
-								<form>
+							<form:form action="/ad/makeBid" method="post">
+								
 									<input type="hidden" name="id" value="${shownAd.id}">
+									<input type="hidden" name="amount" value="${shownAd.priceSale}">
+									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
-								</form>
-							</form>
+									</c:if>
+								
+							</form:form>
 						</c:if>
 						
 						<!-- only shows this part if property for auction -->
@@ -402,15 +405,15 @@
 								
 								This property is for sale through auction ! 
 								
-								<form action="/ad/instantBuy" method="post">
-								<form>
+								<form:form action="/ad/makeBid" method="post">
+								
 									<input type="hidden" name="id" value="${shownAd.id}">
-									
+									<input type="hidden" name="amount" value="${shownAd.priceSale}">
 									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
 									</c:if>
-								</form>
-								</form>
+								
+								</form:form>
 								
 								
 								</br> 
@@ -428,15 +431,15 @@
 									
 									
 										<c:if test="${loggedInUserEmail != shownAd.user.username }">
-											<form action="/ad/makeBid" method="post">
+											<form:form action="/ad/makeBid" method="post">
 								
-												<form><label for="field-currentBid">Make a higher bid :</label>
+												<label for="field-currentBid">Make a higher bid :</label>
 												<input type="hidden" name="id" value="${shownAd.id}">
 												<input class="bidInput" type="number" name ="amount" id="bidAmount"/>
 												<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
 												</form>
 								
-											</form>
+											</form:form>
 										</c:if>
 										
 									
@@ -444,12 +447,12 @@
 									
 											<c:if test="${latestBid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												
+												<h3>
 												
 												<table>
 													<tr>
 														<td>
-															current highest bidder : ${latestBid.user.username}
+															Current highest bidder : ${latestBid.user.username}
 														</td>
 														
 														<td>
@@ -467,7 +470,7 @@
 													</tr>	
 													<tr>
 														<td>
-															with a bid of : ${latestBid.amount} CHF
+															With a bid of : ${latestBid.amount} CHF
 														</td>
 														<td>
 														This offer was made: 
@@ -475,13 +478,14 @@
 														</td>
 													</tr>
 												</table>
+												</h3>
 											</div>
 											
 											</c:if>
 											
 											<c:if test="${latestBid.user == null}">
 											<h3>
-												noone has made a bid yet.
+												Noone has made a bid yet.
 											</h3>
 											</c:if>
 										</div>
@@ -494,7 +498,7 @@
 											</c:otherwise>
 									</c:choose>
 								</c:when>
-								<c:when test="${shownAd.expired=='true'}">
+								<c:when test="${shownAd.expired=='true'&&shownAd.instantBought=='false'}">
 									<h3>
 									This ads auction expired on ${shownAd.expireDate}
 									</h3>
@@ -502,7 +506,49 @@
 								
 								<c:when test="${shownAd.instantBought=='true'}">
 									<h3>
-									This flat was instant bought
+									This flat has been instant bought...
+									<br>
+									<br>
+									<c:if test="${latestBid.user != null}">
+											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
+												
+												
+												<table>
+													<tr>
+														<td>
+															...by the user : ${latestBid.user.username}
+														</td>
+														
+														<td>
+															<c:choose>
+																<c:when test="${latestBid.user.picture.filePath != null}">
+																	<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
+																</c:when>
+																<c:otherwise>
+																	<img src="/img/avatar.png">
+																</c:otherwise>
+															</c:choose>
+														</td>					
+														
+														
+													</tr>	
+													<tr>
+														<td>
+															For a sum of : ${latestBid.amount} CHF
+														</td>
+														<td>
+														This offer was made: 
+														<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
+														</td>
+													</tr>
+												</table>
+											</div>
+											
+										</c:if>
+									
+									
+									
+									
 									</h3>
 								</c:when>
 					
