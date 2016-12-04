@@ -562,91 +562,8 @@
 
 
 		<td style="width:50%;">
-			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
-				<tr>
-					<td><h2>Advertiser</h2><br /></td>
-				</tr>
-
-				<tr>
-					<td><c:choose>
-							<c:when test="${shownAd.user.picture.filePath != null}">
-								<img src="${shownAd.user.picture.filePath}">
-							</c:when>
-							<c:otherwise>
-								<img src="/img/avatar.png">
-							</c:otherwise>
-						</c:choose></td>
-					
-					<td>${shownAd.user.username}</td>
-					
-					<td id="advertiserEmail">
-					<c:choose>
-						<c:when test="${loggedIn}">
-							<a href="/user?id=${shownAd.user.id}"><button type="button">Visit profile</button></a>
-						</c:when>
-						<c:otherwise>
-							<a href="/login"><button class="thinInactiveButton" type="button">Login to visit profile</button></a>
-						</c:otherwise>
-					</c:choose>
-
-					<td>
-						<form>
-							<c:choose>
-								<c:when test="${loggedIn}">
-									<c:if test="${loggedInUserEmail != shownAd.user.username }">
-										<button id="newMsg" type="button">Contact Advertiser</button>
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<a href="/login"><button class="thinInactiveButton" type="button">Login to contact advertiser</button></a>
-								</c:otherwise>
-							</c:choose>
-						</form>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<div class="adDescDiv">
-				<h2>Room Description</h2>
-				<p>${shownAd.roomDescription}</p>
-			</div>
-		</td>
-
-		<td>
-			<div class="adDescDiv">
-				<h2>Location details</h2>
-				<table>
-					<tr>
-						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
-					</tr>
-					<tr>
-						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
-					</tr>
-					<tr>
-						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
-					</tr>
-					<tr>
-						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
-					</tr>
-				</table>
-			</div>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<div class="adDescDiv">
-				<h2>Preferences</h2>
-				<p>${shownAd.preferences}</p>
-			</div>
-		</td>
-
-		<td>
-			<div id="visitList" class="adDescDiv">
+		
+		<div id="visitList" class="adDescDiv">
 				<h2>Visiting times</h2>
 				<table>
 					<c:forEach items="${visits }" var="visit">
@@ -678,6 +595,99 @@
 					</c:forEach>
 				</table>
 			</div>
+			
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<div class="adDescDiv">
+				<h2>Room Description</h2>
+				<p>${shownAd.roomDescription}</p>
+			</div>
+		</td>
+
+		<td>
+		
+			<div class="adDescDiv">
+				<h2>Location details</h2>
+				<table>
+					<tr>
+						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
+					</tr>
+					<tr>
+						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
+					</tr>
+				</table>
+			</div>
+			
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<div class="adDescDiv">
+				<h2>Preferences</h2>
+				<p>${shownAd.preferences}</p>
+			</div>
+		</td>
+
+		<td>
+		
+			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
+				<tr>
+					<td><h2>Advertiser</h2><br /></td>
+				</tr>
+
+				<tr>
+					<td><c:choose>
+							<c:when test="${shownAd.user.picture.filePath != null}">
+								<img src="${shownAd.user.picture.filePath}">
+							</c:when>
+							<c:otherwise>
+								<img src="/img/avatar.png">
+							</c:otherwise>
+						</c:choose></td>
+					
+					<td>${shownAd.user.username}</td>
+					
+					<td id="advertiserEmail">
+					<c:choose>
+						<c:when test="${loggedIn}">
+							<a href="/user?id=${shownAd.user.id}"><button type="button">Visit profile</button></a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login"><button class="thinInactiveButton" type="button">Login to visit profile</button></a>
+						</c:otherwise>
+					</c:choose>
+					</td>
+					<td>
+						<form>
+							<c:choose>
+								<c:when test="${loggedIn}">
+									<c:if test="${loggedInUserEmail != shownAd.user.username }">
+										<button id="newMsg" type="button">Contact Advertiser</button>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<a href="/login"><button class="thinInactiveButton" type="button">Login to contact advertiser</button></a>
+								</c:otherwise>
+							</c:choose>
+						</form>
+					</td>
+				</tr>
+			</table>
+		
+		
+		
+			
+			
 		</td>
 	</tr>
 
