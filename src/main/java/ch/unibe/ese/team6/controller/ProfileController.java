@@ -108,6 +108,7 @@ public class ProfileController {
 		ModelAndView model = new ModelAndView("index");
 		if(!googleSignupService.doesUserWithUsernameExist(googleForm.getEmail())){
 			googleSignupService.saveFrom(googleForm);
+			
 		}
 		googleLoginService.loginFrom(googleForm);
 		model.addObject("searchForm", new SearchForm());
@@ -132,18 +133,17 @@ public class ProfileController {
 			
 			if(!facebookSignupService.doesUserWithUsernameExist(email)) {
 				FacebookLoginForm fbLoginForm = new FacebookLoginForm();
+	
+				String name = email.substring(0, email.indexOf("@"));
 				fbLoginForm.setEmail(email);
-				fbLoginForm.setFirstName(email);
-				fbLoginForm.setLastName(email);
+				fbLoginForm.setFirstName(name);
+				fbLoginForm.setLastName(name);
 				String password = facebookSignupService.saveFrom(fbLoginForm);
 				
 				Authentication request = new UsernamePasswordAuthenticationToken(email, password);
 				Authentication result = authenticationManager.authenticate(request);
 				SecurityContextHolder.getContext().setAuthentication(result);
-				
-				ModelAndView model = new ModelAndView("index");		
-				model.addObject("confirmationMessage", "Signup complete and we have sent you an Email!");
-			}
+				}
 		} catch (IOException e) {
 			ModelAndView model = new ModelAndView("index");
 			model.addObject("message",
@@ -151,7 +151,7 @@ public class ProfileController {
 			e.printStackTrace();
 		}
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("searchForm", new SearchForm());
+		model.addObject("confirmationMessage", "Signup complete and we have sent you an Email!");
 		return model;
 	}
 	
