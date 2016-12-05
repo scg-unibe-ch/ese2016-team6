@@ -93,6 +93,12 @@ public class MessageController {
 		return model;
 	}
 	
+	/** Deletes the alert with the given id */
+	@RequestMapping(value = "/profile/messages/deleteMessage", method = RequestMethod.GET)
+	public @ResponseBody void deleteMessage(@RequestParam("id") long id) {
+		messageService.deleteMessage(id);
+	}
+	
 	/**
 	 * Sets the MessageState of a given Message to "READ".
 	 */

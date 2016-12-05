@@ -111,7 +111,7 @@ public class ProfileController {
 			
 		}
 		googleLoginService.loginFrom(googleForm);
-		model.addObject("searchForm", new SearchForm());
+		model.addObject("confirmationMessage", "Signup complete and we have sent you an Email!");
 		return model;
 	}
 	

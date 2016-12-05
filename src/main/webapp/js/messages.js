@@ -12,6 +12,11 @@ function loadMessages(data) {
 	});
 }
 
+function deleteMessage(button) {
+	var id = $(button).attr("data-id");
+	$.get("/profile/messages/deleteMessage?id=" + id);
+}
+	
 function prepareRows() {
 	var rows = $("#messageList table tr:gt(0)");
 	$(rows).hover(function() {
@@ -30,6 +35,7 @@ function prepareRows() {
 		$.get("/profile/readMessage?id=" + id, function (data) {
 			$.get("/profile/messages/getMessage?id=" + id, function(data) {
 				var result = '<h2>' + data.subject + '</h2>';
+				result += '<button id="newMsg" type="button" style="float: right;">Reply</button>';
 				result += '<h3><b>To: </b>' + data.recipient.email + '</h3>';
 				result += '<h3><b>From: </b>' + data.sender.email + '</h3>';
 				result += '<h3><b>Date sent: </b>' + data.dateSent + '</h3>';

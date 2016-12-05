@@ -301,6 +301,13 @@ public class Ad {
 	public void setPreferences(String preferences) {
 		this.preferences = preferences;
 	}
+	
+	public boolean hasPreferences() {
+		if(preferences.isEmpty()){
+			return false;
+		}
+		return true;
+	}
 
 
 	/*______ROOM CONTENT______*/
@@ -494,6 +501,11 @@ public class Ad {
 		this.proximityToNightlife = proximityToNightlife;
 	}
 	
+	public boolean hasLocationDetails() {
+		if(proximityToPublicTransport==0 && proximityToSchool==0 && proximityToSupermarket==0 && proximityToNightlife==0)
+			return false;
+		return true;
+	}
 	
 	/*___________USER__________________*/
 	
@@ -551,6 +563,13 @@ public class Ad {
 
 	public void setPictures(List<AdPicture> pictures) {
 		this.pictures = pictures;
+	}
+	
+	public boolean hasPictures() {
+		if(pictures.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	@ManyToOne(optional = false)
@@ -612,6 +631,11 @@ public class Ad {
 		this.visits = visits;
 	}
 	
+	public boolean hasVisits() {
+		if(visits.isEmpty())
+			return false;
+		return true;
+	}
 	
 	/*_______ADDITIONAL FUNCTIONS________*/
 	

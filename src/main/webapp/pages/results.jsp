@@ -126,7 +126,7 @@ function sort_div_attribute() {
 <hr />
 
 
-<table style="width:100%;
+<table style="width:50%;
 	table-layout: fixed;">
 <tr>
 <td valign="top" style="width:400px; min-width:400px;">
@@ -156,7 +156,7 @@ function sort_div_attribute() {
 		
 		<form>
 			<c:choose>
-			<c:when test="${currentSearch.getValueOfSearch()}">
+			<c:when test="${forRent}=='checked'">
 				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
 				<input type="radio" id="type-sale" name="RentSale"> For Sale				
 			</c:when>
@@ -196,7 +196,7 @@ function sort_div_attribute() {
 	
 		<hr class="slim">		
 		
-		<table style="width: 80%">
+		<table style="width: 60%">
 			<tr>
 				<td><label for="earliestMoveInDate">Earliest move-in date</label></td>
 				<td><label for="earliestMoveOutDate">Earliest move-out date (optional)</label></td>
@@ -265,11 +265,11 @@ function sort_div_attribute() {
 </div>
 </td>
 
-<td>
+<td valign="top">
 
 <c:choose>
 	<c:when test="${empty results}">
-		<p>No results found!
+		<p style="float:left; width:100%">No results found!
 	</c:when>
 	<c:otherwise>
 		<div id="resultsDiv" class="resultsDiv" style="float:left; width:100%;">			

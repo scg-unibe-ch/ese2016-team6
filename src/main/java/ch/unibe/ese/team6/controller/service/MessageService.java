@@ -179,4 +179,8 @@ public class MessageService {
 		}
 		return i;
 	}
+
+	public void deleteMessage(long id) {
+		messageDao.delete(id);	
+	}
 }
