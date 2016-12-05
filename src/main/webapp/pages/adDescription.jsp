@@ -567,8 +567,15 @@
 							<td><c:choose>
 									<c:when test="${loggedIn}">
 										<c:if test="${loggedInUserEmail != shownAd.user.username}">
-										
-											<button class="thinButton" type="button" data-id="${visit.id}">Send enquiry to advertiser</button>
+											
+											<c:choose>
+											<c:when test="${VisitService.hasUserSentEnquiry(loggedInUserEmail, visit)}">
+												<button class="thinInactiveButton" type="button" data-id="${visit.id}">Enquiry sent</button>
+											</c:when>
+											<c:otherwise>
+												<button class="thinButton" type="button" data-id="${visit.id}">Send enquiry to advertiser</button>
+											</c:otherwise>
+											</c:choose>
 							
 										</c:if>
 									</c:when>

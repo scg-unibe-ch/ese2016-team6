@@ -1,6 +1,7 @@
 package ch.unibe.ese.team6.controller.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.User;
+import ch.unibe.ese.team6.model.dao.UserDao;
 import ch.unibe.ese.team6.model.Visit;
 import ch.unibe.ese.team6.model.VisitEnquiry;
 import ch.unibe.ese.team6.model.VisitEnquiryState;
@@ -21,6 +23,9 @@ public class VisitService {
 
 	@Autowired
 	private VisitDao visitDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Autowired
 	VisitEnquiryDao visitEnquiryDao;
@@ -55,6 +60,28 @@ public class VisitService {
 				(usersVisits).add(enquiry.getVisit());
 		}
 		return usersVisits;
+	}
+	
+	/** Returns true if the user has sent an enquiry for the visit, false otherwise */
+	public boolean hasUserSentEnquiry(User user, Visit visit) {		
+		Iterable<VisitEnquiry> usersEnquiries = visitEnquiryDao.findBySender(user);
+		ArrayList<Visit> visits = new ArrayList<Visit>();
+		for (VisitEnquiry enquiry : usersEnquiries) {
+				visits.add(enquiry.getVisit());
+		}
+		
+		Iterator<Visit> it = visits.iterator();
+		while (it.hasNext()) {
+			if (visit.getId() == it.next().getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean hasUserSentEnquiry(String username, Visit visit) {
+		User user = userDao.findByUsername(username);
+		return hasUserSentEnquiry(user, visit);
 	}
 
 	/** Returns all visitors for the visit with the given id. */
