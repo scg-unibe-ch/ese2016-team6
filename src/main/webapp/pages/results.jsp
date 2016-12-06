@@ -40,6 +40,10 @@ function validateType(form)
 </script>
 -->
 
+<!-- imports the new login window found in template/NewLoginPop.jsp -->
+<!-- This must be in the body of each page in order for the login screen to work -->
+<c:import url="template/NewLoginPop.jsp" />
+
 <script>
 /*
  * This script takes all the resultAd divs and sorts them by a parameter specified by the user.
