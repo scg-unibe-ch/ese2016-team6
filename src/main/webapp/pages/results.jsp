@@ -321,7 +321,12 @@ function sort_div_attribute() {
 						
 							<td>
 								<div class="resultRight">
-									<h2>CHF ${ad.prizePerMonth }</h2>
+									
+									
+									<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale } <br> sale price</h2></c:if>
+									<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid } <br> current bid</h2></c:if>
+									<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid</h2></c:if>
+									
 									<br /> <br />
 									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 										type="date" pattern="dd.MM.yyyy" />
