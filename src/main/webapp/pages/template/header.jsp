@@ -99,8 +99,12 @@
 						<% 
 							out.print("<img src='" + filePath + "' />");
 
-							out.print("<p class='text'>" + realUser.getFirstName() + "<br />"
-								+ realUser.getLastName() + "</p>"); 
+							if(realUser.getFirstName().equals(realUser.getLastName())) {
+								out.print("<p class='text'>" + realUser.getFirstName() + "</p>"); 
+							} else {
+								out.print("<p class='text'>" + realUser.getFirstName() + "<br />"
+									+ realUser.getLastName() + "</p>");
+							}
 						%>
 						</a>
 					

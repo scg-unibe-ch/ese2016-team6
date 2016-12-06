@@ -18,6 +18,7 @@
 
 <script src="/js/image_slider.js"></script>
 <script src="/js/adDescription.js"></script>
+<script src="/js/messages.js"></script>
 
 <script>
 	var shownAdvertisementID = "${shownAd.id}";
@@ -108,7 +109,7 @@
 			if($("#msgSubject").val() != "" && $("#msgTextarea").val() != ""){
 				var subject = $("#msgSubject").val();
 				var text = $("#msgTextarea").val();
-				var recipientEmail = "${shownAd.user.username}";
+				var recipientEmail = "${shownAd.user.email}";
 				$.post("profile/messages/sendMessage", {subject : subject, text: text, recipientEmail : recipientEmail}, function(){
 					$("#msgDiv").css("display", "none");
 					$("#msgDiv").css("opacity", "0");
@@ -179,12 +180,21 @@
                 }
 
 
-            }
+            
         }
 
         var timer = setInterval(showTimeLeft, 1000);
     </script>
+ <%-- <script> function show() {
+	 if(${shownAd.pictures}.isEmpty()) {
+		 $("#image-slider").parent().hide();
+	 }
+	 if(${shownAd.preferences}.isEmpty()) {
+		 $("#preferences").parent().hide();
+	 }
+ }
 
+</script>--%>
 
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->
@@ -235,16 +245,16 @@
 
 <label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a7bbdbe7fd5c1f45a355d748c9d60f14b6bbcef1
 <hr style="margin:0px" />
 
 <table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">
 	<tr>
-		<section style="height:100%;width:100%">
-		<td style="width:50%">
-			
-				
+				<td style="width:50%">
 					<table id="adDescTable" class="adDescDiv">
 						<tr>
 							<td><h2>Status : </h2></td>
@@ -315,31 +325,10 @@
 							<td><h2>To :</h2></td>
 							<td>${formattedMoveOutDate}</td>
 						</tr>
-
-						
-						<!--
-						removed because room/studio difference no longer important
-						<c:if test="${shownAd.studio}">
-						<tr>
-							<td><h2>Number of Rooms</h2></td>
-							<td>${shownAd.numberOfRooms}</td>
-							<c:if test="${shownAd.numberOfRooms>0}">
-								<td>${shownAd.numberOfRooms}</td>
-							</c:if>
-							
-							<c:if test="${shownAd.numberOfRooms==0}">
-								<td>unspecified</td>
-							</c:if>
-							
-						</tr>
-						</c:if>
-						-->
-						
-					</table>
-				
-			
+					
+					</table>	
 		</td>
-		</section>
+		<c:if test="${shownAd.hasPictures()}">
 		<td style="width:50%;">
 			<div id="image-slider" class="adDescDiv">
 				<div id="left-arrow">
@@ -355,9 +344,10 @@
 				</div>
 			</div>
 		</td>
-	
+		</c:if>
 	</tr>
 	<tr>
+	
 		<td style="width:50%;">	
 			<div id="bidList" class="adDescDiv">
 				
@@ -433,7 +423,6 @@
 												<input type="hidden" name="id" value="${shownAd.id}">
 												<input class="bidInput" type="number" name ="amount" id="bidAmount"/>
 												<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
-												</form>
 								
 											</form:form>
 										</c:if>
@@ -555,8 +544,17 @@
 	
 </div>
 </td>
+</tr>
+<tr>
+		
+		<td>
+			<div class="adDescDiv">
+				<h2>Room Description</h2>
+				<p>${shownAd.roomDescription}</p>
+			</div>
+		</td>
 
-
+	<c:if test="${shownAd.hasVisits()}">
 		<td style="width:50%;">
 		
 		<div id="visitList" class="adDescDiv">
@@ -574,8 +572,15 @@
 							<td><c:choose>
 									<c:when test="${loggedIn}">
 										<c:if test="${loggedInUserEmail != shownAd.user.username}">
-										
-											<button class="thinButton" type="button" data-id="${visit.id}">Send enquiry to advertiser</button>
+											
+											<c:choose>
+											<c:when test="${VisitService.hasUserSentEnquiry(loggedInUserEmail, visit)}">
+												<button class="thinInactiveButton" type="button" data-id="${visit.id}">Enquiry sent</button>
+											</c:when>
+											<c:otherwise>
+												<button class="thinButton" type="button" data-id="${visit.id}">Send enquiry to advertiser</button>
+											</c:otherwise>
+											</c:choose>
 							
 										</c:if>
 									</c:when>
@@ -591,48 +596,51 @@
 					</c:forEach>
 				</table>
 			</div>
-			
 		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<div class="adDescDiv">
-				<h2>Room Description</h2>
-				<p>${shownAd.roomDescription}</p>
-			</div>
-		</td>
-
-		<td>
+	</c:if>
 		
+
+		<td>
+		<c:if test="${shownAd.hasLocationDetails()}">
 			<div class="adDescDiv">
 				<h2>Location details</h2>
 				<table>
+					<c:if test="$('shownAd.proximityToPublicTransport'==0)">
 					<tr>
 						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
 					</tr>
+					</c:if>
+					<c:if test="$('shownAd.proximityToSchool'==0)">
 					<tr>
 						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
 					</tr>
+					</c:if>
+					<c:if test="$('shownAd.proximityToSupermarket'==0)">
 					<tr>
 						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
 					</tr>
+					</c:if>
+					<c:if test="$('shownAd.proximityToNightlife'==0)">
 					<tr>
 						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
 					</tr>
+					</c:if>
 				</table>
 			</div>
-			
+			</c:if>
 		</td>
 	</tr>
 
+
 	<tr>
+	<c:if test="${shownAd.hasPreferences()}">
 		<td>
 			<div class="adDescDiv">
 				<h2>Preferences</h2>
 				<p>${shownAd.preferences}</p>
 			</div>
 		</td>
+	</c:if>
 
 		<td>
 		

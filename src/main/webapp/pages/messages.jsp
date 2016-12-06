@@ -18,18 +18,57 @@
 <script src="/js/messages.js"></script>
 
 <script>
-	$(document).ready(unreadMessages("messages"));
+function deleteMessage(button) {
+	var id = $(button).attr("data-id");
+	$.get("/profile/messages/deleteMessage?id=" + id);
+	};
+</script>
+<script>
+	$(document).ready(function() {
+		unreadMessages("messages");
+		
+		$("#newMsg").click(function(){
+			$("#content").children().animate({opacity: 0.4}, 300, function(){
+				$("#msgDiv").css("display", "block");
+				$("#msgDiv").css("opacity", "1");
+			});
+		});
+		
+		$("#messageCancel").click(function(){
+			$("#msgDiv").css("display", "none");
+			$("#msgDiv").css("opacity", "0");
+			$("#content").children().animate({opacity: 1}, 300);
+		});
+		
+		$("#messageSend").click(function (){
+			if($("#msgSubject").val() != "" && $("#msgTextarea").val() != ""){
+				var subject = $("#msgSubject").val();
+				var text = $("#msgTextarea").val();
+				var recipientEmail = "${messages[0].recipient.email}";
+				$.post("profile/messages/sendMessage", {subject : subject, text: text, recipientEmail : recipientEmail}, function(){
+					$("#msgDiv").css("display", "none");
+					$("#msgDiv").css("opacity", "0");
+					$("#msgSubject").val("");
+					$("#msgTextarea").val("");
+					$("#content").children().animate({opacity: 1}, 300);
+				})
+			}
+		});
+		$("#sent").click(function() {
+			$.post("/profile/message/sent", function(data) {
+				loadMessages(data);
+				prepareRows();
+			}, 'json');
+		});
+	});
 </script>
 
 <h1>Messages</h1>
 <hr />
 
-
 <table>
 	<tr>
-		
-		<td valign="top" style="float:left;max-width:500px;">
-		
+		<td valign="top" style="float:left;max-width:600px;">
 		
 		<div style="text-align:center;">
 			<div id="folders">
@@ -37,8 +76,9 @@
 				<h2 id="newMessage">New</h2>
 				<h2 id="sent">Sent</h2>
 			</div>
+			
+			</div>
 
-		
 			<div id="messageList" >
 				<table class="styledTable" style="width:100%;">
 					<tr>
@@ -48,6 +88,8 @@
 						<th>Recipient</th>
 						
 						<th>Date sent</th>
+						
+						<th></th>
 					</tr>
 					<c:forEach items="${messages }" var="message">
 						<fmt:formatDate value="${message.dateSent}"
@@ -58,26 +100,31 @@
 							<td>${message.subject }</td>
 							<td>${message.sender.email}</td>
 							
-							<td>${message.recipient.email }</td>
+							<td>${message.recipient.email}</td>
 							
 							<td>${singleFormattedDateSent}</td>
+							
+							<td><button style="background-color:#991f00;color:white" class="deleteButton" data-id="${message.id}" onClick="deleteMessage(this)">Delete</button></td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 		</td>
-	
+		
+		<td style="width:15px;">
+		<div style="width:15px;"></div>
 	
 		<td valign="top">
 			<div id="messageList">
-				
-				<div id="messageDetail" style="width: 100%;">
-					<h2>${messages[0].subject }</h2>
+				<div id="messageDetail" style="width: 650px;">
+					<h2>${messages[0].subject}</h2>
+					
+					<button id="newMsg" type="button" style="float: right;">Reply</button>
 					<h3>
-						<b>To: </b>${messages[0].recipient.email }
+						<b>To: </b>${messages[0].recipient.email}
 					</h3>
 					<h3>
-						<b>From: </b> ${messages[0].sender.email }
+						<b>From: </b> ${messages[0].sender.email}
 					</h3>
 					<h3>
 						<b>Date sent:</b> ${formattedDateSent}
@@ -87,12 +134,26 @@
 				</div>
 			</div>
 		</td>
-	
-	
 
-	
 	</tr>
 </table>
+<div id="msgDiv">
+<form class="msgForm">
+	<h2>Reply</h2>
+	<br>
+	<br>
+	<label>Subject: <span>*</span></label>
+	<input  class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
+	<br><br>
+	<label>Message: </label>
+	<textarea id="msgTextarea" placeholder="Message" ></textarea>
+	<br/>
+	
+	<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
+	<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
+	
+	</form>
+</div>
 		
 <c:import url="getMessageForm.jsp" />
 

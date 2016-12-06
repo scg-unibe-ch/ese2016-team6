@@ -40,6 +40,10 @@ function validateType(form)
 </script>
 -->
 
+<!-- imports the new login window found in template/NewLoginPop.jsp -->
+<!-- This must be in the body of each page in order for the login screen to work -->
+<c:import url="template/NewLoginPop.jsp" />
+
 <script>
 /*
  * This script takes all the resultAd divs and sorts them by a parameter specified by the user.
@@ -126,7 +130,7 @@ function sort_div_attribute() {
 <hr />
 
 
-<table style="width:100%;
+<table style="width:50%;
 	table-layout: fixed;">
 <tr>
 <td valign="top" style="width:400px; min-width:400px;">
@@ -156,13 +160,13 @@ function sort_div_attribute() {
 		
 		<form>
 			<c:choose>
-			<c:when test="${currentSearch.getValueOfSearch()}">
+			<c:when test="${forRent}=='checked'">
 				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
-				<input type="radio" id="type-sale" name="RentSale"> For Sale				
+				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction				
 			</c:when>
 			<c:otherwise>
 				<input type="radio" id="type-rent" name="RentSale"> For Rent
-				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale			
+				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale/Auction			
 			</c:otherwise>
 			</c:choose>
 	 		</form>
@@ -196,7 +200,7 @@ function sort_div_attribute() {
 	
 		<hr class="slim">		
 		
-		<table style="width: 80%">
+		<table style="width: 60%">
 			<tr>
 				<td><label for="earliestMoveInDate">Earliest move-in date</label></td>
 				<td><label for="earliestMoveOutDate">Earliest move-out date (optional)</label></td>
@@ -265,11 +269,11 @@ function sort_div_attribute() {
 </div>
 </td>
 
-<td>
+<td valign="top">
 
 <c:choose>
 	<c:when test="${empty results}">
-		<p>No results found!
+		<p style="float:left; width:100%">No results found!
 	</c:when>
 	<c:otherwise>
 		<div id="resultsDiv" class="resultsDiv" style="float:left; width:100%;">			
@@ -307,7 +311,7 @@ function sort_div_attribute() {
 									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 									<p>
 										<i>
-											flat
+											Flat
 											<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
 											<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
 										</i>
@@ -317,7 +321,12 @@ function sort_div_attribute() {
 						
 							<td>
 								<div class="resultRight">
-									<h2>CHF ${ad.prizePerMonth }</h2>
+									
+									
+									<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale } <br> sale price </h2></c:if>
+									<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid } <br> current bid </h2></c:if>
+									<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid </h2></c:if>
+									
 									<br /> <br />
 									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 										type="date" pattern="dd.MM.yyyy" />

@@ -428,7 +428,7 @@ public class AdService {
 		}
 		else if(searchForm.getForSale()){
 			
-			results = adDao.findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
+			results = adDao.findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqual(
 					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
 			
 		}

@@ -39,11 +39,8 @@
 </script>
 <script>
 $(document).ready(function() {
-	
-	
-	document.getElementById('forRent').checked = true;
-	document.getElementById('forSale').checked = false;
-	
+	document.getElementById('forSale').checked = true;
+	document.getElementById('forRent').checked = false;
 	
 	$("#type-sale").on("click", function(){
 		document.getElementById('forSale').checked = true;
@@ -55,6 +52,10 @@ $(document).ready(function() {
 		document.getElementById('forSale').checked = false;
 	});
 });	
+</script>
+<script> function wasSale() {
+	return document.getElementById('forSale').checked;
+}
 </script>
 
 <!-- 
@@ -85,6 +86,9 @@ function validateType(form)
 }
 </script>
 -->
+<!-- imports the new login window found in template/NewLoginPop.jsp -->
+<!-- This must be in the body of each page in order for the login screen to work -->
+<c:import url="template/NewLoginPop.jsp" />
 
 <h1>Search for an ad</h1>
 <hr />
@@ -93,17 +97,18 @@ function validateType(form)
 	id="searchForm" autocomplete="off">
 
 	<fieldset>
-		<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
+			<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
 			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
 			<form>
 			<c:choose>
-			<c:when test="${currentSearch.getValueOfSearch()}">
-				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
-				<input type="radio" id="type-sale" name="RentSale"> For Sale				
+			<%-- that needs to be fixed --%>
+			<c:when test="document.getElementById('forSale').checked">
+				<input type="radio" id="type-rent" name="RentSale"> For Rent
+				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale/Auction				
 			</c:when>
 			<c:otherwise>
-				<input type="radio" id="type-rent" name="RentSale"> For Rent
-				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale			
+				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
+				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction			
 			</c:otherwise>
 			</c:choose>
 	 		</form>

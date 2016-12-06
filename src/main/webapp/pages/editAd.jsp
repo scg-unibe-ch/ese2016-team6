@@ -30,10 +30,13 @@
 			}
 		},10);
 
+		
+
     	$("#type-rent").on("click", function(){
-    		document.getElementById('type-rent').checked= true;
-			document.getElementById('type-sale').checked= false;
-			document.getElementById('type-auction').checked= false;
+    		
+    		
+			document.getElementById('type-sale').checked="";
+			document.getElementById('type-auction').checked="";
         	document.getElementById('field-priceRent').style.visibility = "visible";
         	document.getElementById('field-priceSale').style.visibility = "hidden";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -48,14 +51,27 @@
 			document.getElementById('incLabel').style.visibility = "hidden";
 			document.getElementById('deadLabel').style.visibility = "hidden";
 			
+			
 			document.getElementById('ActualDeal').value = "forRent";
+			
+			document.getElementById('preferences').style.visibility = "visible";
+			document.getElementById('preference').style.visibility = "visible";
+			
+			$("#field-priceRent").parent().show();
+			$("#field-priceSale").parent().hide();
+			$("#field-currentBid").parent().hide();
+			$("#field-increment").parent().hide();
+			$("#field-deadlineDate").parent().hide();
+			$("#field-deadlineHour").parent().hide();
+			$("#field-deadlineMinute").parent().hide();
+			$("#preferences").parent().show();
+			$("#preference").parent().show();
 			
     	});
 
 		$("#type-sale").on("click", function(){
-			document.getElementById('type-rent').checked= false;
-			document.getElementById('type-sale').checked= true;
-			document.getElementById('type-auction').checked= false;
+			document.getElementById('type-rent').checked="";
+			document.getElementById('type-auction').checked="";
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -63,7 +79,8 @@
 			document.getElementById('field-deadlineDate').style.visibility = "hidden";
 			document.getElementById('field-deadlineHour').style.visibility = "hidden";
 			document.getElementById('field-deadlineMinute').style.visibility = "hidden";
-			
+			document.getElementById('preferences').style.visibility = "hidden";
+			document.getElementById('preference').style.visibility = "hidden";
 			
 			document.getElementById('rentLabel').style.visibility = "hidden";
 			document.getElementById('saleLabel').style.visibility = "visible";
@@ -73,12 +90,23 @@
 			
 			document.getElementById('ActualSale').value = "direct";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+			$("#field-priceSale").parent().show();
+			$("#field-priceRent").parent().hide();
+			$("#field-currentBid").parent().hide();
+			$("#field-increment").parent().hide();
+			$("#field-deadlineDate").parent().hide();
+			$("#field-deadlineHour").parent().hide();
+			$("#field-deadlineMinute").parent().hide();
+			$("#preferences").parent().hide();
+			$("#preference").parent().hide();
+
    		});
 
     	$("#type-auction").on("click", function(){
-    		document.getElementById('type-rent').checked= false;
-			document.getElementById('type-sale').checked= false;
-			document.getElementById('type-auction').checked= true;
+    		document.getElementById('type-rent').checked="";
+			document.getElementById('type-sale').checked="";
+			
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "visible";
@@ -86,7 +114,9 @@
 			document.getElementById('field-deadlineDate').style.visibility = "visible";
 			document.getElementById('field-deadlineHour').style.visibility = "visible";
 			document.getElementById('field-deadlineMinute').style.visibility = "visible";
-			
+			document.getElementById('preferences').style.visibility = "hidden";
+			document.getElementById('preference').style.visibility = "hidden";
+
 			document.getElementById('rentLabel').style.visibility = "hidden";
 			document.getElementById('saleLabel').style.visibility = "visible";
 			document.getElementById('bidLabel').style.visibility = "visible";
@@ -95,6 +125,16 @@
 			
 			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
 			document.getElementById('ActualDeal').value = "forSale";
+			
+			$("#field-priceRent").parent().hide();
+			$("#field-priceSale").parent().show();
+			$("#field-currentBid").parent().show();
+			$("#field-increment").parent().show();
+			$("#field-deadlineDate").parent().show();
+			$("#field-deadlineHour").parent().show();
+			$("#field-deadlineMinute").parent().show();
+			$("#preferences").parent().hide();
+			$("#preference").parent().hide();
     	});
 
 		$("#field-city").autocomplete({
@@ -538,32 +578,6 @@
 
 	</td>
 	
-	
-	
-	<td>
-	
-	<fieldset class="editFieldsetTwo" >
-			<legend>Change preferences</legend>
-		<div>
-		<form:textarea path="preferences" rows="20" cols="70" value="${ad.preferences}" ></form:textarea>
-		
-		</div>
-	</fieldset>
-	</td>
-	
-	</tr>
-	
-	
-	</table>
-	
-	<!-- third row -->
-	
-	
-	<table class="editTableThree">
-	
-	<tr>
-	
-	
 	<td>
 	<fieldset class="editFieldsetThree" >
 	
@@ -602,6 +616,9 @@
 
 	</td>
 	
+	</tr>
+	<tr>
+
 	<td>
 	<fieldset class="editFieldsetThree"  >
 		<legend>Add visiting times</legend>
@@ -666,6 +683,16 @@
 
 	
 	
+	</td>
+	<td>
+	
+	<fieldset id="preference" class="editFieldsetTwo" >
+			<legend>Change preferences</legend>
+		<div>
+		<form:textarea path="preferences" rows="4" cols="70" value="${ad.preferences}" ></form:textarea>
+		
+		</div>
+	</fieldset>
 	</td>
 	</tr>
 	</table>

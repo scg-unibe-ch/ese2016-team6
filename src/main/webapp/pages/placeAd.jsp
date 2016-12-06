@@ -281,9 +281,23 @@
 				<form:input type="hidden" id="ActualSale" path="sale"  value="direct" readonly="readonly" />
 				<form:input type="hidden" id="ActualDeal" path="deal"  value="forRent" readonly="readonly" />
 				
+				<c:choose>
+				<c:when test="${currentAd.getTypeOfDeal() eq 'forRent'}">
 				<input id="type-rent" type="radio" name="sale" value="forRent" checked="checked"> Rent
 				<input id="type-sale"  type="radio" name="sale" value="forSale"> Sale
-				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction		
+				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction
+				</c:when>
+				<c:when test="${currentAd.getTypeOfDeal() eq 'forSale'}">
+				<input id="type-rent" type="radio" name="sale" value="forRent" > Rent
+				<input id="type-sale"  type="radio" name="sale" value="forSale" checked="checked"> Sale
+				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction
+				</c:when>
+				<c:otherwise>
+				<input id="type-rent" type="radio" name="sale" value="forRent" > Rent
+				<input id="type-sale"  type="radio" name="sale" value="forSale" > Sale
+				<input id="type-auction" type="radio" name="sale" value="forAuction" checked="checked"> Auction
+				</c:otherwise>
+				</c:choose>	
 				</td>
 			</tr>	
 			<tr>
@@ -485,7 +499,7 @@
 		<label for="field-pictures">Pictures</label> <input type="file" id="field-pictures" accept="image/*" multiple="multiple" />
 		<table id="uploaded-pictures" class="styledTable">
 			<tr>
-				<th id="name-column">Uploaded picture</th>
+				<th id="name-column">Uploaded Picture</th>
 				<th>Size</th>
 				<th>Delete</th>
 			</tr>
