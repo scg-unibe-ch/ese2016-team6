@@ -203,7 +203,12 @@ public class AdController {
 		return model;
 	}
 
-
+	/** Deletes the ad with the given id */
+	@RequestMapping(value = "/ad", method = RequestMethod.GET)
+	public @ResponseBody void deleteAd(@RequestParam("id") long id) {
+		adService.deleteAd(id);
+	}
+	
 	/* AUCTION */
 	/*@RequestMapping(value = "/ad?id=${ad.id}", method = RequestMethod.POST)
 	public ModelAndView create(@Valid Ad ad,

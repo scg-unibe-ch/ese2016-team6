@@ -142,7 +142,17 @@
 		
 </script>
 
-    <script>
+<script>
+function deleteAd(button) {
+	var id = $(button).attr("data-id");
+	$.get("/ad?id=" + id + "/deleteAd?id=" + id , function(){
+		$("#deleteDiv").load(document.URL + " #deleteDiv");
+	});
+}
+</script>
+
+
+ <script>
         function showTimeLeft() {
             //We need getTime() to make the countdown compatible with all browsers.
             var expired = ${shownAd.expireDate.getTime()};
@@ -220,6 +230,7 @@
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">
+				<button style="background-color:#991f00;color:white" class="deleteButton" data-id="${shownAd.id}" onClick="deleteAd(this)">Delete Ad</button>
 				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
 					<button type="button">Edit Ad</button>
 				</a>
@@ -245,11 +256,7 @@
 
 <label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> a7bbdbe7fd5c1f45a355d748c9d60f14b6bbcef1
 <hr style="margin:0px" />
 
 <table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">

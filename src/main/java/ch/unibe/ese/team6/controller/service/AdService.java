@@ -867,4 +867,11 @@ public class AdService {
 		}
 		return false;
 	}
+	
+	/** Deletes the ad with the given id. */
+	@Transactional
+	public void deleteAd(Long id) {
+		adDao.delete(id);
+	}
+	
 }
