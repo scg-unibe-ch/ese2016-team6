@@ -104,11 +104,11 @@ function validateType(form)
 			<%-- that needs to be fixed --%>
 			<c:when test="document.getElementById('forSale').checked">
 				<input type="radio" id="type-rent" name="RentSale"> For Rent
-				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale				
+				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale/Auction				
 			</c:when>
 			<c:otherwise>
 				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
-				<input type="radio" id="type-sale" name="RentSale"> For Sale			
+				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction			
 			</c:otherwise>
 			</c:choose>
 	 		</form>

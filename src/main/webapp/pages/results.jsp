@@ -162,11 +162,11 @@ function sort_div_attribute() {
 			<c:choose>
 			<c:when test="${forRent}=='checked'">
 				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
-				<input type="radio" id="type-sale" name="RentSale"> For Sale				
+				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction				
 			</c:when>
 			<c:otherwise>
 				<input type="radio" id="type-rent" name="RentSale"> For Rent
-				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale			
+				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale/Auction			
 			</c:otherwise>
 			</c:choose>
 	 		</form>
@@ -311,7 +311,7 @@ function sort_div_attribute() {
 									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 									<p>
 										<i>
-											flat
+											Flat
 											<c:if test="${ad.numberOfRooms==0}"> with unspecified amount of rooms </c:if>
 											<c:if test="${ad.numberOfRooms>0}"> with ${ad.numberOfRooms} rooms  </c:if>
 										</i>
@@ -323,9 +323,9 @@ function sort_div_attribute() {
 								<div class="resultRight">
 									
 									
-									<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale } <br> sale price</h2></c:if>
-									<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid } <br> current bid</h2></c:if>
-									<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid</h2></c:if>
+									<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale } <br> sale price </h2></c:if>
+									<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid } <br> current bid </h2></c:if>
+									<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid </h2></c:if>
 									
 									<br /> <br />
 									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
