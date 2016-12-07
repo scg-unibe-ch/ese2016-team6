@@ -146,7 +146,7 @@
 function deleteAd(button) {
 	var id = $(button).attr("data-id");
 	$.get("/ad?id=" + id + "/deleteAd?id=" + id , function(){
-		$("#deleteDiv").load(document.URL + " #deleteDiv");
+		$("#adDiv").load(document.URL + " #adDiv");
 	});
 }
 </script>

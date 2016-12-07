@@ -117,8 +117,9 @@
 								<li class="ProfileListItem" style="top:90px;"><a href="/profile/myRooms">My advertisements</a></li>
 								<li class="ProfileListItem" style="top:115px;"><a href="/profile/myBookmarks">My bookmarks</a></li>
 								<li class="ProfileListItem" style="top:140px;"><a href="/profile/schedule">Schedule</a></li>
-								<li class="ProfileListItem" style="top:165px;"><a id="messageLink" href="/profile/messages"></a></li>
-								<li class="ProfileListItem" style="top:190px;"><a href="/profile/enquiries">Enquiries</a></li>
+								<li class="ProfileListItem" style="top:165px;"><a id="messageLink" href="/profile/messages">Enquiries</a></li>
+								<!-- <li class="ProfileListItem" style="top:190px;"><a href="/profile/enquiries">Enquiries</a></li> -->
+								<li class="ProfileListItem" style="top:190px;"><a id="enquiryLink"></a></li>
 								<li class="ProfileListItem" style="top:215px;"><a href="/profile/alerts">Alerts</a></li>
 								<li class="ProfileListItem" style="top:240px;">
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>

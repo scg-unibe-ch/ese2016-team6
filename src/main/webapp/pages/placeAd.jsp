@@ -320,13 +320,13 @@
 
 			<tr>
 				<td style="background-color:#fff9f9"><label for="field-squareFootage">Square Meters (m²) *:</label>
-					<form:input id="field-squareFootage" type="number" path="squareFootage" placeholder="number of square meters"  min="1" value="1" />
+					<form:input id="field-squareFootage" type="number" max="100000" path="squareFootage" placeholder="number of square meters"  min="1" value="1" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label for="field-numberRooms">Number of Rooms *:</label>
-					<form:input id="field-numberRooms" type="number" path="numberOfRooms" placeholder="Number of Rooms" min="1" value="1" />
+					<form:input id="field-numberRooms" type="number" max="1000" path="numberOfRooms" placeholder="Number of Rooms" min="1" value="1" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
@@ -467,19 +467,23 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-ProximityToPublicTransport">Proximity to Public Transport in meters</label>
-				<form:input id="field-ProximityToPublicTransport" type="number" path="proximityToPublicTransport" placeholder="e.g. 500" /></td>
+				<form:input id="field-ProximityToPublicTransport" type="number" max="10000" path="proximityToPublicTransport" placeholder="e.g. 500" />
+				</td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSchool">Proximity to School in meters</label>
-				<form:input id="field-ProximityToSchool" type="number" path="proximityToSchool" placeholder="e.g. 500"  /></td>
+				<form:input id="field-ProximityToSchool" type="number" max="10000" path="proximityToSchool" placeholder="e.g. 500"  />
+				</td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToSupermarket">Proximity to Supermarket in meters</label>
-				<form:input id="field-ProximityToSupermarket" type="number" path="proximityToSupermarket" placeholder="e.g. 500"   /></td>
+				<form:input id="field-ProximityToSupermarket" type="number" max="10000" path="proximityToSupermarket" placeholder="e.g. 500"   />
+				</td>
 			</tr>
 			<tr>
 				<td><label for="field-ProximityToNightlife">Proximity to Night Life in meters</label>
-				<form:input id="field-ProximityToNightlife" type="number" path="proximityToNightlife" placeholder="e.g. 500"   /></td>
+				<form:input id="field-ProximityToNightlife" type="number" max="10000" path="proximityToNightlife" placeholder="e.g. 500"   />
+				</td>
 			</tr>
 		</table>
 		</div>
