@@ -37,13 +37,15 @@ function prepareRows() {
 	$(rows).click(function() {
 		var id = $(this).attr("data-id");
 		
-		var fun ="$('#content').children().animate({opacity: 0.4}, 300, function(){ $('#msgDiv').css('display', 'block');$('#msgDiv').css('opacity', '1');});";
+		var fun ="$('#content').children().animate({opacity: 0.4}, 300, function(){$('#msgDiv').css('display', 'block');$('#msgDiv').css('opacity', '1');});";
 		
 		$(this).removeClass("UNREAD");
 		$.get("/profile/readMessage?id=" + id, function (data) {
 			$.get("/profile/messages/getMessage?id=" + id, function(data) {
 				var result = '<h2>' + data.subject + '</h2>';
-				result += '<button id="newMsg" type="button" style="float: right;" onclick='+fun+'>Reply</button>';
+				result += '<button id="newMsg" type="button" style="float: right;" onclick="'; 
+				result += fun;
+				result +='">Reply</button>';
 				result += '<h3><b>To: </b>' + data.recipient.email + '</h3>';
 				result += '<h3><b>From: </b>' + data.sender.email + '</h3>';
 				result += '<h3><b>Date sent: </b>' + data.dateSent + '</h3>';

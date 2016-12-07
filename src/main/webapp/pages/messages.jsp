@@ -160,7 +160,7 @@ function deleteMessage(button) {
 				</div>
 			</div>
 		</td>
-
+	
 	</tr>
 </table>
 <div id="msgDiv">
