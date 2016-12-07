@@ -6,7 +6,9 @@ function loadMessages(data) {
 		result += '<td>' + message.subject + '</td>';
 		result += '<td>' + message.sender.email + '</td>';
 		result += '<td>' + message.recipient.email + '</td>';
-		result += '<td>' + message.dateSent + '</td></tr>';
+		result += '<td>' + message.dateSent + '</td>';
+		result += '<td><button style="background-color:#991f00;color:white" class="deleteButton" data-id="${message.id}" onClick="deleteMessage(this)">Delete</button></td></tr>';
+		
 
 		$("#messageList table").append(result);
 	});
@@ -31,11 +33,14 @@ function prepareRows() {
 	});
 	$(rows).click(function() {
 		var id = $(this).attr("data-id");
+		
+		var fun ="$('#content').children().animate({opacity: 0.4}, 300, function(){ $('#msgDiv').css('display', 'block');$('#msgDiv').css('opacity', '1');});";
+		
 		$(this).removeClass("UNREAD");
 		$.get("/profile/readMessage?id=" + id, function (data) {
 			$.get("/profile/messages/getMessage?id=" + id, function(data) {
 				var result = '<h2>' + data.subject + '</h2>';
-				result += '<button id="newMsg" type="button" style="float: right;">Reply</button>';
+				result += '<button id="newMsg" type="button" style="float: right;" onclick='+fun+'>Reply</button>';
 				result += '<h3><b>To: </b>' + data.recipient.email + '</h3>';
 				result += '<h3><b>From: </b>' + data.sender.email + '</h3>';
 				result += '<h3><b>Date sent: </b>' + data.dateSent + '</h3>';
@@ -96,4 +101,8 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#deleteMessage").click(function(){
+		var id = $(button).attr("data-id");
+		$.get("/profile/messages/deleteMessage?id=" + id);
+	});	
 });

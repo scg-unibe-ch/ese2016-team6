@@ -18,6 +18,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.controller.service.UserService;
+import ch.unibe.ese.team6.model.Gender;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.User;
 
@@ -99,6 +100,17 @@ public class MessageController {
 		messageService.deleteMessage(id);
 	}
 	
+	/** Deletes the alert with the given id 
+	@RequestMapping(value = "/profile/messages/deleteMessage", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView getMessages(@RequestParam("id") long id) {
+		long idUser = messageService.getMessage(id).getRecipient().getId();
+		User user = userService.findUserById(idUser);
+		ModelAndView model = new ModelAndView("messages");
+		model.addObject("messageForm", new MessageForm());
+		model.addObject("messsages", messageService.getInboxForUser(user));
+		return model;
+	}*/
+	
 	/**
 	 * Sets the MessageState of a given Message to "READ".
 	 */
@@ -127,6 +139,8 @@ public class MessageController {
 		User user = userService.findUserByUsername(email);
 		if (user == null) {
 			return "This user does not exist.";
+		} else if (user.getGender().equals(Gender.ADMIN)) {
+			return "eseserver@gmail.com";
 		} else {
 			return user.getEmail();
 		}

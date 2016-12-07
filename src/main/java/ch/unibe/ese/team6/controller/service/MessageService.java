@@ -181,6 +181,10 @@ public class MessageService {
 	}
 
 	public void deleteMessage(long id) {
-		messageDao.delete(id);	
+		Message message = messageDao.findOne(id);
+		if(message != null) {
+			message.setState(MessageState.READ);
+			messageDao.delete(id);	
+		}	
 	}
 }

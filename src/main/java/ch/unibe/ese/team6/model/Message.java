@@ -96,4 +96,8 @@ public class Message {
 	public void setRecipient(User recipient) {
 		this.recipient = recipient;
 	}
+	
+	public boolean isSenderNotAdmin() {
+		return !sender.isAdmin();
+	}
 }

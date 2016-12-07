@@ -20,12 +20,21 @@
 <script>
 function deleteMessage(button) {
 	var id = $(button).attr("data-id");
-	$.get("/profile/messages/deleteMessage?id=" + id);
-	};
+	$.get("/profile/messages/deleteMessage?id=" + id, function(){
+		
+		$("#msgDiv").load(document.URL + " #msgDiv");
+	});
+	location.reload();
+}
 </script>
 <script>
 	$(document).ready(function() {
 		unreadMessages("messages");
+		
+		$("#deleteMessage").click(function(){
+			var id = $(button).attr("data-id");
+			$.get("/profile/messages/deleteMessage?id=" + id);
+		});	
 		
 		$("#newMsg").click(function(){
 			$("#content").children().animate({opacity: 0.4}, 300, function(){
@@ -40,25 +49,42 @@ function deleteMessage(button) {
 			$("#content").children().animate({opacity: 1}, 300);
 		});
 		
-		$("#messageSend").click(function (){
-			if($("#msgSubject").val() != "" && $("#msgTextarea").val() != ""){
+		
+		$("#receiverEmail").focusout(function() {
+			var text = $("#receiverEmail").val();
+			
+			$.post("/profile/messages/validateEmail", {email:text}, function(data) {
+				if (data != text) {
+					alert(data);
+					$("#receiverEmail").val("");
+				}
+			});
+		});
+		
+		$("#messageForm").submit(function (event){
+			if($("#receiverEmail").val() == ""){
+				event.preventDefault();
+			}
+		});
+		$("#messageSend").click(function() {
+			if ($("#msgSubject").val() != "" && $("#msgTextarea").val() != "") {
 				var subject = $("#msgSubject").val();
 				var text = $("#msgTextarea").val();
-				var recipientEmail = "${messages[0].recipient.email}";
-				$.post("profile/messages/sendMessage", {subject : subject, text: text, recipientEmail : recipientEmail}, function(){
+				var recipientEmail = "${user.username}";
+				$.post("profile/messages/sendMessage", {
+					subject : subject,
+					text : text,
+					recipientEmail : recipientEmail
+				}, function() {
 					$("#msgDiv").css("display", "none");
 					$("#msgDiv").css("opacity", "0");
 					$("#msgSubject").val("");
 					$("#msgTextarea").val("");
-					$("#content").children().animate({opacity: 1}, 300);
+					$("#content").children().animate({
+						opacity : 1
+					}, 300);
 				})
 			}
-		});
-		$("#sent").click(function() {
-			$.post("/profile/message/sent", function(data) {
-				loadMessages(data);
-				prepareRows();
-			}, 'json');
 		});
 	});
 </script>
@@ -138,22 +164,20 @@ function deleteMessage(button) {
 	</tr>
 </table>
 <div id="msgDiv">
-<form class="msgForm">
-	<h2>Reply</h2>
-	<br>
-	<br>
-	<label>Subject: <span>*</span></label>
-	<input  class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
-	<br><br>
-	<label>Message: </label>
-	<textarea id="msgTextarea" placeholder="Message" ></textarea>
-	<br/>
-	
-	<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
-	<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
-	
+	<form class="msgForm">
+		<h2>Message this user</h2>
+		<br> <br> <label>Subject: <span>*</span></label> <input
+			class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
+		<br> <br> <label>Message: </label>
+		<textarea id="msgTextarea" placeholder="Message"></textarea>
+		<br />
+		
+		<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
+		<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
+		
 	</form>
 </div>
+
 		
 <c:import url="getMessageForm.jsp" />
 

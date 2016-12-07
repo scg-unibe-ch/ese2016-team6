@@ -581,7 +581,7 @@ function deleteAd(button) {
 										<c:if test="${loggedInUserEmail != shownAd.user.username}">
 											
 											<c:choose>
-											<c:when test="${VisitService.hasUserSentEnquiry(loggedInUserEmail, visit)}">
+											<c:when test="${visitServie.hasUserSentEnquiry(loggedInUserEmail, visit)}">
 												<button class="thinInactiveButton" type="button" data-id="${visit.id}">Enquiry sent</button>
 											</c:when>
 											<c:otherwise>
