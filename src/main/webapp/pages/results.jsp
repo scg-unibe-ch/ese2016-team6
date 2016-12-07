@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <c:import url="template/header.jsp" />
@@ -43,6 +44,12 @@ function validateType(form)
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->
 <c:import url="template/NewLoginPop.jsp" />
+
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript">
+console.log(${fn:length(results)});
+var addresses = new Array(${fn:length(results)});
+var i = 0;
+</script>
 
 <script>
 /*
@@ -99,6 +106,7 @@ function sort_div_attribute() {
 
 <script>
 	$(document).ready(function() {
+		
 		$("#city").autocomplete({
 			minLength : 2
 		});
@@ -122,6 +130,36 @@ function sort_div_attribute() {
 		$("#field-latestMoveOutDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});--%>
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+		      zoom: 7,
+		      center: new google.maps.LatLng(46.8633639,8.213877),
+		      mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+		
+		var geocoder = new google.maps.Geocoder();
+		var infowindow = new google.maps.InfoWindow();
+		var marker, k;
+		var address = addresses[0];
+		
+		console.log(address);
+		
+		for(var k = 0; k < addresses.length; k++) {
+			var address = addresses[k];
+			
+		    geocoder.geocode({'address': address}, function(results, status) {
+		   		if (status === google.maps.GeocoderStatus.OK) {
+		      		var marker = new google.maps.Marker({
+		      		map: map,
+		        	position: results[0].geometry.location
+		      		});
+		    	} else if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+		    		k--;
+		    	} else {
+		      		alert('Geocode was not successful for the following reason: ' + status);
+		    	}
+		   	});
+		}
 	});
 </script>
 
@@ -134,6 +172,10 @@ function sort_div_attribute() {
 	table-layout: fixed;">
 <tr>
 <td valign="top" style="width:400px; min-width:400px;">
+
+<div id="map" style="width: 400px; height: 300px;"></div>
+
+<br>
 
 <div>
 <select id="modus">
@@ -280,7 +322,7 @@ function sort_div_attribute() {
 			<c:forEach var="ad" items="${results}">
 				<div class="resultAd" data-price="${ad.prizePerMonth}" 
 								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-					
+								
 				 	<table id="resultTable" >
 						<tr>
 							<th colspan="3">
