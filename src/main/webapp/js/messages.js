@@ -1,4 +1,3 @@
-
 function loadMessages(data) {
 	$("#messageList table tr:gt(0)").remove();
 	$.each(data, function(index, message) {
@@ -16,8 +15,12 @@ function loadMessages(data) {
 
 function deleteMessage(button) {
 	var id = $(button).attr("data-id");
-	$.get("/profile/messages/deleteMessage?id=" + id);
-}
+	$.get("/profile/messages/deleteMessage?id=" + id, function(){
+		
+		$("#msgDiv").load(document.URL + " #msgDiv");
+	});
+	location.reload();
+	}
 	
 function prepareRows() {
 	var rows = $("#messageList table tr:gt(0)");
@@ -103,6 +106,10 @@ $(document).ready(function() {
 	
 	$("#deleteMessage").click(function(){
 		var id = $(button).attr("data-id");
-		$.get("/profile/messages/deleteMessage?id=" + id);
+		$.get("/profile/messages/deleteMessage?id=" + id, function(){
+			
+			$("#msgDiv").load(document.URL + " #msgDiv");
+		});
+		location.reload();
 	});	
 });

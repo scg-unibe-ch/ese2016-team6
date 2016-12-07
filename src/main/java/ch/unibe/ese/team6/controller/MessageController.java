@@ -100,17 +100,6 @@ public class MessageController {
 		messageService.deleteMessage(id);
 	}
 	
-	/** Deletes the alert with the given id 
-	@RequestMapping(value = "/profile/messages/deleteMessage", method = RequestMethod.GET)
-	public @ResponseBody ModelAndView getMessages(@RequestParam("id") long id) {
-		long idUser = messageService.getMessage(id).getRecipient().getId();
-		User user = userService.findUserById(idUser);
-		ModelAndView model = new ModelAndView("messages");
-		model.addObject("messageForm", new MessageForm());
-		model.addObject("messsages", messageService.getInboxForUser(user));
-		return model;
-	}*/
-	
 	/**
 	 * Sets the MessageState of a given Message to "READ".
 	 */
