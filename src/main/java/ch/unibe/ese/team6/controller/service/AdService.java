@@ -363,7 +363,7 @@ public class AdService {
 	
 	
 	/**
-	 * Returns the newest ads that are filtered by rent in the database. Parameter 'newest' says how many.
+	 * Returns the newest ads that are filtered by type of deal in the database. Parameter 'newest' says how many.
 	 */
 	@Transactional
 	public Iterable<Ad> getNewestRentAds(int newest, boolean rent) {
@@ -371,9 +371,8 @@ public class AdService {
 		if(rent) deal = KindOfDeal.forRent;
 		else deal = KindOfDeal.forSale;
 		
-		//Iterable<Ad> allAds = adDao.findByRent(rent);
 		
-		Iterable<Ad> allAds = adDao.findByDeal(deal);
+		Iterable<Ad> allAds = adDao.findByDealAndExpiredAndInstantBought(deal, false, false);
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
 			ads.add(ad);
@@ -405,31 +404,20 @@ public class AdService {
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 
 		
-		if (searchForm.getForRent()&&searchForm.getForSale()) {
-			
-			
-			/*Searches for rooms with
-			 * the prize per monoth being below x
-			 * the numberof rooms being equal or greater than y
-			 * 
-			 * 
-			 */
-			results = adDao
-					.findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(searchForm.getPrize() + 1,searchForm.getNumberOfRooms());
-		}
 		
-		else if(searchForm.getForRent()) {
+		
+		 if(searchForm.getForRent()) {
 			
 			
-			results = adDao.findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(
-					KindOfDeal.forRent, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+			results = adDao.findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
+					KindOfDeal.forRent, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(), false, false);
 			
 			
 		}
 		else if(searchForm.getForSale()){
 			
-			results = adDao.findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqual(
-					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms());
+			results = adDao.findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
+					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(),false, false);
 			
 		}
 		

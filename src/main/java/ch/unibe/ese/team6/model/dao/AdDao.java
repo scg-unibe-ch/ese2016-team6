@@ -26,13 +26,14 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 	
 	//public Iterable<Ad> findByRentAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(boolean rent, int i, int j);
 	
-	public Iterable<Ad> findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(KindOfDeal d, int i, int j);
+	public Iterable<Ad> findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(KindOfDeal d, int price, int nrRooms, boolean ex, boolean bought);
 	
-	public Iterable<Ad> findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqual(KindOfDeal d, int i, int j);
-	
+	public Iterable<Ad> findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(KindOfDeal d, int curBid, int nrRooms, boolean ex, boolean bought);
 	
 	
 	public Iterable<Ad>findByDeal(KindOfDeal d);
+	
+	public Iterable<Ad>findByDealAndExpiredAndInstantBought(KindOfDeal d, boolean ex, boolean inst);
 	
 	
 	public Iterable<Ad> findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual (int prize,int j);
@@ -41,17 +42,9 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 
 	public Iterable<Ad> findByKindOfMembershipOfUserEquals(boolean i);
 	
-	/*_*/
-	
-	//no function about property
-	
-	//public Iterable<Ad> findByPremium(boolean premium);
-
-	//public Iterable<Ad> findByPremiumAndExpired(boolean premium, boolean expired);
-
 	public Iterable<Ad> findByExpireDateLessThanAndExpired(Date date, boolean expired);
 
-	//public Iterable<Ad> findByRent(boolean rent);
+	
 	
 
 }
