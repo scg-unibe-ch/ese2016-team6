@@ -178,7 +178,7 @@ public class VisitEnquiryTestDataSaver {
 		return String.format("%02d", hour) + ":"
 				+ String.format("%02d", minutes) + " "
 				+ String.format("%02d", day) + "."
-				+ String.format("%02d", month) + ".2014";
+				+ String.format("%02d", month) + ".2017";
 	}
 
 }
