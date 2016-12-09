@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.AdPicture;
+import ch.unibe.ese.team6.model.KindOfDeal;
+import ch.unibe.ese.team6.model.KindOfSale;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.Visit;
 import ch.unibe.ese.team6.model.dao.AdDao;
@@ -90,8 +92,13 @@ public class EditAdService {
 		} catch (NumberFormatException e) {
 		}
 		
-		ad.setDeal(placeAdForm.getDeal());
-		ad.setSale(placeAdForm.getSale());
+		if(ad.getDeal().equals(KindOfDeal.forRent)) {
+			placeAdForm.setForRent(true);
+		} else if(ad.getDeal().equals(KindOfDeal.forSale)) {
+			placeAdForm.setForSale(true);
+		} else {
+			placeAdForm.setForAuction(true);
+		}
 		ad.setPriceRent(placeAdForm.getPriceRent());
 		ad.setPriceSale(placeAdForm.getPriceSale());
 		ad.setIncrement(placeAdForm.getIncrement());
@@ -207,8 +214,13 @@ public class EditAdService {
 		if (ad.getMoveOutDate() != null){
 			adForm.setMoveOutDate(dateFormat.format(ad.getMoveOutDate()));
 		}
-		adForm.setDeal(ad.getDeal());
-		adForm.setSale(ad.getSale());
+		if(ad.getDeal().equals(KindOfDeal.forRent)) {
+			adForm.setForRent(true);
+		} else if(ad.getDeal().equals(KindOfDeal.forSale)) {
+			adForm.setForSale(true);
+		} else {
+			adForm.setForAuction(true);
+		}
 		adForm.setPriceRent(ad.getPriceRent());
 		adForm.setPriceSale(ad.getPriceSale());
 		adForm.setIncrement(ad.getIncrement());

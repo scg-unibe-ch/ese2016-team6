@@ -37,7 +37,7 @@ function prepareRows() {
 	$(rows).click(function() {
 		var id = $(this).attr("data-id");
 		
-		var fun ="$('#content').children().animate({opacity: 0.4}, 300, function(){$('#msgDiv').css('display', 'block');$('#msgDiv').css('opacity', '1');});";
+		var fun ="$('#content').children().animate({opacity: 0.4}, 300, function(){$('#messageDiv').css('display', 'block');$('#messageDiv').css('opacity', '1');});";
 		
 		$(this).removeClass("UNREAD");
 		$.get("/profile/readMessage?id=" + id, function (data) {
@@ -75,6 +75,7 @@ $(document).ready(function() {
 		}, 'json');
 	});
 	
+	//Shows the New Message Popup
 	$("#newMessage").click(function(){
 		$("#content").children().animate({opacity: 0.4}, 300, function(){
 			$("#msgDiv").css("display", "block");
@@ -82,6 +83,7 @@ $(document).ready(function() {
 		});
 	});
 	
+	//Cancel Button from the Reply Popup
 	$("#messageCancel").click(function(){
 		$("#msgDiv").css("display", "none");
 		$("#msgDiv").css("opacity", "0");
@@ -100,9 +102,32 @@ $(document).ready(function() {
 		});
 	});
 	
+	//messageForm from the New Message Popup
 	$("#messageForm").submit(function (event){
 		if($("#receiverEmail").val() == ""){
 			event.preventDefault();
+		}
+	});
+	
+	//Send Button from New Message Popup
+	$("#messageSend").click(function() {
+		if ($("#msgSubject").val() != "" && $("#msgTextarea").val() != "") {
+			var subject = $("#msgSubject").val();
+			var text = $("#msgTextarea").val();
+			var recipientEmail = $("#msgRecipient").val();
+			$.post("/profile/messages/sendMessage", {
+				subject : subject,
+				text : text,
+				recipientEmail : recipientEmail
+			}, function() {
+				$("#msgDiv").css("display", "none");
+				$("#msgDiv").css("opacity", "0");
+				$("#msgSubject").val("");
+				$("#msgTextarea").val("");
+				$("#content").children().animate({
+					opacity : 1
+				}, 300);
+			})
 		}
 	});
 	

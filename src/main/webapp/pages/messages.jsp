@@ -33,19 +33,25 @@ function deleteMessage(button) {
 		
 		$("#deleteMessage").click(function(){
 			var id = $(button).attr("data-id");
-			$.get("/profile/messages/deleteMessage?id=" + id);
+			$.get("/profile/messages/deleteMessage?id=" + id, function(){
+				
+				$("#msgDiv").load(document.URL + " #msgDiv");
+			});
+			location.reload();
 		});	
 		
+		//Shows the Reply Popup
 		$("#newMsg").click(function(){
 			$("#content").children().animate({opacity: 0.4}, 300, function(){
-				$("#msgDiv").css("display", "block");
-				$("#msgDiv").css("opacity", "1");
+				$("#messageDiv").css("display", "block");
+				$("#messageDiv").css("opacity", "1");
 			});
 		});
 		
-		$("#messageCancel").click(function(){
-			$("#msgDiv").css("display", "none");
-			$("#msgDiv").css("opacity", "0");
+		//Cancel Button from the Reply Popup
+		$("#messageReplyCancel").click(function(){
+			$("#messageDiv").css("display", "none");
+			$("#messageDiv").css("opacity", "0");
 			$("#content").children().animate({opacity: 1}, 300);
 		});
 		
@@ -61,25 +67,28 @@ function deleteMessage(button) {
 			});
 		});
 		
+		//messageForm from the Reply Popup
 		$("#messageForm").submit(function (event){
 			if($("#receiverEmail").val() == ""){
 				event.preventDefault();
 			}
 		});
-		$("#messageSend").click(function() {
-			if ($("#msgSubject").val() != "" && $("#msgTextarea").val() != "") {
-				var subject = $("#msgSubject").val();
-				var text = $("#msgTextarea").val();
-				var recipientId = $("#msgRecipient").val();
+		
+		//Send button from Reply Popup
+		$("#messageReplySend").click(function() {
+			if ($("#messageSubject").val() != "" && $("#messageTextarea").val() != "") {
+				var subject = $("#messageSubject").val();
+				var text = $("#messageTextarea").val();
+				var recipientId = $("#messageRecipient").val();
 				$.post("/profile/messages/sendMessageById", {
 					subject : subject,
 					text : text,
 					recipientId : recipientId
 				}, function() {
-					$("#msgDiv").css("display", "none");
-					$("#msgDiv").css("opacity", "0");
-					$("#msgSubject").val("");
-					$("#msgTextarea").val("");
+					$("#messageDiv").css("display", "none");
+					$("#messageDiv").css("opacity", "0");
+					$("#messageSubject").val("");
+					$("#messageTextarea").val("");
 					$("#content").children().animate({
 						opacity : 1
 					}, 300);
@@ -164,23 +173,21 @@ function deleteMessage(button) {
 	
 	</tr>
 </table>
-<div id="msgDiv">
-	<form class="msgForm">
+<div id="messageDiv" style="display:none">
+	<form class="msgForm" >
 		<h2>Reply to this User</h2>
 		<br> <br> <label>Subject: <span>*</span></label> 
 		<input
-			class="msgInput" type="text" style="display:none" id="msgRecipient" value="${messages[0].sender.id}" /><input
-			class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
-		<br> <br> <label>Message: </label>
-		<textarea id="msgTextarea" placeholder="Message"></textarea>
-		<br />
+			class="msgInput" type="text" style="display:none" id="messageRecipient" value="${messages[0].sender.id}" /><input
+			class="msgInput" type="text" id="messageSubject" placeholder="Subject" />
+		<br> <br> <label>Message: </label><br><br>
+		<textarea rows="10" cols="49" id="messageTextarea" placeholder="Message"></textarea><br><br>
 		
-		<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
-		<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
+		<button style="background-color:#991f00;color:white" type="button" id="messageReplyCancel">Cancel</button>
+		<button style="background-color:#ffffcc" type="button" id="messageReplySend">Send</button>
 		
 	</form>
 </div>
-
 		
 <c:import url="getMessageForm.jsp" />
 
