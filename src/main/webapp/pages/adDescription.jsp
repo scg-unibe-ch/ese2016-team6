@@ -286,25 +286,15 @@ function deleteAd(button) {
 									
 								
 							</td>
-						</tr>
-						
-						
+						</tr>	
 						<tr>
-						
 							<td>
 								<h2>Ad created on : </h2>
+							</td>			
+							<td>				
+								${formattedCreationDate}			
 							</td>
-						
-							<td>
-							
-								${formattedCreationDate}
-							
-							</td>
-							
 						</tr>
-						
-						
-
 						<tr>
 							<td><h2>Address :</h2></td>
 							<td>
@@ -312,33 +302,28 @@ function deleteAd(button) {
 										${shownAd.zipcode} ${shownAd.city}</a>
 							</td>
 						</tr>
-					
-						
 						<tr>
 							<td><h2>Area :</h2></td>
 							<td>${shownAd.squareFootage}&#32;m²</td>
-						</tr>
-						
+						</tr>				
 						<tr>
 							<td><h2>Number of Rooms :</h2></td>
 							<td>${shownAd.numberOfRooms}</td>
-						</tr>
-						
+						</tr>					
 						<tr>
 							<td><h2>Available from : </h2></td>
 							<td>${formattedMoveInDate}</td>
-						</tr>
-						
+						</tr>			
 						<tr>
 							<td><h2>To :</h2></td>
 							<td>${formattedMoveOutDate}</td>
-						</tr>
-					
+						</tr>			
 					</table>	
 		</td>
 		<c:if test="${shownAd.hasPictures()}">
 			
 		<c:set var="countCols" value="${1}" />
+		
 		<td style="width:50%;">
 			<div id="image-slider" class="adDescDiv">
 				<div id="left-arrow">
@@ -364,7 +349,11 @@ function deleteAd(button) {
 		
 		<td style="width:50%;">	
 			<div id="bidList" class="adDescDiv">
-				
+			
+			<c:if test="${countCols == 0}">
+				<c:set var="countCols" value="${countCols + 1}" />
+			</c:if>
+			
 				<h2>Price corner</h2>
 				<br/>
 				
@@ -397,57 +386,36 @@ function deleteAd(button) {
 						
 						<!-- only shows this part if property for auction -->
 						<c:if test="${shownAd.sale=='auction'||shownAd.sale=='bothAuctionAndDirect'}">
-
-						
-							
 							<c:choose>
-								<c:when test="${shownAd.expired=='false' && shownAd.instantBought=='false'}">
-								
+								<c:when test="${shownAd.expired=='false' && shownAd.instantBought=='false'}">							
 								This property is for sale through auction ! 
-								
-								<form:form action="/ad/makeBid" method="post">
-								
+								<form:form action="/ad/makeBid" method="post">							
 									<input type="hidden" name="id" value="${shownAd.id}">
 									<input type="hidden" name="amount" value="${shownAd.priceSale}">
 									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
-									</c:if>
-								
+									</c:if>							
 								</form:form>
-								
-								
 								</br> 
 									<h3><label>	Amount of the current bid : </label> CHF ${shownAd.currentBid}</h3>
 									<h3><label>Minimum increment :</label> CHF ${shownAd.increment}</h3>
 								</br> 
 								<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
-							
-						
-								
-									<div>
-									
+								<div>
 									<c:choose>
-										<c:when test="${loggedIn}">
-									
-									
+										<c:when test="${loggedIn}">						
 										<c:if test="${loggedInUserEmail != shownAd.user.username }">
-											<form:form action="/ad/makeBid" method="post">
-								
+											<form:form action="/ad/makeBid" method="post">							
 												<label for="field-currentBid">Make a higher bid :</label>
 												<input type="hidden" name="id" value="${shownAd.id}">
 												<input class="bidInput" type="number" name ="amount" id="bidAmount"/>
-												<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
-								
+												<button type="submit" id="makeBid" class="bidButton">Let's go !</button>		
 											</form:form>
 										</c:if>
-										
-									
-									
-									
+	
 											<c:if test="${latestBid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												<h3>
-												
+												<h3>							
 												<table>
 													<tr>
 														<td>
@@ -463,9 +431,7 @@ function deleteAd(button) {
 																	<img src="/img/avatar.png">
 																</c:otherwise>
 															</c:choose>
-														</td>					
-														
-														
+														</td>							
 													</tr>	
 													<tr>
 														<td>
@@ -510,8 +476,6 @@ function deleteAd(button) {
 									<br>
 									<c:if test="${latestBid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												
-												
 												<table>
 													<tr>
 														<td>
@@ -528,8 +492,6 @@ function deleteAd(button) {
 																</c:otherwise>
 															</c:choose>
 														</td>					
-														
-														
 													</tr>	
 													<tr>
 														<td>
@@ -544,32 +506,37 @@ function deleteAd(button) {
 											</div>
 											
 										</c:if>
-									
-									
-									
-									
 									</h3>
-								</c:when>
-					
-							</c:choose>
-					
+								</c:when>			
+							</c:choose>				
 						</c:if>
 				</c:if>
-	
-</div>
-</td>
-</tr>
-<tr>
-		
+		</div>
+	</td>
+		<c:if test="${countCols == 1 }">
+					</tr>
+					<tr>
+					<c:set var="countCols" value="${0}" />
+		</c:if>		
 		<td>
 			<div class="adDescDiv">
 				<h2>Room Description</h2>
 				<p>${shownAd.roomDescription}</p>
 			</div>
 		</td>
+		
+		<c:if test="${countCols == 1}">
+			</tr>
+			<tr>
+			<c:set var="countCols" value="${0}" />
+		</c:if>
 
 	<c:if test="${shownAd.hasVisits()}">
 		<td style="width:50%;">
+		
+		<c:if test="${countCols == 0 }">
+			<c:set var="countCols" value="${1}" />
+		</c:if>
 		
 		<div id="visitList" class="adDescDiv">
 				<h2>Visiting times</h2>
@@ -612,12 +579,21 @@ function deleteAd(button) {
 			</div>
 		</td>
 	</c:if>
-		
+	<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+			<c:set var="countCols" value="${0}" />
+		</c:if>		
 
-		<td>
+		
 		<c:if test="${shownAd.hasLocationDetails()}">
+		<td>
 			<div class="adDescDiv">
 				<h2>Location details</h2>
+				<c:if test="${countCols == 0 }">
+					<c:set var="countCols" value="${1}" />
+				</c:if>
+				
 				<table>
 					<c:if test="$('shownAd.proximityToPublicTransport'==0)">
 					<tr>
@@ -643,25 +619,36 @@ function deleteAd(button) {
 			</div>
 			</c:if>
 		</td>
-	</tr>
-
-
-	<tr>
+	<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+			<c:set var="countCols" value="${0}" />
+		</c:if>	
 	<c:if test="${shownAd.hasPreferences()}">
 		<td>
 			<div class="adDescDiv">
+			<c:if test="${countCols == 0 }">
+				<c:set var="countCols" value="${1}" />
+			</c:if>
 				<h2>Preferences</h2>
 				<p>${shownAd.preferences}</p>
 			</div>
 		</td>
 	</c:if>
-
+		<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+			<c:set var="countCols" value="${0}" />
+		</c:if>	
 		<td>
 		
 			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
 				<tr>
 					<td><h2>Advertiser</h2><br /></td>
 				</tr>
+				<c:if test="${countCols == 0 }">
+					<c:set var="countCols" value="${1}" />
+				</c:if>
 
 				<tr>
 					<td><c:choose>
@@ -701,19 +688,19 @@ function deleteAd(button) {
 					</td>
 				</tr>
 			</table>
-		
-		
-		
-			
-			
 		</td>
-	</tr>
-
-	<tr>
+		<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+			<c:set var="countCols" value="${0}" />
+		</c:if>	
 		<td>
 			<table id="checkBoxTable" class="adDescDiv" style="width:93%">
 				<tr>
 					<td><h3>Smoking inside allowed</h3></td>
+					<c:if test="${countCols == 0 }">
+						<c:set var="countCols" value="${1}" />
+					</c:if>
 					<td>
 						<c:choose>
 							<c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
@@ -807,6 +794,9 @@ function deleteAd(button) {
 
 <div id="msgDiv">
 <form class="msgForm">
+	<c:if test="${countCols == 0 }">
+		<c:set var="countCols" value="${1}" />
+	</c:if>
 	<h2>Contact the advertiser</h2>
 	<br>
 	<br>

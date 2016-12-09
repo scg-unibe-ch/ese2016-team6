@@ -92,12 +92,15 @@ public class EditAdService {
 		} catch (NumberFormatException e) {
 		}
 		
-		if(ad.getDeal().equals(KindOfDeal.forRent)) {
-			placeAdForm.setForRent(true);
-		} else if(ad.getDeal().equals(KindOfDeal.forSale)) {
-			placeAdForm.setForSale(true);
+		if(placeAdForm.getForRent()) {
+			ad.setDeal(KindOfDeal.forRent);
+			ad.setRent(true);
+		} else if(placeAdForm.getForSale()) {
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.direct);
 		} else {
-			placeAdForm.setForAuction(true);
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.bothAuctionAndDirect);
 		}
 		ad.setPriceRent(placeAdForm.getPriceRent());
 		ad.setPriceSale(placeAdForm.getPriceSale());
@@ -216,7 +219,7 @@ public class EditAdService {
 		}
 		if(ad.getDeal().equals(KindOfDeal.forRent)) {
 			adForm.setForRent(true);
-		} else if(ad.getDeal().equals(KindOfDeal.forSale)) {
+		} else if(ad.getDeal().equals(KindOfDeal.forSale) && ad.getSale().equals(KindOfSale.direct)) {
 			adForm.setForSale(true);
 		} else {
 			adForm.setForAuction(true);

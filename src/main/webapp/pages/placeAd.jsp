@@ -180,18 +180,16 @@
 			$("#addedVisits").append(label + input);
 		});
 		
-		if (document.getElementById('forRent').checked) {
-			$("#type-rent").prop('checked', true);
-			$("#type-rent").click();
+		if (document.getElementById('forAuction').checked) {
+			$("#type-auction").prop('checked', true);
+			$("#type-auction").click();
 		} else if(document.getElementById('forSale').checked){
 			$("#type-sale").prop('checked', true);
 			$("#type-sale").click();
 		} else {
-			$("#type-auction").prop('checked', true);
-			$("#type-auction").click;
+			$("#type-rent").prop('checked', true);
+			$("#type-rent").click();
 		}
-		
-
 	});
 </script>
 
@@ -226,17 +224,15 @@
 			<td style="background-color:#fff9f9"><label for="field-type">Type of deal*:</label>
 
 				<!-- uses the scripts above to put the values of the radio buttons in these two invisible fields
-				these two invisible fields are then written into the form
-				
- -->
+				these two invisible fields are then written into the form -->
 				
 				<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
 				<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent"/>
 				<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction"/>				
 				
-				<input id="type-rent" type="radio" name="sale" value="forRent"> Rent
-				<input id="type-sale"  type="radio" name="sale" value="forSale"> Sale
-				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction
+				<input id="type-rent" type="radio" name="sale" value="forRent"> For Rent
+				<input id="type-sale"  type="radio" name="sale" value="forSale"> For Sale
+				<input id="type-auction" type="radio" name="sale" value="forAuction"> For Auction
 				</td>
 			</tr>	
 			<tr>

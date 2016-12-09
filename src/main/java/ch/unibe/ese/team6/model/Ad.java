@@ -91,10 +91,6 @@ public class Ad {
 	public void setRent(boolean rent) {
 		this.rent = rent;
 	}
-	
-	
-
-	
 
 	//sale type
 	private KindOfDeal deal = KindOfDeal.forRent;
@@ -123,9 +119,6 @@ public class Ad {
 		this.expireDate = expireDate;
 	}
 	
-	/*___________________________________*/
-	
-	
 	@Column(nullable = false)
 	private boolean instantBought = false;
 	
@@ -138,14 +131,6 @@ public class Ad {
 		this.instantBought = instantBought;
 	}
 	
-	/*___________________________________*/
-	
-	
-	
-	
-	/*___________________________________*/
-	
-	
 	@Column(nullable = false)
 	private boolean expired = false;
 
@@ -157,20 +142,15 @@ public class Ad {
 		this.expired = expired;
 	}
 	
-	/*______________________*/
-	
-
 	@Column(nullable = false)
 	@Lob
 	private String roomDescription;
-	
 	
 	private boolean kindOfMembershipOfUser;
 	
 	@OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Visit> visits;
 
-	
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -179,12 +159,10 @@ public class Ad {
 		this.creationDate = creationDate;
 	}
 	
-	
 	public String getRoomDescription() {
 		return roomDescription;
 	}
-
-
+	
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
 	}
@@ -282,13 +260,6 @@ public class Ad {
 		this.prizePerMonth = prizePerMonth;
 		this.priceRent = prizePerMonth;
 	}
-	
-	/*
-	public void setPropertyType(KindOfProperty newType){
-		propertyType = newType;
-	}
-	
-	/*__________________________*/
 	
 	@Column(nullable = false)
 	@Lob
@@ -613,15 +584,6 @@ public class Ad {
 		else
 			return moveOutDate;
 	}
-
-	/*
-	public List<User> getRegisteredRoommates() {
-		return registeredRoommates;
-	}
-
-	public void setRegisteredRoommates(List<User> registeredRoommates) {
-		this.registeredRoommates = registeredRoommates;
-	}*/
 
 	public List<Visit> getVisits() {
 		return visits;
