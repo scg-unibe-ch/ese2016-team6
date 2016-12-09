@@ -70,11 +70,11 @@ function deleteMessage(button) {
 			if ($("#msgSubject").val() != "" && $("#msgTextarea").val() != "") {
 				var subject = $("#msgSubject").val();
 				var text = $("#msgTextarea").val();
-				var recipientEmail = "${user.username}";
-				$.post("/profile/messages/sendMessage", {
+				var recipientId = $("#msgRecipient").val();
+				$.post("/profile/messages/sendMessageById", {
 					subject : subject,
 					text : text,
-					recipientEmail : recipientEmail
+					recipientId : recipientId
 				}, function() {
 					$("#msgDiv").css("display", "none");
 					$("#msgDiv").css("opacity", "0");
@@ -166,8 +166,10 @@ function deleteMessage(button) {
 </table>
 <div id="msgDiv">
 	<form class="msgForm">
-		<h2>Message this user</h2>
-		<br> <br> <label>Subject: <span>*</span></label> <input
+		<h2>Reply to this User</h2>
+		<br> <br> <label>Subject: <span>*</span></label> 
+		<input
+			class="msgInput" type="text" style="display:none" id="msgRecipient" value="${messages[0].sender.id}" /><input
 			class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
 		<br> <br> <label>Message: </label>
 		<textarea id="msgTextarea" placeholder="Message"></textarea>
