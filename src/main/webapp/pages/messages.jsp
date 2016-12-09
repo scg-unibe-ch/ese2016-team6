@@ -71,7 +71,7 @@ function deleteMessage(button) {
 				var subject = $("#msgSubject").val();
 				var text = $("#msgTextarea").val();
 				var recipientEmail = "${user.username}";
-				$.post("profile/messages/sendMessage", {
+				$.post("/profile/messages/sendMessage", {
 					subject : subject,
 					text : text,
 					recipientEmail : recipientEmail
@@ -144,8 +144,9 @@ function deleteMessage(button) {
 			<div id="messageList">
 				<div id="messageDetail" style="width: 650px;">
 					<h2>${messages[0].subject}</h2>
-					
+					<c:if test="${messages[0].isSenderNotAdmin()}">
 					<button id="newMsg" type="button" style="float: right;">Reply</button>
+					</c:if>
 					<h3>
 						<b>To: </b>${messages[0].recipient.email}
 					</h3>

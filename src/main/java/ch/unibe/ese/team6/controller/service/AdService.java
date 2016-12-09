@@ -94,27 +94,24 @@ public class AdService {
 		
 		ad.setTitle(placeAdForm.getTitle());
 		ad.setStreet(placeAdForm.getStreet());
-		//ad.setStudio(placeAdForm.getStudio());
 		
-		//transports rent variable
-		//ad.setRent(placeAdForm.getRent());
-
-		//transports for deal variable
-		if(placeAdForm.getRent()==true)ad.setDeal(KindOfDeal.forRent);
-		if(placeAdForm.getRent()==false)ad.setDeal(KindOfDeal.forSale);
-		
-		//transports for sale variable
-		//if(placeAdForm.getSale()==KindOfSale.direct) ad.setSale(KindOfSale.direct);//getSale==false
-		//if(placeAdForm.getAuction()==true) ad.setSale(KindOfSale.auction);
-		ad.setSale(placeAdForm.getSale());
-		
-		//transports for rent and sale prices variable
+		if(placeAdForm.getForRent()) {
+			ad.setDeal(KindOfDeal.forRent);
+			ad.setRent(true);
+		} else if(placeAdForm.getForSale()) {
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.direct);
+		} else {
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.bothAuctionAndDirect);
+		}
+			
 		ad.setPriceRent(placeAdForm.getPriceRent());
 		ad.setPriceSale(placeAdForm.getPriceSale());
-		
-		//transports for auction prices variable
-		ad.setCurrentBid(placeAdForm.getCurrentBid());
 		ad.setIncrement(placeAdForm.getIncrement());
+		ad.setCurrentBid(placeAdForm.getCurrentBid());
+		ad.setRoomDescription(placeAdForm.getRoomDescription());
+		ad.setPreferences(placeAdForm.getPreferences());
 
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
@@ -123,10 +120,7 @@ public class AdService {
 
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
 		ad.setNumberOfRooms(placeAdForm.getNumberOfRooms());
-		
-		//ad.setStudio(placeAdForm.getStudio());
-		//ad.setRent(placeAdForm.getRent());
-
+	
 		Calendar calendar = Calendar.getInstance();
 		// java.util.Calendar uses a month range of 0-11 instead of the
 		// XMLGregorianCalendar which uses 1-12
@@ -154,35 +148,6 @@ public class AdService {
 			}
 		} catch (NumberFormatException e) {
 		}
-
-		/* AUCTION */
-		
-		ad.setDeal(placeAdForm.getDeal());
-		ad.setSale(placeAdForm.getSale());
-		
-		ad.setPriceRent(placeAdForm.getPriceRent());
-		ad.setPriceSale(placeAdForm.getPriceSale());
-		ad.setIncrement(placeAdForm.getIncrement());
-		ad.setCurrentBid(placeAdForm.getCurrentBid());
-		
-		/*ad.setDeadlineDate(placeAdForm.getDeadlineDate());
-		ad.setDeadlineHour(placeAdForm.getDeadlineHour());
-		ad.setDeadlineMinute(placeAdForm.getDeadlineMinute());*/
-		
-		
-		/*________*/
-		
-		
-		//ad.setPrizePerMonth(placeAdForm.getPrize());
-		ad.setRoomDescription(placeAdForm.getRoomDescription());
-		ad.setPreferences(placeAdForm.getPreferences());
-		
-		
-		/* Removed due to customer wishes
-		ad.setRoommates(placeAdForm.getRoommates());
-		*/
-		
-		/*_______________________*/
 		
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
@@ -200,15 +165,7 @@ public class AdService {
 		ad.setProximityToSchool(placeAdForm.getProximityToSchool());
 		ad.setProximityToSupermarket(placeAdForm.getProximityToSupermarket());
 		ad.setProximityToNightlife(placeAdForm.getProximityToNightlife());
-		
-		
-		//set property Type
-		//taken out for now
-		/*
-		ad.setPropertyType(placeAdForm.getPropertyType());
-		*/
-		
-		
+	
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
 		 * uploaded at this point!
@@ -220,26 +177,7 @@ public class AdService {
 			pictures.add(picture);
 		}
 		ad.setPictures(pictures);
-
-		/*
-		 * Roommates are saved in the form as strings. They need to be converted
-		 * into Users and saved as a List which will be accessible through the
-		 * ad object itself.
-		 */
-		
-		/* Removed due to customer wishes
-		List<User> registeredUserRommates = new LinkedList<>();
-		if (placeAdForm.getRegisteredRoommateEmails() != null) {
-			for (String userEmail : placeAdForm.getRegisteredRoommateEmails()) {
-				User roommateUser = userService.findUserByUsername(userEmail);
-				registeredUserRommates.add(roommateUser);
-			}
-		}
-		ad.setRegisteredRoommates(registeredUserRommates);
-		*/
-		
-		/*__________________________________________*/
-		
+	
 		// visits
 		List<Visit> visits = new LinkedList<>();
 		List<String> visitStrings = placeAdForm.getVisits();
@@ -294,7 +232,7 @@ public class AdService {
 		User sender = userDao.findByUsername("System");
 		for(User temp: userDa.findAll()) {
 			if(temp.getKindOfMembership().equals(ch.unibe.ese.team6.model.KindOfMembership.PREMIUM)) {
-				if(!temp.equals(ad.getUser())) {
+				if(!temp.equals(ad.getUser()) && !temp.equals(sender) && !temp.equals("eseserver@gmail.com")) {
 					messageService.sendMessage(sender, temp, subject, txt);
 					messageService.sendEmail(temp, subject, txt2);
 				}
@@ -403,24 +341,14 @@ public class AdService {
 
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 
-		
-		
-		
 		 if(searchForm.getForRent()) {
-			
-			
 			results = adDao.findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
-					KindOfDeal.forRent, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(), false, false);
-			
-			
+					KindOfDeal.forRent, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(), false, false);	
 		}
-		else if(searchForm.getForSale()){
-			
+		else if(searchForm.getForSale()){	
 			results = adDao.findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
-					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(),false, false);
-			
+					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(),false, false);	
 		}
-		
 		
 		//for the premium user ads list
 		List<Ad> premiumsFiltered = new ArrayList<>();

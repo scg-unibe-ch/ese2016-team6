@@ -148,7 +148,6 @@ public class MessageService {
 			mess.setSubject(sub);
 			mess.setText(tex);
 	
-
 			Transport.send(mess);
 			System.out.println("Sent message successfully....");
 			}catch (MessagingException mex) {

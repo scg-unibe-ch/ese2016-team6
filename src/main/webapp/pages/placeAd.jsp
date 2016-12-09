@@ -19,31 +19,8 @@
 		// iterate through it
 		// if there is id == x then make "Bookmark Me" to "bookmarked"
 
-		
-		
-		document.getElementById('type-sale').checked="";
-		document.getElementById('type-auction').checked="";
-		
-		document.getElementById('field-priceRent').style.visibility = "visible";
-		document.getElementById('field-priceSale').style.visibility = "hidden";
-		document.getElementById('field-currentBid').style.visibility = "hidden";
-		document.getElementById('field-increment').style.visibility = "hidden";
-		document.getElementById('field-deadlineDate').style.visibility = "hidden";
-		document.getElementById('field-deadlineHour').style.visibility = "hidden";
-		document.getElementById('field-deadlineMinute').style.visibility = "hidden";
-		
-		document.getElementById('rentLabel').style.visibility = "visible";
-		document.getElementById('saleLabel').style.visibility = "hidden";
-		document.getElementById('bidLabel').style.visibility = "hidden";
-		document.getElementById('incLabel').style.visibility = "hidden";
-		document.getElementById('deadLabel').style.visibility = "hidden";
-		
-
     	$("#type-rent").on("click", function(){
     		
-    		
-			document.getElementById('type-sale').checked="";
-			document.getElementById('type-auction').checked="";
         	document.getElementById('field-priceRent').style.visibility = "visible";
         	document.getElementById('field-priceSale').style.visibility = "hidden";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -58,9 +35,9 @@
 			document.getElementById('incLabel').style.visibility = "hidden";
 			document.getElementById('deadLabel').style.visibility = "hidden";
 			
-			
-			document.getElementById('ActualDeal').value = "forRent";
-			
+			document.getElementById('forRent').checked = true;
+			document.getElementById('forSale').checked = false;
+			document.getElementById('forAuction').checked = false;
 			
 			document.getElementById('preference').style.visibility = "visible";
 			document.getElementById('preferences').style.visibility = "visible";
@@ -77,8 +54,6 @@
     	});
 
 		$("#type-sale").on("click", function(){
-			document.getElementById('type-rent').checked="";
-			document.getElementById('type-auction').checked="";
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -95,8 +70,9 @@
 			document.getElementById('incLabel').style.visibility = "hidden";
 			document.getElementById('deadLabel').style.visibility = "hidden";
 			
-			document.getElementById('ActualSale').value = "direct";
-			document.getElementById('ActualDeal').value = "forSale";
+			document.getElementById('forRent').checked = false;
+			document.getElementById('forSale').checked = true;
+			document.getElementById('forAuction').checked = false;
 			
 			$("#field-priceSale").parent().show();
 			$("#field-priceRent").parent().hide();
@@ -110,10 +86,7 @@
 
    		});
 
-    	$("#type-auction").on("click", function(){
-    		document.getElementById('type-rent').checked="";
-			document.getElementById('type-sale').checked="";
-			
+    	$("#type-auction").on("click", function(){	
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "visible";
@@ -131,8 +104,9 @@
 			document.getElementById('incLabel').style.visibility = "visible";
 			document.getElementById('deadLabel').style.visibility = "visible";
 			
-			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
-			document.getElementById('ActualDeal').value = "forSale";
+			document.getElementById('forRent').checked = true;
+			document.getElementById('forSale').checked = false;
+			document.getElementById('forAuction').checked = false;
 			
 			$("#field-priceRent").parent().hide();
 			$("#field-priceSale").parent().show();
@@ -174,42 +148,6 @@
 			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
 		
-	<%--	$("#addbutton").click(function() {
-			
-			var text = $("#roomFriends").val();
-			var alreadyAdded = $("#addedRoommates").html();
-			
-			if(validateForm(text)) {
-				$.post("/profile/placeAd/validateEmail",{email: text, alreadyIn: alreadyAdded}, function(data) {
-					if(validateForm(data)) {
-						var index = $("#roommateCell input.roommateInput").length;
-						$("#roommateCell").append("<input class='roommateInput' type='hidden' name='registeredRoommateEmails[" + index + "]' value='" + data + "' />");
-						$("#addedRoommates").append(data + "; ");
-					} else {
-						alert(data);
-					}});
-			}
-			
-			else {
-				alert("Please enter an e-mail adress");
-			}
-			  
-			 
-			// Validates the input for Email Syntax
-			function validateForm(text) {
-			    var positionAt = text.indexOf("@");
-			    var positionDot = text.lastIndexOf(".");
-			    if (positionAt< 1 || positionDot<positionAt+2 || positionDot+2>=text.length) {
-			        return false;
-			    } else {
-			    	return true;
-			    }
-			}
-		});--%>
-		
-		
-		
-		
 		$("#addVisitButton").click(function() {
 			var date = $("#field-visitDay").val();
 			if(date == ""){
@@ -241,6 +179,18 @@
 			
 			$("#addedVisits").append(label + input);
 		});
+		
+		if (document.getElementById('forRent').checked) {
+			$("#type-rent").prop('checked', true);
+			$("#type-rent").click();
+		} else if(document.getElementById('forSale').checked){
+			$("#type-sale").prop('checked', true);
+			$("#type-sale").click();
+		} else {
+			$("#type-auction").prop('checked', true);
+			$("#type-auction").click;
+		}
+		
 
 	});
 </script>
@@ -277,27 +227,16 @@
 
 				<!-- uses the scripts above to put the values of the radio buttons in these two invisible fields
 				these two invisible fields are then written into the form
-				-->
-				<form:input type="hidden" id="ActualSale" path="sale"  value="direct" readonly="readonly" />
-				<form:input type="hidden" id="ActualDeal" path="deal"  value="forRent" readonly="readonly" />
 				
-				<c:choose>
-				<c:when test="${currentAd.getTypeOfDeal() eq 'forRent'}">
-				<input id="type-rent" type="radio" name="sale" value="forRent" checked="checked"> Rent
+ -->
+				
+				<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
+				<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent"/>
+				<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction"/>				
+				
+				<input id="type-rent" type="radio" name="sale" value="forRent"> Rent
 				<input id="type-sale"  type="radio" name="sale" value="forSale"> Sale
 				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction
-				</c:when>
-				<c:when test="${currentAd.getTypeOfDeal() eq 'forSale'}">
-				<input id="type-rent" type="radio" name="sale" value="forRent" > Rent
-				<input id="type-sale"  type="radio" name="sale" value="forSale" checked="checked"> Sale
-				<input id="type-auction" type="radio" name="sale" value="forAuction"> Auction
-				</c:when>
-				<c:otherwise>
-				<input id="type-rent" type="radio" name="sale" value="forRent" > Rent
-				<input id="type-sale"  type="radio" name="sale" value="forSale" > Sale
-				<input id="type-auction" type="radio" name="sale" value="forAuction" checked="checked"> Auction
-				</c:otherwise>
-				</c:choose>	
 				</td>
 			</tr>	
 			<tr>
