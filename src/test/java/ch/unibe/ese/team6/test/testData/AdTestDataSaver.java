@@ -86,6 +86,7 @@ public class AdTestDataSaver {
 		adBern.setMoveOutDate(moveOutDate1);
 		adBern.setPrizePerMonth(400);
 		adBern.setSquareFootage(50);
+		
 		adBern.setStudio(false);
 		adBern.setSmokers(false);
 		adBern.setAnimals(true);
@@ -133,6 +134,7 @@ public class AdTestDataSaver {
 		adBern2.setMoveOutDate(moveOutDate4);
 		adBern2.setPrizePerMonth(700);
 		adBern2.setSquareFootage(60);
+		adBern2.setNumberOfRooms(2);
 		adBern2.setStudio(true);
 		adBern2.setSmokers(false);
 		adBern2.setAnimals(true);

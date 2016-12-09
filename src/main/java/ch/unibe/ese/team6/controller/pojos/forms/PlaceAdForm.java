@@ -100,7 +100,15 @@ public class PlaceAdForm {
 	}
 
 	public String getStreet() {
-		return street;
+		if(street!=null){
+			try {
+				return new String(street.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return street;	
+			}
+		}
+		else
+			return new String("");	
 	}
 
 	public void setStreet(String street) {
@@ -253,7 +261,15 @@ public class PlaceAdForm {
 	}
 	
 	public String getRoomDescription() {
-		return roomDescription;
+		if(roomDescription!=null){
+			try {
+				return new String(roomDescription.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return roomDescription;	
+			}
+		}
+		else
+			return new String("");	
 	}
 
 	public void setRoomDescription(String roomDescription) {
@@ -261,7 +277,15 @@ public class PlaceAdForm {
 	}
 
 	public String getPreferences() {
-		return preferences;
+		if(preferences!=null){
+			try {
+				return new String(preferences.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return preferences;	
+			}
+		}
+		else
+			return new String("");	
 	}
 
 	public void setPreferences(String preferences) {
