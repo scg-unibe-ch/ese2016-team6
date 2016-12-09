@@ -259,6 +259,7 @@ function deleteAd(button) {
 
 <hr style="margin:0px" />
 
+<c:set var="countCols" value="${0}" />
 <table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">
 	<tr>
 				<td style="width:50%">
@@ -336,6 +337,8 @@ function deleteAd(button) {
 					</table>	
 		</td>
 		<c:if test="${shownAd.hasPictures()}">
+			
+		<c:set var="countCols" value="${1}" />
 		<td style="width:50%;">
 			<div id="image-slider" class="adDescDiv">
 				<div id="left-arrow">
@@ -352,9 +355,13 @@ function deleteAd(button) {
 			</div>
 		</td>
 		</c:if>
-	</tr>
-	<tr>
-	
+		
+		<c:if test="${countCols == 1}">
+			</tr>
+			<tr>
+			<c:set var="countCols" value="${0}" />
+		</c:if>
+		
 		<td style="width:50%;">	
 			<div id="bidList" class="adDescDiv">
 				
@@ -581,7 +588,7 @@ function deleteAd(button) {
 										<c:if test="${loggedInUserEmail != shownAd.user.username}">
 											
 											<c:choose>
-											<c:when test="${visitServie.hasUserSentEnquiry(loggedInUserEmail, visit)}">
+											<c:when test="${visitService.hasUserSentEnquiry(loggedInUserEmail, visit)}">
 												<button class="thinInactiveButton" type="button" data-id="${visit.id}">Enquiry sent</button>
 											</c:when>
 											<c:otherwise>

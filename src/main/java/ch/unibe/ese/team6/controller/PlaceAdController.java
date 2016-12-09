@@ -135,6 +135,8 @@ public class PlaceAdController {
 		if (pictureUploader == null) {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
+		
+		model.addObject("visitService", new VisitService());
 		return model;
 	}
 

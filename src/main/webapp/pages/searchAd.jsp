@@ -39,8 +39,6 @@
 </script>
 <script>
 $(document).ready(function() {
-	document.getElementById('forSale').checked = true;
-	document.getElementById('forRent').checked = false;
 	
 	$("#type-sale").on("click", function(){
 		document.getElementById('forSale').checked = true;
@@ -51,6 +49,12 @@ $(document).ready(function() {
 		document.getElementById('forRent').checked = true;
 		document.getElementById('forSale').checked = false;
 	});
+	
+	if (document.getElementById('forSale').checked) {
+		$("#type-sale").prop('checked', true);
+	} else {
+		$("#type-rent").prop('checked', true);
+	}
 });	
 </script>
 <script> function wasSale() {
@@ -100,18 +104,13 @@ function validateType(form)
 			<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
 			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
 			<form>
-			<c:choose>
 			<%-- that needs to be fixed --%>
-			<c:when test="${document.getElementById('forSale').checked == 'checked'}">
+			<%-- document.getElementById('forSale').checked --%>
+			
 				<input type="radio" id="type-rent" name="RentSale"> For Rent
-				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale/Auction				
-			</c:when>
-			<c:otherwise>
-				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
-				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction			
-			</c:otherwise>
-			</c:choose>
-	 		</form>
+				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction				
+			
+			</form>
 		<br />
 		
 		<label for="city">City / zip code:</label>
