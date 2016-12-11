@@ -12,35 +12,6 @@
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
 -->
 
-<!-- 
-<script>
-function validateType(form)
-{
-	var rent = document.getElementById('rent');
-	var sale = document.getElementById('sale');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	var type = document.getElementById('type');
-	var filtered = document.getElementById('filtered');
-	
-	if(room.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!room.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-		type.checked = studio.checked;
-	}
-	filtered.checked = true;
-}
-</script>
--->
-
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->
 <c:import url="template/NewLoginPop.jsp" />
@@ -106,7 +77,6 @@ function sort_div_attribute() {
 
 <script>
 	$(document).ready(function() {
-		
 		if (document.getElementById('forSale').checked) {
 			$("#type-sale").prop('checked', true);
 		} else {
@@ -125,6 +95,18 @@ function sort_div_attribute() {
 			document.getElementById('line').style.display = "none";
 			document.getElementById('additionalCriteria').style.display = "none";
 			document.getElementById('hideMoreCriteria').style.display = "none";
+		});
+		
+		$("#showMap").click(function() {
+			document.getElementById('showMap').style.display = "none";
+			document.getElementById('map').style.display = "";
+			document.getElementById('hideMap').style.display = "block";
+		});
+		
+		$("#hideMap").click(function() {
+			document.getElementById('showMap').style.display = "block";
+			document.getElementById('map').style.display = "none";
+			document.getElementById('hideMap').style.display = "none";
 		});
 		
 		$("#city").autocomplete({
@@ -193,7 +175,6 @@ function sort_div_attribute() {
 <tr>
 <td valign="top" style="width:350px; min-width:400px;">
 
-<br>
 
 <div>
 <select id="modus">
@@ -305,15 +286,9 @@ function sort_div_attribute() {
 		<button style="background-color:#991f00;color:white" type="reset">Cancel</button>
 		<button style="background-color:#ffffcc" type="submit">Filter</button>
 		<button id="hideMoreCriteria" type="button" style="float: right; display: none;">Hide Filter Criteria</button>
-		<button id="moreFilterCriteria" type="button" style="float: right;">More Filter Criteria</button>
-		
-		
+		<button id="moreFilterCriteria" type="button" style="float: right;">More Filter Criteria</button>	
 	</div>
 </form:form>
-
-<br><br>
-
-<div id="map" style="width: 370px; height: 300px;"></div>
 
 </td>
 <!-- seperates the two columns -->
@@ -324,6 +299,11 @@ function sort_div_attribute() {
 </td>
 
 <td rowspan="2" valign="top">
+
+<button id="showMap" type="button" style="float: left; display: none;">Show the Map</button>
+<button id="hideMap" type="button" style="float: left;">Hide the Map</button>
+
+<div id="map" style="width: 800px; height: 300px; float:left"></div>
 
 <c:choose>
 	<c:when test="${empty results}">
