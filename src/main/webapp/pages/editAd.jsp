@@ -17,11 +17,14 @@
 <script>
 	$(document).ready(function() {	
 		if(document.getElementById('forRent').checked) {
+			$("#type-rent").prop('checked', true);
 			$("#type-rent").click();
 		} else if(document.getElementById('forSale').checked) {
+			$("#type-sale").prop('checked', true);
 			$("#type-Sale").click();
 		} else if(document.getElementById('forAuction').checked) {
 			$("#type-auction").click();
+			$("#type-auction").prop('checked', true);
 		}
 		
 		setTimeout(function() {
@@ -283,7 +286,7 @@ $("#type-rent").on("click", function(){
 							
 						<input id="type-rent" type="radio" name="sale" value="forRent"/>For Rent
 						<input id="type-sale" type="radio" name="sale" value="forSale"/>For Sale
-						<input id="type-auction" type="radio" name="sale" value="forAuction" checked="checked"/>For Auction
+						<input id="type-auction" type="radio" name="sale" value="forAuction"/>For Auction
 					
 					</td>
 

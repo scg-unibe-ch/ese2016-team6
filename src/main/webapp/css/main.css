@@ -990,15 +990,22 @@ footer nav ul li {
 .resultAd {
 	
 	
-	width: 600px;
+	width: 700px;
 	vertical-align: top;
 	display: inline-block;
 	
 	padding: 10px 10px;
 }
 
-
-
+.resultAdSearch {
+	
+	
+	width: 800px;
+	vertical-align: top;
+	display: inline-block;
+	
+	padding: 10px 10px;
+}
 
 #resultsDiv div {
 	/*height: 150px;
@@ -1033,7 +1040,7 @@ footer nav ul li {
 
 .resultLeft {
 	float: left;
-	width: 10%;
+	width: 15%;
 	min-width: 80px;
 	
 }
