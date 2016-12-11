@@ -217,10 +217,10 @@ function sort_div_attribute() {
 		<form:errors path="radius" cssClass="validationErrorText" />
 	
 		<br /> 
-		<label for="prize">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize" min="0" />
+		<label for="price">Price (max.):</label>
+		<form:input id="priceInput" type="number" path="price" min="0" />
 		CHF
-		<form:errors path="prize" cssClass="validationErrorText" />
+		<form:errors path="price" cssClass="validationErrorText" />
 		
 		<br />
 		<label for="numberOfRooms">Rooms(min.):</label>
@@ -312,7 +312,7 @@ function sort_div_attribute() {
 	<c:otherwise>
 		<div id="resultsDiv" class="resultsDiv" style="float:left; align:center; width:100%;">			
 			<c:forEach var="ad" items="${results}">
-				<div class="resultAdSearch" data-price="${ad.prizePerMonth}" 
+				<div class="resultAdSearch" data-price="${ad.price}" 
 								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
 								
 				 	<table id="resultTable" >
@@ -355,12 +355,12 @@ function sort_div_attribute() {
 						
 							<td>
 								<div class="resultRight">
-									
-									
-									<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale } <br> sale price </h2></c:if>
-									<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid } <br> current bid </h2></c:if>
-									<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid </h2></c:if>
-									
+									<c:if test="${ad.deal=='forRent'}"> <h2>CHF ${ad.priceRent}</h2></c:if>
+									<c:if test="${ad.deal=='forSale'}">
+											<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale} <br> sale price </h2></c:if>
+											<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid} <br> current bid </h2></c:if>
+											<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid </h2></c:if>
+											</c:if>
 									<br /> <br />
 									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 										type="date" pattern="dd.MM.yyyy" />

@@ -67,8 +67,6 @@ public class Ad {
 	public long getPriceAll() {
 		if(price!=0) {
 			return price;
-		} else if(prizePerMonth!=0) {
-			return prizePerMonth;
 		} else if(priceRent!=0) {
 			return priceRent;
 		} else if(priceSale!=0) {
@@ -259,20 +257,6 @@ public class Ad {
 	
 	public void setDeadlineMinute(String deadlineMinute) {
 		this.deadlineMinute = deadlineMinute;
-	}
-
-	
-	//value used to store the price of rent. Do not use.
-	//do not delete either, it is necessary to get the default value of the current ads.
-	private int prizePerMonth;
-	
-	public int getPrizePerMonth() {
-		return prizePerMonth;
-	}
-
-	public void setPrizePerMonth(int prizePerMonth) {
-		this.prizePerMonth = prizePerMonth;
-		this.priceRent = prizePerMonth;
 	}
 	
 	@Column(nullable = false)

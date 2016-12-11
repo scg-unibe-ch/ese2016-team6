@@ -21,7 +21,7 @@
 			autoFocus : true
 		});
 		
-		var price = document.getElementById('prizeInput');
+		var price = document.getElementById('priceInput');
 		var radius = document.getElementById('radiusInput');
 		
 		var roomNumbers = document.getElementById('numberRoomsInput');
@@ -43,11 +43,15 @@ $(document).ready(function() {
 	$("#type-sale").on("click", function(){
 		document.getElementById('forSale').checked = true;
 		document.getElementById('forRent').checked = false;
+		document.getElementById('priceSale').style.visibility = "visible";
+		document.getElementById('priceRent').style.visibility = "hidden";
 	});
 
 	$("#type-rent").on("click", function(){
 		document.getElementById('forRent').checked = true;
 		document.getElementById('forSale').checked = false;
+		document.getElementById('priceSale').style.visibility = "hidden";
+		document.getElementById('priceRent').style.visibility = "visible";
 	});
 	
 	if (document.getElementById('forSale').checked) {
@@ -62,34 +66,7 @@ $(document).ready(function() {
 }
 </script>
 
-<!-- 
-<script>
-function validateType(form)
-{
-	var room = document.getElementById('room');
-	var studio = document.getElementById('studio');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	var type = document.getElementById('type');
-	var filtered = document.getElementById('filtered');
-	
-	if(room.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!room.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-		type.checked = studio.checked;
-	}
-	filtered.checked = false;
-}
-</script>
--->
+
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->
 <c:import url="template/NewLoginPop.jsp" />
@@ -125,10 +102,16 @@ function validateType(form)
 		<form:errors path="radius" cssClass="validationErrorText" />
 		
 		
-		<br /> <label for="prizeInput">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize" min="1" />
+		<br /> <label for="priceRent">Price Rent(max.):</label>
+		<form:input id="priceRent" type="number" path="priceRent" min="1" />
 		CHF
-		<form:errors path="prize" cssClass="validationErrorText" />
+		<form:errors path="priceRent" cssClass="validationErrorText" />
+		<br />
+		
+		<br /> <label for="priceSale">Price Sale(max.):</label>
+		<form:input id="priceSale" type="number" path="priceSale" min="1" />
+		CHF
+		<form:errors path="priceSale" cssClass="validationErrorText" />
 		<br />
 		
 		

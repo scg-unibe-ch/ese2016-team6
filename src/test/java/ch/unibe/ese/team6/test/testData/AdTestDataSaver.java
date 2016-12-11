@@ -84,7 +84,8 @@ public class AdTestDataSaver {
 		adBern.setMoveInDate(moveInDate1);
 		adBern.setCreationDate(creationDate1);
 		adBern.setMoveOutDate(moveOutDate1);
-		adBern.setPrizePerMonth(400);
+		adBern.setDeal(KindOfDeal.forRent);
+		adBern.setPriceRent(400);
 		adBern.setSquareFootage(50);
 		
 		adBern.setStudio(false);
@@ -132,7 +133,8 @@ public class AdTestDataSaver {
 		adBern2.setMoveInDate(moveInDate2);
 		adBern2.setCreationDate(creationDate2);
 		adBern2.setMoveOutDate(moveOutDate4);
-		adBern2.setPrizePerMonth(700);
+		adBern2.setDeal(KindOfDeal.forRent);
+		adBern2.setPriceRent(700);
 		adBern2.setSquareFootage(60);
 		adBern2.setNumberOfRooms(2);
 		adBern2.setStudio(true);
@@ -177,7 +179,8 @@ public class AdTestDataSaver {
 		adBasel.setMoveInDate(moveInDate3);
 		adBasel.setMoveOutDate(moveOutDate2);
 		adBasel.setCreationDate(creationDate3);
-		adBasel.setPrizePerMonth(480);
+		adBasel.setDeal(KindOfDeal.forRent);
+		adBasel.setPriceRent(480);
 		adBasel.setSquareFootage(10);
 		adBasel.setStudio(true);
 		adBasel.setSmokers(true);
@@ -220,7 +223,7 @@ public class AdTestDataSaver {
 		adOlten.setNumberOfRooms(2);
 		adOlten.setMoveInDate(moveInDate4);
 		adOlten.setCreationDate(creationDate4);
-		//adOlten.setPrizePerMonth(430);
+		adOlten.setPriceRent(430);
 		adOlten.setSquareFootage(60);
 		adOlten.setStudio(false);
 		adOlten.setSmokers(true);
@@ -259,7 +262,8 @@ public class AdTestDataSaver {
 		adNeuchâtel.setMoveInDate(moveInDate5);
 		adNeuchâtel.setMoveOutDate(moveOutDate3);
 		adNeuchâtel.setCreationDate(creationDate5);
-		adNeuchâtel.setPrizePerMonth(410);
+		adNeuchâtel.setDeal(KindOfDeal.forRent);
+		adNeuchâtel.setPriceRent(410);
 		adNeuchâtel.setSquareFootage(40);
 		adNeuchâtel.setStudio(true);
 		adNeuchâtel.setSmokers(true);
@@ -302,7 +306,6 @@ public class AdTestDataSaver {
 		adBiel.setMoveInDate(moveInDate6);
 		adBiel.setMoveOutDate(moveOutDate5);
 		adBiel.setCreationDate(creationDate6);
-		//adBiel.setPrizePerMonth(480);
 		adBiel.setNumberOfRooms(4);
 		adBiel.setSquareFootage(20);
 		adBiel.setStudio(true);
@@ -349,7 +352,6 @@ public class AdTestDataSaver {
 		adZurich.setMoveInDate(moveInDate7);
 		adZurich.setCreationDate(creationDate7);
 		adZurich.setMoveOutDate(moveOutDate5);
-		//adZurich.setPrizePerMonth(480);
 		adZurich.setNumberOfRooms(1);
 		adZurich.setSquareFootage(32);
 		adZurich.setStudio(false);
@@ -396,7 +398,8 @@ public class AdTestDataSaver {
 		adLuzern.setZipcode(6000);
 		adLuzern.setMoveInDate(moveInDate8);
 		adLuzern.setCreationDate(creationDate2);
-		adLuzern.setPrizePerMonth(700);
+		adLuzern.setDeal(KindOfDeal.forRent);
+		adLuzern.setPriceRent(700);
 		adLuzern.setSquareFootage(60);
 		adLuzern.setStudio(true);
 		adLuzern.setSmokers(false);
@@ -443,7 +446,6 @@ public class AdTestDataSaver {
 		adAarau.setMoveInDate(moveInDate3);
 		adAarau.setMoveOutDate(moveOutDate4);
 		adAarau.setCreationDate(creationDate8);
-		//adAarau.setPrizePerMonth(800);
 		adAarau.setSquareFootage(26);
 		adAarau.setStudio(true);
 		adAarau.setSmokers(true);
@@ -486,7 +488,8 @@ public class AdTestDataSaver {
 		adDavos.setZipcode(7260);
 		adDavos.setMoveInDate(moveInDate2);
 		adDavos.setCreationDate(creationDate4);
-		adDavos.setPrizePerMonth(1100);
+		adDavos.setDeal(KindOfDeal.forRent);
+		adDavos.setPriceRent(1100);
 		adDavos.setSquareFootage(74);
 		adDavos.setStudio(false);
 		adDavos.setSmokers(true);
@@ -525,7 +528,8 @@ public class AdTestDataSaver {
 		adLausanne.setMoveInDate(moveInDate5);
 		adLausanne.setMoveOutDate(moveOutDate3);
 		adLausanne.setCreationDate(creationDate5);
-		adLausanne.setPrizePerMonth(360);
+		adLausanne.setDeal(KindOfDeal.forRent);
+		adLausanne.setPriceRent(360);
 		adLausanne.setSquareFootage(8);
 		adLausanne.setStudio(false);
 		adLausanne.setSmokers(true);
@@ -565,7 +569,6 @@ public class AdTestDataSaver {
 		adLocarno.setMoveInDate(moveInDate6);
 		adLocarno.setMoveOutDate(moveOutDate5);
 		adLocarno.setCreationDate(creationDate6);
-		//adLocarno.setPrizePerMonth(960);
 		adLocarno.setSquareFootage(42);
 		adLocarno.setStudio(false);
 		adLocarno.setSmokers(true);

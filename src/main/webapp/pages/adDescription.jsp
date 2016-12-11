@@ -216,7 +216,7 @@ function deleteAd(button) {
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">
-				<button style="background-color:#991f00;color:white" class="deleteButton" data-id="${shownAd.id}" onClick="deleteAd(this)">Delete Ad</button>
+				<button style="background-color:#991f00;color:white" class="deleteButton" data-id="${shownAd.id}" onClick="deleteAd(this)" href="/deletedAd">Delete Ad</button>
 				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
 					<button type="button">Edit Ad</button>
 				</a>

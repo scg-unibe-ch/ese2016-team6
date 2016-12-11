@@ -28,20 +28,8 @@ public class Alert {
 	private String city;
 
 	@Column(nullable = false)
-	private int price;
-
-	@Column(nullable = false)
 	private int radius;
 
-	@Column
-	private boolean studio;
-
-	@Column
-	private boolean room;
-
-	@Column
-	private boolean bothRoomAndStudio;
-	
 	@Column
 	private boolean forRent; // true if for rent, false if for sale
 
@@ -62,6 +50,11 @@ public class Alert {
 
 	@Column(nullable = false)
 	private int numberOfRooms;
+
+	private int priceRent;
+	private int priceSale;
+	
+	private int price;
 
 	public long getId() {
 		return id;
@@ -103,38 +96,6 @@ public class Alert {
 		this.radius = radius;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public boolean getStudio() {
-		return studio;
-	}
-
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-
-	public boolean getRoom() {
-		return room;
-	}
-
-	public void setRoom(boolean room) {
-		this.room = room;
-	}
-
-	public boolean getBothRoomAndStudio() {
-		return bothRoomAndStudio;
-	}
-
-	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
-		this.bothRoomAndStudio = bothRoomAndStudio;
-	}
-	
 	public boolean getForRent() {
 		return forRent;
 	}
@@ -190,5 +151,29 @@ public class Alert {
 	
 	public boolean getIsValid() {
 		return isValid;
+	}
+
+	public void setPriceRent(int priceRent) {
+		this.priceRent = priceRent;
+	}
+	
+	public int getPriceRent() {
+		return priceRent;
+	}
+	
+	public void setPriceSale(int priceSale) {
+		this.priceSale = priceSale;
+	}
+	
+	public int getPriceSale() {
+		return priceSale;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }

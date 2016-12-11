@@ -33,7 +33,7 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
-	private int prize;
+	private int price;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
@@ -78,10 +78,6 @@ public class PlaceAdForm {
 
 	private KindOfMembership kind;
 	
-	/*private boolean rent = false;
-	private boolean sale = false;
-	private boolean auction = false;*/
-
 	public String getTitle() {
 		
 		if(title!=null){
@@ -163,38 +159,6 @@ public class PlaceAdForm {
 		this.moveOutDate = moveOutDate;
 	}
 	
-	/*public KindOfDeal getDeal() {
-		return deal;
-	}
-	
-	public void setDeal(KindOfDeal deal) {
-		this.deal = deal;
-	}
-	
-	public boolean getRent() {
-		return rent;
-	}
-	
-	public void setRent(boolean rent) {
-		this.rent = rent;
-	}
-	
-	public KindOfSale getSale() {
-		return sale;
-	}
-	
-	public void setSale(KindOfSale sale) {
-		this.sale = sale;
-	}
-	
-	public boolean getAuction() {
-		return auction;
-	}
-	
-	public void setAuction(boolean auction) {
-		this.auction = auction;
-	}*/
-	
 	public int getPriceRent() {
 		return priceRent;
 	}
@@ -252,12 +216,12 @@ public class PlaceAdForm {
 		this.deadlineMinute = deadlineMinute;
 	}
 	
-	public int getPrize() {
-		return prize;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setPrize(int prize) {
-		this.prize = prize;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	
 	public String getRoomDescription() {

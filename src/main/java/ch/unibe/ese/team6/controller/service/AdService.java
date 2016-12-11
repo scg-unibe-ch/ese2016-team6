@@ -342,12 +342,12 @@ public class AdService {
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 
 		 if(searchForm.getForRent()) {
-			results = adDao.findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
-					KindOfDeal.forRent, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(), false, false);	
+			results = adDao.findByDealAndPriceRentLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
+					KindOfDeal.forRent, searchForm.getPriceRent() + 1, searchForm.getNumberOfRooms(), false, false);	
 		}
 		else if(searchForm.getForSale()){	
 			results = adDao.findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
-					KindOfDeal.forSale, searchForm.getPrize() + 1, searchForm.getNumberOfRooms(),false, false);	
+					KindOfDeal.forSale, searchForm.getPriceSale() + 1, searchForm.getNumberOfRooms(),false, false);	
 		}
 		
 		//for the premium user ads list
