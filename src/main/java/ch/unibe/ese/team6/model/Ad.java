@@ -63,6 +63,20 @@ public class Ad {
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 	
+	// as we have so much different pirces we need this method if we just want to get a price
+	public long getPriceAll() {
+		if(price!=0) {
+			return price;
+		} else if(prizePerMonth!=0) {
+			return prizePerMonth;
+		} else if(priceRent!=0) {
+			return priceRent;
+		} else if(priceSale!=0) {
+			return priceSale;
+		}
+		return 0;
+	}
+	
 	/*_________To Be Removed______________*/
 	
 	//to remove asap
@@ -93,7 +107,7 @@ public class Ad {
 	}
 
 	//sale type
-	private KindOfDeal deal = KindOfDeal.forRent;
+	private KindOfDeal deal;
 	private KindOfSale sale;
 
 	private int priceRent;
@@ -622,54 +636,7 @@ public class Ad {
 		if (id != other.id)
 			return false;
 		return true;
-	}
-	
-	
-	/*___________________________________*/
-	/*             GIVEN UP              */
-	/*___________________________________*/
-	
-	
-	/*KindOfProperty : studio, room, flat
-	
-	//Specifies what kind of property this property is (Studio, Room, Flat)
-	//taken out because it caused an error
-	
-	@Column(nullable = false)
-	private KindOfProperty propertyType;
-
-	
-	public void setPropertyType(KindOfProperty newType){
-		propertyType = newType;
-	}
-	
-	
-	public KindOfProperty getPropertyType(){
-		return propertyType;
-	}
-	
-	
-	public boolean getStudio() {
-		return (propertyType==KindOfProperty.Studio);
-		
-		
-		//following line is deprecated
-		return studio;
-		
-	}
-
-
-	public void setStudio(boolean studio) {
-		this.propertyType=KindOfProperty.Studio;
-		
-		//A failsave to make sure no single room has more or less than one room
-		if(this.propertyType==KindOfProperty.Room) this.setNumberOfRooms(1);
-		
-		//following line is deprecated
-		this.studio = studio;
-		
-	}
-	
+	}	
 	
 	/*studio&room, for rent&for sale*/
 	
@@ -685,26 +652,5 @@ public class Ad {
 		
 	public void setStudio(boolean studio) {
 		this.studio = studio;
-	}
-	
-
-	/*roommates & registered roommates*/
-/*	
-	
-	private String roommates;
-
-	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<User> registeredRoommates;
-	
-	public String getRoommates() {
-		return roommates;
-	}
-
-	public void setRoommates(String roommates) {
-		this.roommates = roommates;
-	}
- */
-	
-	
+	}	
 }

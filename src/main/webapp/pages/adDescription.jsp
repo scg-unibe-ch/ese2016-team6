@@ -13,7 +13,7 @@
 <c:import url="template/header.jsp" />
 
 <!--
-<pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>
+<pre><a href="/">Home</a>   &gt;   <a href="/profile/myAds">My Rooms</a>   &gt;   Ad Description</pre>
 -->
 
 <script src="/js/image_slider.js"></script>
@@ -138,11 +138,6 @@
                     }--%>
                 }
         });
-        
-        $("#deleteAd").click(function(){
-			var id = $(button).attr("data-id");
-			$.get("/deleteAd?id=" + id);
-		});	
     });
 		
 </script>
@@ -196,8 +191,6 @@ function deleteAd(button) {
 
         var timer = setInterval(showTimeLeft, 1000);
     </script>
-
-</script>--%>
 
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->

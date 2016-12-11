@@ -210,7 +210,7 @@ public class AdController {
 	@RequestMapping(value = "/deleteAd", method = RequestMethod.POST)
 	public @ResponseBody ModelAndView deleteAd(@RequestParam("id") long id) {
 		adService.deleteAd(id);
-		ModelAndView model = new ModelAndView("index");
+		ModelAndView model = new ModelAndView("redirect:/idex");
 		model.addObject("confirmationMessage", "Delete Ad was succesfull!");
 		return model;
 	}

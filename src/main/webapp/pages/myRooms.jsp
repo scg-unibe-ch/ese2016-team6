@@ -2,6 +2,7 @@
 	contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
@@ -41,7 +42,7 @@
 				
 						
 					<c:forEach var="ad" items="${ownAdvertisements}">
-						<div class="resultAd" data-price="${ad.prizePerMonth}" 
+						<div class="resultAd" data-price="${ad.getPriceAll()}" 
 										data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
 							
 							<table id="resultTable" >
@@ -94,13 +95,12 @@
 								
 									<td>
 										<div class="resultRight">
-											<h2>CHF ${ad.prizePerMonth }</h2>
+											<h2>CHF ${ad.getPriceAll()}</h2>
 											<br /> <br />
 
 											<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-												type="date" pattern="dd.MM.yyyy" />
-
-											<p>Move-in date: ${formattedMoveInDate }</p>
+														type="date" pattern="dd.MM.yyyy" />
+													<p>Move-in date: ${formattedMoveInDate }</p>
 										</div>
 							
 									</td>
