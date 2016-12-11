@@ -146,6 +146,7 @@
 function deleteAd(button) {
 	var id = $(button).attr("data-id");
 	$.post("/deleteAd?id=" + id);
+	window.location.href = "/deletedAd";
 }
 </script>
 
