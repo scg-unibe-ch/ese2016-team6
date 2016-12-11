@@ -192,20 +192,10 @@ function deleteAd(button) {
                     }
                 }
 
-
-            
         }
 
         var timer = setInterval(showTimeLeft, 1000);
     </script>
- <%-- <script> function show() {
-	 if(${shownAd.pictures}.isEmpty()) {
-		 $("#image-slider").parent().hide();
-	 }
-	 if(${shownAd.preferences}.isEmpty()) {
-		 $("#preferences").parent().hide();
-	 }
- }
 
 </script>--%>
 
