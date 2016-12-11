@@ -234,7 +234,6 @@ public class ProfileController {
 			Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
 			Authentication result = authenticationManager.authenticate(request);
 			SecurityContextHolder.getContext().setAuthentication(result);			
-			model = new ModelAndView("updatedProfile");
 			model = new ModelAndView("redirect:/user?id=" + user.getId());
 			model.addObject("confirmationMessage",
 					"Your Profile has been updated!");

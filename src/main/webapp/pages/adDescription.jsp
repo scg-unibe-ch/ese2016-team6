@@ -138,6 +138,11 @@
                     }--%>
                 }
         });
+        
+        $("#deleteAd").click(function(){
+			var id = $(button).attr("data-id");
+			$.get("/deleteAd?id=" + id);
+		});	
     });
 		
 </script>
@@ -145,9 +150,7 @@
 <script>
 function deleteAd(button) {
 	var id = $(button).attr("data-id");
-	$.get("/ad?id=" + id + "/deleteAd?id=" + id , function(){
-		$("#adDiv").load(document.URL + " #adDiv");
-	});
+	$.post("/deleteAd?id=" + id);
 }
 </script>
 
@@ -667,9 +670,8 @@ function deleteAd(button) {
 							<td><c:choose>
 									<c:when test="${loggedIn}">
 										<c:if test="${loggedInUserEmail != shownAd.user.username}">
-											
 											<c:choose>
-											<c:when test="${visitService.hasUserSentEnquiry(shownAd.user.Email, visit)}">
+											<c:when test="${visitService.hasUserSentEnquiry(loggedInUserEmail, visit)}">
 												<button class="thinInactiveButton" type="button" data-id="${visit.id}">Enquiry sent</button>
 											</c:when>
 											<c:otherwise>

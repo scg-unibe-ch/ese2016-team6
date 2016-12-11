@@ -789,5 +789,4 @@ public class AdService {
 	public void deleteAd(Long id) {
 		adDao.delete(id);
 	}
-	
 }

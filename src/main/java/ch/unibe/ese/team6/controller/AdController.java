@@ -86,6 +86,7 @@ public class AdController {
 		model.addObject("loggedInUserEmail", loggedInUserEmail);
 
 		model.addObject("visits", visitService.getVisitsByAd(ad));
+		model.addObject("visitService", visitService);
 
 		return model;
 	}
@@ -102,6 +103,7 @@ public class AdController {
 		Ad ad = adService.getAdById(id);
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
+		model.addObject("visitService", visitService);
 
 		if (!bindingResult.hasErrors()) {
 			messageService.saveFrom(messageForm);
@@ -173,6 +175,7 @@ public class AdController {
 
 			model.addObject("bookmarkedAdvertisements", user.getBookmarkedAds());
 			model.addObject("ownAdvertisements", ownAds);
+			model.addObject("visitService", visitService);
 			return model;
 		} else {
 			model = new ModelAndView("home");
@@ -203,11 +206,14 @@ public class AdController {
 		return model;
 	}
 
-	/** Deletes the ad with the given id
-	@RequestMapping(value = "/ad", method = RequestMethod.GET)
-	public @ResponseBody void deleteAd(@RequestParam("id") long id) {
+	/*Deletes the ad with the given id*/
+	@RequestMapping(value = "/deleteAd", method = RequestMethod.POST)
+	public @ResponseBody ModelAndView deleteAd(@RequestParam("id") long id) {
 		adService.deleteAd(id);
-	}*/
+		ModelAndView model = new ModelAndView("index");
+		model.addObject("confirmationMessage", "Delete Ad was succesfull!");
+		return model;
+	}
 	
 	/* AUCTION */
 	/*@RequestMapping(value = "/ad?id=${ad.id}", method = RequestMethod.POST)
