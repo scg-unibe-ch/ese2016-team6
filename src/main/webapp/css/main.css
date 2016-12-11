@@ -893,7 +893,7 @@ footer nav ul li {
 /* -------------------------------------------------------------------- */
 /* editProfile.jsp */
 .editProfileTable input {
-	width: 30%;
+	width: 50%;
 	font-size: 0.8em;
 }
 
@@ -902,9 +902,10 @@ footer nav ul li {
 }
 
 .editProfileTable {
-	width: 80%;
+	width: 100%;
 	margin-top: 2px;
-	font-size: 1.4em;
+	font-size: 1.3em;
+	float: center;
 }
 
 .spacingTable {
@@ -1461,12 +1462,12 @@ footer nav ul li {
 /* -------------------------------------------------------------------- */
 /* publicProfile.jsp */
 #userDiv {
-	width: 40%;
+	width: 60%;
 	margin: 0 auto;
 }
 
 #userDiv img{
-	max-height: 200px;
+	max-height: 250px;
 }
 
 /* -------------------------------------------------------------------- */

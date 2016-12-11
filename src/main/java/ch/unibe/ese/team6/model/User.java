@@ -247,4 +247,11 @@ public class User {
 		}
 		return false;
 	}
+	
+	public boolean aboutMeNotEmpty() {
+		if(aboutMe.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 }

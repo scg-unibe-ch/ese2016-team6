@@ -39,6 +39,7 @@ public class GoogleSignupService {
 		user.setEmail(googleForm.getEmail());
 		user.setFirstName(googleForm.getFirstName());
 		user.setLastName(googleForm.getLastName());
+		user.setAboutMe("");
 		
 		final SecureRandom rndm = new SecureRandom();
 		String randomPassword = new BigInteger(50, rndm).toString(32);

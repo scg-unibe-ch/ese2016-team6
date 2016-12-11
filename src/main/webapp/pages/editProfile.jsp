@@ -50,6 +50,9 @@ function testForKind(kindOfUser, kind) {
 		<td class="spacingTable"><label for="user-name">Username:</label><a>&emsp;</a>
 		<form:input id="user-name" path="username" value="${currentUser.username}" /></td>
 		
+		<td rowspan="5" class="spacingTable"><label for="about-me">About me:</label><a>&emsp;&thinsp;</a><br><br>
+		<form:textarea id="about-me" path="aboutMe" rows="10" cols="50" /></td>
+		
 	</tr>
 	<tr>
 		<td class="spacingTable"><label for="first-name">First name:</label><a>&emsp;</a>
@@ -77,13 +80,7 @@ function testForKind(kindOfUser, kind) {
 			</c:otherwise>
 			</c:choose>
 		</form:select>
-	</tr>
-
-	<tr>
-		<td class="spacingTable"><label for="about-me">About me:</label><a>&emsp;&thinsp;</a><br>
-		<form:textarea id="about-me" path="aboutMe" rows="10" cols="100" /></td>
-	</tr>
-	
+	</tr>	
 </table>
 
 <div>

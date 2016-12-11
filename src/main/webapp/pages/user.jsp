@@ -58,7 +58,10 @@
 	<a href="/">Home</a>   &gt;   Profile</pre>
 -->
 	
-<div id="userDiv">
+<table id="userDiv" style="float: center;">	
+<tr>
+<td>
+<div id="userDiv" style="float: right;">
 	<c:choose>
 		<c:when test="${user.picture.filePath != null}">
 			<img src="${user.picture.filePath}">
@@ -67,25 +70,38 @@
 			<img src="/img/avatar.png">
 		</c:otherwise>
 	</c:choose>
+	</div>
+	</td>
+	<td>
+	<div id="userDiv" style="float: left;">
 	<p>
 	<h2>Username</h2>${user.email}<p>
 	<h2>Name</h2>${user.firstName}
-	${user.lastName}
+	${user.lastName}<p>
+	<h2>Kind Of Membership</h2>${user.kindOfMembership}
 	<p>
+	</div>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2">
+	<div id="userDiv" style="float:center;">
+	<c:if test="${user.aboutMeNotEmpty()}">
 	<hr class="slim">
 	<h2>About me</h2>${user.aboutMe}
 	<hr class="slim">
+	</c:if>
 	<form>
 		<c:choose>
 			<c:when test="${principalID != null}">
-				<button id="newMsg" type="button">Message</button>
 				<c:choose>
 					<c:when test="${principalID eq user.id}">
 						<a class="button" href="/profile/editProfile">Edit Profile</a>
 					</c:when>
-					<c:otherwise></c:otherwise>
+					<c:otherwise>
+						<button id="newMsg" type="button">Message</button>
+					</c:otherwise>
 				</c:choose>
-
 			</c:when>
 			<c:otherwise>
 				<p>Please log in to contact this person.</p>
@@ -93,6 +109,9 @@
 		</c:choose>
 	</form>
 </div>
+</td>
+</tr>
+</table>
 <div id="msgDiv">
 	<form class="msgForm">
 		<h2>Message this user</h2>
