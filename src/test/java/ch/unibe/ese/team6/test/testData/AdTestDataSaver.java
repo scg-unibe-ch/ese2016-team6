@@ -87,7 +87,7 @@ public class AdTestDataSaver {
 		adBern.setDeal(KindOfDeal.forRent);
 		adBern.setPriceRent(400);
 		adBern.setSquareFootage(50);
-		
+		adBern.setNumberOfRooms(4);
 		adBern.setStudio(false);
 		adBern.setSmokers(false);
 		adBern.setAnimals(true);
@@ -182,6 +182,7 @@ public class AdTestDataSaver {
 		adBasel.setDeal(KindOfDeal.forRent);
 		adBasel.setPriceRent(480);
 		adBasel.setSquareFootage(10);
+		adBasel.setNumberOfRooms(1);
 		adBasel.setStudio(true);
 		adBasel.setSmokers(true);
 		adBasel.setAnimals(false);
@@ -265,6 +266,7 @@ public class AdTestDataSaver {
 		adNeuchâtel.setDeal(KindOfDeal.forRent);
 		adNeuchâtel.setPriceRent(410);
 		adNeuchâtel.setSquareFootage(40);
+		adNeuchâtel.setNumberOfRooms(3);
 		adNeuchâtel.setStudio(true);
 		adNeuchâtel.setSmokers(true);
 		adNeuchâtel.setAnimals(false);
@@ -272,7 +274,7 @@ public class AdTestDataSaver {
 		adNeuchâtel.setPreferences(roomPreferences5);
 	//	adNeuchâtel.setRoommates("None");
 		adNeuchâtel.setUser(bernerBaer);
-		adNeuchâtel.setTitle("Studio extrèmement bon marché à Neuchâtel");
+		adNeuchâtel.setTitle("Studio extrêmement bon marché à Neuchâtel");
 		adNeuchâtel.setStreet("Rue de l'Hôpital 11");
 		adNeuchâtel.setCity("Neuchâtel");
 		adNeuchâtel.setGarden(true);
@@ -401,6 +403,7 @@ public class AdTestDataSaver {
 		adLuzern.setDeal(KindOfDeal.forRent);
 		adLuzern.setPriceRent(700);
 		adLuzern.setSquareFootage(60);
+		adLuzern.setNumberOfRooms(5);
 		adLuzern.setStudio(true);
 		adLuzern.setSmokers(false);
 		adLuzern.setAnimals(false);
@@ -447,6 +450,7 @@ public class AdTestDataSaver {
 		adAarau.setMoveOutDate(moveOutDate4);
 		adAarau.setCreationDate(creationDate8);
 		adAarau.setSquareFootage(26);
+		adAarau.setNumberOfRooms(2);
 		adAarau.setStudio(true);
 		adAarau.setSmokers(true);
 		adAarau.setAnimals(false);
@@ -491,6 +495,7 @@ public class AdTestDataSaver {
 		adDavos.setDeal(KindOfDeal.forRent);
 		adDavos.setPriceRent(1100);
 		adDavos.setSquareFootage(74);
+		adDavos.setNumberOfRooms(5);
 		adDavos.setStudio(false);
 		adDavos.setSmokers(true);
 		adDavos.setAnimals(false);
@@ -531,6 +536,7 @@ public class AdTestDataSaver {
 		adLausanne.setDeal(KindOfDeal.forRent);
 		adLausanne.setPriceRent(360);
 		adLausanne.setSquareFootage(8);
+		adLausanne.setNumberOfRooms(1);
 		adLausanne.setStudio(false);
 		adLausanne.setSmokers(true);
 		adLausanne.setAnimals(false);
@@ -538,7 +544,7 @@ public class AdTestDataSaver {
 		adLausanne.setPreferences(roomPreferences11);
 	//	adLausanne.setRoommates("None");
 		adLausanne.setUser(oprah);
-		adLausanne.setTitle("Studio extrèmement bon marché à Lausanne");
+		adLausanne.setTitle("Studio extrêmement bon marché à Lausanne");
 		adLausanne.setStreet("Rue de l'Eglise 26");
 		adLausanne.setCity("Lausanne");
 		adLausanne.setGarden(true);
@@ -570,6 +576,7 @@ public class AdTestDataSaver {
 		adLocarno.setMoveOutDate(moveOutDate5);
 		adLocarno.setCreationDate(creationDate6);
 		adLocarno.setSquareFootage(42);
+		adLocarno.setNumberOfRooms(3);
 		adLocarno.setStudio(false);
 		adLocarno.setSmokers(true);
 		adLocarno.setAnimals(false);

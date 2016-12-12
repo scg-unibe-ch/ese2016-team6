@@ -356,7 +356,8 @@ function deleteAd(button) {
 				<!-- only shows this part if property for rent -->
 				<c:if test="${shownAd.deal=='forRent'}">
 					<h3><label>This property is for rent for : </label>${shownAd.priceRent} CHF/month</h3>
-					<h3>Send the owner an enquiry or a message if you are interested </h3>
+					<br/>
+					<i>Send the owner an enquiry or a message if you are interested </i>
 				</c:if>
 				
 				<!-- only shows this part if property for sale -->
