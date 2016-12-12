@@ -31,6 +31,7 @@ import ch.unibe.ese.team6.model.Bid;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.dao.BidDao;
 
+
 /**
  * This controller handles all requests concerning displaying ads and
  * bookmarking them.
@@ -206,7 +207,7 @@ public class AdController {
 		return model;
 	}
 
-<<<<<<< HEAD
+
 	/** Deletes the ad with the given id and display a validation message
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
 	public @ResponseBody void deleteAd(@RequestParam("id") long id, RedirectAttributes redirectAttributes) {
@@ -215,21 +216,21 @@ public class AdController {
 		redirectAttributes.addFlashAttribute("confirmationMessage",
 				"Ad deleted successfully. It won't appear on My advertisements page anylonger");
 	}*/
-=======
+
 	/*Deletes the ad with the given id*/
 	@RequestMapping(value = "/deleteAd", method = RequestMethod.POST)
 	public @ResponseBody void deleteAd(@RequestParam("id") long id) {
 		adService.deleteAd(id);
 	}
 	
-	/*Deletes the ad with the given id*/
+	/*Display the validation message when deleting an ad*/
 	@RequestMapping(value = "/deletedAd", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView deletedAd() {
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("confirmationMessage", "Delete Ad was succesfull!");
+		model.addObject("confirmationMessage", "Ad deleted successfully !");
 		return model;
 	}
->>>>>>> e51a98c9c6010231547f5339a555eb301d0b6d64
+
 	
 	/* AUCTION */
 	/*@RequestMapping(value = "/ad?id=${ad.id}", method = RequestMethod.POST)

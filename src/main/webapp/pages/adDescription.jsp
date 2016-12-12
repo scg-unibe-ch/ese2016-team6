@@ -142,15 +142,15 @@
 		
 
 function deleteAd(button) {
-<<<<<<< HEAD
-	$.get("/ad?id=" + "${shownAd.id}", function(){ <%-- + "/deleteAd?id=" + id  --%>
+
+	<%-- $.get("/ad?id=" + "${shownAd.id}", function(){ + "/deleteAd?id=" + id 
 		$("#adDiv").load(document.URL + " #adDiv");
-	});
-=======
+	});--%>
+	
 	var id = $(button).attr("data-id");
 	$.post("/deleteAd?id=" + id);
 	window.location.href = "/deletedAd";
->>>>>>> e51a98c9c6010231547f5339a555eb301d0b6d64
+
 }
 </script>
 
@@ -221,11 +221,7 @@ function deleteAd(button) {
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">
-<<<<<<< HEAD
-				<button style="background-color:#991f00;color:white" class="deleteButton" onClick="deleteAd(this)">Delete Ad</button>
-=======
 				<button style="background-color:#991f00;color:white" class="deleteButton" data-id="${shownAd.id}" onClick="deleteAd(this)" href="/deletedAd">Delete Ad</button>
->>>>>>> e51a98c9c6010231547f5339a555eb301d0b6d64
 				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
 					<button type="button">Edit Ad</button>
 				</a>
@@ -234,7 +230,7 @@ function deleteAd(button) {
 </c:choose>
 
 
-</br>
+<br/>
 
 
 	<c:choose>
@@ -245,7 +241,7 @@ function deleteAd(button) {
 		</c:when>
 	</c:choose>		
 
-</br>
+<br/>
 
 <h1 id="shownAdTitle"><b>${shownAd.title}</b></h1>
 
