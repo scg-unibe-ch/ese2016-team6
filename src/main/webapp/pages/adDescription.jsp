@@ -140,12 +140,9 @@
         });
     });
 		
-</script>
 
-<script>
 function deleteAd(button) {
-	var id = $(button).attr("data-id");
-	$.get("/ad?id=" + id + "/deleteAd?id=" + id , function(){
+	$.get("/ad?id=" + "${shownAd.id}", function(){ <%-- + "/deleteAd?id=" + id  --%>
 		$("#adDiv").load(document.URL + " #adDiv");
 	});
 }
@@ -230,7 +227,7 @@ function deleteAd(button) {
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">
-				<button style="background-color:#991f00;color:white" class="deleteButton" data-id="${shownAd.id}" onClick="deleteAd(this)">Delete Ad</button>
+				<button style="background-color:#991f00;color:white" class="deleteButton" onClick="deleteAd(this)">Delete Ad</button>
 				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
 					<button type="button">Edit Ad</button>
 				</a>

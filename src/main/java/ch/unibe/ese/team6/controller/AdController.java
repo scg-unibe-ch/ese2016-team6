@@ -203,10 +203,13 @@ public class AdController {
 		return model;
 	}
 
-	/** Deletes the ad with the given id
+	/** Deletes the ad with the given id and display a validation message
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
-	public @ResponseBody void deleteAd(@RequestParam("id") long id) {
+	public @ResponseBody void deleteAd(@RequestParam("id") long id, RedirectAttributes redirectAttributes) {
+		ModelAndView model = new ModelAndView("redirect:/ad?id=" + id);
 		adService.deleteAd(id);
+		redirectAttributes.addFlashAttribute("confirmationMessage",
+				"Ad deleted successfully. It won't appear on My advertisements page anylonger");
 	}*/
 	
 	/* AUCTION */
