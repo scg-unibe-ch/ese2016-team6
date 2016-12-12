@@ -98,18 +98,24 @@ public class AdService {
 		if(placeAdForm.getForRent()) {
 			ad.setDeal(KindOfDeal.forRent);
 			ad.setRent(true);
+			ad.setPriceRent(placeAdForm.getPriceRent());
 		} else if(placeAdForm.getForSale()) {
 			ad.setDeal(KindOfDeal.forSale);
 			ad.setSale(KindOfSale.direct);
-		} else {
+			ad.setPriceSale(placeAdForm.getPriceSale());
+		} else if(placeAdForm.getPriceSale()>1){
 			ad.setDeal(KindOfDeal.forSale);
 			ad.setSale(KindOfSale.bothAuctionAndDirect);
+			ad.setPriceSale(placeAdForm.getPriceSale());
+			ad.setIncrement(placeAdForm.getIncrement());
+			ad.setCurrentBid(placeAdForm.getCurrentBid());
+		} else {
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.auction);
+			ad.setIncrement(placeAdForm.getIncrement());
+			ad.setCurrentBid(placeAdForm.getCurrentBid());
 		}
-			
-		ad.setPriceRent(placeAdForm.getPriceRent());
-		ad.setPriceSale(placeAdForm.getPriceSale());
-		ad.setIncrement(placeAdForm.getIncrement());
-		ad.setCurrentBid(placeAdForm.getCurrentBid());
+
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
 

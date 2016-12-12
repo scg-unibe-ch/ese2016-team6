@@ -104,9 +104,9 @@
 			document.getElementById('incLabel').style.visibility = "visible";
 			document.getElementById('deadLabel').style.visibility = "visible";
 			
-			document.getElementById('forRent').checked = true;
+			document.getElementById('forRent').checked = false;
 			document.getElementById('forSale').checked = false;
-			document.getElementById('forAuction').checked = false;
+			document.getElementById('forAuction').checked = true;
 			
 			$("#field-priceRent").parent().hide();
 			$("#field-priceSale").parent().show();

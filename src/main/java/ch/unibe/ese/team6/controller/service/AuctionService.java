@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * This service serves primary to check whether or not some auctions
@@ -41,11 +42,16 @@ public class AuctionService {
 
     private static double provision=0.05;
     
+    // finds all Ad for Auction of the user
     @Transactional
     public Iterable<Ad> findAuctionsByUser(User user) {   	
     	return adDao.findByUserAndDeal(user, KindOfDeal.forSale);
     }
 
+    //finds all Ad on which the user bidded
+    public Iterable<Ad> findBidsByUser(User user) {
+    	return (bidDao.findAdByUser(user));
+    }
     /**
      * Searches every 10 seconds for finished auctions
      * and sends messages to the corresponding users

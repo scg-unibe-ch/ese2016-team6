@@ -311,7 +311,7 @@ function deleteAd(button) {
 			
 		<c:set var="countCols" value="${1}" />
 		
-		<td style="width:50%;">
+		<td style="width:100%;">
 			<div id="image-slider" class="adDescDiv">
 				<div id="left-arrow">
 					<img src="/img/left-arrow.png" />
@@ -361,7 +361,7 @@ function deleteAd(button) {
 					
 						<!-- only shows this part if property for directsale -->
 						<c:if test="${shownAd.sale=='direct'}">
-							<h3><label>This property is for sale ! Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
+							<h3><label>This property is for sale!<br> Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
 							
 							
 							<form:form action="/ad/makeBid" method="post">

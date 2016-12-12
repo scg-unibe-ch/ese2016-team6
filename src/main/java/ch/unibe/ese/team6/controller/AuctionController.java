@@ -121,6 +121,7 @@ public class AuctionController {
 		User user = userService.findUserById(id);
 		
 		model.addObject("myAuctions", auctionService.findAuctionsByUser(user));
+		model.addObject("myBids", auctionService.findBidsByUser(user));
 		
 		return model;
 	}
