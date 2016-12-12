@@ -21,7 +21,7 @@
 			autoFocus : true
 		});
 		
-		var price = document.getElementById('priceInput');
+		var price = document.getElementById('price');
 		var radius = document.getElementById('radiusInput');
 		
 		var roomNumbers = document.getElementById('numberRoomsInput');
@@ -40,18 +40,16 @@
 <script>
 $(document).ready(function() {
 	
+	$("#type-rent").click();
+	
 	$("#type-sale").on("click", function(){
 		document.getElementById('forSale').checked = true;
 		document.getElementById('forRent').checked = false;
-		document.getElementById('priceSale').style.visibility = "visible";
-		document.getElementById('priceRent').style.visibility = "hidden";
 	});
 
 	$("#type-rent").on("click", function(){
 		document.getElementById('forRent').checked = true;
 		document.getElementById('forSale').checked = false;
-		document.getElementById('priceSale').style.visibility = "hidden";
-		document.getElementById('priceRent').style.visibility = "visible";
 	});
 	
 	if (document.getElementById('forSale').checked) {
@@ -102,18 +100,11 @@ $(document).ready(function() {
 		<form:errors path="radius" cssClass="validationErrorText" />
 		
 		
-		<br /> <label for="priceRent">Price Rent(max.):</label>
-		<form:input id="priceRent" type="number" path="priceRent" min="1" />
+		<br /> <label for="price">Price (max.):</label>
+		<form:input id="price" type="number" path="price" min="1" />
 		CHF
-		<form:errors path="priceRent" cssClass="validationErrorText" />
+		<form:errors path="price" cssClass="validationErrorText" />
 		<br />
-		
-		<br /> <label for="priceSale">Price Sale(max.):</label>
-		<form:input id="priceSale" type="number" path="priceSale" min="1" />
-		CHF
-		<form:errors path="priceSale" cssClass="validationErrorText" />
-		<br />
-		
 		
 		<label for="numberRoomsInput">Rooms (min.):</label>
 		

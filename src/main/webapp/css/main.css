@@ -527,14 +527,6 @@ header ul li a {
 	background: #b35900;
 }
 
-
-
-
-
-
-
-
-
 header ul li a:hover {
 	
 	background: #ffffb3;
@@ -1046,13 +1038,20 @@ footer nav ul li {
 	
 }
 
+.resultLeftBigger {
+	float: left;
+	width: 20%;
+	min-width: 120px;
+	
+}
+
 
 .resultMiddle {
 	float: center;
 	
 }
 
-.resultRight {
+.resultRightBigger {
 	float: right;
 	width: 20%;
 	min-width: 200px;

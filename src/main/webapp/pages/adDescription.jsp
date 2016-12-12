@@ -420,10 +420,10 @@ function deleteAd(button) {
 														<td>
 															<c:choose>
 																<c:when test="${latestBid.user.picture.filePath != null}">
-																	<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
+																	<img style="width:40px;height:40px;" src="${latestBid.user.picture.filePath}">
 																</c:when>
 																<c:otherwise>
-																	<img src="/img/avatar.png">
+																	<img style="width:40px;height:40px;" src="/img/avatar.png">
 																</c:otherwise>
 															</c:choose>
 														</td>							

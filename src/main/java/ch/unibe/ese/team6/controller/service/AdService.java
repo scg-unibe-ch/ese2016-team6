@@ -342,7 +342,7 @@ public class AdService {
 		Iterable<Ad> adsFromPremium = adDao.findByKindOfMembershipOfUserEquals(true);
 
 		if(searchForm.getForRent()) {
-			results = adDao.findByDealAndPriceRentLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
+			results = adDao.findByDealAndPriceLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(
 					KindOfDeal.forRent, searchForm.getPriceRent() + 1, searchForm.getNumberOfRooms(), false, false);	
 		}
 		else if(searchForm.getForSale()){	
