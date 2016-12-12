@@ -137,7 +137,8 @@ function rentSaleOfAlert(alert) {
 		
 	</fieldset>
 
-</form:form> <br />
+</form:form> <br /><br/>
+
 <h2>Your active alerts</h2>
 
 <div id="alertsDiv" class="alertsDiv">			

@@ -140,13 +140,17 @@
         });
     });
 		
-</script>
 
-<script>
 function deleteAd(button) {
+
+	<%-- $.get("/ad?id=" + "${shownAd.id}", function(){ + "/deleteAd?id=" + id 
+		$("#adDiv").load(document.URL + " #adDiv");
+	});--%>
+	
 	var id = $(button).attr("data-id");
 	$.post("/deleteAd?id=" + id);
 	window.location.href = "/deletedAd";
+
 }
 </script>
 
@@ -226,7 +230,7 @@ function deleteAd(button) {
 </c:choose>
 
 
-</br>
+<br/>
 
 
 	<c:choose>
@@ -237,7 +241,7 @@ function deleteAd(button) {
 		</c:when>
 	</c:choose>		
 
-</br>
+<br/>
 
 <h1 id="shownAdTitle"><b>${shownAd.title}</b></h1>
 
@@ -352,7 +356,8 @@ function deleteAd(button) {
 				<!-- only shows this part if property for rent -->
 				<c:if test="${shownAd.deal=='forRent'}">
 					<h3><label>This property is for rent for : </label>${shownAd.priceRent} CHF/month</h3>
-					<h3>Send the owner an enquiry or a message if you are interested </h3>
+					<br/>
+					<i>Send the owner an enquiry or a message if you are interested </i>
 				</c:if>
 				
 				<!-- only shows this part if property for sale -->

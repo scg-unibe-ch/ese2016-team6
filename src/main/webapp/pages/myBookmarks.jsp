@@ -14,7 +14,7 @@
 
 </script>
 
-		<table id="indexTable">
+		<table id="indexTable" style="width:100%;text-align:center;">
 			<tr>
 
 			<tr>

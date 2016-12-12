@@ -13,6 +13,10 @@
 
 <table style="width=80%;">
 <tr>
+
+<h1>Schedule</h1>
+<hr/>
+
 <td style = "min-width:600px" valign="top">
 <h2>Your presentations</h2>
 <div id="presentationsDiv">			
