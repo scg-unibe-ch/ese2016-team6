@@ -72,8 +72,6 @@ public class AuctionController {
 
 	/**
 	 * handles a user making a bid
-	 * 
-	 * 
 	 */
 	@RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
 	public @ResponseBody ModelAndView makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
@@ -115,7 +113,18 @@ public class AuctionController {
 
 		return model;
 	}
-
+	
+	@RequestMapping(value = "/ad/myAuctions", method = RequestMethod.GET) 
+	public @ResponseBody ModelAndView showMyAuctions(@RequestParam int id) {
+		ModelAndView model = new ModelAndView("myAuctions");
+		
+		User user = userService.findUserById(id);
+		
+		model.addObject("myAuctions", auctionService.findAuctionsByUser(user));
+		
+		return model;
+	}
+	
 	/*
 	 * 
 	 * //deprecated

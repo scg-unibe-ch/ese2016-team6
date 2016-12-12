@@ -25,8 +25,7 @@ public class SearchForm {
 	@Min(value = 0, message = "Please enter a positive distance")
 	private Integer radius;
 	
-	private int priceRent;
-	private int priceSale;
+	private int price;
 	
 	//specifies how many rooms a Flat must have
 	//@NotNull(message = "Requires a number")
@@ -284,21 +283,29 @@ public class SearchForm {
 	public void setKindOfMembershipUser(boolean kindOfMembershipUser) {
 		this.kindOfMembershipUser = kindOfMembershipUser;
 	}
+	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	public int getPriceRent() {
-		return priceRent;
+		return price;
 	}
 
 	public void setPriceRent(int priceRent) {
-		this.priceRent = priceRent;
+		this.price = priceRent;
 	}
 
 	public int getPriceSale() {
-		return priceSale;
+		return price;
 	}
 
 	public void setPriceSale(int priceSale) {
-		this.priceSale = priceSale;
+		this.price = priceSale;
 	}
 	
 }

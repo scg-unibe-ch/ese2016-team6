@@ -3,6 +3,7 @@ package ch.unibe.ese.team6.controller.service;
 
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Bid;
+import ch.unibe.ese.team6.model.KindOfDeal;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.dao.AdDao;
 import ch.unibe.ese.team6.model.dao.BidDao;
@@ -39,6 +40,11 @@ public class AuctionService {
     private UserDao userDao;
 
     private static double provision=0.05;
+    
+    @Transactional
+    public Iterable<Ad> findAuctionsByUser(User user) {   	
+    	return adDao.findByUserAndDeal(user, KindOfDeal.forSale);
+    }
 
     /**
      * Searches every 10 seconds for finished auctions
