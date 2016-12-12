@@ -18,7 +18,7 @@
 <pre><a href="/">Home</a>   &gt;   My advertisements</pre>
 -->
 
-		<table id="indexTable">
+		<table id="indexTable" style="width:100%;text-align:center;">
 			<tr>
 
 			<tr>
