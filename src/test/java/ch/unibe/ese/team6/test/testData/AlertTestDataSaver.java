@@ -30,14 +30,11 @@ public class AlertTestDataSaver {
 		// 2 Alerts for the ese test-user
 		Alert alert = new Alert();
 		alert.setUser(ese);
-		alert.setBothRoomAndStudio(true);
-		alert.setRoom(true);
-		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
-		alert.setPrice(1500);
-		alert.setRadius(30);
 		alert.setForRent(true);
+		alert.setPriceRent(1500);
+		alert.setRadius(30);
 		alert.setNumberOfRooms(3);
 		alert.setMinSize(0);
 		alert.setMaxSize(1000000);
@@ -45,12 +42,9 @@ public class AlertTestDataSaver {
 		
 		alert = new Alert();
 		alert.setUser(ese);
-		alert.setBothRoomAndStudio(false);
-		alert.setRoom(true);
-		alert.setStudio(false);
 		alert.setCity("Zürich");
 		alert.setZipcode(8000);
-		alert.setPrice(1000);
+		alert.setPriceRent(1000);
 		alert.setRadius(25);
 		alert.setForRent(true);
 		alert.setNumberOfRooms(2);
@@ -62,12 +56,9 @@ public class AlertTestDataSaver {
 		// One alert for Jane Doe
 		alert = new Alert();
 		alert.setUser(jane);
-		alert.setBothRoomAndStudio(false);
-		alert.setRoom(false);
-		alert.setStudio(true);
 		alert.setCity("Luzern");
 		alert.setZipcode(6003);
-		alert.setPrice(900);
+		alert.setPriceRent(900);
 		alert.setRadius(22);
 		alert.setForRent(true);
 		alert.setNumberOfRooms(2);

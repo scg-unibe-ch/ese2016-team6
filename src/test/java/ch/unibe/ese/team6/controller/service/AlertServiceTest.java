@@ -60,23 +60,19 @@ public class AlertServiceTest {
 		// Create 2 alerts for Adolf Ogi
 		Alert alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setBothRoomAndStudio(false);
-		alert.setRoom(false);
-		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
-		alert.setPrice(1500);
+		alert.setForRent(true);
+		alert.setPriceRent(1500);
 		alert.setRadius(100);
 		alertDao.save(alert);
 		
 		alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setBothRoomAndStudio(true);
-		alert.setRoom(true);
-		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
-		alert.setPrice(1000);
+		alert.setForRent(true);
+		alert.setPriceRent(1000);
 		alert.setRadius(5);
 		alertDao.save(alert);
 		
@@ -104,23 +100,19 @@ public class AlertServiceTest {
 		// Create 2 alerts for Thomy F
 		Alert alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setBothRoomAndStudio(false);
-		alert.setRoom(false);
-		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
-		alert.setPrice(1500);
+		alert.setForSale(true);
+		alert.setPriceSale(2000);
 		alert.setRadius(100);
 		alertDao.save(alert);
 		
 		alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setBothRoomAndStudio(true);
-		alert.setRoom(true);
-		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
-		alert.setPrice(1000);
+		alert.setForSale(true);
+		alert.setPriceSale(3000);
 		alert.setRadius(5);
 		alertDao.save(alert);
 		
@@ -134,7 +126,7 @@ public class AlertServiceTest {
 		oltenResidence.setZipcode(4600);
 		oltenResidence.setMoveInDate(date);
 		oltenResidence.setCreationDate(date);
-		oltenResidence.setPrizePerMonth(1200);
+		oltenResidence.setPriceRent(1200);
 		oltenResidence.setSquareFootage(42);
 		oltenResidence.setStudio(false);
 		oltenResidence.setSmokers(true);

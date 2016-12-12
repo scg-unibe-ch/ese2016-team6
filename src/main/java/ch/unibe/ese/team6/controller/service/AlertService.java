@@ -56,16 +56,18 @@ public class AlertService {
 		String zip = alertForm.getCity().substring(0, 4);
 		alert.setZipcode(Integer.parseInt(zip));
 		alert.setCity(alertForm.getCity().substring(7));
-
-		alert.setPrice(alertForm.getPrice());
 		alert.setRadius(alertForm.getRadius());
-	//	alert.setRoom(alertForm.getRoom());
-	//	alert.setStudio(alertForm.getStudio());
-	//	alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
 		alert.setUser(user);
 		alert.setForRent(alertForm.getForRent());
 		alert.setForSale(alertForm.getForSale());
-		//alert.setBothRentAndSale(alertForm.getBothRentAndSale());
+		if(alert.getForRent()) {
+			alert.setPriceRent(alertForm.getPrice());
+		} else if(alert.getForSale()){
+			alert.setPriceSale(alertForm.getPrice());
+		} else {
+			alert.setPriceRent(alertForm.getPrice());
+			alert.setPriceSale(alertForm.getPrice());
+		}
 		alert.setMinSize(alertForm.getMinSize());
 		alert.setMaxSize(alertForm.getMaxSize());
 		alert.setIsValid(alertForm.getIsValid());
@@ -100,7 +102,10 @@ public class AlertService {
 		 */
 		
 		int adPrice = ad.getPriceRent(); //ad.getPrizePerMonth removed from Ad.java
-		Iterable<Alert> alerts = alertDao.findByPriceGreaterThan(adPrice - 1);
+		int adPriceSale = ad.getPriceSale();
+		Iterable<Alert> alerts = alertDao.findByPriceRentGreaterThanAndPriceSaleGreaterThan(adPrice - 1, adPriceSale-1);
+		
+		
 
 		// loop through all ads with matching city and price range, throw out
 		// mismatches
@@ -108,7 +113,6 @@ public class AlertService {
 		while (alertIterator.hasNext()) {
 			Alert alert = alertIterator.next();
 			if (rentSaleMismatchWith(ad, alert) || radiusMismatchWith(ad, alert)
-				//	|| ad.getUser().equals(alert.getUser()) || rentSaleMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
 					|| ad.getUser().equals(alert.getUser()) || sizeMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
 				alertIterator.remove();
 		}
@@ -136,11 +140,7 @@ public class AlertService {
 			message.setDateSent(now);
 			messageDao.save(message);
 		}
-		
-		
 	}
-
-	
 
 	/**
 	 * Returns the text for an alert message with the properties of the given
@@ -157,15 +157,6 @@ public class AlertService {
 				+ "Good luck and enjoy,<br>"
 				+ "Your HomeLender crew";
 	}
-
-	/** Checks if an ad is conforming to the criteria in an alert for Room and Studio. */
-	/*private boolean typeMismatchWith(Ad ad, Alert alert) {
-		boolean mismatch = false;
-		if (!alert.getBothRoomAndStudio()
-				&& ad.getStudio() != alert.getStudio())
-			mismatch = true;
-		return mismatch;
-	} */
 	
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean rentSaleMismatchWith(Ad ad, Alert alert) {

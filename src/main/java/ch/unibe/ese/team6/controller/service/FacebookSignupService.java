@@ -39,6 +39,7 @@ public class FacebookSignupService {
 		user.setEmail(facebookForm.getEmail());
 		user.setFirstName(facebookForm.getFirstName());
 		user.setLastName(facebookForm.getLastName());
+		user.setAboutMe("");
 		
 		final SecureRandom rndm = new SecureRandom();
 		String randomPassword = new BigInteger(50, rndm).toString(32);

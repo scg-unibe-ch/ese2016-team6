@@ -240,4 +240,18 @@ public class User {
 	public boolean getisFacebookUser() {
 		return this.isFbUser;
 	}
+	
+	public boolean isAdmin() {
+		if(gender.equals(Gender.ADMIN)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean aboutMeNotEmpty() {
+		if(aboutMe.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 }

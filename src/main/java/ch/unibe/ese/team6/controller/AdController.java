@@ -86,6 +86,7 @@ public class AdController {
 		model.addObject("loggedInUserEmail", loggedInUserEmail);
 
 		model.addObject("visits", visitService.getVisitsByAd(ad));
+		model.addObject("visitService", visitService);
 
 		return model;
 	}
@@ -102,6 +103,7 @@ public class AdController {
 		Ad ad = adService.getAdById(id);
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
+		model.addObject("visitService", visitService);
 
 		if (!bindingResult.hasErrors()) {
 			messageService.saveFrom(messageForm);
@@ -173,6 +175,7 @@ public class AdController {
 
 			model.addObject("bookmarkedAdvertisements", user.getBookmarkedAds());
 			model.addObject("ownAdvertisements", ownAds);
+			model.addObject("visitService", visitService);
 			return model;
 		} else {
 			model = new ModelAndView("home");
@@ -203,6 +206,7 @@ public class AdController {
 		return model;
 	}
 
+<<<<<<< HEAD
 	/** Deletes the ad with the given id and display a validation message
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
 	public @ResponseBody void deleteAd(@RequestParam("id") long id, RedirectAttributes redirectAttributes) {
@@ -211,6 +215,21 @@ public class AdController {
 		redirectAttributes.addFlashAttribute("confirmationMessage",
 				"Ad deleted successfully. It won't appear on My advertisements page anylonger");
 	}*/
+=======
+	/*Deletes the ad with the given id*/
+	@RequestMapping(value = "/deleteAd", method = RequestMethod.POST)
+	public @ResponseBody void deleteAd(@RequestParam("id") long id) {
+		adService.deleteAd(id);
+	}
+	
+	/*Deletes the ad with the given id*/
+	@RequestMapping(value = "/deletedAd", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView deletedAd() {
+		ModelAndView model = new ModelAndView("index");
+		model.addObject("confirmationMessage", "Delete Ad was succesfull!");
+		return model;
+	}
+>>>>>>> e51a98c9c6010231547f5339a555eb301d0b6d64
 	
 	/* AUCTION */
 	/*@RequestMapping(value = "/ad?id=${ad.id}", method = RequestMethod.POST)

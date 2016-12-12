@@ -13,7 +13,7 @@
 <c:import url="template/header.jsp" />
 
 <!--
-<pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>
+<pre><a href="/">Home</a>   &gt;   <a href="/profile/myAds">My Rooms</a>   &gt;   Ad Description</pre>
 -->
 
 <script src="/js/image_slider.js"></script>
@@ -142,9 +142,15 @@
 		
 
 function deleteAd(button) {
+<<<<<<< HEAD
 	$.get("/ad?id=" + "${shownAd.id}", function(){ <%-- + "/deleteAd?id=" + id  --%>
 		$("#adDiv").load(document.URL + " #adDiv");
 	});
+=======
+	var id = $(button).attr("data-id");
+	$.post("/deleteAd?id=" + id);
+	window.location.href = "/deletedAd";
+>>>>>>> e51a98c9c6010231547f5339a555eb301d0b6d64
 }
 </script>
 
@@ -186,22 +192,10 @@ function deleteAd(button) {
                     }
                 }
 
-
-            
         }
 
         var timer = setInterval(showTimeLeft, 1000);
     </script>
- <%-- <script> function show() {
-	 if(${shownAd.pictures}.isEmpty()) {
-		 $("#image-slider").parent().hide();
-	 }
-	 if(${shownAd.preferences}.isEmpty()) {
-		 $("#preferences").parent().hide();
-	 }
- }
-
-</script>--%>
 
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->
@@ -227,7 +221,11 @@ function deleteAd(button) {
 <c:choose>
 		<c:when test="${loggedIn}">
 			<c:if test="${loggedInUserEmail == shownAd.user.username }">
+<<<<<<< HEAD
 				<button style="background-color:#991f00;color:white" class="deleteButton" onClick="deleteAd(this)">Delete Ad</button>
+=======
+				<button style="background-color:#991f00;color:white" class="deleteButton" data-id="${shownAd.id}" onClick="deleteAd(this)" href="/deletedAd">Delete Ad</button>
+>>>>>>> e51a98c9c6010231547f5339a555eb301d0b6d64
 				<a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
 					<button type="button">Edit Ad</button>
 				</a>
@@ -256,6 +254,7 @@ function deleteAd(button) {
 
 <hr style="margin:0px" />
 
+<c:set var="countCols" value="${0}" />
 <table style="width:100%; border-collapse: separate; border-spacing: 0px 10px;">
 	<tr>
 				<td style="width:50%">
@@ -282,25 +281,15 @@ function deleteAd(button) {
 									
 								
 							</td>
-						</tr>
-						
-						
+						</tr>	
 						<tr>
-						
 							<td>
 								<h2>Ad created on : </h2>
+							</td>			
+							<td>				
+								${formattedCreationDate}			
 							</td>
-						
-							<td>
-							
-								${formattedCreationDate}
-							
-							</td>
-							
 						</tr>
-						
-						
-
 						<tr>
 							<td><h2>Address :</h2></td>
 							<td>
@@ -308,31 +297,28 @@ function deleteAd(button) {
 										${shownAd.zipcode} ${shownAd.city}</a>
 							</td>
 						</tr>
-					
-						
 						<tr>
 							<td><h2>Area :</h2></td>
 							<td>${shownAd.squareFootage}&#32;m²</td>
-						</tr>
-						
+						</tr>				
 						<tr>
 							<td><h2>Number of Rooms :</h2></td>
 							<td>${shownAd.numberOfRooms}</td>
-						</tr>
-						
+						</tr>					
 						<tr>
 							<td><h2>Available from : </h2></td>
 							<td>${formattedMoveInDate}</td>
-						</tr>
-						
+						</tr>			
 						<tr>
 							<td><h2>To :</h2></td>
 							<td>${formattedMoveOutDate}</td>
-						</tr>
-					
+						</tr>			
 					</table>	
 		</td>
 		<c:if test="${shownAd.hasPictures()}">
+			
+		<c:set var="countCols" value="${1}" />
+		
 		<td style="width:50%;">
 			<div id="image-slider" class="adDescDiv">
 				<div id="left-arrow">
@@ -349,12 +335,24 @@ function deleteAd(button) {
 			</div>
 		</td>
 		</c:if>
-	</tr>
-	<tr>
-	
+		
+		<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>
+		
 		<td style="width:50%;">	
 			<div id="bidList" class="adDescDiv">
-				
+			
+				<c:choose>
+				<c:when test="${countCols== 1}">
+					<c:set var="countCols" value="${0}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="countCols" value="${1}"/>
+				</c:otherwise>
+				</c:choose>
+			
 				<h2>Price corner</h2>
 				<br/>
 				
@@ -387,57 +385,36 @@ function deleteAd(button) {
 						
 						<!-- only shows this part if property for auction -->
 						<c:if test="${shownAd.sale=='auction'||shownAd.sale=='bothAuctionAndDirect'}">
-
-						
-							
 							<c:choose>
-								<c:when test="${shownAd.expired=='false' && shownAd.instantBought=='false'}">
-								
+								<c:when test="${shownAd.expired=='false' && shownAd.instantBought=='false'}">							
 								This property is for sale through auction ! 
-								
-								<form:form action="/ad/makeBid" method="post">
-								
+								<form:form action="/ad/makeBid" method="post">							
 									<input type="hidden" name="id" value="${shownAd.id}">
 									<input type="hidden" name="amount" value="${shownAd.priceSale}">
 									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
 									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
-									</c:if>
-								
+									</c:if>							
 								</form:form>
-								
-								
 								</br> 
 									<h3><label>	Amount of the current bid : </label> CHF ${shownAd.currentBid}</h3>
 									<h3><label>Minimum increment :</label> CHF ${shownAd.increment}</h3>
 								</br> 
 								<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
-							
-						
-								
-									<div>
-									
+								<div>
 									<c:choose>
-										<c:when test="${loggedIn}">
-									
-									
+										<c:when test="${loggedIn}">						
 										<c:if test="${loggedInUserEmail != shownAd.user.username }">
-											<form:form action="/ad/makeBid" method="post">
-								
+											<form:form action="/ad/makeBid" method="post">							
 												<label for="field-currentBid">Make a higher bid :</label>
 												<input type="hidden" name="id" value="${shownAd.id}">
 												<input class="bidInput" type="number" name ="amount" id="bidAmount"/>
-												<button type="submit" id="makeBid" class="bidButton">Let's go !</button>
-								
+												<button type="submit" id="makeBid" class="bidButton">Let's go !</button>		
 											</form:form>
 										</c:if>
-										
-									
-									
-									
+	
 											<c:if test="${latestBid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												<h3>
-												
+												<h3>							
 												<table>
 													<tr>
 														<td>
@@ -453,9 +430,7 @@ function deleteAd(button) {
 																	<img src="/img/avatar.png">
 																</c:otherwise>
 															</c:choose>
-														</td>					
-														
-														
+														</td>							
 													</tr>	
 													<tr>
 														<td>
@@ -500,8 +475,6 @@ function deleteAd(button) {
 									<br>
 									<c:if test="${latestBid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												
-												
 												<table>
 													<tr>
 														<td>
@@ -518,8 +491,6 @@ function deleteAd(button) {
 																</c:otherwise>
 															</c:choose>
 														</td>					
-														
-														
 													</tr>	
 													<tr>
 														<td>
@@ -534,176 +505,48 @@ function deleteAd(button) {
 											</div>
 											
 										</c:if>
-									
-									
-									
-									
 									</h3>
-								</c:when>
-					
-							</c:choose>
-					
+								</c:when>			
+							</c:choose>				
 						</c:if>
 				</c:if>
-	
-</div>
-</td>
-</tr>
-<tr>
-		
+		</div>
+	</td>
+		<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>	
 		<td>
 			<div class="adDescDiv">
 				<h2>Room Description</h2>
+				<c:choose>
+				<c:when test="${countCols== 1}">
+					<c:set var="countCols" value="${0}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="countCols" value="${1}"/>
+				</c:otherwise>
+				</c:choose>
 				<p>${shownAd.roomDescription}</p>
 			</div>
 		</td>
-
-	<c:if test="${shownAd.hasVisits()}">
-		<td style="width:50%;">
 		
-		<div id="visitList" class="adDescDiv">
-				<h2>Visiting times</h2>
-				<table>
-					<c:forEach items="${visits }" var="visit">
-						<tr>
-							<td>
-								<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
-								&nbsp; from
-								<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
-								until
-								<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
-							</td>
-							<td><c:choose>
-									<c:when test="${loggedIn}">
-										<c:if test="${loggedInUserEmail != shownAd.user.username}">
-											
-											<c:choose>
-											<c:when test="${VisitService.hasUserSentEnquiry(loggedInUserEmail, visit)}">
-												<button class="thinInactiveButton" type="button" data-id="${visit.id}">Enquiry sent</button>
-											</c:when>
-											<c:otherwise>
-												<button class="thinButton" type="button" data-id="${visit.id}">Send enquiry to advertiser</button>
-											</c:otherwise>
-											</c:choose>
-							
-										</c:if>
-									</c:when>
-									<c:otherwise>
-									
-									
-										<a href="/login"><button class="thinInactiveButton" type="button"
-											data-id="${visit.id}">Login to send enquiries</button></a>
-									</c:otherwise>
-								</c:choose>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</td>
-	</c:if>
-		
-
-		<td>
-		<c:if test="${shownAd.hasLocationDetails()}">
-			<div class="adDescDiv">
-				<h2>Location details</h2>
-				<table>
-					<c:if test="$('shownAd.proximityToPublicTransport'==0)">
-					<tr>
-						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
-					</tr>
-					</c:if>
-					<c:if test="$('shownAd.proximityToSchool'==0)">
-					<tr>
-						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
-					</tr>
-					</c:if>
-					<c:if test="$('shownAd.proximityToSupermarket'==0)">
-					<tr>
-						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
-					</tr>
-					</c:if>
-					<c:if test="$('shownAd.proximityToNightlife'==0)">
-					<tr>
-						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
-					</tr>
-					</c:if>
-				</table>
-			</div>
-			</c:if>
-		</td>
-	</tr>
-
-
-	<tr>
-	<c:if test="${shownAd.hasPreferences()}">
-		<td>
-			<div class="adDescDiv">
-				<h2>Preferences</h2>
-				<p>${shownAd.preferences}</p>
-			</div>
-		</td>
-	</c:if>
-
-		<td>
-		
-			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
-				<tr>
-					<td><h2>Advertiser</h2><br /></td>
-				</tr>
-
-				<tr>
-					<td><c:choose>
-							<c:when test="${shownAd.user.picture.filePath != null}">
-								<img src="${shownAd.user.picture.filePath}">
-							</c:when>
-							<c:otherwise>
-								<img src="/img/avatar.png">
-							</c:otherwise>
-						</c:choose></td>
-					
-					<td>${shownAd.user.username}</td>
-					
-					<td id="advertiserEmail">
-					<c:choose>
-						<c:when test="${loggedIn}">
-							<a href="/user?id=${shownAd.user.id}"><button type="button">Visit profile</button></a>
-						</c:when>
-						<c:otherwise>
-							<a href="/login"><button class="thinInactiveButton" type="button">Login to visit profile</button></a>
-						</c:otherwise>
-					</c:choose>
-					</td>
-					<td>
-						<form>
-							<c:choose>
-								<c:when test="${loggedIn}">
-									<c:if test="${loggedInUserEmail != shownAd.user.username }">
-										<button id="newMsg" type="button">Contact Advertiser</button>
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<a href="/login"><button class="thinInactiveButton" type="button">Login to contact advertiser</button></a>
-								</c:otherwise>
-							</c:choose>
-						</form>
-					</td>
-				</tr>
-			</table>
-		
-		
-		
-			
-			
-		</td>
-	</tr>
-
-	<tr>
-		<td>
+		<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>	
+	<td>
 			<table id="checkBoxTable" class="adDescDiv" style="width:93%">
 				<tr>
 					<td><h3>Smoking inside allowed</h3></td>
+					<c:choose>
+						<c:when test="${countCols== 1}">
+						<c:set var="countCols" value="${0}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="countCols" value="${1}"/>
+					</c:otherwise>
+					</c:choose>
 					<td>
 						<c:choose>
 							<c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
@@ -786,9 +629,191 @@ function deleteAd(button) {
 		</tr>
 
 	</table>
+	</td>
+	
+	<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>	
 
+	<c:if test="${shownAd.hasVisits()}">
+		<td style="width:50%;">
 
-</td>
+		<div id="visitList" class="adDescDiv">
+				<h2>Visiting times</h2>
+				<c:choose>
+				<c:when test="${countCols== 1}">
+					<c:set var="countCols" value="${0}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="countCols" value="${1}"/>
+				</c:otherwise>
+				</c:choose>
+				<table>
+					<c:forEach items="${visits }" var="visit">
+						<tr>
+							<td>
+								<fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy " />
+								&nbsp; from
+								<fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm " />
+								until
+								<fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm" />
+							</td>
+							<td><c:choose>
+									<c:when test="${loggedIn}">
+										<c:if test="${loggedInUserEmail != shownAd.user.username}">
+											<c:choose>
+											<c:when test="${visitService.hasUserSentEnquiry(loggedInUserEmail, visit)}">
+												<button class="thinInactiveButton" type="button" data-id="${visit.id}">Enquiry sent</button>
+											</c:when>
+											<c:otherwise>
+												<button class="thinButton" type="button" data-id="${visit.id}">Send enquiry to advertiser</button>
+											</c:otherwise>
+											</c:choose>
+							
+										</c:if>
+									</c:when>
+									<c:otherwise>
+									
+									
+										<a href="/login"><button class="thinInactiveButton" type="button"
+											data-id="${visit.id}">Login to send enquiries</button></a>
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</td>
+	</c:if>
+	<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>	
+
+		
+		<c:if test="${shownAd.hasLocationDetails()}">
+		<td>
+			<div class="adDescDiv">
+				<h2>Location details</h2>
+				
+				<c:choose>
+				<c:when test="${countCols== 1}">
+					<c:set var="countCols" value="${0}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="countCols" value="${1}"/>
+				</c:otherwise>
+				</c:choose>
+				
+				<table>
+					<c:if test="${shownAd.proximityToPublicTransport!=0}">
+					<tr>
+						<td>Proximity to Public Transport: ${shownAd.proximityToPublicTransport} meters</td>
+					</tr>
+					</c:if>
+					<c:if test="${shownAd.proximityToSchool!=0}">
+					<tr>
+						<td>Proximity to School: ${shownAd.proximityToSchool} meters</td>
+					</tr>
+					</c:if>
+					<c:if test="${shownAd.proximityToSupermarket!=0}">
+					<tr>
+						<td>Proximity to Supermarket: ${shownAd.proximityToSupermarket} meters</td>
+					</tr>
+					</c:if>
+					<c:if test="${shownAd.proximityToNightlife!=0}">
+					<tr>
+						<td>Proximity to Night Life: ${shownAd.proximityToNightlife} meters</td>
+					</tr>
+					</c:if>
+				</table>
+			</div>
+			</c:if>
+		</td>
+	<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>	
+	<c:if test="${shownAd.hasPreferences()}">
+		<td>
+			<div class="adDescDiv">
+				<h2>Preferences</h2>
+				<c:choose>
+				<c:when test="${countCols== 1}">
+					<c:set var="countCols" value="${0}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="countCols" value="${1}"/>
+				</c:otherwise>
+				</c:choose>
+				<p>${shownAd.preferences}</p>
+			</div>
+		</td>
+	</c:if>
+		<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>	
+		<td>
+		
+			<table id="advertiserTable" class="adDescDiv" style="width:93%;">
+				<tr>
+					<td><h2>Advertiser</h2><br /></td>
+				</tr>
+				<c:choose>
+				<c:when test="${countCols== 1}">
+					<c:set var="countCols" value="${0}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="countCols" value="${1}"/>
+				</c:otherwise>
+				</c:choose>
+				<tr>
+					<td><c:choose>
+							<c:when test="${shownAd.user.picture.filePath != null}">
+								<img src="${shownAd.user.picture.filePath}">
+							</c:when>
+							<c:otherwise>
+								<img src="/img/avatar.png">
+							</c:otherwise>
+						</c:choose></td>
+					
+					<td>${shownAd.user.username}</td>
+					
+					<td id="advertiserEmail">
+					<c:choose>
+						<c:when test="${loggedIn}">
+							<a href="/user?id=${shownAd.user.id}"><button type="button">Visit profile</button></a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login"><button class="thinInactiveButton" type="button">Login to visit profile</button></a>
+						</c:otherwise>
+					</c:choose>
+					</td>
+					<td>
+						<form>
+							<c:choose>
+								<c:when test="${loggedIn}">
+									<c:if test="${loggedInUserEmail != shownAd.user.username }">
+										<button id="newMsg" type="button">Contact Advertiser</button>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<a href="/login"><button class="thinInactiveButton" type="button">Login to contact advertiser</button></a>
+								</c:otherwise>
+							</c:choose>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<c:if test="${countCols == 1 }">
+			</tr>
+			<tr>
+		</c:if>	
+		
 
 
 </tr>
@@ -797,6 +822,9 @@ function deleteAd(button) {
 
 <div id="msgDiv">
 <form class="msgForm">
+	<c:if test="${countCols == 0 }">
+		<c:set var="countCols" value="${1}" />
+	</c:if>
 	<h2>Contact the advertiser</h2>
 	<br>
 	<br>

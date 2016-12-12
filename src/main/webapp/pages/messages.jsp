@@ -20,45 +20,80 @@
 <script>
 function deleteMessage(button) {
 	var id = $(button).attr("data-id");
-	$.get("/profile/messages/deleteMessage?id=" + id);
-	};
+	$.get("/profile/messages/deleteMessage?id=" + id, function(){
+		
+		$("#msgDiv").load(document.URL + " #msgDiv");
+	});
+	location.reload();
+}
 </script>
 <script>
 	$(document).ready(function() {
 		unreadMessages("messages");
 		
+		$("#deleteMessage").click(function(){
+			var id = $(button).attr("data-id");
+			$.get("/profile/messages/deleteMessage?id=" + id, function(){
+				
+				$("#msgDiv").load(document.URL + " #msgDiv");
+			});
+			location.reload();
+		});	
+		
+		//Shows the Reply Popup
 		$("#newMsg").click(function(){
 			$("#content").children().animate({opacity: 0.4}, 300, function(){
-				$("#msgDiv").css("display", "block");
-				$("#msgDiv").css("opacity", "1");
+				$("#messageDiv").css("display", "block");
+				$("#messageDiv").css("opacity", "1");
 			});
 		});
 		
-		$("#messageCancel").click(function(){
-			$("#msgDiv").css("display", "none");
-			$("#msgDiv").css("opacity", "0");
+		//Cancel Button from the Reply Popup
+		$("#messageReplyCancel").click(function(){
+			$("#messageDiv").css("display", "none");
+			$("#messageDiv").css("opacity", "0");
 			$("#content").children().animate({opacity: 1}, 300);
 		});
 		
-		$("#messageSend").click(function (){
-			if($("#msgSubject").val() != "" && $("#msgTextarea").val() != ""){
-				var subject = $("#msgSubject").val();
-				var text = $("#msgTextarea").val();
-				var recipientEmail = "${messages[0].recipient.email}";
-				$.post("profile/messages/sendMessage", {subject : subject, text: text, recipientEmail : recipientEmail}, function(){
-					$("#msgDiv").css("display", "none");
-					$("#msgDiv").css("opacity", "0");
-					$("#msgSubject").val("");
-					$("#msgTextarea").val("");
-					$("#content").children().animate({opacity: 1}, 300);
-				})
+		
+		$("#receiverEmail").focusout(function() {
+			var text = $("#receiverEmail").val();
+			
+			$.post("/profile/messages/validateEmail", {email:text}, function(data) {
+				if (data != text) {
+					alert(data);
+					$("#receiverEmail").val("");
+				}
+			});
+		});
+		
+		//messageForm from the Reply Popup
+		$("#messageForm").submit(function (event){
+			if($("#receiverEmail").val() == ""){
+				event.preventDefault();
 			}
 		});
-		$("#sent").click(function() {
-			$.post("/profile/message/sent", function(data) {
-				loadMessages(data);
-				prepareRows();
-			}, 'json');
+		
+		//Send button from Reply Popup
+		$("#messageReplySend").click(function() {
+			if ($("#messageSubject").val() != "" && $("#messageTextarea").val() != "") {
+				var subject = $("#messageSubject").val();
+				var text = $("#messageTextarea").val();
+				var recipientId = $("#messageRecipient").val();
+				$.post("/profile/messages/sendMessageById", {
+					subject : subject,
+					text : text,
+					recipientId : recipientId
+				}, function() {
+					$("#messageDiv").css("display", "none");
+					$("#messageDiv").css("opacity", "0");
+					$("#messageSubject").val("");
+					$("#messageTextarea").val("");
+					$("#content").children().animate({
+						opacity : 1
+					}, 300);
+				})
+			}
 		});
 	});
 </script>
@@ -118,8 +153,9 @@ function deleteMessage(button) {
 			<div id="messageList">
 				<div id="messageDetail" style="width: 650px;">
 					<h2>${messages[0].subject}</h2>
-					
+					<c:if test="${messages[0].isSenderNotAdmin()}">
 					<button id="newMsg" type="button" style="float: right;">Reply</button>
+					</c:if>
 					<h3>
 						<b>To: </b>${messages[0].recipient.email}
 					</h3>
@@ -134,24 +170,22 @@ function deleteMessage(button) {
 				</div>
 			</div>
 		</td>
-
+	
 	</tr>
 </table>
-<div id="msgDiv">
-<form class="msgForm">
-	<h2>Reply</h2>
-	<br>
-	<br>
-	<label>Subject: <span>*</span></label>
-	<input  class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
-	<br><br>
-	<label>Message: </label>
-	<textarea id="msgTextarea" placeholder="Message" ></textarea>
-	<br/>
-	
-	<button style="background-color:#991f00;color:white" type="button" id="messageCancel">Cancel</button>
-	<button style="background-color:#ffffcc" type="button" id="messageSend">Send</button>
-	
+<div id="messageDiv" style="display:none">
+	<form class="msgForm" >
+		<h2>Reply to this User</h2>
+		<br> <br> <label>Subject: <span>*</span></label> 
+		<input
+			class="msgInput" type="text" style="display:none" id="messageRecipient" value="${messages[0].sender.id}" /><input
+			class="msgInput" type="text" id="messageSubject" placeholder="Subject" />
+		<br> <br> <label>Message: </label><br><br>
+		<textarea rows="10" cols="49" id="messageTextarea" placeholder="Message"></textarea><br><br>
+		
+		<button style="background-color:#991f00;color:white" type="button" id="messageReplyCancel">Cancel</button>
+		<button style="background-color:#ffffcc" type="button" id="messageReplySend">Send</button>
+		
 	</form>
 </div>
 		

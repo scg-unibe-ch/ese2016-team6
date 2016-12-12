@@ -11,22 +11,22 @@ import ch.unibe.ese.team6.model.User;
 public interface AdDao extends CrudRepository<Ad, Long> {
 	
 	/** this will be used if both rooms AND studios are searched */
-	public Iterable<Ad> findByPrizePerMonthLessThan (int prize);
+	public Iterable<Ad> findByPriceRentLessThan (int price);
 	
 	/*_*/
 	
-	public Iterable<Ad> findByPriceLessThan (int price);
+	public Iterable<Ad> findByPriceSaleLessThan (int price);
 
-	public Iterable<Ad> findByPriceLessThanAndExpired (int price,boolean expired);
+	public Iterable<Ad> findByPriceRentLessThanAndExpired (int price,boolean expired);
 	
 	/** this will be used if only rooms or studios are searched */
-	public Iterable<Ad> findByStudioAndPrizePerMonthLessThan(boolean studio, int i);
+	public Iterable<Ad> findByStudioAndPriceRentLessThan(boolean studio, int i);
 
-	public Iterable<Ad> findByStudioAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(boolean studio, int i, int j);
+	public Iterable<Ad> findByStudioAndPriceRentLessThanAndNumberOfRoomsGreaterThanEqual(boolean studio, int i, int j);
 	
-	//public Iterable<Ad> findByRentAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual(boolean rent, int i, int j);
+	//public Iterable<Ad> findByRentAndPriceRentLessThanAndNumberOfRoomsGreaterThanEqual(boolean rent, int i, int j);
 	
-	public Iterable<Ad> findByDealAndPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(KindOfDeal d, int price, int nrRooms, boolean ex, boolean bought);
+	public Iterable<Ad> findByDealAndPriceRentLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(KindOfDeal d, int price, int nrRooms, boolean ex, boolean bought);
 	
 	public Iterable<Ad> findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(KindOfDeal d, int curBid, int nrRooms, boolean ex, boolean bought);
 	
@@ -36,15 +36,12 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 	public Iterable<Ad>findByDealAndExpiredAndInstantBought(KindOfDeal d, boolean ex, boolean inst);
 	
 	
-	public Iterable<Ad> findByPrizePerMonthLessThanAndNumberOfRoomsGreaterThanEqual (int prize,int j);
+	public Iterable<Ad> findByPriceLessThanAndNumberOfRoomsGreaterThanEqual (int price,int j);
 	
 	public Iterable<Ad> findByUser(User user);
 
 	public Iterable<Ad> findByKindOfMembershipOfUserEquals(boolean i);
 	
 	public Iterable<Ad> findByExpireDateLessThanAndExpired(Date date, boolean expired);
-
-	
-	
 
 }

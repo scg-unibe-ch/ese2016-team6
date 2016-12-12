@@ -32,9 +32,6 @@ public class AlertForm {
 	private boolean forRent;
 	private boolean forSale;
 	
-	@AssertFalse(message = "Please select either of both Types")
-	private boolean noRentNoSale;
-	
 	@Min(value = 0, message = "Please enter a positive minimal Size")
 	private int minSize;
 	
@@ -47,7 +44,7 @@ public class AlertForm {
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "Please enter a positive Number of Rooms")
 	private int numberOfRooms;
-
+	
 	public String getCity() {
 		return city;
 	}
@@ -135,4 +132,5 @@ public class AlertForm {
 	public void setIsValid(boolean valid){
 		this.isValid = valid;
 	}
+
 }

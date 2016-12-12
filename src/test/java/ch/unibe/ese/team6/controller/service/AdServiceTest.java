@@ -59,13 +59,13 @@ public class AdServiceTest {
 		placeAdForm.setPreferences("Test preferences");
 		placeAdForm.setRoomDescription("Test Room description");
 		//placeAdForm.setRoommates("Test Roommate description");
-		placeAdForm.setPrize(600);
+		placeAdForm.setPriceRent(600);
 		placeAdForm.setSquareFootage(50);
 		placeAdForm.setTitle("title");
 		placeAdForm.setStreet("Hauptstrasse 13");
 	//	placeAdForm.setStudio(true);
-		placeAdForm.setMoveInDate("27-02-2015");
-		placeAdForm.setMoveOutDate("27-04-2015");
+		placeAdForm.setMoveInDate("27-02-2017");
+		placeAdForm.setMoveOutDate("27-04-2017");
 		
 		placeAdForm.setSmokers(true);
 		placeAdForm.setAnimals(false);
@@ -104,7 +104,7 @@ public class AdServiceTest {
 		assertEquals("Test preferences", ad.getPreferences());
 		assertEquals("Test Room description", ad.getRoomDescription());
 	//	assertEquals("Test Roommate description", ad.getRoommates());
-		assertEquals(600, ad.getPrizePerMonth());
+		assertEquals(600, ad.getPriceRent());
 		assertEquals(50, ad.getSquareFootage());
 		assertEquals("title", ad.getTitle());
 		assertEquals("Hauptstrasse 13", ad.getStreet());

@@ -76,7 +76,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setZipcode(4600);
 		oltenResidence.setMoveInDate(date);
 		oltenResidence.setCreationDate(date);
-		oltenResidence.setPrizePerMonth(1200);
+		oltenResidence.setPriceRent(1200);
 		oltenResidence.setSquareFootage(42);
 		oltenResidence.setStudio(false);
 		oltenResidence.setSmokers(true);
@@ -102,14 +102,14 @@ public class EnquiryServiceTest {
 		//ad two possible visiting times ("visits") to the ad
 		Visit visit = new Visit();
 		visit.setAd(oltenResidence);
-		visit.setStartTimestamp(formatter.parse("16.12.2014 10:00"));
-		visit.setEndTimestamp(formatter.parse("16.12.2014 12:00"));
+		visit.setStartTimestamp(formatter.parse("16.12.2016 10:00"));
+		visit.setEndTimestamp(formatter.parse("16.12.2016 12:00"));
 		visitDao.save(visit);
 
 		Visit visit2 = new Visit();
 		visit2.setAd(oltenResidence);
-		visit2.setStartTimestamp(formatter.parse("18.12.2014 10:00"));
-		visit2.setEndTimestamp(formatter.parse("18.12.2014 12:00"));
+		visit2.setStartTimestamp(formatter.parse("18.12.2016 10:00"));
+		visit2.setEndTimestamp(formatter.parse("18.12.2016 12:00"));
 		visitDao.save(visit2);
 		
 		Iterable<Visit> oltenVisits = visitService.getVisitsByAd(oltenResidence);
@@ -138,7 +138,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setZipcode(4600);
 		oltenResidence.setMoveInDate(date);
 		oltenResidence.setCreationDate(date);
-		oltenResidence.setPrizePerMonth(1200);
+		oltenResidence.setPriceRent(1200);
 		oltenResidence.setSquareFootage(42);
 		oltenResidence.setStudio(false);
 		oltenResidence.setSmokers(true);
@@ -164,14 +164,14 @@ public class EnquiryServiceTest {
 		//ad two possible visiting times ("visits") to the ad
 		Visit visit = new Visit();
 		visit.setAd(oltenResidence);
-		visit.setStartTimestamp(formatter.parse("16.12.2014 10:00"));
-		visit.setEndTimestamp(formatter.parse("16.12.2014 12:00"));
+		visit.setStartTimestamp(formatter.parse("16.12.2016 10:00"));
+		visit.setEndTimestamp(formatter.parse("16.12.2016 12:00"));
 		visitDao.save(visit);
 
 		Visit visit2 = new Visit();
 		visit2.setAd(oltenResidence);
-		visit2.setStartTimestamp(formatter.parse("18.12.2014 10:00"));
-		visit2.setEndTimestamp(formatter.parse("18.12.2014 12:00"));
+		visit2.setStartTimestamp(formatter.parse("18.12.2016 10:00"));
+		visit2.setEndTimestamp(formatter.parse("18.12.2016 12:00"));
 		visitDao.save(visit2);
 		
 		//Ogi is enquiring about Blocher's apartment

@@ -16,7 +16,17 @@
 
 <script>
 	$(document).ready(function() {	
-
+		if(document.getElementById('forRent').checked) {
+			$("#type-rent").prop('checked', true);
+			$("#type-rent").click();
+		} else if(document.getElementById('forSale').checked) {
+			$("#type-sale").prop('checked', true);
+			$("#type-Sale").click();
+		} else if(document.getElementById('forAuction').checked) {
+			$("#type-auction").click();
+			$("#type-auction").prop('checked', true);
+		}
+		
 		setTimeout(function() {
 			if ($("#ActualDeal").val() == "forRent") {
 				$("#type-rent").trigger('click');
@@ -29,14 +39,9 @@
 				}
 			}
 		},10);
-
+	
 		
-
-    	$("#type-rent").on("click", function(){
-    		
-    		
-			document.getElementById('type-sale').checked="";
-			document.getElementById('type-auction').checked="";
+$("#type-rent").on("click", function(){
         	document.getElementById('field-priceRent').style.visibility = "visible";
         	document.getElementById('field-priceSale').style.visibility = "hidden";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -51,11 +56,12 @@
 			document.getElementById('incLabel').style.visibility = "hidden";
 			document.getElementById('deadLabel').style.visibility = "hidden";
 			
+			document.getElementById('forRent').checked = true;
+			document.getElementById('forSale').checked = false;
+			document.getElementById('forAuction').checked = false;
 			
-			document.getElementById('ActualDeal').value = "forRent";
-			
-			document.getElementById('preferences').style.visibility = "visible";
 			document.getElementById('preference').style.visibility = "visible";
+			document.getElementById('preferences').style.visibility = "visible";
 			
 			$("#field-priceRent").parent().show();
 			$("#field-priceSale").parent().hide();
@@ -66,12 +72,9 @@
 			$("#field-deadlineMinute").parent().hide();
 			$("#preferences").parent().show();
 			$("#preference").parent().show();
-			
     	});
 
 		$("#type-sale").on("click", function(){
-			document.getElementById('type-rent').checked="";
-			document.getElementById('type-auction').checked="";
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "hidden";
@@ -88,8 +91,9 @@
 			document.getElementById('incLabel').style.visibility = "hidden";
 			document.getElementById('deadLabel').style.visibility = "hidden";
 			
-			document.getElementById('ActualSale').value = "direct";
-			document.getElementById('ActualDeal').value = "forSale";
+			document.getElementById('forRent').checked = false;
+			document.getElementById('forSale').checked = true;
+			document.getElementById('forAuction').checked = false;
 			
 			$("#field-priceSale").parent().show();
 			$("#field-priceRent").parent().hide();
@@ -103,10 +107,7 @@
 
    		});
 
-    	$("#type-auction").on("click", function(){
-    		document.getElementById('type-rent').checked="";
-			document.getElementById('type-sale').checked="";
-			
+    	$("#type-auction").on("click", function(){	
 			document.getElementById('field-priceRent').style.visibility = "hidden";
         	document.getElementById('field-priceSale').style.visibility = "visible";
         	document.getElementById('field-currentBid').style.visibility = "visible";
@@ -116,15 +117,17 @@
 			document.getElementById('field-deadlineMinute').style.visibility = "visible";
 			document.getElementById('preferences').style.visibility = "hidden";
 			document.getElementById('preference').style.visibility = "hidden";
-
+			
+			
 			document.getElementById('rentLabel').style.visibility = "hidden";
 			document.getElementById('saleLabel').style.visibility = "visible";
 			document.getElementById('bidLabel').style.visibility = "visible";
 			document.getElementById('incLabel').style.visibility = "visible";
 			document.getElementById('deadLabel').style.visibility = "visible";
 			
-			document.getElementById('ActualSale').value = "bothAuctionAndDirect";
-			document.getElementById('ActualDeal').value = "forSale";
+			document.getElementById('forRent').checked = true;
+			document.getElementById('forSale').checked = false;
+			document.getElementById('forAuction').checked = false;
 			
 			$("#field-priceRent").parent().hide();
 			$("#field-priceSale").parent().show();
@@ -189,9 +192,6 @@
 			}
 		});
 		
-		
-		
-		
 		$("#addVisitButton").click(function() {
 			var date = $("#field-visitDay").val();
 			if(date == ""){
@@ -254,8 +254,7 @@
 	action="/profile/editAd" id="placeAdForm" autocomplete="off"
 	enctype="multipart/form-data">
 
-<input type="hidden" name="adId" value="${ad.id }" />
-
+<input type="hidden" name="adId" value="${ad.id}" />
 
 	<tr>
 	<td>
@@ -266,35 +265,29 @@
 			<table class="placeAdTable">
 
 				<tr>
-					<td><label for="field-type">Type of deal:</label>
-						
-						<form:input type="hidden" id="ActualDeal" path="deal"  value="${ad.deal}" readonly="readonly" />	
-						<form:input type="hidden" id="ActualSale" path="sale"  value="${ad.sale}" readonly="readonly" />
-						
-						<c:choose>
-							<c:when test="${ad.deal eq 'forRent'}">
-								<input id="type-rent" type="radio" name="sale" value="forRent" checked="checked" />Rent
-							</c:when>
-							<c:otherwise>
-								<input id="type-rent" type="radio" name="sale" value="forRent" />Rent
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${ad.deal eq 'forSale' && ad.sale eq 'direct'}">
-								<input id="type-sale" type="radio" name="sale" value="forSale" checked="checked" />Sale
-							</c:when>
-							<c:otherwise>
-								<input id="type-sale" type="radio" name="sale" value="forSale" />Sale
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${ad.sale eq 'bothAuctionAndDirect' && ad.deal eq 'forSale'}">
-								<input id="type-auction" type="radio" name="sale" value="forAuction" checked="checked" />Auction
-							</c:when>
-							<c:otherwise>
-								<input id="type-auction" type="radio" name="sale" value="forAuction" />Auction
-							</c:otherwise>
-						</c:choose>
+					<td><label for="field-type">Type of deal:</label>	
+				<c:choose>
+					<c:when test="${ad.sale eq 'bothAuctionAndDirect' && ad.deal eq 'forSale'}">
+						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
+						<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent" />
+						<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction" checked="checked"/>
+					</c:when>
+					<c:when test="${ad.deal eq 'forSale' && ad.sale eq 'direct'}">
+						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale" checked="checked"/>
+						<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent" />
+						<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction"/>
+					</c:when>
+					<c:otherwise>
+						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
+						<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent" checked="checked"/>
+						<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction"/>
+					</c:otherwise>
+				</c:choose>
+							
+						<input id="type-rent" type="radio" name="sale" value="forRent"/>For Rent
+						<input id="type-sale" type="radio" name="sale" value="forSale"/>For Sale
+						<input id="type-auction" type="radio" name="sale" value="forAuction"/>For Auction
+					
 					</td>
 
 				</tr>

@@ -44,29 +44,29 @@ public class AdTestDataSaver {
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
-		Date creationDate1 = formatter.parse("03.10.2014");
-		Date creationDate2 = formatter.parse("11.10.2014");
-		Date creationDate3 = formatter.parse("25.10.2014");
-		Date creationDate4 = formatter.parse("02.11.2014");
-		Date creationDate5 = formatter.parse("25.11.2013");
-		Date creationDate6 = formatter.parse("01.12.2014");
-		Date creationDate7 = formatter.parse("16.11.2014");
-		Date creationDate8 = formatter.parse("27.11.2014");
+		Date creationDate1 = formatter.parse("03.01.2017");
+		Date creationDate2 = formatter.parse("11.10.2017");
+		Date creationDate3 = formatter.parse("25.10.2017");
+		Date creationDate4 = formatter.parse("02.11.2017");
+		Date creationDate5 = formatter.parse("25.11.2017");
+		Date creationDate6 = formatter.parse("01.12.2017");
+		Date creationDate7 = formatter.parse("16.11.2017");
+		Date creationDate8 = formatter.parse("27.11.2017");
 		
-		Date moveInDate1 = formatter.parse("15.12.2014");
-		Date moveInDate2 = formatter.parse("21.12.2014");
-		Date moveInDate3 = formatter.parse("01.01.2015");
-		Date moveInDate4 = formatter.parse("15.01.2015");
-		Date moveInDate5 = formatter.parse("01.02.2015");
-		Date moveInDate6 = formatter.parse("01.03.2015");
-		Date moveInDate7 = formatter.parse("15.03.2015");
-		Date moveInDate8 = formatter.parse("16.02.2015");
+		Date moveInDate1 = formatter.parse("15.12.2017");
+		Date moveInDate2 = formatter.parse("21.12.2017");
+		Date moveInDate3 = formatter.parse("01.01.2017");
+		Date moveInDate4 = formatter.parse("15.01.2017");
+		Date moveInDate5 = formatter.parse("01.02.2017");
+		Date moveInDate6 = formatter.parse("01.03.2017");
+		Date moveInDate7 = formatter.parse("15.03.2017");
+		Date moveInDate8 = formatter.parse("16.02.2017");
 		
-		Date moveOutDate1 = formatter.parse("31.03.2015");
-		Date moveOutDate2 = formatter.parse("30.04.2015");
-		Date moveOutDate3 = formatter.parse("31.03.2016");
-		Date moveOutDate4 = formatter.parse("01.07.2015");
-		Date moveOutDate5 = formatter.parse("30.09.2016");
+		Date moveOutDate1 = formatter.parse("31.03.2017");
+		Date moveOutDate2 = formatter.parse("30.04.2017");
+		Date moveOutDate3 = formatter.parse("31.03.2017");
+		Date moveOutDate4 = formatter.parse("01.07.2017");
+		Date moveOutDate5 = formatter.parse("30.09.2017");
 		
 		String roomDescription1 = "The room is a part of 3.5 rooms apartment completely renovated"
 				+ "in 2010 at Kramgasse, Bern. The apartment is about 50 m2 on 1st floor."
@@ -84,8 +84,10 @@ public class AdTestDataSaver {
 		adBern.setMoveInDate(moveInDate1);
 		adBern.setCreationDate(creationDate1);
 		adBern.setMoveOutDate(moveOutDate1);
-		adBern.setPrizePerMonth(400);
+		adBern.setDeal(KindOfDeal.forRent);
+		adBern.setPriceRent(400);
 		adBern.setSquareFootage(50);
+		
 		adBern.setStudio(false);
 		adBern.setSmokers(false);
 		adBern.setAnimals(true);
@@ -131,8 +133,10 @@ public class AdTestDataSaver {
 		adBern2.setMoveInDate(moveInDate2);
 		adBern2.setCreationDate(creationDate2);
 		adBern2.setMoveOutDate(moveOutDate4);
-		adBern2.setPrizePerMonth(700);
+		adBern2.setDeal(KindOfDeal.forRent);
+		adBern2.setPriceRent(700);
 		adBern2.setSquareFootage(60);
+		adBern2.setNumberOfRooms(2);
 		adBern2.setStudio(true);
 		adBern2.setSmokers(false);
 		adBern2.setAnimals(true);
@@ -175,7 +179,8 @@ public class AdTestDataSaver {
 		adBasel.setMoveInDate(moveInDate3);
 		adBasel.setMoveOutDate(moveOutDate2);
 		adBasel.setCreationDate(creationDate3);
-		adBasel.setPrizePerMonth(480);
+		adBasel.setDeal(KindOfDeal.forRent);
+		adBasel.setPriceRent(480);
 		adBasel.setSquareFootage(10);
 		adBasel.setStudio(true);
 		adBasel.setSmokers(true);
@@ -218,7 +223,7 @@ public class AdTestDataSaver {
 		adOlten.setNumberOfRooms(2);
 		adOlten.setMoveInDate(moveInDate4);
 		adOlten.setCreationDate(creationDate4);
-		//adOlten.setPrizePerMonth(430);
+		adOlten.setPriceRent(430);
 		adOlten.setSquareFootage(60);
 		adOlten.setStudio(false);
 		adOlten.setSmokers(true);
@@ -257,7 +262,8 @@ public class AdTestDataSaver {
 		adNeuchâtel.setMoveInDate(moveInDate5);
 		adNeuchâtel.setMoveOutDate(moveOutDate3);
 		adNeuchâtel.setCreationDate(creationDate5);
-		adNeuchâtel.setPrizePerMonth(410);
+		adNeuchâtel.setDeal(KindOfDeal.forRent);
+		adNeuchâtel.setPriceRent(410);
 		adNeuchâtel.setSquareFootage(40);
 		adNeuchâtel.setStudio(true);
 		adNeuchâtel.setSmokers(true);
@@ -300,7 +306,6 @@ public class AdTestDataSaver {
 		adBiel.setMoveInDate(moveInDate6);
 		adBiel.setMoveOutDate(moveOutDate5);
 		adBiel.setCreationDate(creationDate6);
-		//adBiel.setPrizePerMonth(480);
 		adBiel.setNumberOfRooms(4);
 		adBiel.setSquareFootage(20);
 		adBiel.setStudio(true);
@@ -347,7 +352,6 @@ public class AdTestDataSaver {
 		adZurich.setMoveInDate(moveInDate7);
 		adZurich.setCreationDate(creationDate7);
 		adZurich.setMoveOutDate(moveOutDate5);
-		//adZurich.setPrizePerMonth(480);
 		adZurich.setNumberOfRooms(1);
 		adZurich.setSquareFootage(32);
 		adZurich.setStudio(false);
@@ -394,7 +398,8 @@ public class AdTestDataSaver {
 		adLuzern.setZipcode(6000);
 		adLuzern.setMoveInDate(moveInDate8);
 		adLuzern.setCreationDate(creationDate2);
-		adLuzern.setPrizePerMonth(700);
+		adLuzern.setDeal(KindOfDeal.forRent);
+		adLuzern.setPriceRent(700);
 		adLuzern.setSquareFootage(60);
 		adLuzern.setStudio(true);
 		adLuzern.setSmokers(false);
@@ -441,7 +446,6 @@ public class AdTestDataSaver {
 		adAarau.setMoveInDate(moveInDate3);
 		adAarau.setMoveOutDate(moveOutDate4);
 		adAarau.setCreationDate(creationDate8);
-		//adAarau.setPrizePerMonth(800);
 		adAarau.setSquareFootage(26);
 		adAarau.setStudio(true);
 		adAarau.setSmokers(true);
@@ -484,7 +488,8 @@ public class AdTestDataSaver {
 		adDavos.setZipcode(7260);
 		adDavos.setMoveInDate(moveInDate2);
 		adDavos.setCreationDate(creationDate4);
-		adDavos.setPrizePerMonth(1100);
+		adDavos.setDeal(KindOfDeal.forRent);
+		adDavos.setPriceRent(1100);
 		adDavos.setSquareFootage(74);
 		adDavos.setStudio(false);
 		adDavos.setSmokers(true);
@@ -523,7 +528,8 @@ public class AdTestDataSaver {
 		adLausanne.setMoveInDate(moveInDate5);
 		adLausanne.setMoveOutDate(moveOutDate3);
 		adLausanne.setCreationDate(creationDate5);
-		adLausanne.setPrizePerMonth(360);
+		adLausanne.setDeal(KindOfDeal.forRent);
+		adLausanne.setPriceRent(360);
 		adLausanne.setSquareFootage(8);
 		adLausanne.setStudio(false);
 		adLausanne.setSmokers(true);
@@ -563,7 +569,6 @@ public class AdTestDataSaver {
 		adLocarno.setMoveInDate(moveInDate6);
 		adLocarno.setMoveOutDate(moveOutDate5);
 		adLocarno.setCreationDate(creationDate6);
-		//adLocarno.setPrizePerMonth(960);
 		adLocarno.setSquareFootage(42);
 		adLocarno.setStudio(false);
 		adLocarno.setSmokers(true);

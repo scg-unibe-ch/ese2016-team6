@@ -18,6 +18,7 @@ import ch.unibe.ese.team6.controller.pojos.forms.GoogleSignupForm;
 import ch.unibe.ese.team6.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team6.controller.service.MessageService;
 import ch.unibe.ese.team6.controller.service.UserService;
+import ch.unibe.ese.team6.model.Gender;
 import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.User;
 
@@ -127,6 +128,8 @@ public class MessageController {
 		User user = userService.findUserByUsername(email);
 		if (user == null) {
 			return "This user does not exist.";
+		} else if (user.getGender().equals(Gender.ADMIN)) {
+			return "eseserver@gmail.com";
 		} else {
 			return user.getEmail();
 		}
@@ -138,6 +141,16 @@ public class MessageController {
 			@RequestParam String text, @RequestParam String recipientEmail,
 			Principal principal) {
 		User recipient = userService.findUserByUsername(recipientEmail);
+		User sender = userService.findUserByUsername(principal.getName());
+		messageService.sendMessage(sender, recipient, subject, text);
+	}
+	
+	/** Sends a message with the passed parameters */
+	@RequestMapping(value = "/profile/messages/sendMessageById", method = RequestMethod.POST)
+	public @ResponseBody void sendMessage(@RequestParam String subject,
+			@RequestParam String text, @RequestParam int recipientId,
+			Principal principal) {
+		User recipient = userService.findUserById(recipientId);
 		User sender = userService.findUserByUsername(principal.getName());
 		messageService.sendMessage(sender, recipient, subject, text);
 	}

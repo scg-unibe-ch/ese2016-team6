@@ -148,7 +148,6 @@ public class MessageService {
 			mess.setSubject(sub);
 			mess.setText(tex);
 	
-
 			Transport.send(mess);
 			System.out.println("Sent message successfully....");
 			}catch (MessagingException mex) {
@@ -181,6 +180,10 @@ public class MessageService {
 	}
 
 	public void deleteMessage(long id) {
-		messageDao.delete(id);	
+		Message message = messageDao.findOne(id);
+		if(message != null) {
+			message.setState(MessageState.READ);
+			messageDao.delete(id);	
+		}	
 	}
 }

@@ -67,7 +67,7 @@ function rentSaleOfAlert(alert) {
 			autoFocus : true
 		});
 		
-		var price = document.getElementById('priceInput');
+		var price = document.getElementById('price');
 		var radius = document.getElementById('radiusInput');
 		
 		if(price.value == null || price.value == "" || price.value == "0")
@@ -106,7 +106,7 @@ function rentSaleOfAlert(alert) {
 		<br /> 
 		
 		<label for="price">Price (max.):</label>
-		<form:input id="priceInput" type="number" path="price" step="50" />
+		<form:input id="price" type="number" path="price" step="50" />
 		CHF
 		<form:errors path="price" cssClass="validationErrorText" />
 		<br />
@@ -160,20 +160,6 @@ function rentSaleOfAlert(alert) {
 			</thead>
 		<c:forEach var="alert" items="${alerts}">
 			<tr>
-				<!-- <td>
-				<c:choose>
-					<c:when test="${alert.bothRoomAndStudio}">
-						Both
-					</c:when>
-					<c:when test="${alert.studio}">
-						Studio
-					</c:when>
-					<c:otherwise>
-						Room
-					</c:otherwise>
-				</c:choose>
-				</td> -->
-				
 				<td>
 				<c:choose>
 					<c:when test="${alert.forSale}">
@@ -187,7 +173,14 @@ function rentSaleOfAlert(alert) {
 				
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>
-				<td>${alert.price} Chf</td>
+				<td><c:choose>
+					<c:when test="${alert.forSale}">
+						${alert.priceSale}
+					</c:when>
+					<c:otherwise>
+						${alert.priceRent}
+					</c:otherwise>
+				</c:choose></td>
 				<td>${alert.numberOfRooms}</td>
 				<td>
 					<c:choose>

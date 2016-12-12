@@ -114,7 +114,7 @@
 					
 						<ul  id="ProfileDropList">
 								<li class="ProfileListItem" style="top:65px;"><a href="/profile/placeAd">Place an ad</a></li>
-								<li class="ProfileListItem" style="top:90px;"><a href="/profile/myRooms">My advertisements</a></li>
+								<li class="ProfileListItem" style="top:90px;"><a href="/profile/myRooms">My ads</a></li>
 								<li class="ProfileListItem" style="top:115px;"><a href="/profile/myBookmarks">My bookmarks</a></li>
 								<li class="ProfileListItem" style="top:140px;"><a href="/profile/schedule">Schedule</a></li>
 								<li class="ProfileListItem" style="top:165px;"><a id="messageLink" href="/profile/messages"></a></li>

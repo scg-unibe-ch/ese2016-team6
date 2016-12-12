@@ -12,35 +12,6 @@
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
 -->
 
-<!-- 
-<script>
-function validateType(form)
-{
-	var rent = document.getElementById('rent');
-	var sale = document.getElementById('sale');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	var type = document.getElementById('type');
-	var filtered = document.getElementById('filtered');
-	
-	if(room.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!room.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-		type.checked = studio.checked;
-	}
-	filtered.checked = true;
-}
-</script>
--->
-
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->
 <c:import url="template/NewLoginPop.jsp" />
@@ -106,6 +77,37 @@ function sort_div_attribute() {
 
 <script>
 	$(document).ready(function() {
+		if (document.getElementById('forSale').checked) {
+			$("#type-sale").prop('checked', true);
+		} else {
+			$("#type-rent").prop('checked', true);
+		}
+		
+		$("#moreFilterCriteria").click(function() {
+			document.getElementById('moreFilterCriteria').style.visibility = "hidden";
+			document.getElementById('line').style.display = "block";
+			document.getElementById('additionalCriteria').style.display = "block";
+			document.getElementById('hideMoreCriteria').style.display = "block";
+		});
+		
+		$("#hideMoreCriteria").click(function() {
+			document.getElementById('moreFilterCriteria').style.visibility = "visible";
+			document.getElementById('line').style.display = "none";
+			document.getElementById('additionalCriteria').style.display = "none";
+			document.getElementById('hideMoreCriteria').style.display = "none";
+		});
+		
+		$("#showMap").click(function() {
+			document.getElementById('showMap').style.display = "none";
+			document.getElementById('map').style.display = "";
+			document.getElementById('hideMap').style.display = "block";
+		});
+		
+		$("#hideMap").click(function() {
+			document.getElementById('showMap').style.display = "block";
+			document.getElementById('map').style.display = "none";
+			document.getElementById('hideMap').style.display = "none";
+		});
 		
 		$("#city").autocomplete({
 			minLength : 2
@@ -168,14 +170,11 @@ function sort_div_attribute() {
 <hr />
 
 
-<table style="width:50%;
+<table style="width:100%;
 	table-layout: fixed;">
 <tr>
-<td valign="top" style="width:400px; min-width:400px;">
+<td valign="top" style="width:350px; min-width:400px;">
 
-<div id="map" style="width: 400px; height: 300px;"></div>
-
-<br>
 
 <div>
 <select id="modus">
@@ -188,9 +187,6 @@ function sort_div_attribute() {
     <option value="dateAge_desc">Date created (oldest to youngest)</option>
 </select>
 
-
-
-
 <button onClick="sort_div_attribute()">Sort</button>	
 </div>
 
@@ -200,17 +196,12 @@ function sort_div_attribute() {
 	<div id="filterDiv">
 		<h2>Filter results:</h2>
 		
+		<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
+		<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
+		
 		<form>
-			<c:choose>
-			<c:when test="${forRent}=='checked'">
-				<input type="radio" id="type-rent" name="RentSale" checked="checked"> For Rent
-				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction				
-			</c:when>
-			<c:otherwise>
 				<input type="radio" id="type-rent" name="RentSale"> For Rent
-				<input type="radio" id="type-sale" name="RentSale" checked="checked"> For Sale/Auction			
-			</c:otherwise>
-			</c:choose>
+				<input type="radio" id="type-sale" name="RentSale"> For Sale/Auction				
 	 		</form>
   		
   		<br />
@@ -226,10 +217,10 @@ function sort_div_attribute() {
 		<form:errors path="radius" cssClass="validationErrorText" />
 	
 		<br /> 
-		<label for="prize">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize" min="0" />
+		<label for="price">Price (max.):</label>
+		<form:input id="priceInput" type="number" path="price" min="0" />
 		CHF
-		<form:errors path="prize" cssClass="validationErrorText" />
+		<form:errors path="price" cssClass="validationErrorText" />
 		
 		<br />
 		<label for="numberOfRooms">Rooms(min.):</label>
@@ -239,51 +230,51 @@ function sort_div_attribute() {
 		<form:errors path="numberOfRooms" cssClass="validationErrorText" />
 		
 		<br />
-	
-		<hr class="slim">		
+			
+		<hr class="slim" id="line" style="display:none">		
 		
-		<table style="width: 60%">
+		<table id="additionalCriteria" style="width: 100%; display:none">
 			<tr>
 				<td><label for="earliestMoveInDate">Earliest move-in date</label></td>
-				<td><label for="earliestMoveOutDate">Earliest move-out date (optional)</label></td>
-			</tr>
-			<tr>
 				<td><form:input type="text" id="field-earliestMoveInDate"
 						path="earliestMoveInDate" /></td>
+			</tr>
+			<tr>
+				<td><label for="latestMoveInDate">Latest move-in date</label></td>
+				<td><form:input type="text" id="field-latestMoveInDate"
+						path="latestMoveInDate" /></td>
+			</tr>
+			<tr>
+				<td><label for="earliestMoveOutDate">Earliest move-out date (optional)</label></td>
 				<td><form:input type="text" id="field-earliestMoveOutDate"
 						path="earliestMoveOutDate" /></td>
 			</tr>
 			<tr>
-				<td><label for="latestMoveInDate">Latest move-in date</label></td>
 				<td><label for="latestMoveOutDate">Latest move-out date (optional)</label></td>
-			</tr>
-			<tr>
-				<td><form:input type="text" id="field-latestMoveInDate"
-						path="latestMoveInDate" /></td>
 				<td><form:input type="text" id="field-latestMoveOutDate"
 						path="latestMoveOutDate" /></td>
 			</tr>
 			<tr>
 				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Smoking inside
 						allowed</label></td>
-				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Animals
-						inside allowed</label></td>
-			</tr>
-			<tr>
 				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden
 						(co-use)</label></td>
-				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony
-						or Patio</label></td>
 			</tr>
 			<tr>
 				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar
 						or Attic</label></td>
-				<td><form:checkbox id="field-furnished" path="furnished"
-						value="1" /><label>Furnished</label></td>
+				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>Cable
+						TV</label></td>						
 			</tr>
 			<tr>
-				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>Cable
-						TV</label></td>
+				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Animals
+						inside allowed</label></td>
+				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony
+						or Patio</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-furnished" path="furnished"
+						value="1" /><label>Furnished</label></td>
 				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label>
 				</td>
 			</tr>
@@ -291,43 +282,44 @@ function sort_div_attribute() {
 				<td><form:checkbox id="field-internet" path="internet" value="1" /><label>WiFi</label></td>
 			</tr>
 		</table>
-			
-		<button style="background-color:#991f00;color:white" type="reset">Cancel</button>
-		<button style="background-color:#ffffcc" type="submit">Filter</button>	
 		
+		<button style="background-color:#991f00;color:white" type="reset">Cancel</button>
+		<button style="background-color:#ffffcc" type="submit">Filter</button>
+		<button id="hideMoreCriteria" type="button" style="float: right; display: none;">Hide Filter Criteria</button>
+		<button id="moreFilterCriteria" type="button" style="float: right;">More Filter Criteria</button>	
 	</div>
 </form:form>
 
-
-
 </td>
-
 <!-- seperates the two columns -->
 
-<td style="width:15px;">
-<div style="width:15px;">
-
-
+<td style="width:60px;">
+<div style="width:60px;">
 </div>
 </td>
 
-<td valign="top">
+<td rowspan="2" valign="top">
+
+<button id="showMap" type="button" style="float: left; display: none;">Show the Map</button>
+<button id="hideMap" type="button" style="float: left;">Hide the Map</button>
+
+<div id="map" style="width: 800px; height: 300px; float:left"></div>
 
 <c:choose>
 	<c:when test="${empty results}">
-		<p style="float:left; width:100%">No results found!
+		<p style="float:left; align:center; width:100%">No results found!
 	</c:when>
 	<c:otherwise>
-		<div id="resultsDiv" class="resultsDiv" style="float:left; width:100%;">			
+		<div id="resultsDiv" class="resultsDiv" style="float:left; align:center; width:100%;">			
 			<c:forEach var="ad" items="${results}">
-				<div class="resultAd" data-price="${ad.prizePerMonth}" 
+				<div class="resultAdSearch" data-price="${ad.price}" 
 								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
 								
 				 	<table id="resultTable" >
 						<tr>
 							<th colspan="3">
 								<h2>
-									<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
+									<a class="link" style="float:left;" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
 								</h2>
 							</th>
 						</tr>
@@ -363,12 +355,12 @@ function sort_div_attribute() {
 						
 							<td>
 								<div class="resultRight">
-									
-									
-									<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale } <br> sale price </h2></c:if>
-									<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid } <br> current bid </h2></c:if>
-									<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid </h2></c:if>
-									
+									<c:if test="${ad.deal=='forRent'}"> <h2>CHF ${ad.priceRent}</h2></c:if>
+									<c:if test="${ad.deal=='forSale'}">
+											<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale} <br> sale price </h2></c:if>
+											<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid} <br> current bid </h2></c:if>
+											<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>CHF ${ad.currentBid } <br> current Bid </h2></c:if>
+											</c:if>
 									<br /> <br />
 									<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 										type="date" pattern="dd.MM.yyyy" />

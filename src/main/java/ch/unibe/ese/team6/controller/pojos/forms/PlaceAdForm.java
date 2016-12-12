@@ -33,8 +33,7 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
-	//@Min(value = 0, message = "Has to be equal to 0 or more")
-	private int prize;
+	private int price;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
@@ -45,16 +44,11 @@ public class PlaceAdForm {
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int numberOfRooms;
 	
-	@NotNull(message = "Required")
-	private KindOfDeal deal;
+	private boolean forSale;
+	private boolean forRent;
+	private boolean forAuction;
 	
-	//@NotNull(message = "Required")
-	private KindOfSale sale;
-	
-	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int priceRent;
-	
-	//@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int priceSale;
 	
 	private int increment;
@@ -63,10 +57,6 @@ public class PlaceAdForm {
 	private String deadlineHour;
 	private String deadlineMinute;
 	
-	//true if rent, false if sale
-	private boolean rent;
-	//private boolean sale;
-	private boolean auction;
 	private String preferences;
 	
 	private boolean smokers;
@@ -88,42 +78,6 @@ public class PlaceAdForm {
 
 	private KindOfMembership kind;
 	
-	//what type of property this property is
-	//taken out for now
-	/*
-	@NotBlank(message = "Required")
-	private KindOfProperty propertyType;
-	*/
-	
-	// optional free text description
-	//private String roommates;
-	
-	// First user are added as strings, then transformed
-	// to Users and added to the DB in through adService
-	//private List<String> registeredRoommateEmails;
-	
-	// optional for input
-	//private String roomFriends;
-	
-	//true if studio, false if room
-	//private boolean studio;
-	
-	/*private boolean rent = false;
-	private boolean sale = false;
-	private boolean auction = false;*/
-	
-	//gets and sets the property Type
-	//taken out for now
-	/*
-	public KindOfProperty getPropertyType(){
-		return propertyType;
-	}
-	
-	public void setPropertyType(KindOfProperty newType){
-		propertyType = newType;
-	}
-	*/
-
 	public String getTitle() {
 		
 		if(title!=null){
@@ -134,9 +88,7 @@ public class PlaceAdForm {
 			}
 		}
 		else
-			return new String("");
-		
-		
+			return new String("");		
 	}
 
 	public void setTitle(String title) {
@@ -144,7 +96,15 @@ public class PlaceAdForm {
 	}
 
 	public String getStreet() {
-		return street;
+		if(street!=null){
+			try {
+				return new String(street.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return street;	
+			}
+		}
+		else
+			return new String("");	
 	}
 
 	public void setStreet(String street) {
@@ -152,8 +112,6 @@ public class PlaceAdForm {
 	}
 	
 	public String getCity() {
-		
-		
 		if(city!=null){
 			try {
 				return new String(city.getBytes("ISO-8859-1"), "UTF-8");
@@ -162,8 +120,7 @@ public class PlaceAdForm {
 			}
 		}
 		else
-			return new String("");
-		
+			return new String("");	
 	}
 
 	public void setCity(String city) {
@@ -202,38 +159,6 @@ public class PlaceAdForm {
 		this.moveOutDate = moveOutDate;
 	}
 	
-	public KindOfDeal getDeal() {
-		return deal;
-	}
-	
-	public void setDeal(KindOfDeal deal) {
-		this.deal = deal;
-	}
-	
-	public boolean getRent() {
-		return rent;
-	}
-	
-	public void setRent(boolean rent) {
-		this.rent = rent;
-	}
-	
-	public KindOfSale getSale() {
-		return sale;
-	}
-	
-	public void setSale(KindOfSale sale) {
-		this.sale = sale;
-	}
-	
-	public boolean getAuction() {
-		return auction;
-	}
-	
-	public void setAuction(boolean auction) {
-		this.auction = auction;
-	}
-	
 	public int getPriceRent() {
 		return priceRent;
 	}
@@ -250,20 +175,13 @@ public class PlaceAdForm {
 		this.priceSale = priceSale;
 	}
 	
-
-	/*__________________________________*/
-
-	
 	public int getCurrentBid() {
 		return currentBid;
 	}
 
 	public void setCurrentBid(int currentBid) {
 		this.currentBid = currentBid;
-	}
-	
-	/*________________________________*/
-	
+	}	
 
 	public int getIncrement() {
 		return increment;
@@ -298,56 +216,24 @@ public class PlaceAdForm {
 		this.deadlineMinute = deadlineMinute;
 	}
 	
-	public int getPrize() {
-		return prize;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setPrize(int prize) {
-		this.prize = prize;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	
-	
-	/*______________________________________*/
-	
-	/* SET BY PAT TO FIX BUGS
-	
-	
-	//direct sale price
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int salePrize;
-		
-	//auction
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int initialBid;
-	
-	public int getSalePrize() {
-		return salePrize;
-	}
-
-	public void setSalePrize(int salePrize) {
-		//this.salePrize = salePrize;
-	}
-
-	public int getBidIncrease() {
-		return bidIncrease;
-	}
-
-	public void setBidIncrease(int bidIncrease) {
-		this.bidIncrease = bidIncrease;
-	}
-
-	//Monthly rental
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int bidIncrease;
-	
-	*/
-	
-	/*___________________________*/
-	
-
-
 	public String getRoomDescription() {
-		return roomDescription;
+		if(roomDescription!=null){
+			try {
+				return new String(roomDescription.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return roomDescription;	
+			}
+		}
+		else
+			return new String("");	
 	}
 
 	public void setRoomDescription(String roomDescription) {
@@ -355,7 +241,15 @@ public class PlaceAdForm {
 	}
 
 	public String getPreferences() {
-		return preferences;
+		if(preferences!=null){
+			try {
+				return new String(preferences.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return preferences;	
+			}
+		}
+		else
+			return new String("");	
 	}
 
 	public void setPreferences(String preferences) {
@@ -466,31 +360,6 @@ public class PlaceAdForm {
 		this.proximityToNightlife = proximityToNightlife;
 	}
 	
-
-/*	public String getRoomFriends() {
-		return roomFriends;
-	}
-
-	public void setRoomFriends(String roomFriends) {
-		this.roomFriends = roomFriends;
-	}
-	
-	public boolean getStudio() {
-		return studio;
-	}
-	
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-	
-	public List<String> getRegisteredRoommateEmails() {
-		return registeredRoommateEmails;
-	}
-
-	public void setRegisteredRoommateEmails(List<String> registeredRoommateEmails) {
-		this.registeredRoommateEmails = registeredRoommateEmails;
-	}*/
-
 	public List<String> getVisits() {
 		return visits;
 	}
@@ -505,5 +374,29 @@ public class PlaceAdForm {
 	
 	public void setMembershipUser(KindOfMembership kind) {
 		this.kind = kind;
+	}
+
+	public boolean getForAuction() {
+		return forAuction;
+	}
+
+	public void setForAuction(boolean forAuction) {
+		this.forAuction = forAuction;
+	}
+
+	public boolean getForSale() {
+		return forSale;
+	}
+
+	public void setForSale(boolean forSale) {
+		this.forSale = forSale;
+	}
+
+	public boolean getForRent() {
+		return forRent;
+	}
+
+	public void setForRent(boolean forRent) {
+		this.forRent = forRent;
 	}
 }

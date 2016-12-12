@@ -14,9 +14,6 @@ public class SearchForm {
 
 	private boolean filtered;
 
-	// studio: true, room: false
-	private boolean studio;
-
 	//for rent:true, for sale: false
 	private boolean rent;
 	
@@ -28,22 +25,13 @@ public class SearchForm {
 	@Min(value = 0, message = "Please enter a positive distance")
 	private Integer radius;
 	
-	@NotNull(message = "Requires a number")
-	@Min(value = 0, message = "In your dreams.")
-	private Integer prize;
-	
+	private int priceRent;
+	private int priceSale;
 	
 	//specifies how many rooms a Flat must have
 	//@NotNull(message = "Requires a number")
 	@Min(value = 1, message = "Cannot search for flats with no rooms")
 	private int numberOfRooms;
-	
-	
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRoomNoStudio;
-
-	private boolean bothRoomAndStudio;
-	
 	
 	public int getNumberOfRooms(){
 		return numberOfRooms;
@@ -68,40 +56,6 @@ public class SearchForm {
 	public void setRadius(Integer radius) {
 		this.radius = radius;
 	}
-
-	public Integer getPrize() {
-		return prize;
-	}
-
-	public void setPrize(Integer prize) {
-		this.prize = prize;
-	}
-
-	public boolean getStudio() {
-		return studio;
-	}
-
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
- 
-	
-	public boolean getNoRoomNoStudio() {
-		return noRoomNoStudio;
-	}
-
-	public void setNoRoomNoStudio(boolean noRoomNoStudio) {
-		this.noRoomNoStudio = noRoomNoStudio;
-	}
-
-	public boolean getBothRoomAndStudio() {
-		return bothRoomAndStudio;
-	}
-
-	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
-		this.bothRoomAndStudio = bothRoomAndStudio;
-	}
-	
 	
 	public boolean getRent(){
 		return rent;
@@ -329,6 +283,22 @@ public class SearchForm {
 
 	public void setKindOfMembershipUser(boolean kindOfMembershipUser) {
 		this.kindOfMembershipUser = kindOfMembershipUser;
+	}
+
+	public int getPriceRent() {
+		return priceRent;
+	}
+
+	public void setPriceRent(int priceRent) {
+		this.priceRent = priceRent;
+	}
+
+	public int getPriceSale() {
+		return priceSale;
+	}
+
+	public void setPriceSale(int priceSale) {
+		this.priceSale = priceSale;
 	}
 	
 }

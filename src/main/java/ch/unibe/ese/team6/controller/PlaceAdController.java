@@ -90,41 +90,6 @@ public class PlaceAdController {
 
 	@Autowired
 	private AdService adService;
-
-	/** Shows the place ad form. */
-	/*@RequestMapping(value = {"","/profile/placeAd"}, method = RequestMethod.GET, params="id")
-	public ModelAndView placeAd(@RequestParam("id") long id) throws IOException {
-		ModelAndView model = new ModelAndView("placeAd");
-
-		String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
-		if (pictureUploader == null) {
-			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
-		}
-		 
-		if(id!=0){
-			Ad ad  = adService.getAdById(id);
-			PlaceAdForm adForm  = new PlaceAdForm();
-			adForm.setTitle(ad.getTitle());
-			adForm.setAnimals(ad.getAnimals());
-			adForm.setBalcony(ad.getBalcony());
-			adForm.setCellar(ad.getCellar());
-			adForm.setCity(ad.getCity());
-			adForm.setFurnished(ad.getFurnished());
-			adForm.setGarage(ad.getGarage());
-			adForm.setGarden(ad.getGarden());
-			adForm.setMoveInDate(ad.getMoveInDate().toString());
-			adForm.setNumberOfRooms(ad.getNumberOfRooms());
-			adForm.setDeal(ad.getDeal());
-			adForm.setSale(ad.getSale());
-			adForm.setRoomDescription(ad.getRoomDescription());
-			adForm.setSquareFootage(ad.getSquareFootage());
-			adForm.setSmokers(ad.getSmokers());
-			//this.placeAdForm = adForm;
-			model.addObject("placeAdForm",adForm);
-		}
-	
-		return model;
-	}*/
 	
 	/** Shows the place ad form. */
 	@RequestMapping(value = "/profile/placeAd", method = RequestMethod.GET)
@@ -135,6 +100,8 @@ public class PlaceAdController {
 		if (pictureUploader == null) {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
+		
+		model.addObject("visitService", new VisitService());
 		return model;
 	}
 

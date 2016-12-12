@@ -79,8 +79,9 @@ public class VisitService {
 		return false;
 	}
 	
-	public boolean hasUserSentEnquiry(String username, Visit visit) {
-		User user = userDao.findByUsername(username);
+	public boolean hasUserSentEnquiry(String email, Visit visit) {
+		System.out.println("\n" + email + "\n");
+		User user = userDao.findByUsername(email);
 		return hasUserSentEnquiry(user, visit);
 	}
 
