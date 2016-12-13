@@ -118,7 +118,7 @@
 								<li class="ProfileListItem" style="top:115px;"><% out.print("<a href=\"/ad/myAuctions?id=" + realUser.getId() + "\">My Auctions</a>"); %></li>
 								<li class="ProfileListItem" style="top:140px;"><a href="/profile/myBookmarks">My Bookmarks</a></li>	
 								<li class="ProfileListItem" style="top:165px;"><a href="/profile/schedule">Schedule</a></li>
-								<li class="ProfileListItem" style="top:190px;"><a id="messageLink" href="/profile/messages"></a></li>
+								<li class="ProfileListItem" style="top:190px;"><a id="messageLink" href="/profile/messages"></a>Messages</li>
 								<li class="ProfileListItem" style="top:215px;"><a id="enquiryLink" href="/profile/enquiries">Enquiries</a></li>
 								<li class="ProfileListItem" style="top:240px;"><a href="/profile/alerts">Alerts</a></li>
 								<li class="ProfileListItem" style="top:265px;"><a href="/logout">Logout</a></li>

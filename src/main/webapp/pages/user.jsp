@@ -87,7 +87,7 @@
 	<td colspan="2">
 	<div id="userDiv" style="float:center;">
 	
-	//must first check if aboutMe is not null!
+	<!--must first check if aboutMe is not null!-->
 	<c:if test="${user.aboutMe!=null}">
 		<c:if test="${user.aboutMeNotEmpty()}">
 		<hr class="slim">
