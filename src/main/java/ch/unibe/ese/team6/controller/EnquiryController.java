@@ -47,6 +47,12 @@ public class EnquiryController {
 		return googleSignupForm;
 	}
 
+	@RequestMapping(value ="/profile/newE", method = RequestMethod.GET)
+	public @ResponseBody int newE(Principal principal) {
+		long id = userService.findUserByUsername(principal.getName()).getId();
+		return enquiryService.newE(id);
+	}
+	
 	/** Serves the page that displays the enquiries for the logged in user. */
 	@RequestMapping(value = "/profile/enquiries")
 	public ModelAndView enquiriesPage(Principal principal) {

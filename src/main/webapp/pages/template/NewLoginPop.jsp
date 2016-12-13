@@ -20,6 +20,8 @@
 	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	
 	<script src="/js/unreadMessages.js"></script>
+	<script src="/js/newEnquiries.js"></script>
+<script src="/js/messagesEnquiries.js"></script>
 </div>
 	
 

@@ -1,5 +1,5 @@
 function newEnquiries(place) {
-	$.get("/profile/new", function(data){
+	$.get("/profile/newE", function(data){
 		var enquiry;
 		if (place == "enquiries")
 			enquiry = "Enquiries";

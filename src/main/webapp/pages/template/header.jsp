@@ -24,6 +24,8 @@
 	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 
 <script src="/js/unreadMessages.js"></script>
+<script src="/js/newEnquiries.js"></script>
+<script src="/js/messagesEnquiries.js"></script>
 
 
 <style>
@@ -67,11 +69,6 @@
 		
 		-->
 	</div>	
-		
-		
-	</div>
-	
-	
 	
 	<div class="right">
 		<nav>
@@ -84,12 +81,15 @@
 					
 					
 					<script>
-						$(document).ready(unreadMessages("header"));
+						$(document).ready(function() {
+							unreadMessages("header"); 
+							messageEnquiries("header");
+							newEnquiries("header"); });
 					</script>
 					
 					<!-- include user details -->
 					<%@include file='/pages/getUserPicture.jsp' %>
-						<li class="HeaderButton"  id="profile_picture" >
+						<li class="HeaderButton" style="width:100px;"  id="profile_picture" >
 						
 						
 						
@@ -100,11 +100,13 @@
 							out.print("<img src='" + filePath + "' />");
 
 							if(realUser.getFirstName().equals(realUser.getLastName())) {
-								out.print("<p class='profileName' class='text'>" + realUser.getFirstName() + "</p>"); 
+								out.print("<p id='messageEnquiryLink' class='profileName' class='text'>" + realUser.getFirstName() + "</p>"); 
 							} else {
-								out.print("<p class='profileName' class='text'>" + realUser.getFirstName() + "<br />"
+								out.print("<p id='messageEnquiryLink' class='profileName' class='text'>" + realUser.getFirstName() + "</br>"
 									+ realUser.getLastName() + "</p>");
 							}
+							
+							
 						%>
 						</a>
 					

@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:import url="template/header.jsp" />
+<script src="/js/newEnquiries.js"></script>
 <!--
 <pre>
 <a href="/">Home</a>   &gt;   Enquiries</pre>

@@ -302,4 +302,15 @@ public class ProfileController {
 		model.addObject("ad", ad);
 		return model;
 	}
+	
+	@RequestMapping(value = "/profile/getUsername", method = RequestMethod.GET)
+	public @ResponseBody String getUsername(Principal principal) {
+		 User user = userService.findUserByUsername(principal.getName());
+		 String firstName = user.getFirstName();
+		 String lastName = user.getLastName();
+		 if(firstName.equals(lastName)) {
+			 return firstName;
+		 }
+		return firstName + "<br>" + lastName;
+	}
 }

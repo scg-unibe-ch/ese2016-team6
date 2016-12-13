@@ -11,14 +11,17 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Rating;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.Visit;
 import ch.unibe.ese.team6.model.VisitEnquiry;
 import ch.unibe.ese.team6.model.VisitEnquiryState;
+import ch.unibe.ese.team6.model.dao.AdDao;
 import ch.unibe.ese.team6.model.dao.RatingDao;
 import ch.unibe.ese.team6.model.dao.VisitDao;
 import ch.unibe.ese.team6.model.dao.VisitEnquiryDao;
+import ch.unibe.ese.team6.model.dao.UserDao;
 
 /** Provides access to enquiries saved in the database. */
 @Service
@@ -32,6 +35,12 @@ public class EnquiryService {
 
 	@Autowired
 	private VisitDao visitDao;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private AdDao adDao;
 
 	/**
 	 * Returns all enquiries that were sent to the given user sorted by date
@@ -109,6 +118,25 @@ public class EnquiryService {
 		Visit visit = enquiry.getVisit();
 		visit.removeFromSearchers(enquiry.getSender());
 		visitDao.save(visit);
+	}
+	
+	@Transactional
+	public int newE(long userId) {
+		int i=0;
+		User user = userDao.findOne(userId);
+		Iterable<Ad> usersAd = adDao.findByUser(user);
+		for(Ad ad : usersAd) {
+			Iterable<Visit> usersVisits = visitDao.findByAd(ad);
+			for(Visit visit: usersVisits) {
+				Iterable<VisitEnquiry> usersEnquiries = enquiryDao.findByVisit(visit);
+						for(VisitEnquiry enquiries: usersEnquiries) {
+							if(enquiries.getState().equals(VisitEnquiryState.OPEN)) {
+								i++;
+							}
+						}
+				}
+			}
+		return i;
 	}
 
 	/**

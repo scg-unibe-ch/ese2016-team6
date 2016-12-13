@@ -147,7 +147,7 @@ function deleteAd(button) {
 								<label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
 								
 									<a href="<c:url value='/ad?id=${ad.id}' />"><img
-									src="${ad.pictures[0].filePath}" /></a>
+									src="${ad.pictures[0].filePath}" style="width:140px; height: 120px;"/></a>
 									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 								</div>
 							</td>
@@ -284,7 +284,7 @@ function deleteAd(button) {
 								<label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
 								
 									<a href="<c:url value='/ad?id=${bid.ad.id}' />"><img
-									src="${bid.ad.pictures[0].filePath}" /></a>
+									src="${bid.ad.pictures[0].filePath}" style="width:140px; height: 120px;"/></a>
 									<p>${bid.ad.street}, ${bid.ad.zipcode} ${bid.ad.city}</p>
 								</div>
 							</td>
