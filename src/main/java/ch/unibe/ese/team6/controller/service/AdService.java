@@ -152,8 +152,26 @@ public class AdService {
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
 			}
+			
+			
+			if (placeAdForm.getDeadlineDate().length() >= 1) {
+				int dayMoveOut = Integer.parseInt(placeAdForm.getDeadlineDate()
+						.substring(0, 2));
+				int monthMoveOut = Integer.parseInt(placeAdForm
+						.getDeadlineDate().substring(3, 5));
+				int yearMoveOut = Integer.parseInt(placeAdForm.getDeadlineDate()
+						.substring(6, 10));
+				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
+				ad.setExpireDate(calendar.getTime());
+			}
+			
 		} catch (NumberFormatException e) {
 		}
+		//transfer date times
+		ad.setDeadlineDate(placeAdForm.getDeadlineDate());
+		ad.setDeadlineHour(placeAdForm.getDeadlineHour());
+		ad.setDeadlineMinute(placeAdForm.getDeadlineMinute());
+		
 		
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
@@ -165,6 +183,10 @@ public class AdService {
 		ad.setCable(placeAdForm.getCable());
 		ad.setGarage(placeAdForm.getGarage());
 		ad.setInternet(placeAdForm.getInternet());
+		
+		
+		
+		
 		
 		// ad location values
 		ad.setProximityToPublicTransport(placeAdForm.getProximityToPublicTransport());

@@ -59,6 +59,28 @@ public class EditAdService {
 
 		ad.setStreet(placeAdForm.getStreet());
 		
+		if(placeAdForm.getForRent()) {
+			ad.setDeal(KindOfDeal.forRent);
+			ad.setRent(true);
+			ad.setPriceRent(placeAdForm.getPriceRent());
+		} else if(placeAdForm.getForSale()) {
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.direct);
+			ad.setPriceSale(placeAdForm.getPriceSale());
+		} else if(placeAdForm.getPriceSale()>1){
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.bothAuctionAndDirect);
+			ad.setPriceSale(placeAdForm.getPriceSale());
+			ad.setIncrement(placeAdForm.getIncrement());
+			ad.setCurrentBid(placeAdForm.getCurrentBid());
+		} else {
+			ad.setDeal(KindOfDeal.forSale);
+			ad.setSale(KindOfSale.auction);
+			ad.setIncrement(placeAdForm.getIncrement());
+			ad.setCurrentBid(placeAdForm.getCurrentBid());
+		}
+		
+		
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
 		ad.setZipcode(Integer.parseInt(zip));
@@ -88,7 +110,21 @@ public class EditAdService {
 						.substring(6, 10));
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
+				
 			}
+			
+			if (placeAdForm.getDeadlineDate().length() >= 1) {
+				int dayMoveOut = Integer.parseInt(placeAdForm.getDeadlineDate()
+						.substring(0, 2));
+				int monthMoveOut = Integer.parseInt(placeAdForm
+						.getDeadlineDate().substring(3, 5));
+				int yearMoveOut = Integer.parseInt(placeAdForm.getDeadlineDate()
+						.substring(6, 10));
+				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
+				ad.setExpireDate(calendar.getTime());
+			}
+			
+			
 		} catch (NumberFormatException e) {
 		}
 		

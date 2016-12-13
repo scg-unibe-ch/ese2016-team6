@@ -120,7 +120,7 @@ public class Ad {
 	
 	//@JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
 	//@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date expireDate;
 	
 	public Date getExpireDate() {
