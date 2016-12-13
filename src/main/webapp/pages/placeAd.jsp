@@ -120,7 +120,7 @@
     	});
 
 		$("#field-city").autocomplete({
-			minLength : 2
+			minLength : 1
 		});
 		
 		$("#field-city").autocomplete({
