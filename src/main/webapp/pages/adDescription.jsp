@@ -77,10 +77,14 @@
 		attachBookmarkClickHandler();
 		attachBookmarkedClickHandler();
 		
-		var minBid = ${shownAd.currentBid} + ${shownAd.increment};
+		var bidInput = document.getElementById('bidAmount');
 		
-		document.getElementById('bidAmount').min = minBid;
-		document.getElementById('bidAmount').value = minBid;
+		if(bidInput!=null){
+			var minBid = ${shownAd.currentBid} + ${shownAd.increment};
+			
+			bidInput.min = minBid;
+			bidInput.value = minBid;
+		}
 		
 		$.post("/bookmark", {id: shownAdvertisementID, screening: true, bookmarked: true}, function(data) {
 			if(data == 3) {
@@ -158,8 +162,13 @@ function deleteAd(button) {
  <script>
         function showTimeLeft() {
             //We need getTime() to make the countdown compatible with all browsers.
-            var expired = ${shownAd.expireDate.getTime()};
-            var current = new Date();
+           
+		    
+			var expired = ${shownAd.expireDate.getTime()};
+		
+			
+			
+			var current = new Date();
 
            <%-- if (current > expired || ${shownAd.expired}) {
                 $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
