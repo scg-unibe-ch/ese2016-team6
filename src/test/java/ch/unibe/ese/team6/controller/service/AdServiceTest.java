@@ -68,7 +68,7 @@ public class AdServiceTest {
 		placeAdForm.setTitle("title");
 		placeAdForm.setStreet("Hauptstrasse 13");
 	//	placeAdForm.setStudio(true);
-		placeAdForm.setMoveInDate("27-02-2017");
+		placeAdForm.setMoveInDate("27-02-2016");
 		placeAdForm.setMoveOutDate("27-04-2017");
 		
 		placeAdForm.setSmokers(true);
@@ -80,7 +80,7 @@ public class AdServiceTest {
 		placeAdForm.setCable(false);
 		placeAdForm.setGarage(true);
 		placeAdForm.setInternet(false);
-		placeAdForm.setMembershipUser(KindOfMembership.PREMIUM);
+		placeAdForm.setMembershipUser(KindOfMembership.NORMAL);
 		placeAdForm.setProximityToPublicTransport(100);
 		placeAdForm.setProximityToSchool(200);
 		placeAdForm.setProximityToNightlife(300);
@@ -127,7 +127,7 @@ public class AdServiceTest {
 		assertEquals(400, ad.getProximityToSupermarket());
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-	    Date result1 =  df.parse("2017-02-27");
+	    Date result1 =  df.parse("2016-02-27");
 	    df = new SimpleDateFormat("yyyy-MM-dd");
 	    Date result2 =  df.parse("2017-04-27");
 		assertEquals(0, result1.compareTo(ad.getMoveInDate()));
@@ -166,6 +166,9 @@ public class AdServiceTest {
 		form.setInternet(false);
 		form.setSmokers(false);
 		form.setRent(true);
+		form.setForRent(true);
+		form.setForSale(false);
+		form.setFiltered(false);
 		form.setPriceRent(1000);
 		form.setKindOfMembershipUser(false);
 		form.setCity("3018 - Bern");
@@ -178,8 +181,79 @@ public class AdServiceTest {
 		ads = adService.queryResults(form);
 		assertEquals(1, size(ads));
 		
+		form.setForSale(true);
+		form.setForRent(false);
+		form.setRent(false);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
 		
+		form.setForSale(false);
+		form.setForRent(true);
+		form.setRent(true);
+		form.setPriceRent(500);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
 		
+		form.setFiltered(true);
+		form.setPriceRent(1000);
+		form.setSmokers(true);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
+		
+		form.setSmokers(false);
+		form.setAnimals(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setAnimals(false);
+		form.setBalcony(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setBalcony(false);
+		form.setGarden(true);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
+		
+		form.setGarden(false);
+		form.setGarage(true);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
+		
+		form.setGarage(false);
+		form.setCable(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setCable(false);
+		form.setFurnished(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setFurnished(false);
+		form.setInternet(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setInternet(false);
+		form.setProximityToPublicTransport(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setProximityToPublicTransport(1000);
+		form.setProximityToNightlife(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setProximityToNightlife(1000);
+		form.setProximityToSchool(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setProximityToSchool(1000);
+		form.setProximityToSupermarket(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
 	}
 	
 	private User createUser(String email, String password, String firstName,
