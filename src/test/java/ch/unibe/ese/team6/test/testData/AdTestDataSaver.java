@@ -308,6 +308,7 @@ public class AdTestDataSaver {
 		adBiel.setCurrentBid(20000);
 		adBiel.setIncrement(3500);
 		adBiel.setExpireDate(getTimedDate(99999999));
+		adBiel.setDeadlineDate(getTimedDate(99999999).toString());
 		adBiel.setMoveInDate(moveInDate6);
 		adBiel.setMoveOutDate(moveOutDate5);
 		adBiel.setCreationDate(creationDate6);
