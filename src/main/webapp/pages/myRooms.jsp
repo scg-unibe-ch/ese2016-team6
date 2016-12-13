@@ -20,13 +20,11 @@
 
 		<table id="indexTable" style="width:100%;text-align:center;">
 			<tr>
-
-			<tr>
 				<th>
 					<h2 style="width:100%;text-align:center;">My Advertisements</h2>
 				</th>
 			</tr>
-			
+			<tr>
 			<td valign="top">
 			<c:choose>
 			<c:when test="${empty ownAdvertisements}">
@@ -95,13 +93,13 @@
 								
 									<td>
 										<div class="resultRight">
-											<c:if test="${ad.deal=='forRent'}"> <h2>CHF ${ad.priceRent}</h2></c:if>
+											<c:if test="${ad.deal=='forRent'}"> <h3>CHF ${ad.priceRent}/Month</h3></br></c:if>
 											<c:if test="${ad.deal=='forSale'}">
-													<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale} <br> sale price </h2></c:if>
-													<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid} <br> current bid </h2></c:if>
-													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>CHF ${ad.priceSale} <br> sale price </h3> <h3>CHF ${ad.currentBid } <br> current Bid </h3></c:if>
+													<c:if test="${ad.sale=='direct'}"> <h3>CHF ${ad.priceSale} sale price </h3><br /></c:if>
+													<c:if test="${ad.sale=='auction'}"> <h3>CHF ${ad.currentBid} current bid </h3><br /></c:if>
+													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>CHF ${ad.priceSale} sale price </h3> <h3>CHF ${ad.currentBid } current Bid </h3></c:if>
 											</c:if>
-											<br /> <br />
+											<br />
 
 											<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 														type="date" pattern="dd.MM.yyyy" />

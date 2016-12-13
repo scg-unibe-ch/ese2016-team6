@@ -44,8 +44,12 @@ public class AuctionService {
     
     // finds all Ad for Auction of the user
     @Transactional
-    public Iterable<Ad> findAuctionsByUser(User user) {   	
-    	return adDao.findByUserAndDeal(user, KindOfDeal.forSale);
+    public Iterable<Ad> findAuctionsByUser(User user) { 
+    	Iterable<Ad> ads =adDao.findByUserAndDeal(user, KindOfDeal.forSale);
+    	if(!ads.iterator().hasNext()){
+    		return null;
+    	}
+    	return ads;
     }
 
     //finds all Ad on which the user bidded
