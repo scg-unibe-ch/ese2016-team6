@@ -375,7 +375,7 @@ function deleteAd(button) {
 					
 						<!-- only shows this part if property for directsale -->
 						<c:if test="${shownAd.sale=='direct'}">
-							<h3><label>This property is for sale!<br> Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
+							<h3><label>This property is for sale!<br/> Price of the direct sale : </label>CHF ${shownAd.priceSale}</h3>
 							
 							
 							<form:form action="/ad/makeBid" method="post">

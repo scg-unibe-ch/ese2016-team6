@@ -52,6 +52,7 @@ public class AdTestDataSaver {
 		Date creationDate6 = formatter.parse("01.12.2017");
 		Date creationDate7 = formatter.parse("16.11.2017");
 		Date creationDate8 = formatter.parse("27.11.2017");
+		Date creationDate9 = formatter.parse("31.09.2016");
 		
 		Date moveInDate1 = formatter.parse("15.12.2017");
 		Date moveInDate2 = formatter.parse("21.12.2017");
@@ -61,12 +62,14 @@ public class AdTestDataSaver {
 		Date moveInDate6 = formatter.parse("01.03.2017");
 		Date moveInDate7 = formatter.parse("15.03.2017");
 		Date moveInDate8 = formatter.parse("16.02.2017");
+		Date moveInDate9 = formatter.parse("24.02.2017");
 		
 		Date moveOutDate1 = formatter.parse("31.03.2017");
 		Date moveOutDate2 = formatter.parse("30.04.2017");
 		Date moveOutDate3 = formatter.parse("31.03.2017");
 		Date moveOutDate4 = formatter.parse("01.07.2017");
 		Date moveOutDate5 = formatter.parse("30.09.2017");
+		Date moveOutDate6 = formatter.parse("08.04.2019");
 		
 		String roomDescription1 = "The room is a part of 3.5 rooms apartment completely renovated"
 				+ "in 2010 at Kramgasse, Bern. The apartment is about 50 m2 on 1st floor."
@@ -571,7 +574,6 @@ public class AdTestDataSaver {
 		adLocarno.setZipcode(6600);
 		adLocarno.setDeal(KindOfDeal.forRent);
 		adLocarno.setPriceRent(960);
-		adLocarno.setNumberOfRooms(4);
 		adLocarno.setMoveInDate(moveInDate6);
 		adLocarno.setMoveOutDate(moveOutDate5);
 		adLocarno.setCreationDate(creationDate6);
@@ -602,6 +604,44 @@ public class AdTestDataSaver {
 		adLocarno.setPictures(pictures);
 		adDao.save(adLocarno);
 
+		String studioDescription13 = "Beautiful apartment, built to high standard. Nice neighbourhood, quiet. "
+				+ "Bay window offers a nice view on mountains. "
+				+ "Near golf club and SPA";
+		String roomPreference13 = "Non-negotiable price ! "
+				+ "Visits are scheduled by message :)";
+		
+		Ad adGstaad = new Ad();
+		adGstaad.setUser(jane);
+		adGstaad.setZipcode(3780);
+		adGstaad.setDeal(KindOfDeal.forSale);
+		adGstaad.setSale(KindOfSale.direct);
+		adGstaad.setPriceSale(80000000);
+		adGstaad.setNumberOfRooms(15);
+		adGstaad.setSquareFootage(450);
+		adGstaad.setMoveInDate(moveInDate9);
+		adGstaad.setCreationDate(creationDate9);
+		adGstaad.setTitle("High standard apartment with view on the Alps");
+		adGstaad.setStreet("Kreuzgasse 24");
+		adGstaad.setCity("Gstaad");
+		adGstaad.setRoomDescription(studioDescription13);
+		adGstaad.setPreferences(roomPreference13);
+		adGstaad.setKindOfMembership(KindOfMembership.PREMIUM);
+		adGstaad.setSmokers(true);
+		adGstaad.setAnimals(true);
+		adGstaad.setGarden(true);
+		adGstaad.setBalcony(true);
+		adGstaad.setCellar(true);
+		adGstaad.setFurnished(false);
+		adGstaad.setCable(true);
+		adGstaad.setGarage(true);
+		adGstaad.setInternet(false);
+		pictures = new ArrayList<>();
+		pictures.add(createPicture(adGstaad,"/img/test/ad7_1.png"));
+		pictures.add(createPicture(adGstaad,"/img/test/ad7_2.png"));
+		pictures.add(createPicture(adGstaad,"/img/test/ad7_3.png"));
+		adGstaad.setPictures(pictures);
+		adDao.save(adGstaad);
+		
 	}
 
 	private AdPicture createPicture(Ad ad, String filePath) {
