@@ -314,7 +314,7 @@
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label id="deadLabel" for="field-deadlineDate">Deadline</label>
-					<input id="field-deadlineDate" />
+					<form:input id="field-deadlineDate" path="deadlineDate" />
 					
 					<select id="field-deadlineHour">
 						<%

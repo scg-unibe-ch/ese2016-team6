@@ -403,9 +403,10 @@ function deleteAd(button) {
 								</form:form>
 								</br> 
 									<h3><label>	Amount of the current bid : </label> CHF ${shownAd.currentBid}</h3>
-									<h3><label>Minimum increment :</label> CHF ${shownAd.increment}</h3>
+									<h3><label>Minimum increment :</label> CHF </h3>
 								</br> 
-								<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
+								<h3><i>Expiry date of the auction: ${shownAd.deadlineDate} </i></h3>
+								<h3 id="timeLeft"><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
 								<div>
 									<c:choose>
 										<c:when test="${loggedIn}">						
@@ -493,7 +494,7 @@ function deleteAd(button) {
 																	<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
 																</c:when>
 																<c:otherwise>
-																	<img src="/img/avatar.png">
+																	<img style="width:50px;height:50px;" src="/img/avatar.png">
 																</c:otherwise>
 															</c:choose>
 														</td>					

@@ -114,24 +114,23 @@ function deleteAd(button) {
 <c:import url="template/NewLoginPop.jsp" />
 	
 
-<div id="resultsDiv" class="resultsDiv" style="float:left; align:center; width:100%;">	
-	<table id="indexTable">
+	<table id="indexTable" style="width:100%;text-align:center;">
 				<tr>
-					<th>
-						<h2 style="width:100%;text-align:center;">Your auctions</h2>
+					<th style="width:50%;">
+						<h2 style="width:100%;text-align:center;">Your Auctions</h2>
 					</th>
-					<th>
-						<h2 style="width:100%;text-align:center;">Your bids</h2>
+					<th style="width:50%;">
+						<h2 style="width:100%;text-align:center;">Your Bids</h2>
 					</th>
 				</tr>	
 				<tr>
 				<td>	
-				<c:forEach var="ad" items="${myAuctions}">
 				<c:choose>
 				<c:when test="${empty myAuctions}">
-					<p>You have no Ad which is saled through auction!</p>
+					<p style="color:black;text-align:center;">You have no Ad which is sold through auction!</p>
 				</c:when>
 					<c:otherwise>
+					<c:forEach var="ad" items="${myAuctions}">
 				 	<table id="resultTable" >
 						<tr>
 							<th colspan="3">
@@ -259,18 +258,18 @@ function deleteAd(button) {
 							</td>
 						</tr>
 					</table>
+					</c:forEach>
 					</c:otherwise>
-					</c:choose>
-			</c:forEach>
+				</c:choose>
 			</td>
 			<td>
-			<c:forEach var="bid" items="${myBids}">
 			<c:choose>
-				<c:when test="${empty myBids}">
-								<p>You have no Bids!</p>
+						<c:when test="${empty myBids}">
+								<p style="color:black;text-align:center;">You have not bidded on an ad yet.</p>
 					</c:when>
-					<c:otherwise>		
-				 	<table id="resultTable" >
+					<c:otherwise>
+			<c:forEach var="bid" items="${myBids}">
+				<table id="resultTable" >
 						<tr>
 							<th colspan="3">
 								<h2>
@@ -382,15 +381,15 @@ function deleteAd(button) {
 								</div>
 							</td>
 						</tr>
-					</table>
-					</c:otherwise>	
-				</c:choose>
+				</table>
 			</c:forEach>
+			</c:otherwise>	
+		</c:choose>
 			</td>
 			</tr>
 			
 	</table>
-</div>
+
 
 <div id="msgDiv">
 <form class="msgForm">

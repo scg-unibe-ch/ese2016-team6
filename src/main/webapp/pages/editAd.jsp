@@ -40,6 +40,10 @@
 			}
 		},10);
 	
+	
+	
+	
+	
 		
 $("#type-rent").on("click", function(){
         	document.getElementById('field-priceRent').style.visibility = "visible";
@@ -125,9 +129,9 @@ $("#type-rent").on("click", function(){
 			document.getElementById('incLabel').style.visibility = "visible";
 			document.getElementById('deadLabel').style.visibility = "visible";
 			
-			document.getElementById('forRent').checked = true;
+			document.getElementById('forRent').checked = false;
 			document.getElementById('forSale').checked = false;
-			document.getElementById('forAuction').checked = false;
+			document.getElementById('forAuction').checked = true;
 			
 			$("#field-priceRent").parent().hide();
 			$("#field-priceSale").parent().show();
@@ -160,6 +164,11 @@ $("#type-rent").on("click", function(){
 		$("#field-visitDay").datepicker({
 			minDate: '0' , dateFormat : 'dd-mm-yy'
 		});
+		
+		$("#field-deadlineDate").datepicker({
+			minDate: '0' , dateFormat : 'dd-mm-yy'
+		});
+		
 		
 		
 		$("#addbutton").click(function() {
@@ -242,6 +251,7 @@ $("#type-rent").on("click", function(){
 <fmt:formatDate value="${ad.moveOutDate}" var="formattedMoveOutDate"
 	type="date" pattern="dd-MM-yyyy" />
 
+
 <h1>Edit Ad</h1>
 <hr style="margin:0px;" />
 
@@ -266,24 +276,27 @@ $("#type-rent").on("click", function(){
 
 				<tr>
 					<td><label for="field-type">Type of deal:</label>	
+				
 				<c:choose>
 					<c:when test="${ad.sale eq 'bothAuctionAndDirect' && ad.deal eq 'forSale'}">
-						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
 						<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent" />
+						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
 						<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction" checked="checked"/>
 					</c:when>
 					<c:when test="${ad.deal eq 'forSale' && ad.sale eq 'direct'}">
-						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale" checked="checked"/>
 						<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent" />
+						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale" checked="checked"/>
 						<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction"/>
 					</c:when>
 					<c:otherwise>
-						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
-						<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent" checked="checked"/>
-						<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction"/>
+						
+						<form:checkbox  id="forRent" path="forRent" value="forRent" checked="checked"/>
+						<form:checkbox  id="forSale" path="forSale" value="forSale"/>
+						<form:checkbox  id="forAuction" path="forAuction" value="forAuction"/>
 					</c:otherwise>
 				</c:choose>
-							
+				
+				
 						<input id="type-rent" type="radio" name="sale" value="forRent"/>For Rent
 						<input id="type-sale" type="radio" name="sale" value="forSale"/>For Sale
 						<input id="type-auction" type="radio" name="sale" value="forAuction"/>For Auction
@@ -371,7 +384,7 @@ $("#type-rent").on("click", function(){
 				<!-- add to formatDate and add proper values -->
 				<tr>
 					<td><label id="deadLabel" for="field-deadlineDate">Deadline</label>
-						<input id="field-deadlineDate" />
+						<form:input type="text" id="field-deadlineDate" path="deadlineDate" />
 						
 						<select id="field-deadlineHour">
 							<%
