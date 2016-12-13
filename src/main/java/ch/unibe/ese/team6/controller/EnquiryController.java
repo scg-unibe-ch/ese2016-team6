@@ -121,4 +121,12 @@ public class EnquiryController {
 		return enquiryService.getRatingByRaterAndRatee(principe, ratee)
 				.getRating();
 	}
+	
+	/*returns the number of new enquiries (enquiries to which the user hasn't answered*/
+	@RequestMapping(value="/profile/newEnquiries", method = RequestMethod.GET)
+	public @ResponseBody int newEnquiries(Principal principal) {
+		long id = userService.findUserByUsername(principal.getName()).getId();
+		return enquiryService.newEnquiries(id);
+	}
+
 }

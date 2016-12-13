@@ -6,6 +6,9 @@ import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.VisitEnquiry;
 
 public interface VisitEnquiryDao extends CrudRepository<VisitEnquiry, Long> {
-	public Iterable<VisitEnquiry> findBySender(User sender);
+	public static Iterable<VisitEnquiry> findBySender(User sender) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

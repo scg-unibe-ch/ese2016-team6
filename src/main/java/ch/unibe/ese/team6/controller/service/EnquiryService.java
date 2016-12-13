@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ch.unibe.ese.team6.model.Message;
+import ch.unibe.ese.team6.model.MessageState;
 import ch.unibe.ese.team6.model.Rating;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.Visit;
@@ -19,6 +21,7 @@ import ch.unibe.ese.team6.model.VisitEnquiryState;
 import ch.unibe.ese.team6.model.dao.RatingDao;
 import ch.unibe.ese.team6.model.dao.VisitDao;
 import ch.unibe.ese.team6.model.dao.VisitEnquiryDao;
+import ch.unibe.ese.team6.model.dao.UserDao;
 
 /** Provides access to enquiries saved in the database. */
 @Service
@@ -32,6 +35,10 @@ public class EnquiryService {
 
 	@Autowired
 	private VisitDao visitDao;
+	
+	@Autowired
+	private UserDao userDao;
+	
 
 	/**
 	 * Returns all enquiries that were sent to the given user sorted by date
@@ -147,5 +154,18 @@ public class EnquiryService {
 		Iterator<Rating> iterator = ratings.iterator();
 		Rating next = iterator.next();
 		return next;
+	}
+	
+	/** Returns the number of new enquiries a user has. */
+	@Transactional
+	public int newEnquiries(long id) {
+		User sender = userDao.findOne(id);
+		Iterable<VisitEnquiry> usersEnquiries = VisitEnquiryDao.findBySender(sender);
+		int i = 0;
+		for(VisitEnquiry enquiry: usersEnquiries) {
+			if(enquiry.getState().equals(VisitEnquiryState.OPEN))
+				i++;
+		}
+		return i;
 	}
 }

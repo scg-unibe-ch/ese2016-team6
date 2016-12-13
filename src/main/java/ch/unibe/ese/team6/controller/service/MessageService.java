@@ -178,7 +178,8 @@ public class MessageService {
 		}
 		return i;
 	}
-
+	
+	/*delete a message*/
 	public void deleteMessage(long id) {
 		Message message = messageDao.findOne(id);
 		if(message != null) {

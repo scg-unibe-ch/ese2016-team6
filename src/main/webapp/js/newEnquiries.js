@@ -1,12 +1,12 @@
 /*Display the number of new enquiries in the drop down list*/
 
 function newEnquiries(place) {
-	$.get("/profile/new", function(data){
+	$.get("/profile/newEnquiries", function(data){
 		var enquiry;
 		enquiry = "Enquiries";
 		
 		if (data > 0)
-			enquiry += " ("+ data + ") ";
+			enquiry += " ("+ data + ")";
 		
 		if (place == "enquiries")
 			$("#enquiries").html(enquiry);
