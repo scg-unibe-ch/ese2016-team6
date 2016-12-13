@@ -24,7 +24,7 @@ public class PlaceAdForm {
 	@NotBlank(message = "Required")
 	private String street;
 	
-	@Pattern(regexp = "^[0-9]{4} - [\\S]*", message = "Please pick a city from the list")
+	@Pattern(regexp = "^[0-9]{4} - [\\S/]*", message = "Please pick a city from the list")
 	@NotBlank(message = "Required")
 	private String city;
 	

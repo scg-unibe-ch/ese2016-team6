@@ -406,7 +406,7 @@ header ul li {
 #ProfileDropList li{
 	
 	text-align: center;
-	width:170px;
+	width:200px;
 	position:absolute;
 	height:40px;
 	margin-top: 0px;
@@ -441,11 +441,28 @@ header ul li a {
 	border-radius: 5px;
 }
 
+.profileName{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align:left;
+	padding:3px;
+}
+
+.profileButton{
+		min-height:60px;
+}
 
 #profile_picture {
-	width: 170px;
+	overflow:none;
+	display: inline-block;
+	min-width:200px;
+	max-width:300px;
 	margin-top: 0px;
+
 }
+
+
 
 #profile_picture_editPage {
 	float: left;

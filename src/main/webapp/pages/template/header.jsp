@@ -93,16 +93,16 @@
 						
 						
 						
-						<a href="/user?id=<% out.print(realUser.getId()); %>"/>
+						<a class="profileButton" href="/user?id=<% out.print(realUser.getId()); %>"/>
 						
 						
 						<% 
 							out.print("<img src='" + filePath + "' />");
 
 							if(realUser.getFirstName().equals(realUser.getLastName())) {
-								out.print("<p class='text'>" + realUser.getFirstName() + "</p>"); 
+								out.print("<p class='profileName' class='text'>" + realUser.getFirstName() + "</p>"); 
 							} else {
-								out.print("<p class='text'>" + realUser.getFirstName() + "<br />"
+								out.print("<p class='profileName' class='text'>" + realUser.getFirstName() + "<br />"
 									+ realUser.getLastName() + "</p>");
 							}
 						%>

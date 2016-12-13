@@ -86,10 +86,14 @@
 	<tr>
 	<td colspan="2">
 	<div id="userDiv" style="float:center;">
-	<c:if test="${user.aboutMeNotEmpty()}">
-	<hr class="slim">
-	<h2>About me</h2>${user.aboutMe}
-	<hr class="slim">
+	
+	//must first check if aboutMe is not null!
+	<c:if test="${user.aboutMe!=null}">
+		<c:if test="${user.aboutMeNotEmpty()}">
+		<hr class="slim">
+		<h2>About me</h2>${user.aboutMe}
+		<hr class="slim">
+		</c:if>
 	</c:if>
 	<form>
 		<c:choose>

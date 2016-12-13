@@ -16,7 +16,7 @@ public class AlertForm {
 	private User user;
 	
 	@NotBlank(message = "Required")
-	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
+	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF/]*", message = "Please pick a city from the list")
 	private String city;
 
 	@NotNull(message = "Requires a number")
