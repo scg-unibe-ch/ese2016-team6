@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
@@ -21,12 +22,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import ch.unibe.ese.team6.controller.pojos.forms.PlaceAdForm;
+import ch.unibe.ese.team6.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team6.controller.service.AdService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Gender;
 import ch.unibe.ese.team6.model.KindOfMembership;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.UserRole;
+import ch.unibe.ese.team6.model.Visit;
 import ch.unibe.ese.team6.model.dao.UserDao;
 
 
@@ -55,6 +58,7 @@ public class AdServiceTest {
 	public void saveFromAndGetById() throws ParseException {
 		//Preparation
 		PlaceAdForm placeAdForm = new PlaceAdForm();
+		placeAdForm.setForRent(true);
 		placeAdForm.setCity("3018 - Bern");
 		placeAdForm.setPreferences("Test preferences");
 		placeAdForm.setRoomDescription("Test Room description");
@@ -64,7 +68,7 @@ public class AdServiceTest {
 		placeAdForm.setTitle("title");
 		placeAdForm.setStreet("Hauptstrasse 13");
 	//	placeAdForm.setStudio(true);
-		placeAdForm.setMoveInDate("27-02-2017");
+		placeAdForm.setMoveInDate("27-02-2016");
 		placeAdForm.setMoveOutDate("27-04-2017");
 		
 		placeAdForm.setSmokers(true);
@@ -76,7 +80,15 @@ public class AdServiceTest {
 		placeAdForm.setCable(false);
 		placeAdForm.setGarage(true);
 		placeAdForm.setInternet(false);
-		placeAdForm.setMembershipUser(KindOfMembership.PREMIUM);
+		placeAdForm.setMembershipUser(KindOfMembership.NORMAL);
+		placeAdForm.setProximityToPublicTransport(100);
+		placeAdForm.setProximityToSchool(200);
+		placeAdForm.setProximityToNightlife(300);
+		placeAdForm.setProximityToSupermarket(400);
+		
+		List<String> visits = new ArrayList<String>();
+		visits.add("28-02-2014;10:02;13:14");
+		placeAdForm.setVisits(visits);
 		
 		ArrayList<String> filePaths = new ArrayList<>();
 		filePaths.add("/img/test/ad1_1.jpg");
@@ -97,6 +109,7 @@ public class AdServiceTest {
 		}
 		
 		//Testing
+		assertTrue(ad.getRent());
 		assertTrue(ad.getSmokers());
 		assertFalse(ad.getAnimals());
 		assertEquals("Bern", ad.getCity());
@@ -108,11 +121,139 @@ public class AdServiceTest {
 		assertEquals(50, ad.getSquareFootage());
 		assertEquals("title", ad.getTitle());
 		assertEquals("Hauptstrasse 13", ad.getStreet());
+		assertEquals(100, ad.getProximityToPublicTransport());
+		assertEquals(200, ad.getProximityToSchool());
+		assertEquals(300, ad.getProximityToNightlife());
+		assertEquals(400, ad.getProximityToSupermarket());
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-	    Date result =  df.parse("2015-02-27");
+	    Date result1 =  df.parse("2016-02-27");
+	    df = new SimpleDateFormat("yyyy-MM-dd");
+	    Date result2 =  df.parse("2017-04-27");
+		assertEquals(0, result1.compareTo(ad.getMoveInDate()));
+		assertEquals(0, result2.compareTo(ad.getMoveOutDate()));
 		
-		assertEquals(0, result.compareTo(ad.getMoveInDate()));
+		List<Visit> vs = ad.getVisits();
+		assertEquals(1, vs.size());
+		Visit v = vs.get(0);
+		
+		Visit visit = new Visit();
+		visit.setAd(ad);
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		visit.setStartTimestamp(dateFormat.parse("28-02-2014 10:02"));
+		visit.setEndTimestamp(dateFormat.parse("28-02-2014 13:14"));
+		assertEquals(visit.getAd(), v.getAd());
+		assertEquals(visit.getStartTimestamp(), v.getStartTimestamp());
+		assertEquals(visit.getEndTimestamp(), v.getEndTimestamp());
+		
+		ads = adService.getNewestAds(1);
+		assertEquals(1, size(ads));
+		
+		ads = adService.getNewestRentAds(1, true);
+		assertEquals(1, size(ads));
+		
+
+		// query results test
+		SearchForm form = new SearchForm();
+		
+		form.setAnimals(false);
+		form.setBalcony(false);
+		form.setCable(false);
+		form.setCellar(false);
+		form.setFurnished(false);
+		form.setGarage(false);
+		form.setGarden(false);
+		form.setInternet(false);
+		form.setSmokers(false);
+		form.setRent(true);
+		form.setForRent(true);
+		form.setForSale(false);
+		form.setFiltered(false);
+		form.setPriceRent(1000);
+		form.setKindOfMembershipUser(false);
+		form.setCity("3018 - Bern");
+		form.setNumberOfRooms(1);
+		form.setProximityToNightlife(1000);
+		form.setProximityToPublicTransport(1000);
+		form.setProximityToSchool(1000);
+		form.setProximityToSupermarket(1000);
+		form.setRadius(20);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
+		
+		form.setForSale(true);
+		form.setForRent(false);
+		form.setRent(false);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setForSale(false);
+		form.setForRent(true);
+		form.setRent(true);
+		form.setPriceRent(500);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setFiltered(true);
+		form.setPriceRent(1000);
+		form.setSmokers(true);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
+		
+		form.setSmokers(false);
+		form.setAnimals(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setAnimals(false);
+		form.setBalcony(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setBalcony(false);
+		form.setGarden(true);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
+		
+		form.setGarden(false);
+		form.setGarage(true);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
+		
+		form.setGarage(false);
+		form.setCable(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setCable(false);
+		form.setFurnished(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setFurnished(false);
+		form.setInternet(true);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setInternet(false);
+		form.setProximityToPublicTransport(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setProximityToPublicTransport(1000);
+		form.setProximityToNightlife(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setProximityToNightlife(1000);
+		form.setProximityToSchool(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
+		
+		form.setProximityToSchool(1000);
+		form.setProximityToSupermarket(50);
+		ads = adService.queryResults(form);
+		assertEquals(0, size(ads));
 	}
 	
 	private User createUser(String email, String password, String firstName,
@@ -133,6 +274,16 @@ public class AdServiceTest {
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
 		return user;
+	}
+	
+	private int size(Iterable<Ad> ads) {
+		int i=0;
+		Iterator<Ad> iterator = ads.iterator();
+		while (iterator.hasNext()) {
+			iterator.next();
+			i++;
+		}
+		return i;
 	}
 	
 }
