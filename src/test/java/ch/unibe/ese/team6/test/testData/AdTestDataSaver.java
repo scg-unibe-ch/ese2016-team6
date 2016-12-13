@@ -322,7 +322,7 @@ public class AdTestDataSaver {
 		adBiel.setUser(ese);
 		adBiel.setTitle("Direkt am Quai: hübsches Studio");
 		adBiel.setStreet("Oberer Quai 12");
-		adBiel.setCity("Biel\\Bienne");
+		adBiel.setCity("Biel/Bienne");
 		adBiel.setGarden(false);
 		adBiel.setBalcony(false);
 		adBiel.setCellar(false);

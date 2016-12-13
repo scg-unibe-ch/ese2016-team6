@@ -11,7 +11,7 @@
 <script>
 	$(document).ready(function() {
 		$("#city").autocomplete({
-			minLength : 2
+			minLength : 1
 		});
 		$("#city").autocomplete({
 			source : <c:import url="getzipcodes.jsp" />
