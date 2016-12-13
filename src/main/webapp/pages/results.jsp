@@ -16,11 +16,7 @@
 <!-- This must be in the body of each page in order for the login screen to work -->
 <c:import url="template/NewLoginPop.jsp" />
 
-<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript">
-console.log(${fn:length(results)});
-var addresses = new Array(${fn:length(results)});
-var i = 0;
-</script>
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
 <script>
 /*
@@ -76,6 +72,11 @@ function sort_div_attribute() {
 </script>
 
 <script>
+
+console.log(${fn:length(results)});
+var addresses = new Array(${fn:length(results)});
+var i = 0;
+
 	$(document).ready(function() {
 		if (document.getElementById('forSale').checked) {
 			$("#type-sale").prop('checked', true);
@@ -152,9 +153,6 @@ function sort_div_attribute() {
 		      center: new google.maps.LatLng(46.8633639,8.213877),
 		      mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
-		
-		//addresses is not defined here unless the following line is written
-		var addresses = new Array(${fn:length(results)});
 		
 		var geocoder = new google.maps.Geocoder();
 		var infowindow = new google.maps.InfoWindow();
@@ -388,6 +386,12 @@ function sort_div_attribute() {
 									<p>Move-in date: ${formattedMoveInDate }</p>
 								</div>
 							</td>
+
+							<script>
+								addresses[i] = "${ad.street} ${ad.zipcode} ${ad.city}";
+								i++;
+							</script>
+
 						</tr>
 					</table>
 				</div>
