@@ -83,6 +83,20 @@ function sort_div_attribute() {
 			$("#type-rent").prop('checked', true);
 		}
 		
+		$("#type-sale").click(function() {
+			
+			$("#forRent").prop('checked', false);
+			$("#forSale").prop('checked', true);
+			
+		});
+		
+		
+		$("#type-rent").click(function() {
+			$("#forRent").prop('checked', true);
+			$("#forSale").prop('checked', false);
+			
+		});
+		
 		$("#moreFilterCriteria").click(function() {
 			document.getElementById('moreFilterCriteria').style.visibility = "hidden";
 			document.getElementById('line').style.display = "block";
@@ -139,6 +153,9 @@ function sort_div_attribute() {
 		      mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 		
+		//addresses is not defined here unless the following line is written
+		var addresses = new Array(${fn:length(results)});
+		
 		var geocoder = new google.maps.Geocoder();
 		var infowindow = new google.maps.InfoWindow();
 		var marker, k;
@@ -148,6 +165,7 @@ function sort_div_attribute() {
 		
 		for(var k = 0; k < addresses.length; k++) {
 			var address = addresses[k];
+			var errorShown = 0;
 			
 		    geocoder.geocode({'address': address}, function(results, status) {
 		   		if (status === google.maps.GeocoderStatus.OK) {
@@ -158,8 +176,11 @@ function sort_div_attribute() {
 		    	} else if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
 		    		k--;
 		    	} else {
-		      		alert('Geocode was not successful for the following reason: ' + status);
-		    	}
+		      		if(errorShown=0){
+						alert('Geocode was not successful for the following reason: ' + status);
+						errorShown=1;
+					}
+				}
 		   	});
 		}
 	});

@@ -76,7 +76,7 @@ $(document).ready(function() {
 	id="searchForm" autocomplete="off">
 
 	<fieldset>
-			<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent"/>
+			<form:checkbox id="forRent" style="display:none" name="forRent" path="forRent" checked="checked"/>
 			<form:checkbox id="forSale" style="display:none" name="forSale" path="forSale"/>
 			<form>
 			<%-- that needs to be fixed --%>
