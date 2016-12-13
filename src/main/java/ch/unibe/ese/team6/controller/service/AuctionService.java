@@ -49,8 +49,8 @@ public class AuctionService {
     }
 
     //finds all Ad on which the user bidded
-    public Iterable<Ad> findBidsByUser(User user) {
-    	return (bidDao.findAdByUser(user));
+    public Iterable<Bid> findBidsByUser(User user) {
+    	return bidDao.findByUser(user);
     }
     /**
      * Searches every 10 seconds for finished auctions

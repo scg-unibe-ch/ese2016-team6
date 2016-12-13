@@ -78,6 +78,7 @@ var addresses = new Array(${fn:length(results)});
 var i = 0;
 
 	$(document).ready(function() {
+
 		if (document.getElementById('forSale').checked) {
 			$("#type-sale").prop('checked', true);
 		} else {

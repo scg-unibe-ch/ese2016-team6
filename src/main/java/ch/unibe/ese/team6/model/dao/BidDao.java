@@ -12,6 +12,6 @@ public interface BidDao extends CrudRepository<Bid, Long> {
     public Bid findTop1ByAdOrderByAmountDesc(Ad ad);
     public Bid findTop1ByAdOrderByIdDesc(Ad ad);
     public Long countByAd(Ad ad);
-    public Iterable<Ad> findAdByUser(User user);
+    public Iterable<Bid> findByUser(User user);
     
 }

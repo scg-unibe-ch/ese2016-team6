@@ -126,9 +126,12 @@ function deleteAd(button) {
 				</tr>	
 				<tr>
 				<td>	
-					<c:forEach var="ad" items="${myAuctions}">
-				
-								
+				<c:forEach var="ad" items="${myAuctions}">
+				<c:choose>
+				<c:when test="${empty myAuctions}">
+					<p>You have no Ad which is saled through auction!</p>
+				</c:when>
+					<c:otherwise>
 				 	<table id="resultTable" >
 						<tr>
 							<th colspan="3">
@@ -256,67 +259,71 @@ function deleteAd(button) {
 							</td>
 						</tr>
 					</table>
+					</c:otherwise>
+					</c:choose>
 			</c:forEach>
 			</td>
 			<td>
-			<c:forEach var="ad" items="${myBids}">
-				
-					<!-- 			
+			<c:forEach var="bid" items="${myBids}">
+			<c:choose>
+				<c:when test="${empty myBids}">
+								<p>You have no Bids!</p>
+					</c:when>
+					<c:otherwise>		
 				 	<table id="resultTable" >
 						<tr>
 							<th colspan="3">
 								<h2>
-									<a class="link" style="float:left;" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a><button style="font-size : 12px; width:80px; height:30px; float: right; background-color:#991f00;color:white;" class="deleteButton" data-id="${ad.id}" onClick="deleteAd(this)" href="/deletedAd">Delete Ad</button>
-				
+									<a class="link" style="float:left;" href="<c:url value='/ad?id=${bid.ad.id}' />">${bid.ad.title }</a><button id="newMsg" style="float:right; font-size : 12px; width:150px; height:30px;"type="button">Contact Advertiser</button>
 								</h2>
 							</th>
 						</tr>
 						<tr>
 							<td>
 								<div class="resultLeftBigger">
-								<fmt:formatDate value="${ad.creationDate}" var="formattedCreationDate" type="date" pattern="dd.MM.yyyy" />
+								<fmt:formatDate value="${bid.ad.creationDate}" var="formattedCreationDate" type="date" pattern="dd.MM.yyyy" />
 								<label style="text-align: right;" id="formattedCreationDate"><b><i>Ad created on : </i>${formattedCreationDate}</b></label>
 								
-									<a href="<c:url value='/ad?id=${ad.id}' />"><img
-									src="${ad.pictures[0].filePath}" /></a>
-									<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+									<a href="<c:url value='/ad?id=${bid.ad.id}' />"><img
+									src="${bid.ad.pictures[0].filePath}" /></a>
+									<p>${bid.ad.street}, ${bid.ad.zipcode} ${bid.ad.city}</p>
 								</div>
 							</td>
 							
 							<td>
 								<div class="resultMiddle">
 								<c:choose>
-								<c:when test="${ad.expired=='false' && ad.instantBought=='false'}">							
+								<c:when test="${bid.ad.expired=='false' && bid.ad.instantBought=='false'}">							
 								This property is for sale through auction ! 
 								</br> 
-									<h3><label>	Amount of the current bid : </label> CHF ${ad.currentBid}</h3>
-									<h3><label>Minimum increment :</label> CHF ${ad.increment}</h3>
+									<h3><label>	Amount of the current bid : </label> CHF ${bid.ad.currentBid}</h3>
+									<h3><label>Minimum increment :</label> CHF ${bid.ad.increment}</h3>
 								</br> 
-								<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
+								<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${bid.ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
 								</c:when>
-								<c:when test="${ad.expired=='true'&&ad.instantBought=='false'}">
+								<c:when test="${bid.ad.expired=='true'&&bid.ad.instantBought=='false'}">
 									<h3>
-									This ads auction expired on ${ad.expireDate}
+									This ads auction expired on ${bid.ad.expireDate}
 									</h3>
 								</c:when>
 								
-								<c:when test="${ad.instantBought=='true'}">
+								<c:when test="${bid.ad.instantBought=='true'}">
 									<h3>
 									This flat has been instant bought...
 									<br>
 									<br>
-									<c:if test="${latestBid.user != null}">
+									<c:if test="${bid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
 												<table>
 													<tr>
 														<td>
-															...by the user : ${latestBid.user.username}
+															...by the user : ${bid.user.username}
 														</td>
 														
 														<td>
 															<c:choose>
-																<c:when test="${latestBid.user.picture.filePath != null}">
-																	<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
+																<c:when test="${bid.user.picture.filePath != null}">
+																	<img style="width:50px;height:50px;" src="${bid.user.picture.filePath}">
 																</c:when>
 																<c:otherwise>
 																	<img src="/img/avatar.png">
@@ -326,11 +333,11 @@ function deleteAd(button) {
 													</tr>	
 													<tr>
 														<td>
-															For a sum of : ${latestBid.amount} CHF
+															For a sum of : ${bid.amount} CHF
 														</td>
 														<td>
 														This offer was made: 
-														<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
+														<fmt:formatDate value="${bid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
 														</td>
 													</tr>
 												</table>
@@ -345,42 +352,29 @@ function deleteAd(button) {
 						
 							<td>
 								<div class="resultRightBigger">
-									<c:if test="${latestBid.user != null}">
-											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												<h3>							
-												<table>
-													<tr>
-														<td>
-															Current highest bidder : ${latestBid.user.username}
-														</td>
-														
-														<td>
+									<c:if test="${bid.user != null}">
+											<div id="bidderPresent" style="vertical-align: middle;display: inline-block; float:left;">
+												<h3>
+													Current highest bidder : ${bid.user.username}	</h3>						
 															<c:choose>
-																<c:when test="${latestBid.user.picture.filePath != null}">
-																	<img style="width:40px;height:40px;" src="${latestBid.user.picture.filePath}">
+																<c:when test="${bid.user.picture.filePath != null}">
+																	<img style="float:center;width:40px;height:40px;" src="${bid.user.picture.filePath}">
 																</c:when>
 																<c:otherwise>
-																	<img style="width:40px;height:40px;" src="/img/avatar.png">
+																	<img style="float:center;width:40px;height:40px;" src="/img/avatar.png">
 																</c:otherwise>
 															</c:choose>
-														</td>							
-													</tr>	
-													<tr>
-														<td>
-															With a bid of : ${latestBid.amount} CHF
-														</td>
-														<td>
+															<h3>
+															With a bid of : ${bid.amount} CHF </h3>
+														<h3>
 														This offer was made: 
-														<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
-														</td>
-													</tr>
-												</table>
+														<fmt:formatDate value="${bid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
 												</h3>
 											</div>
 											
 											</c:if>
 											
-											<c:if test="${latestBid.user == null}">
+											<c:if test="${bid.user == null}">
 											<h3>
 												None has made a bid yet.
 											</h3>
@@ -389,7 +383,9 @@ function deleteAd(button) {
 							</td>
 						</tr>
 					</table>
-			</c:forEach> -->
+					</c:otherwise>	
+				</c:choose>
+			</c:forEach>
 			</td>
 			</tr>
 			

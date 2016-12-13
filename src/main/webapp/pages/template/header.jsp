@@ -115,9 +115,8 @@
 						<ul  id="ProfileDropList">
 								<li class="ProfileListItem" style="top:65px;"><a href="/profile/placeAd">Place an ad</a></li>
 								<li class="ProfileListItem" style="top:90px;"><a href="/profile/myRooms">My Ads</a></li>
-								<li class="ProfileListItem" style="top:115px;"><a href="/profile/myBookmarks">My Bookmarks</a></li>
-								<li class="ProfileListItem" style="top:140px;">
-								<% out.print("<a href=\"/ad/myAuctions?id=" + realUser.getId() + "\">My Auctions</a>"); %></li>
+								<li class="ProfileListItem" style="top:115px;"><% out.print("<a href=\"/ad/myAuctions?id=" + realUser.getId() + "\">My Auctions</a>"); %></li>
+								<li class="ProfileListItem" style="top:140px;"><a href="/profile/myBookmarks">My Bookmarks</a></li>	
 								<li class="ProfileListItem" style="top:165px;"><a href="/profile/schedule">Schedule</a></li>
 								<li class="ProfileListItem" style="top:190px;"><a id="messageLink" href="/profile/messages"></a></li>
 								<li class="ProfileListItem" style="top:215px;"><a id="enquiryLink" href="/profile/enquiries">Enquiries</a></li>
