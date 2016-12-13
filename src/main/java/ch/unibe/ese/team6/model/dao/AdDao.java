@@ -28,9 +28,11 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 	
 	//public Iterable<Ad> findByRentAndPriceRentLessThanAndNumberOfRoomsGreaterThanEqual(boolean rent, int i, int j);
 	
-	public Iterable<Ad> findByDealAndPriceLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(KindOfDeal d, int price, int nrRooms, boolean ex, boolean bought);
+	public Iterable<Ad> findByDealAndPriceRentLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought
+	(KindOfDeal d, int price, int nrRooms, boolean ex, boolean bought);
 	
-	public Iterable<Ad> findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought(KindOfDeal d, int curBid, int nrRooms, boolean ex, boolean bought);
+	public Iterable<Ad> findByDealAndCurrentBidLessThanAndNumberOfRoomsGreaterThanEqualAndExpiredAndInstantBought
+	(KindOfDeal d, int curBid, int nrRooms, boolean ex, boolean bought);
 	
 	
 	public Iterable<Ad>findByDeal(KindOfDeal d);
