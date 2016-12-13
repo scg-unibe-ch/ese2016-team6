@@ -71,7 +71,7 @@ public class IndexController {
 	public @ResponseBody int getMessageAndEnquiries(Principal principal) {
 		long id = userService.findUserByUsername(principal.getName()).getId();
 		int i = messageService.unread(id);
-		int j = enquiryService.newE(id);
+		int j = enquiryService.newEnquiries(id);
 		return i+j;
 	}
 }

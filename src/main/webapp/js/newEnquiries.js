@@ -1,15 +1,8 @@
+/*Display the number of new enquiries in the drop down list*/
+
 function newEnquiries(place) {
-	$.get("/profile/newE", function(data){
+	$.get("/profile/newEnquiries", function(data){
 		var enquiry;
-		if (place == "enquiries")
-			enquiry = "Enquiries";
-		else
-			enquiry = "Enquiries";
-		if (data > 0)
-			enquiry += " ("+ data + ") ";
-		if (place == "enquiries")
-			$("#enquiries").html(enquiry);
-		else
-			$("#enquiryLink").html(enquiry);
+		$("#enquiryLink").html(data + " " + enquiry);
 	});
 }

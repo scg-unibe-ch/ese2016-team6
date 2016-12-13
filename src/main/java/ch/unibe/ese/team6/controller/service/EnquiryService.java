@@ -121,7 +121,7 @@ public class EnquiryService {
 	}
 	
 	@Transactional
-	public int newE(long userId) {
+	public int newEnquiries(long userId) {
 		int i=0;
 		User user = userDao.findOne(userId);
 		Iterable<Ad> usersAd = adDao.findByUser(user);

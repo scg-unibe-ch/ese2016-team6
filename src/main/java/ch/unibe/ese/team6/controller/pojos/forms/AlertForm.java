@@ -27,6 +27,7 @@ public class AlertForm {
 	@Min(value = 0, message = "In your dreams.")
 	private Integer price;
 	
+	
 	private int zipCode;
 	
 	private boolean forRent;
