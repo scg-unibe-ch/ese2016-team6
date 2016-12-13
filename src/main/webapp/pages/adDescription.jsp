@@ -379,13 +379,55 @@ function deleteAd(button) {
 							
 							
 							<form:form action="/ad/makeBid" method="post">
-								
-									<input type="hidden" name="id" value="${shownAd.id}">
-									<input type="hidden" name="amount" value="${shownAd.priceSale}">
-									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
-									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
-									</c:if>
-								
+								<c:choose>
+									<c:when test="${shownAd.expired=='false' && shownAd.instantBought=='false'}">		
+											<input type="hidden" name="id" value="${shownAd.id}">
+											<input type="hidden" name="amount" value="${shownAd.priceSale}">
+											<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
+												
+													<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
+											</c:if>
+									</c:when>
+									<c:when test="${shownAd.instantBought=='true'}">
+										<h3>
+										This flat has been instant bought...
+										<br>
+										<br>
+										<c:if test="${latestBid.user != null}">
+												<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
+													<table>
+														<tr>
+															<td>
+																...by the user : ${latestBid.user.username}
+															</td>
+															
+															<td>
+																<c:choose>
+																	<c:when test="${latestBid.user.picture.filePath != null}">
+																		<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
+																	</c:when>
+																	<c:otherwise>
+																		<img style="width:50px;height:50px;" src="/img/avatar.png">
+																	</c:otherwise>
+																</c:choose>
+															</td>					
+														</tr>	
+														<tr>
+															<td>
+																For a sum of : ${latestBid.amount} CHF
+															</td>
+															<td>
+															This offer was made: 
+															<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
+															</td>
+														</tr>
+													</table>
+												</div>
+												
+											</c:if>
+										</h3>
+									</c:when>			
+								</c:choose>			
 							</form:form>
 						</c:if>
 						
@@ -398,7 +440,7 @@ function deleteAd(button) {
 									<input type="hidden" name="id" value="${shownAd.id}">
 									<input type="hidden" name="amount" value="${shownAd.priceSale}">
 									<c:if test="${loggedIn && loggedInUserEmail != shownAd.user.username}">
-									<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
+										<button type="submit" id="makeBid" class="bidButton">Instant buy for ${shownAd.priceSale} !</button>
 									</c:if>							
 								</form:form>
 								</br> 
