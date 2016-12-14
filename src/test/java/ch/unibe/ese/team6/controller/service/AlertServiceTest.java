@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.Test;
@@ -16,15 +17,18 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import ch.unibe.ese.team6.controller.pojos.forms.AlertForm;
 import ch.unibe.ese.team6.controller.service.AlertService;
 import ch.unibe.ese.team6.model.Ad;
 import ch.unibe.ese.team6.model.Alert;
 import ch.unibe.ese.team6.model.Gender;
 import ch.unibe.ese.team6.model.KindOfMembership;
+import ch.unibe.ese.team6.model.Message;
 import ch.unibe.ese.team6.model.User;
 import ch.unibe.ese.team6.model.UserRole;
 import ch.unibe.ese.team6.model.dao.AdDao;
 import ch.unibe.ese.team6.model.dao.AlertDao;
+import ch.unibe.ese.team6.model.dao.MessageDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,6 +47,9 @@ public class AlertServiceTest {
 	
 	@Autowired
 	AlertDao alertDao;
+	
+	@Autowired
+	MessageDao messageDao;
 	
 	@Autowired
 	AlertService alertService;
@@ -86,6 +93,35 @@ public class AlertServiceTest {
 		assertEquals(adolfOgi, alertList.get(0).getUser());
 		assertEquals("Bern", alertList.get(1).getCity());
 		assertTrue(alertList.get(0).getRadius() > alertList.get(1).getRadius());
+		
+		AlertForm form = new AlertForm();
+		form.setCity("3002 - Bern");
+		form.setForRent(true);
+		form.setForSale(false);
+		form.setMaxSize(300);
+		form.setMinSize(5);
+		form.setNumberOfRooms(1);
+		form.setPrice(1000);
+		form.setUser(adolfOgi);
+		form.setZipCode(3002);
+		form.setIsValid(true);
+		form.setRadius(10);
+		alertService.saveFrom(form, adolfOgi);
+		
+		alerts = alertService.getAlertsByUser(adolfOgi);
+		alertList = new ArrayList<Alert>();
+		for(Alert returnedAlert: alerts)
+			alertList.add(returnedAlert);
+		
+		assertEquals(3, alertList.size());
+		assertEquals(adolfOgi, alertList.get(2).getUser());
+		assertEquals("Bern", alertList.get(2).getCity());
+		assertEquals(10, alertList.get(2).getRadius());
+		assertEquals(5, alertList.get(2).getMinSize());
+		assertEquals(300, alertList.get(2).getMaxSize());
+		assertTrue(alertList.get(2).getForRent());
+		assertEquals(1, alertList.get(2).getNumberOfRooms());
+		assertEquals(1000, alertList.get(2).getPriceRent());
 	}
 	
 	@Test
@@ -97,14 +133,23 @@ public class AlertServiceTest {
 		thomyF.setAboutMe("Supreme hustler");
 		userDao.save(thomyF);
 		
+		User thomyG = createUser("thomy@g.ch", "password", "Thomy", "G",
+				Gender.MALE, KindOfMembership.NORMAL);
+		thomyG.setAboutMe("Supreme hustler");
+		userDao.save(thomyG);
+		
 		// Create 2 alerts for Thomy F
 		Alert alert = new Alert();
 		alert.setUser(thomyF);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
-		alert.setForSale(true);
-		alert.setPriceSale(2000);
+		alert.setForRent(true);
+		alert.setForSale(false);
+		alert.setPriceRent(3000);
 		alert.setRadius(100);
+		alert.setMinSize(10);
+		alert.setMaxSize(100);
+		alert.setNumberOfRooms(2);
 		alertDao.save(alert);
 		
 		alert = new Alert();
@@ -112,8 +157,12 @@ public class AlertServiceTest {
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
 		alert.setForSale(true);
+		alert.setForRent(false);
 		alert.setPriceSale(3000);
 		alert.setRadius(5);
+		alert.setMinSize(10);
+		alert.setMaxSize(40);
+		alert.setNumberOfRooms(2);
 		alertDao.save(alert);
 		
 		Iterable<Alert> alerts = alertService.getAlertsByUser(userDao.findByUsername("thomy@f.ch"));
@@ -123,6 +172,8 @@ public class AlertServiceTest {
 		//save an ad
 		Date date = new Date();
 		Ad oltenResidence= new Ad();
+		oltenResidence.setRent(true);
+		oltenResidence.setNumberOfRooms(4);
 		oltenResidence.setZipcode(4600);
 		oltenResidence.setMoveInDate(date);
 		oltenResidence.setCreationDate(date);
@@ -134,7 +185,7 @@ public class AlertServiceTest {
 		oltenResidence.setRoomDescription("blah");
 		oltenResidence.setPreferences("blah");
 	//	oltenResidence.setRoommates("None");
-		oltenResidence.setUser(thomyF);
+		oltenResidence.setUser(thomyG);
 		oltenResidence.setTitle("Olten Residence");
 		oltenResidence.setStreet("Florastr. 100");
 		oltenResidence.setCity("Olten");
@@ -149,6 +200,16 @@ public class AlertServiceTest {
 		
 		assertFalse(alertService.radiusMismatch(oltenResidence, alertList.get(0)));
 		assertTrue(alertService.radiusMismatch(oltenResidence, alertList.get(1)));
+		assertFalse(alertService.rentSaleMismatch(oltenResidence, alertList.get(0)));
+		assertTrue(alertService.rentSaleMismatch(oltenResidence, alertList.get(1)));
+		assertFalse(alertService.sizeMismatch(oltenResidence, alertList.get(0)));
+		assertTrue(alertService.sizeMismatch(oltenResidence, alertList.get(1)));
+
+		alertService.triggerAlerts(oltenResidence);
+		Iterable<Message> messages = messageDao.findByRecipient(userDao.findByUsername("thomy@f.ch"));
+		int m = size(messages);
+		assertEquals(1, m);
+		
 		}
 	
 	//Lean user creating method
@@ -170,5 +231,15 @@ public class AlertServiceTest {
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
 		return user;
+	}
+	
+	private int size(Iterable<Message> m) {
+		Iterator<Message> it = m.iterator();
+		int i=0;
+		while (it.hasNext()) {
+			it.next();
+			i++;
+		}
+		return i;
 	}
 }

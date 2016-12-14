@@ -59,7 +59,7 @@ public class AdServiceTest {
 		//Preparation
 		PlaceAdForm placeAdForm = new PlaceAdForm();
 		placeAdForm.setForRent(true);
-		placeAdForm.setCity("3018 - Bern");
+		placeAdForm.setCity("7532 - Tschierv");
 		placeAdForm.setPreferences("Test preferences");
 		placeAdForm.setRoomDescription("Test Room description");
 		//placeAdForm.setRoommates("Test Roommate description");
@@ -70,6 +70,11 @@ public class AdServiceTest {
 	//	placeAdForm.setStudio(true);
 		placeAdForm.setMoveInDate("27-02-2016");
 		placeAdForm.setMoveOutDate("27-04-2017");
+		placeAdForm.setNumberOfRooms(3);
+		
+		placeAdForm.setDeadlineDate("30-04-2017");
+		placeAdForm.setDeadlineHour("13");
+		placeAdForm.setDeadlineMinute("30");
 		
 		placeAdForm.setSmokers(true);
 		placeAdForm.setAnimals(false);
@@ -112,8 +117,8 @@ public class AdServiceTest {
 		assertTrue(ad.getRent());
 		assertTrue(ad.getSmokers());
 		assertFalse(ad.getAnimals());
-		assertEquals("Bern", ad.getCity());
-		assertEquals(3018, ad.getZipcode());
+		assertEquals("Tschierv", ad.getCity());
+		assertEquals(7532, ad.getZipcode());
 		assertEquals("Test preferences", ad.getPreferences());
 		assertEquals("Test Room description", ad.getRoomDescription());
 	//	assertEquals("Test Roommate description", ad.getRoommates());
@@ -171,13 +176,13 @@ public class AdServiceTest {
 		form.setFiltered(false);
 		form.setPriceRent(1000);
 		form.setKindOfMembershipUser(false);
-		form.setCity("3018 - Bern");
+		form.setCity("7532 - Tschierv");
 		form.setNumberOfRooms(1);
 		form.setProximityToNightlife(1000);
 		form.setProximityToPublicTransport(1000);
 		form.setProximityToSchool(1000);
 		form.setProximityToSupermarket(1000);
-		form.setRadius(20);
+		form.setRadius(10);
 		ads = adService.queryResults(form);
 		assertEquals(1, size(ads));
 		
@@ -254,6 +259,11 @@ public class AdServiceTest {
 		form.setProximityToSupermarket(50);
 		ads = adService.queryResults(form);
 		assertEquals(0, size(ads));
+		
+		form.setProximityToSupermarket(1000);
+		form.setCellar(true);
+		ads = adService.queryResults(form);
+		assertEquals(1, size(ads));
 	}
 	
 	private User createUser(String email, String password, String firstName,

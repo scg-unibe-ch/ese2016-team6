@@ -112,8 +112,11 @@ public class AlertService {
 		Iterator<Alert> alertIterator = alerts.iterator();
 		while (alertIterator.hasNext()) {
 			Alert alert = alertIterator.next();
-			if (rentSaleMismatchWith(ad, alert) || radiusMismatchWith(ad, alert)
-					|| ad.getUser().equals(alert.getUser()) || sizeMismatchWith(ad, alert) || ad.getNumberOfRooms() < alert.getNumberOfRooms() )
+			if (rentSaleMismatchWith(ad, alert)
+					|| radiusMismatchWith(ad, alert)
+					|| ad.getUser().equals(alert.getUser())
+					|| sizeMismatchWith(ad, alert)
+					|| ad.getNumberOfRooms() < alert.getNumberOfRooms() )
 				alertIterator.remove();
 		}
 
@@ -161,8 +164,8 @@ public class AlertService {
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean rentSaleMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
-		if (!alert.getBothRentAndSale()
-				&& (ad.getDeal() == KindOfDeal.forRent ) == alert.getForRent())
+		if (//(ad.getDeal() == KindOfDeal.forRent ) != alert.getForRent()
+				ad.getRent() != alert.getForRent())
 			mismatch = true;
 		return mismatch;
 	}
@@ -211,5 +214,13 @@ public class AlertService {
 	//for testing
 	public boolean radiusMismatch(Ad ad, Alert alert) {
 		return radiusMismatchWith(ad, alert);
+	}
+	
+	public boolean rentSaleMismatch(Ad ad, Alert alert) {
+		return rentSaleMismatchWith(ad, alert);
+	}
+	
+	public boolean sizeMismatch(Ad ad, Alert alert) {
+		return sizeMismatchWith(ad, alert);
 	}
 }
