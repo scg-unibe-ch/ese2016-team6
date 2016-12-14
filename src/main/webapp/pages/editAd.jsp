@@ -16,16 +16,7 @@
 
 <script>
 	$(document).ready(function() {	
-		if(document.getElementById('forRent').checked) {
-			$("#type-rent").prop('checked', true);
-			$("#type-rent").click();
-		} else if(document.getElementById('forSale').checked) {
-			$("#type-sale").prop('checked', true);
-			$("#type-Sale").click();
-		} else if(document.getElementById('forAuction').checked) {
-			$("#type-auction").click();
-			$("#type-auction").prop('checked', true);
-		}
+		
 		
 		setTimeout(function() {
 			if ($("#ActualDeal").val() == "forRent") {
@@ -242,6 +233,20 @@ $("#type-rent").on("click", function(){
 			});
 		
 		});
+		
+		
+		if(document.getElementById('forRent').checked) {
+			$("#type-rent").prop('checked', true);
+			$("#type-rent").click();
+		} else if(document.getElementById('forSale').checked) {
+			$("#type-sale").prop('checked', true);
+			$("#type-Sale").click();
+		} else if(document.getElementById('forAuction').checked) {
+			$("#type-auction").click();
+			$("#type-auction").prop('checked', true);
+		}
+		
+		
 	});
 </script>
 
