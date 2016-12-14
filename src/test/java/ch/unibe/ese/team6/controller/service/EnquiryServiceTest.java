@@ -65,7 +65,7 @@ public class EnquiryServiceTest {
 	@Test
 	public void createVisits() throws Exception {		
 		//create user
-		User thomyF = createUser("thomy@f.ch", "password", "Thomy", "F",
+		User thomyF = createUser("thomy@f2.ch", "password", "Thomy", "F",
 				Gender.MALE, KindOfMembership.NORMAL);
 		thomyF.setAboutMe("Supreme hustler");
 		userDao.save(thomyF);
@@ -123,7 +123,7 @@ public class EnquiryServiceTest {
 	@Test
 	public void enquireAndAccept() throws Exception {		
 		//create two users
-		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
+		User adolfOgi = createUser("adolf@ogi2.ch", "password", "Adolf", "Ogi",
 				Gender.MALE, KindOfMembership.NORMAL);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
@@ -181,6 +181,9 @@ public class EnquiryServiceTest {
 		enquiry.setState(VisitEnquiryState.OPEN);
 		visitEnquiryDao.save(enquiry);
 		
+		Iterable<VisitEnquiry> ve = enquiryService.getEnquiriesByRecipient(adolfOgi);
+		assertEquals(visit.getId(), ve.iterator().next().getVisit().getId());
+		
 		Iterable<VisitEnquiry> ogiEnquiries = visitEnquiryDao.findBySender(adolfOgi);
 		ArrayList<VisitEnquiry> ogiEnquiryList = new ArrayList<VisitEnquiry>();
 		for(VisitEnquiry venq: ogiEnquiries)
@@ -189,8 +192,13 @@ public class EnquiryServiceTest {
 		long venqID = ogiEnquiryList.get(0).getId();
 		
 		enquiryService.acceptEnquiry(venqID);
-		
 		assertEquals(VisitEnquiryState.ACCEPTED, visitEnquiryDao.findOne(venqID).getState());
+		
+		enquiryService.reopenEnquiry(venqID);
+		assertEquals(VisitEnquiryState.OPEN, visitEnquiryDao.findOne(venqID).getState());
+		
+		enquiryService.declineEnquiry(venqID);
+		assertEquals(VisitEnquiryState.DECLINED, visitEnquiryDao.findOne(venqID).getState());
 	}
 	
 	//Lean user creating method
