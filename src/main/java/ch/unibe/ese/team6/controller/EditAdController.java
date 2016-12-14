@@ -129,7 +129,7 @@ public class EditAdController {
 
 			// triggers all alerts that match the placed ad
 			
-			//alertService.triggerAlerts(ad);
+			alertService.triggerAlerts(ad);
 
 			// reset the picture uploader
 			this.pictureUploader = null;
