@@ -86,9 +86,9 @@
 	</c:choose>
 	<br>
 	<br>
-	<br />
-		
 	
+	<!--
+	<br />
 	<br />
 		<h2>Test users</h2>
 		<br />
@@ -99,7 +99,7 @@
 			<li>Email: <i>oprah@winfrey.com</i>, password: <i>password</i></li>
 		</ul>
 	<br />		
-		
+	-->	
     </div>
     <div class="modal-footer">
      
