@@ -255,13 +255,13 @@
 
 			<tr>
 				<td style="background-color:#fff9f9"><label for="field-squareFootage">Square Meters (m²) *:</label>
-					<form:input id="field-squareFootage" type="number" max="100000" path="squareFootage" placeholder="number of square meters"  min="1" value="1" />
+					<form:input id="field-squareFootage" type="number" max="100000" path="squareFootage" placeholder="number of square meters"  min="1" />
 					<form:errors path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label for="field-numberRooms">Number of Rooms *:</label>
-					<form:input id="field-numberRooms" type="number" max="1000" path="numberOfRooms" placeholder="Number of Rooms" min="1" value="1" />
+					<form:input id="field-numberRooms" type="number" max="1000" path="numberOfRooms" placeholder="Number of Rooms" min="1" />
 					<form:errors path="numberOfRooms" cssClass="validationErrorText" /></td>
 			</tr>
 			
@@ -290,25 +290,25 @@
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label id="rentLabel" for="field-priceRent">Monthly rental charges (CHF) *:</label>
-				<form:input id="field-priceRent" type="number" path="priceRent"  min="1" value="1"/>
+				<form:input id="field-priceRent" type="number" path="priceRent"  min="1" />
 				<form:errors path="priceRent" cssClass="validationErrorText" /></td>
 			</tr>
 		
 			<tr>
 				<td style="background-color:#fff9f9"><label id="saleLabel" for="field-priceSale">Price for a direct sale (CHF) *:</label>
-				<form:input id="field-priceSale" type="number" path="priceSale" min="1" value="1"/>
+				<form:input id="field-priceSale" type="number" path="priceSale" min="1" />
 				<form:errors path="priceSale" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>
 				<td style="background-color:#fff9f9"><label id="bidLabel" for="field-currentBid">Initial bid for a sale through auction (CHF) *:</label>
-				<form:input id="field-currentBid" type="number" path="currentBid" min="1" value="1"/>
+				<form:input id="field-currentBid" type="number" path="currentBid" min="1" />
 				<form:errors path="currentBid" cssClass="validationErrorText" /></td>
 			</tr>
 			
 			<tr>				
 				<td style="background-color:#fff9f9"><label id="incLabel" for="field-increment">Automatic increment for each new bid (CHF) *:</label>
-				<form:input id="field-increment" type="number" path="increment" min="1" value="1"/>
+				<form:input id="field-increment" type="number" path="increment" min="1" />
 				<form:errors path="increment" cssClass="validationErrorText" /></td>			
 			</tr>
 			

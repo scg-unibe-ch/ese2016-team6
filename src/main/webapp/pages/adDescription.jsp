@@ -445,7 +445,7 @@ function deleteAd(button) {
 								</form:form>
 								</br> 
 									<h3><label>	Amount of the current bid : </label> CHF ${shownAd.currentBid}</h3>
-									<h3><label>Minimum increment :</label> CHF </h3>
+									<h3><label>Minimum increment : </label> CHF ${shownAd.increment}</h3>
 								</br> 
 								<h3><i>Expiry date of the auction: ${shownAd.deadlineDate} </i></h3>
 								<h3 id="timeLeft"><fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
