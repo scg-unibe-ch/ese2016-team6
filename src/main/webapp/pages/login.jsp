@@ -65,6 +65,7 @@
 
 		
 		<br />
+		<!--
 		<br />
 		<br />
 		<h2>Test users</h2>
@@ -75,6 +76,7 @@
 			<li>Email: <i>user@bern.com</i>, password: <i>password</i></li>
 			<li>Email: <i>oprah@winfrey.com</i>, password: <i>password</i></li>
 		</ul>
+		-->
 		<br />	
 
 	<div>

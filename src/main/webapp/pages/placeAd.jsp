@@ -119,6 +119,25 @@
 			$("#preference").parent().hide();
     	});
 
+		
+		if( document.getElementById('field-priceRent').value==0 ){
+			document.getElementById('field-priceRent').value = 1;
+		}
+		
+		if( document.getElementById('field-priceSale').value==0 ){
+			document.getElementById('field-priceSale').value = 1;
+		}
+		
+		if( document.getElementById('field-currentBid').value==0 ){
+			document.getElementById('field-currentBid').value = 1;
+		}
+		
+		if( document.getElementById('field-increment').value==0 ){
+			document.getElementById('field-increment').value = 1;
+		}
+		
+		
+		
 		$("#field-city").autocomplete({
 			minLength : 1
 		});

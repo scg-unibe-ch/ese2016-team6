@@ -290,9 +290,9 @@ $("#type-rent").on("click", function(){
 					</c:when>
 					<c:otherwise>
 						
-						<form:checkbox  id="forRent" path="forRent" value="forRent" checked="checked"/>
-						<form:checkbox  id="forSale" path="forSale" value="forSale"/>
-						<form:checkbox  id="forAuction" path="forAuction" value="forAuction"/>
+						<form:checkbox style="display:none" id="forRent" path="forRent" value="forRent" checked="checked"/>
+						<form:checkbox style="display:none" id="forSale" path="forSale" value="forSale"/>
+						<form:checkbox style="display:none" id="forAuction" path="forAuction" value="forAuction"/>
 					</c:otherwise>
 				</c:choose>
 				
