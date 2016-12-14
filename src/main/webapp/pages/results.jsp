@@ -75,6 +75,7 @@ function sort_div_attribute() {
 
 console.log(${fn:length(results)});
 var addresses = new Array(${fn:length(results)});
+var titles = new Array(${fn:length(results)});
 var i = 0;
 
 	$(document).ready(function() {
@@ -159,29 +160,40 @@ var i = 0;
 		var infowindow = new google.maps.InfoWindow();
 		var marker, k;
 		var address = addresses[0];
+		var title = titles[0];
 		
 		console.log(address);
 		
-		for(var k = 0; k < addresses.length; k++) {
+		for(var k = 0; k < addresses.length; k++) { (function(num) {
 			var address = addresses[k];
-			var errorShown = 0;
+			var title = titles[k];
 			
 		    geocoder.geocode({'address': address}, function(results, status) {
-		   		if (status === google.maps.GeocoderStatus.OK) {
-		      		var marker = new google.maps.Marker({
-		      		map: map,
-		        	position: results[0].geometry.location
-		      		});
-		    	} else if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-		    		k--;
-		    	} else {
-		      		if(errorShown=0){
-						alert('Geocode was not successful for the following reason: ' + status);
-						errorShown=1;
+		   			if (status === google.maps.GeocoderStatus.OK) {
+		    	  		var marker = new google.maps.Marker({
+			      			map: map,
+			        		position: results[0].geometry.location
+			      		});
+
+			      		var infowindow = new google.maps.InfoWindow({
+						    content: title
+  						});
+
+  						marker.addListener('click', function() {
+    						infowindow.open(marker.get('map'), marker);
+  						});
+
+		    		} else if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+		    			k--;
+		    		} else {
+		      			if(errorShown=0){
+							alert('Geocode was not successful for the following reason: ' + status);
+							errorShown=1;
+						}
 					}
-				}
+				
 		   	});
-		}
+		}(k))}
 	});
 </script>
 
@@ -390,6 +402,7 @@ var i = 0;
 
 							<script>
 								addresses[i] = "${ad.street} ${ad.zipcode} ${ad.city}";
+								titles[i] = "${ad.title}";
 								i++;
 							</script>
 
