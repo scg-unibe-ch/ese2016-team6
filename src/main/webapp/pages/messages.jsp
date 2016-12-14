@@ -101,7 +101,7 @@ function deleteMessage(button) {
 <h1>Messages</h1>
 <hr />
 
-<table>
+<table style="align: center; padding-left: 60px;">
 	<tr>
 		<td valign="top" style="float:left;max-width:600px;">
 		
@@ -146,8 +146,7 @@ function deleteMessage(button) {
 			</div>
 		</td>
 		
-		<td style="width:15px;">
-		<div style="width:15px;"></div>
+		<td style="padding:40px;"></td>
 	
 		<td valign="top">
 			<div id="messageList">

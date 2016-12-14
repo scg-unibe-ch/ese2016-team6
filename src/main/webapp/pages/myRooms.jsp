@@ -18,10 +18,10 @@
 <pre><a href="/">Home</a>   &gt;   My advertisements</pre>
 -->
 
-		<table id="indexTable" style="width:100%;text-align:center;">
+		<table id="indexTable" style="width:100%;text-align:left; padding: 30px;">
 			<tr>
 				<th>
-					<h2 style="width:100%;text-align:center;">My Advertisements</h2>
+					<h2 style="width:100%;text-align:center;">My Ads</h2>
 				</th>
 			</tr>
 			<tr>
@@ -65,16 +65,6 @@
 									
 									<td>
 										<div class="resultMiddle">
-											</br>
-											<p>
-											<c:if test="${ad.deal=='forRent'}"> <h3>For rent</h3></c:if>
-											<c:if test="${ad.deal=='forSale'}">
-												<c:if test="${ad.sale=='direct'}"> <h3>For sale</h3></c:if>
-												<c:if test="${ad.sale=='auction'}"> <h3>For auction</h3></c:if>
-												<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>For auction/sale</h3></c:if>
-											</c:if>
-											</p>
-								
 											<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 								
 											<p>
@@ -93,13 +83,22 @@
 								
 									<td>
 										<div class="resultRight">
+										<p>
+											<c:if test="${ad.deal=='forRent'}"> <h2>For Rent</h2></c:if>
+											<c:if test="${ad.deal=='forSale'}">
+												<c:if test="${ad.sale=='direct'}"> <h2>For Sale</h2></c:if>
+												<c:if test="${ad.sale=='auction'}"> <h2>For Auction</h2></c:if>
+												<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>For Auction/Sale</h2></c:if>
+											</c:if>
+											</p>
+										
 											<c:if test="${ad.deal=='forRent'}"> <h3>CHF ${ad.priceRent}/Month</h3></br></c:if>
 											<c:if test="${ad.deal=='forSale'}">
 													<c:if test="${ad.sale=='direct'}"> <h3>CHF ${ad.priceSale} sale price </h3><br /></c:if>
 													<c:if test="${ad.sale=='auction'}"> <h3>CHF ${ad.currentBid} current bid </h3><br /></c:if>
 													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>CHF ${ad.priceSale} sale price </h3> <h3>CHF ${ad.currentBid } current Bid </h3></c:if>
 											</c:if>
-											<br />
+								
 
 											<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 														type="date" pattern="dd.MM.yyyy" />

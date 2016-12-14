@@ -11,7 +11,7 @@
 <a href="/">Home</a>   &gt;   Schedule</pre>
 -->
 
-<table style="width=80%;">
+<table style=" border-collapse: separate; border-spacing: 100px 0;">
 <tr>
 
 <h1>Schedule</h1>

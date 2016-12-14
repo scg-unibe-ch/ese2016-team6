@@ -86,24 +86,25 @@
 	<tr>
 	<td colspan="2">
 	<div id="userDiv" style="float:center;">
+	<hr class="slim">
 	
 	<!--must first check if aboutMe is not null!-->
 	<c:if test="${user.aboutMe!=null}">
 		<c:if test="${user.aboutMeNotEmpty()}">
-		<hr class="slim">
 		<h2>About me</h2>${user.aboutMe}
 		<hr class="slim">
 		</c:if>
 	</c:if>
 	<form>
+	<br>
 		<c:choose>
 			<c:when test="${principalID != null}">
 				<c:choose>
 					<c:when test="${principalID eq user.id}">
-						<a class="button" href="/profile/editProfile">Edit Profile</a>
+						<a class="button" href="/profile/editProfile"">Edit Profile</a>
 					</c:when>
 					<c:otherwise>
-						<button id="newMsg" type="button">Message</button>
+						<button id="newMsg" type="button"">Message</button>
 					</c:otherwise>
 				</c:choose>
 			</c:when>

@@ -123,19 +123,13 @@ public class EnquiryService {
 	@Transactional
 	public int newEnquiries(long userId) {
 		int i=0;
-		User user = userDao.findOne(userId);
-		Iterable<Ad> usersAd = adDao.findByUser(user);
-		for(Ad ad : usersAd) {
-			Iterable<Visit> usersVisits = visitDao.findByAd(ad);
-			for(Visit visit: usersVisits) {
-				Iterable<VisitEnquiry> usersEnquiries = enquiryDao.findByVisit(visit);
-						for(VisitEnquiry enquiries: usersEnquiries) {
-							if(enquiries.getState().equals(VisitEnquiryState.OPEN)) {
-								i++;
-							}
-						}
+		for (VisitEnquiry enquiry : enquiryDao.findAll()) {
+			if (enquiry.getVisit().getAd().getUser().getId() == userId) {
+				if(enquiry.getState().equals(VisitEnquiryState.OPEN)) {
+					i++;
 				}
 			}
+		}
 		return i;
 	}
 

@@ -14,7 +14,7 @@
 
 </script>
 
-		<table id="indexTable" style="width:100%;text-align:center;">
+		<table id="indexTable" style="width:100%;text-align:left; padding: 30px;">
 			<tr>
 
 			<tr>
@@ -22,8 +22,8 @@
 					<h2 style="width:100%;text-align:center;">My Bookmarks</h2>
 				</th>
 			</tr>
-		
-		<td valign="top">
+		<tr>
+		<td>
 		<c:choose>
 			<c:when test="${empty bookmarkedAdvertisements}">
 				
@@ -61,15 +61,7 @@
 									
 									<td>
 										<div class="resultMiddle">
-											</br>
-											<p>
-											<c:if test="${ad.deal=='forRent'}"> <h3>For rent</h3></c:if>
-											<c:if test="${ad.deal=='forSale'}">
-												<c:if test="${ad.sale=='direct'}"> <h3>For sale</h3></c:if>
-												<c:if test="${ad.sale=='auction'}"> <h3>For auction</h3></c:if>
-												<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>For auction/sale</h3></c:if>
-											</c:if>
-											</p>
+											
 								
 											<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
 								
@@ -89,13 +81,22 @@
 								
 									<td>
 										<div class="resultRight">
-											<c:if test="${ad.deal=='forRent'}"> <h2>CHF ${ad.priceRent}</h2></c:if>
+											<p>
+											<c:if test="${ad.deal=='forRent'}"> <h2>For rent</h2></c:if>
 											<c:if test="${ad.deal=='forSale'}">
-													<c:if test="${ad.sale=='direct'}"> <h2>CHF ${ad.priceSale} <br> sale price </h2></c:if>
-													<c:if test="${ad.sale=='auction'}"> <h2>CHF ${ad.currentBid} <br> current bid </h2></c:if>
-													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>CHF ${ad.priceSale} <br> sale price </h3> <h3>CHF ${ad.currentBid } <br> current Bid </h3></c:if>
+												<c:if test="${ad.sale=='direct'}"> <h2>For sale</h2></c:if>
+												<c:if test="${ad.sale=='auction'}"> <h2>For auction</h2></c:if>
+												<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h2>For auction/sale</h2></c:if>
 											</c:if>
-											<br /> <br />
+											</p>
+									
+											<c:if test="${ad.deal=='forRent'}"> <h3>CHF ${ad.priceRent}/Month</h3><br /></c:if>
+											<c:if test="${ad.deal=='forSale'}">
+													<c:if test="${ad.sale=='direct'}"> <h3>CHF ${ad.priceSale} sale price </h3><br /></c:if>
+													<c:if test="${ad.sale=='auction'}"> <h3>CHF ${ad.currentBid} current bid </h3><br /></c:if>
+													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>CHF ${ad.priceSale} sale price </h3> <h3>CHF ${ad.currentBid } current Bid </h3></c:if>
+											</c:if>
+											
 
 											<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 												type="date" pattern="dd.MM.yyyy" />

@@ -88,7 +88,7 @@
 													</p>
 													<h3>CHF ${ad.priceRent }/Month</h3> 
 													
-													<br /> <br />
+													<br />
 													<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 														type="date" pattern="dd.MM.yyyy" />
 													<p>Move-in date: ${formattedMoveInDate }</p>
@@ -149,7 +149,7 @@
 													<c:if test="${ad.sale=='auction'}"> <h3>CHF ${ad.currentBid } current bid </h3><br /></c:if>
 													<c:if test="${ad.sale=='bothAuctionAndDirect'}"> <h3>CHF ${ad.priceSale } sale price </h3><h3>CHF ${ad.currentBid } current Bid </h3></c:if>
 													
-													<br />
+													
 													<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 														type="date" pattern="dd.MM.yyyy" />
 													<p>Move-in date: ${formattedMoveInDate }</p>

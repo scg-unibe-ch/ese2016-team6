@@ -100,9 +100,9 @@
 							out.print("<img src='" + filePath + "' />");
 
 							if(realUser.getFirstName().equals(realUser.getLastName())) {
-								out.print("<p id='messageEnquiryLink' class='profileName' class='text'>" + realUser.getFirstName() + "</p>"); 
+								out.print("<p id='messageEnquiryLink' class='profileName' class='text' style='vertical-align:middle; padding-top:10px;'>" + realUser.getFirstName() + "</p>"); 
 							} else {
-								out.print("<p id='messageEnquiryLink' class='profileName' class='text'>" + realUser.getFirstName() + "</br>"
+								out.print("<p id='messageEnquiryLink' class='profileName' class='text' style='vertical-align:middle; padding-top:10px;'>" + realUser.getFirstName() + "</br>"
 									+ realUser.getLastName() + "</p>");
 							}
 							

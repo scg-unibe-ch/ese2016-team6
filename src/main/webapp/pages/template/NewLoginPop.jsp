@@ -48,7 +48,7 @@
 		}(document, 'script', 'facebook-jssdk'));</script>
 	
 	
-	
+	<br><br>
 	<c:choose>
 		<c:when test="${loggedIn}">
 			<p> <h3 style="color:red"> You are already logged in! </h3> </p>
@@ -84,6 +84,7 @@
 			
 		</c:otherwise>
 	</c:choose>
+	<br>
 	<br>
 	<br>
 	

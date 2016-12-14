@@ -22,11 +22,6 @@
 	
 	$(document).ready(function() {
 		
-		var minBid = ${ad.currentBid} + ${ad.increment};
-		
-		document.getElementById('bidAmount').min = minBid;
-		document.getElementById('bidAmount').value = minBid;
-		
 		$("#newMsg").click(function(){
 			$("#content").children().animate({opacity: 0.4}, 300, function(){
 				$("#msgDiv").css("display", "block");
@@ -44,7 +39,7 @@
 			if($("#msgSubject").val() != "" && $("#msgTextarea").val() != ""){
 				var subject = $("#msgSubject").val();
 				var text = $("#msgTextarea").val();
-				var recipientEmail = "${latestBid.user.email}";
+				var recipientEmail = "${bidService.getTopBid(ad).user.email}";
 				$.post("profile/messages/sendMessage", {subject : subject, text: text, recipientEmail : recipientEmail}, function(){
 					$("#msgDiv").css("display", "none");
 					$("#msgDiv").css("opacity", "0");
@@ -65,49 +60,6 @@ function deleteAd(button) {
 	window.location.href = "/deletedAd";
 }
 </script>
-
-
- <script>
-        function showTimeLeft() {
-            //We need getTime() to make the countdown compatible with all browsers.
-            var expired = ${shownAd.expireDate.getTime()};
-            var current = new Date();
-
-           <%-- if (current > expired || ${shownAd.expired}) {
-                $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
-            } else {--%>
-                var msec = expired - current;
-
-                var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
-
-                msec -= dd * 1000 * 60 * 60 * 24;
-                var hh = Math.floor(msec / 1000 / 60 / 60);
-                msec -= hh * 1000 * 60 * 60;
-                var mm = Math.floor(msec / 1000 / 60);
-                msec -= mm * 1000 * 60;
-                var ss = Math.floor(msec / 1000);
-                msec -= ss * 1000;
-                if (dd > 0) {
-                    $('#timeLeft').html("Time Left: " + dd + " Days, " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
-                }
-                else {
-                    if (hh > 0) {
-                        $('#timeLeft').html("Time Left: " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
-                    }
-                    else {
-                        if (mm > 0) {
-                            $('#timeLeft').html("Time Left: " + +mm + " Minutes, " + ss + " Seconds");
-                        }
-                        else {
-                            $('#timeLeft').html("Time Left: " + ss + " Seconds");
-                        }
-                    }
-                }
-
-        }
-
-        var timer = setInterval(showTimeLeft, 1000);
-    </script>
 
 <!-- imports the new login window found in template/NewLoginPop.jsp -->
 <!-- This must be in the body of each page in order for the login screen to work -->
@@ -155,7 +107,7 @@ function deleteAd(button) {
 							<td>
 								<div class="resultMiddle">
 								<c:choose>
-								<c:when test="${ad.expired=='false' && ad.instantBought=='false'}">							
+								<c:when test="${ad.expired=='false'}">							
 								This property is for sale through auction ! 
 								</br> 
 									<h3><label>	Amount of the current bid : </label> CHF ${ad.currentBid}</h3>
@@ -163,49 +115,9 @@ function deleteAd(button) {
 								</br> 
 								<h3 id="timeLeft"><i>Expiry date of the auction: </i><fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
 								</c:when>
-								<c:when test="${ad.expired=='true'&&ad.instantBought=='false'}">
+								<c:when test="${ad.expired=='true'}">
 									<h3>
 									This ads auction expired on ${ad.expireDate}
-									</h3>
-								</c:when>
-								
-								<c:when test="${ad.instantBought=='true'}">
-									<h3>
-									This flat has been instant bought...
-									<br>
-									<br>
-									<c:if test="${latestBid.user != null}">
-											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												<table>
-													<tr>
-														<td>
-															...by the user : ${latestBid.user.username}
-														</td>
-														
-														<td>
-															<c:choose>
-																<c:when test="${latestBid.user.picture.filePath != null}">
-																	<img style="width:50px;height:50px;" src="${latestBid.user.picture.filePath}">
-																</c:when>
-																<c:otherwise>
-																	<img src="/img/avatar.png">
-																</c:otherwise>
-															</c:choose>
-														</td>					
-													</tr>	
-													<tr>
-														<td>
-															For a sum of : ${latestBid.amount} CHF
-														</td>
-														<td>
-														This offer was made: 
-														<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
-														</td>
-													</tr>
-												</table>
-											</div>
-											
-										</c:if>
 									</h3>
 								</c:when>
 								</c:choose>
@@ -214,42 +126,33 @@ function deleteAd(button) {
 						
 							<td>
 								<div class="resultRightBigger">
-									<c:if test="${latestBid.user != null}">
+									<c:if test="${bidService.getTopBid(ad).user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block;">
-												<h3>							
-												<table>
-													<tr>
-														<td>
-															Current highest bidder : ${latestBid.user.username}
-														</td>
-														
-														<td>
+												<p>							
+														Current highest bidder : ${bidService.getTopBid(ad).user.username}
+														<br>
 															<c:choose>
-																<c:when test="${latestBid.user.picture.filePath != null}">
-																	<img style="width:40px;height:40px;" src="${latestBid.user.picture.filePath}">
+																<c:when test="${bidService.getTopBid(ad).user.picture.filePath != null}">
+																	<img style="width:40px;height:40px;" src="${bidService.getTopBid(ad).user.picture.filePath}">
 																</c:when>
 																<c:otherwise>
 																	<img style="width:40px;height:40px;" src="/img/avatar.png">
 																</c:otherwise>
 															</c:choose>
-														</td>							
-													</tr>	
-													<tr>
-														<td>
-															With a bid of : ${latestBid.amount} CHF
-														</td>
-														<td>
-														This offer was made: 
-														<fmt:formatDate value="${latestBid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
-														</td>
-													</tr>
-												</table>
-												</h3>
+															</p>
+														<h3>
+															With a bid of : ${bidService.getTopBid(ad).amount} CHF
+														</h3>
+														<p> <br>
+														This offer was made: <br>
+														<fmt:formatDate value="${bidService.getTopBid(ad).timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
+														
+												</p>
 											</div>
 											
 											</c:if>
 											
-											<c:if test="${latestBid.user == null}">
+											<c:if test="${bidService.getTopBid(ad).user == null}">
 											<h3>
 												None has made a bid yet.
 											</h3>
@@ -265,7 +168,7 @@ function deleteAd(button) {
 			<td>
 			<c:choose>
 						<c:when test="${empty myBids}">
-								<p style="color:black;text-align:center;">You have not bidded on an ad yet.</p>
+								<p style="color:black; vertical-align:top;">You have not bidded on an ad yet!</p>
 					</c:when>
 					<c:otherwise>
 			<c:forEach var="bid" items="${myBids}">
@@ -353,8 +256,8 @@ function deleteAd(button) {
 								<div class="resultRightBigger">
 									<c:if test="${bid.user != null}">
 											<div id="bidderPresent" style="vertical-align: middle;display: inline-block; float:left;">
-												<h3>
-													Current highest bidder : ${bid.user.username}	</h3>						
+												<p>
+													Current highest bidder : ${bid.user.username}	<br>						
 															<c:choose>
 																<c:when test="${bid.user.picture.filePath != null}">
 																	<img style="float:center;width:40px;height:40px;" src="${bid.user.picture.filePath}">
@@ -362,13 +265,13 @@ function deleteAd(button) {
 																<c:otherwise>
 																	<img style="float:center;width:40px;height:40px;" src="/img/avatar.png">
 																</c:otherwise>
-															</c:choose>
+															</c:choose></p>
 															<h3>
 															With a bid of : ${bid.amount} CHF </h3>
-														<h3>
-														This offer was made: 
+														<p>
+														This offer was made: <br>
 														<fmt:formatDate value="${bid.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
-												</h3>
+												</p>
 											</div>
 											
 											</c:if>

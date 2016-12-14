@@ -753,7 +753,6 @@ footer nav ul li {
 #indexTable {
 	table-layout: fixed;
 	
-	
 	border-collapse: separate;
 	border-spacing: 50px 0;
 }
@@ -1065,6 +1064,7 @@ footer nav ul li {
 
 .resultMiddle {
 	float: center;
+	align: top;
 	
 }
 

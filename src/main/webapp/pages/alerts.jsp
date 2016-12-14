@@ -80,6 +80,9 @@ function rentSaleOfAlert(alert) {
 <h1>Create and manage alerts</h1>
 <hr />
 
+<table style="width:100%; padding-left: 10px;">
+<tr>
+<td style="padding-left:70px; width:50%;">
 <h2>Create new alert</h2><br />
 <form:form method="post" modelAttribute="alertForm" action="/profile/alerts"
 	id="alertForm" autocomplete="off">
@@ -138,7 +141,10 @@ function rentSaleOfAlert(alert) {
 	</fieldset>
 
 </form:form> <br /><br/>
-
+</td>
+<td style="padding: 40px;">
+</td>
+<td style="vertical-align:top; width:50%;">
 <h2>Your active alerts</h2>
 
 <div id="alertsDiv" class="alertsDiv">			
@@ -206,5 +212,8 @@ function rentSaleOfAlert(alert) {
 	</c:otherwise>
 </c:choose>
 </div>
+</td>
+</tr>
+</table>
 
 <c:import url="template/footer.jsp" />

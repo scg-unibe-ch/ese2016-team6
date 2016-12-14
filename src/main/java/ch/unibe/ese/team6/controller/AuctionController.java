@@ -45,7 +45,7 @@ public class AuctionController {
 
 	@Autowired
 	private AuctionService auctionService;
-
+	
 	protected GoogleSignupForm googleSignupForm;
 
 	@ModelAttribute("googleSignupForm")
@@ -121,7 +121,9 @@ public class AuctionController {
 		User user = userService.findUserById(id);
 		
 		model.addObject("myAuctions", auctionService.findAuctionsByUser(user));
+		model.addObject("bidService", bidService);
 		model.addObject("myBids", auctionService.findBidsByUser(user));
+		
 		
 		return model;
 	}
