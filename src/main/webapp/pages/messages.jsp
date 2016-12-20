@@ -180,7 +180,7 @@ function deleteMessage(button) {
 			class="msgInput" type="text" style="display:none" id="messageRecipient" value="${messages[0].sender.id}" /><input
 			class="msgInput" type="text" id="messageSubject" placeholder="Subject" />
 		<br> <br> <label>Message: </label><br><br>
-		<textarea rows="10" cols="49" id="messageTextarea" placeholder="Message"></textarea><br><br>
+		<textarea rows="10" cols="43" id="messageTextarea" placeholder="Message"></textarea><br><br>
 		
 		<button style="background-color:#991f00;color:white" type="button" id="messageReplyCancel">Cancel</button>
 		<button style="background-color:#ffffcc" type="button" id="messageReplySend">Send</button>

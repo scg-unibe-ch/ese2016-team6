@@ -41,6 +41,7 @@ import ch.unibe.ese.team6.model.dao.AlertDao;
 import ch.unibe.ese.team6.model.dao.MessageDao;
 import ch.unibe.ese.team6.model.dao.UserDao;
 import ch.unibe.ese.team6.model.dao.VisitDao;
+import ch.unibe.ese.team6.model.dao.VisitEnquiryDao;
 import ch.unibe.ese.team6.model.util.Location;
 
 /** Handles all persistence operations concerning ad placement and retrieval. */
@@ -67,6 +68,13 @@ public class AdService {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private VisitDao visitDao;
+	
+	@Autowired
+	private VisitEnquiryDao visitEnquriyDao;
+	
 
 	/**
 	 * Handles persisting a new ad to the database.
@@ -816,5 +824,6 @@ public class AdService {
 	@Transactional
 	public void deleteAd(Long id) {
 		adDao.delete(id);
+		
 	}
 }

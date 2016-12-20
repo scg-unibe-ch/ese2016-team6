@@ -218,19 +218,14 @@ public class AdController {
 	}*/
 
 	/*Deletes the ad with the given id*/
-	@RequestMapping(value = "/deleteAd", method = RequestMethod.POST)
-	public @ResponseBody void deleteAd(@RequestParam("id") long id) {
+	@RequestMapping(value = "/deleteAd", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView deleteAd(@RequestParam("id") long id) {
 		adService.deleteAd(id);
-	}
-	
-	/*Display the validation message when deleting an ad*/
-	@RequestMapping(value = "/deletedAd", method = RequestMethod.GET)
-	public @ResponseBody ModelAndView deletedAd() {
 		ModelAndView model = new ModelAndView("index");
 		model.addObject("confirmationMessage", "Ad deleted successfully !");
 		return model;
+		
 	}
-
 	
 	/* AUCTION */
 	/*@RequestMapping(value = "/ad?id=${ad.id}", method = RequestMethod.POST)

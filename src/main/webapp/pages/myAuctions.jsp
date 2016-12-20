@@ -228,7 +228,7 @@ function deleteAd(button) {
 																	<img style="width:50px;height:50px;" src="${bid.user.picture.filePath}">
 																</c:when>
 																<c:otherwise>
-																	<img src="/img/avatar.png">
+																	<img style="width:50px; height:50px;" src="/img/avatar.png">
 																</c:otherwise>
 															</c:choose>
 														</td>					
