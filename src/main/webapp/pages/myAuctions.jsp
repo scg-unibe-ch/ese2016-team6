@@ -56,8 +56,7 @@
 <script>
 function deleteAd(button) {
 	var id = $(button).attr("data-id");
-	$.post("/deleteAd?id=" + id);
-	window.location.href = "/deletedAd";
+	window.location.href = "/deleteAd?id=" + id;
 }
 </script>
 
@@ -87,7 +86,7 @@ function deleteAd(button) {
 						<tr>
 							<th colspan="3">
 								<h2>
-									<a class="link" style="float:left;" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a><button style="font-size : 12px; width:80px; height:30px; float: right; background-color:#991f00;color:white;" class="deleteButton" data-id="${ad.id}" onClick="deleteAd(this)" href="/deletedAd">Delete Ad</button>
+									<a class="link" style="float:left;" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a><button style="font-size : 12px; width:80px; height:30px; float: right; background-color:#991f00;color:white;" class="deleteButton" data-id="${ad.id}" onClick="deleteAd(this)">Delete Ad</button>
 				
 								</h2>
 							</th>
